@@ -1,0 +1,69 @@
+#
+# Copyright  2012  Zemberek3 Developers <http://code.google.com/p/zemberek3/> (Original work)
+# Copyright  2012  Ali Ok (aliokATapacheDOTorg) (Derivative work)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+altı [P:Num, Card]
+altıncı [P:Num, Ord]
+altmış [P:Num, Card]
+altmışıncı [P:Num, Ord]
+beş [P:Num, Card]
+beşinci [P:Num, Ord]
+bin [P:Num, Card]
+bininci [P:Num, Ord]
+bir [P:Num, Card]
+birinci [P:Num, Ord]
+doksan [P:Num, Card]
+doksanıncı [P:Num, Ord]
+dokuz [P:Num, Card]
+dokuzuncu [P:Num, Ord]
+dördüncü [P:Num, Ord]
+dört [P:Num, Card]
+elli [P:Num, Card]
+ellinci [P:Num, Ord]
+iki [P:Num, Card]
+ikinci [P:Num, Ord]
+katrilyon [P:Num, Card]
+katrilyonuncu [P:Num, Ord]
+kentilyon [P:Num, Card]
+kentilyonuncu [P:Num, Ord]
+kırk [P:Num, Card]
+kırkıncı [P:Num, Ord]
+milyar [P:Num, Card]
+milyarıncı [P:Num, Ord]
+milyon [P:Num, Card]
+milyonuncu [P:Num, Ord]
+on [P:Num, Card]
+onuncu [P:Num, Ord]
+otuz [P:Num, Card]
+otuzuncu [P:Num, Ord]
+sekiz [P:Num, Card]
+sekizinci [P:Num, Ord]
+seksen [P:Num, Card]
+sekseninci [P:Num, Ord]
+sıfır [P:Num, Card]
+sıfırıncı [P:Num, Ord]
+sonuncu [P:Num, Ord]
+trilyon [P:Num, Card]
+trilyonuncu [P:Num, Ord]
+üç [P:Num, Card; A:NoVoicing]
+üçüncü [P:Num, Ord]
+yedi [P:Num, Card]
+yedinci [P:Num, Ord]
+yetmiş [P:Num, Card]
+yetmişinci [P:Num, Ord]
+yirmi [P:Num, Card]
+yirminci [P:Num, Ord]
+yüz [P:Num, Card]
+yüzüncü [P:Num, Ord]

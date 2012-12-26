@@ -1,0 +1,145 @@
+<!--
+  ~ Copyright  2012  Ali Ok (aliokATapacheDOTorg)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<ui:composition template="basetemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h:form prependId="false" styleClass="form-horizontal">
+            <fieldset>
+                <legend>Parse a word</legend>
+
+                <div class="control-group">
+                    <h:outputLabel styleClass="control-label" value="Guess non-circumflexed forms"
+                                   for="convertCircumflexes"/>
+
+                    <div class="controls">
+                        <h:selectBooleanCheckbox id="convertCircumflexes"
+                                                 value="#{rootFinderSelectionData.convertCircumflexes}"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h:outputLabel styleClass="control-label" value="Root finders to use (can select multiple)"
+                                   for="rootFinders"/>
+
+                    <div class="controls">
+                        <h:selectManyListbox id="rootFinders" layout="pageDirection"
+                                             styleClass="table table-bordered table-condensed"
+                                             value="#{rootFinderSelectionData.selectedRootFinderOptions}">
+                            <f:selectItems value="#{rootFinderSelectionData.allRootFinderOptions}"/>
+                        </h:selectManyListbox>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <h:outputLabel styleClass="control-label" value="Include numeral graphs"
+                                       for="includeNumeralGraph"/>
+                        <h:selectBooleanCheckbox id="includeNumeralGraph"
+                                                 value="#{suffixGraphSelectionData.includeNumeralGraph}"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <h:outputLabel styleClass="control-label" value="Include proper noun graph"
+                                       for="includeProperNounGraph"/>
+                        <h:selectBooleanCheckbox id="includeProperNounGraph"
+                                                 value="#{suffixGraphSelectionData.includeProperNounGraph}"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <h:selectBooleanCheckbox id="includeCopulaGraph"
+                                                 value="#{suffixGraphSelectionData.includeCopulaGraph}"/>
+                        <h:outputLabel styleClass="control-label" value="Include copula graph"
+                                       for="includeCopulaGraph"/>
+                    </div>
+                </div>
+
+                <h:outputLabel value="Word" for="surface"/>
+                <h:inputText required="true" class="input-xxlarge" style="height: 30px;" id="surface"
+                             value="#{parserBean.surface}"/>
+                <span class="help-block"><h:message for="surface" showDetail="true"/></span>
+
+                <button id="parseButton" type="button" class="btn btn-large btn-primary">
+                    Parse
+                </button>
+                <h:graphicImage id="loadingImg" style="display: none;" library="img" name="ajaxloading.gif"
+                                alt="Loading..."/>
+
+            </fieldset>
+
+            <p:outputPanel id="results">
+                <p:outputPanel rendered="#{not empty parserBean.parseResults}">
+                    <ol>
+                        <ui:repeat value="#{parserBean.parseResults}" var="parseResult">
+                            <li><h4>#{parseResult}</h4></li>
+                        </ui:repeat>
+                    </ol>
+                </p:outputPanel>
+                <p:outputPanel rendered="#{empty parserBean.parseResults}">
+                    No result found
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <h:messages showDetail="true"/>
+
+            <p:remoteCommand id="parseSurface" name="parseSurface" action="#{parserBean.parse}"
+                             process="@form"
+                             global="true" onstart="jQuery('#loadingImg').show();"
+                             oncomplete="handleParseComplete(xhr, status, args);"
+                             update="@form"/>
+        </h:form>
+
+        <script>
+            function handleParseComplete(xhr, status, args) {
+                jQuery('#loadingImg').hide();
+                jQuery('#surface').focus();
+
+                var xmlDoc = xhr.responseXML;
+                var errorNodes = xmlDoc.getElementsByTagName('error-name');
+                if (errorNodes.length != 0) {
+                    var errorName = errorNodes[0].childNodes[0].nodeValue;
+                    if (errorName) {
+                        alert('Error occurred ' + errorName);
+                        return;
+                    }
+                }
+            }
+            $(document).ready(function () {
+                jQuery('#parseButton').live('click', function (e) {
+                    parseSurface();
+                });
+
+                jQuery('#surface').live('keydown', function (e) {
+                    if (e.which == 13) {
+                        parseSurface();
+                        e.preventDefault();
+                    }
+                });
+
+            });
+        </script>
+    </ui:define>
+
+</ui:composition>
