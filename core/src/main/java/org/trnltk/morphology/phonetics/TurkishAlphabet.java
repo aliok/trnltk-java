@@ -24,43 +24,43 @@ import java.util.Arrays;
 
 public class TurkishAlphabet {
 
-    public static final TurkishLetter L_a = new TurkishLetter.TurkishLetterBuilder('a', 'A', 1).vowel().build();
-    public static final TurkishLetter L_b = new TurkishLetter.TurkishLetterBuilder('b', 'B', 2).build();
-    public static final TurkishLetter L_c = new TurkishLetter.TurkishLetterBuilder('c', 'C', 3).build();
-    public static final TurkishLetter L_cc = new TurkishLetter.TurkishLetterBuilder('ç', 'Ç', 4).voiceless().asciiEquivalentChar('c').build();
-    public static final TurkishLetter L_d = new TurkishLetter.TurkishLetterBuilder('d', 'D', 5).build();
-    public static final TurkishLetter L_e = new TurkishLetter.TurkishLetterBuilder('e', 'E', 6).vowel().frontal().build();
-    public static final TurkishLetter L_f = new TurkishLetter.TurkishLetterBuilder('f', 'F', 7).continuant().voiceless().build();
-    public static final TurkishLetter L_g = new TurkishLetter.TurkishLetterBuilder('g', 'G', 8).build();
-    public static final TurkishLetter L_gg = new TurkishLetter.TurkishLetterBuilder('ğ', 'Ğ', 9).continuant().asciiEquivalentChar('g').build();
-    public static final TurkishLetter L_h = new TurkishLetter.TurkishLetterBuilder('h', 'H', 10).continuant().voiceless().build();
-    public static final TurkishLetter L_ii = new TurkishLetter.TurkishLetterBuilder('ı', 'I', 11).vowel().asciiEquivalentChar('i').build();
-    public static final TurkishLetter L_i = new TurkishLetter.TurkishLetterBuilder('i', 'İ', 12).vowel().frontal().build();
-    public static final TurkishLetter L_j = new TurkishLetter.TurkishLetterBuilder('j', 'J', 13).continuant().build();
-    public static final TurkishLetter L_k = new TurkishLetter.TurkishLetterBuilder('k', 'K', 14).voiceless().build();
-    public static final TurkishLetter L_l = new TurkishLetter.TurkishLetterBuilder('l', 'L', 15).continuant().build();
-    public static final TurkishLetter L_m = new TurkishLetter.TurkishLetterBuilder('m', 'M', 16).continuant().build();
-    public static final TurkishLetter L_n = new TurkishLetter.TurkishLetterBuilder('n', 'N', 17).continuant().build();
-    public static final TurkishLetter L_o = new TurkishLetter.TurkishLetterBuilder('o', 'O', 18).vowel().rounded().build();
-    public static final TurkishLetter L_oo = new TurkishLetter.TurkishLetterBuilder('ö', 'Ö', 19).vowel().frontal().rounded().asciiEquivalentChar('o').build();
-    public static final TurkishLetter L_p = new TurkishLetter.TurkishLetterBuilder('p', 'P', 20).voiceless().build();
-    public static final TurkishLetter L_r = new TurkishLetter.TurkishLetterBuilder('r', 'R', 21).continuant().build();
-    public static final TurkishLetter L_s = new TurkishLetter.TurkishLetterBuilder('s', 'S', 22).continuant().voiceless().build();
-    public static final TurkishLetter L_ss = new TurkishLetter.TurkishLetterBuilder('ş', 'Ş', 23).continuant().voiceless().asciiEquivalentChar('s').build();
-    public static final TurkishLetter L_t = new TurkishLetter.TurkishLetterBuilder('t', 'T', 24).voiceless().build();
-    public static final TurkishLetter L_u = new TurkishLetter.TurkishLetterBuilder('u', 'U', 25).vowel().rounded().build();
-    public static final TurkishLetter L_uu = new TurkishLetter.TurkishLetterBuilder('ü', 'Ü', 26).vowel().frontal().rounded().asciiEquivalentChar('o').build();
-    public static final TurkishLetter L_v = new TurkishLetter.TurkishLetterBuilder('v', 'V', 27).continuant().build();
-    public static final TurkishLetter L_y = new TurkishLetter.TurkishLetterBuilder('y', 'Y', 28).continuant().build();
-    public static final TurkishLetter L_z = new TurkishLetter.TurkishLetterBuilder('z', 'Z', 29).continuant().build();
+    public static final TurkishLetter L_a = new TurkishLetter.TurkishLetterBuilder('a', 1).vowel().build();
+    public static final TurkishLetter L_b = new TurkishLetter.TurkishLetterBuilder('b', 2).build();
+    public static final TurkishLetter L_c = new TurkishLetter.TurkishLetterBuilder('c', 3).build();
+    public static final TurkishLetter L_cc = new TurkishLetter.TurkishLetterBuilder('ç', 4).voiceless().asciiEquivalentChar('c').build();
+    public static final TurkishLetter L_d = new TurkishLetter.TurkishLetterBuilder('d', 5).build();
+    public static final TurkishLetter L_e = new TurkishLetter.TurkishLetterBuilder('e', 6).vowel().frontal().build();
+    public static final TurkishLetter L_f = new TurkishLetter.TurkishLetterBuilder('f', 7).continuant().voiceless().build();
+    public static final TurkishLetter L_g = new TurkishLetter.TurkishLetterBuilder('g', 8).build();
+    public static final TurkishLetter L_gg = new TurkishLetter.TurkishLetterBuilder('ğ', 9).continuant().asciiEquivalentChar('g').build();
+    public static final TurkishLetter L_h = new TurkishLetter.TurkishLetterBuilder('h', 10).continuant().voiceless().build();
+    public static final TurkishLetter L_ii = new TurkishLetter.TurkishLetterBuilder('ı', 11).vowel().asciiEquivalentChar('i').build();
+    public static final TurkishLetter L_i = new TurkishLetter.TurkishLetterBuilder('i', 12).vowel().frontal().build();
+    public static final TurkishLetter L_j = new TurkishLetter.TurkishLetterBuilder('j', 13).continuant().build();
+    public static final TurkishLetter L_k = new TurkishLetter.TurkishLetterBuilder('k', 14).voiceless().build();
+    public static final TurkishLetter L_l = new TurkishLetter.TurkishLetterBuilder('l', 15).continuant().build();
+    public static final TurkishLetter L_m = new TurkishLetter.TurkishLetterBuilder('m', 16).continuant().build();
+    public static final TurkishLetter L_n = new TurkishLetter.TurkishLetterBuilder('n', 17).continuant().build();
+    public static final TurkishLetter L_o = new TurkishLetter.TurkishLetterBuilder('o', 18).vowel().rounded().build();
+    public static final TurkishLetter L_oo = new TurkishLetter.TurkishLetterBuilder('ö', 19).vowel().frontal().rounded().asciiEquivalentChar('o').build();
+    public static final TurkishLetter L_p = new TurkishLetter.TurkishLetterBuilder('p', 20).voiceless().build();
+    public static final TurkishLetter L_r = new TurkishLetter.TurkishLetterBuilder('r', 21).continuant().build();
+    public static final TurkishLetter L_s = new TurkishLetter.TurkishLetterBuilder('s', 22).continuant().voiceless().build();
+    public static final TurkishLetter L_ss = new TurkishLetter.TurkishLetterBuilder('ş', 23).continuant().voiceless().asciiEquivalentChar('s').build();
+    public static final TurkishLetter L_t = new TurkishLetter.TurkishLetterBuilder('t', 24).voiceless().build();
+    public static final TurkishLetter L_u = new TurkishLetter.TurkishLetterBuilder('u', 25).vowel().rounded().build();
+    public static final TurkishLetter L_uu = new TurkishLetter.TurkishLetterBuilder('ü', 26).vowel().frontal().rounded().asciiEquivalentChar('o').build();
+    public static final TurkishLetter L_v = new TurkishLetter.TurkishLetterBuilder('v', 27).continuant().build();
+    public static final TurkishLetter L_y = new TurkishLetter.TurkishLetterBuilder('y', 28).continuant().build();
+    public static final TurkishLetter L_z = new TurkishLetter.TurkishLetterBuilder('z', 29).continuant().build();
 
-    public static final TurkishLetter L_q = new TurkishLetter.TurkishLetterBuilder('q', 'Q', 30).foreign().build();
-    public static final TurkishLetter L_w = new TurkishLetter.TurkishLetterBuilder('w', 'W', 31).foreign().build();
-    public static final TurkishLetter L_x = new TurkishLetter.TurkishLetterBuilder('x', 'X', 32).foreign().build();
+    public static final TurkishLetter L_q = new TurkishLetter.TurkishLetterBuilder('q', 30).foreign().build();
+    public static final TurkishLetter L_w = new TurkishLetter.TurkishLetterBuilder('w', 31).foreign().build();
+    public static final TurkishLetter L_x = new TurkishLetter.TurkishLetterBuilder('x', 32).foreign().build();
 
-    public static final TurkishLetter L_ac = new TurkishLetter.TurkishLetterBuilder('â', 'Â', 33).vowel().asciiEquivalentChar('a').build();
-    public static final TurkishLetter L_ic = new TurkishLetter.TurkishLetterBuilder('î', 'Î', 34).vowel().frontal().asciiEquivalentChar('i').build();
-    public static final TurkishLetter L_uc = new TurkishLetter.TurkishLetterBuilder('û', 'Û', 35).vowel().rounded().asciiEquivalentChar('u').build();
+    public static final TurkishLetter L_ac = new TurkishLetter.TurkishLetterBuilder('â', 33).vowel().asciiEquivalentChar('a').build();
+    public static final TurkishLetter L_ic = new TurkishLetter.TurkishLetterBuilder('î', 34).vowel().frontal().asciiEquivalentChar('i').build();
+    public static final TurkishLetter L_uc = new TurkishLetter.TurkishLetterBuilder('û', 35).vowel().rounded().asciiEquivalentChar('u').build();
 
     public static ImmutableSet<TurkishLetter> Turkish_Letters = ImmutableSet.copyOf(Arrays.asList(
             L_a, L_b, L_c, L_cc, L_d, L_e, L_f, L_g,
@@ -88,6 +88,7 @@ public class TurkishAlphabet {
             .put(L_c, L_cc)
             .put(L_d, L_t)
             .put(L_g, L_k)
+            .put(L_gg, L_k)
             .build();
 
     public static final ImmutableSet<TurkishLetter> Devoicable_Letters = Devoicing_Map.keySet();
@@ -109,7 +110,7 @@ public class TurkishAlphabet {
             .put(L_gg, L_k)
             .build();
 
-    public static final ImmutableMap<Character, TurkishLetter> Lower_Case_Letter_Map = ImmutableMap.copyOf(
+    public static final ImmutableMap<Character, TurkishLetter> Letter_Map = ImmutableMap.copyOf(
             HashBiMap.create(
                     Maps.toMap(Turkish_Letters, new Function<TurkishLetter, Character>() {
                         @Override
@@ -120,31 +121,13 @@ public class TurkishAlphabet {
             ).inverse()
     );
 
-    public static final ImmutableMap<Character, TurkishLetter> Upper_Case_Letter_Map = ImmutableMap.copyOf(
-            HashBiMap.create(
-                    Maps.toMap(Turkish_Letters, new Function<TurkishLetter, Character>() {
-                        @Override
-                        public Character apply(TurkishLetter input) {
-                            return input.getUpperCaseCharValue();
-                        }
-                    })
-            ).inverse()
-    );
-
     public static TurkishLetter getLetterForChar(char c) {
-        final TurkishLetter lowerLetter = Lower_Case_Letter_Map.get(c);
+        c = Character.toLowerCase(c);
+        final TurkishLetter lowerLetter = Letter_Map.get(c);
         if (lowerLetter != null)
             return lowerLetter;
 
-        final TurkishLetter upperLetter = Upper_Case_Letter_Map.get(c);
-        if (upperLetter != null)
-            return upperLetter;
-
-        return new TurkishLetter.TurkishLetterBuilder(c, Character.toUpperCase(c), 99).build();
-    }
-
-    public static TurkishLetter getLetterForUpperCaseChar(char c) {
-        return Upper_Case_Letter_Map.get(c);
+        return new TurkishLetter.TurkishLetterBuilder(c, 99).build();
     }
 
     public static TurkishLetter voice(TurkishLetter letter) {
@@ -153,10 +136,6 @@ public class TurkishAlphabet {
 
     public static TurkishLetter devoice(TurkishLetter letter) {
         return Devoicing_Map.get(letter);
-    }
-
-    public static boolean isUpperCase(char currentChar) {
-        return Upper_Case_Letter_Map.containsKey(currentChar);
     }
 
     public static TurkishChar getChar(char c) {

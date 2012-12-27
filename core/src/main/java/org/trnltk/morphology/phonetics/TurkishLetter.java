@@ -20,7 +20,6 @@ import org.apache.commons.lang3.Validate;
 
 public class TurkishLetter {
     private final char charValue;
-    private final char upperCaseCharValue;
     private final int alphabeticIndex;
     private final boolean vowel;
     private final boolean frontal;
@@ -32,10 +31,9 @@ public class TurkishLetter {
     private final char asciiEquivalentChar;
 
 
-    private TurkishLetter(char charValue, char upperCaseCharValue, int alphabeticIndex, boolean vowel, boolean frontal, boolean rounded, boolean voiceless,
+    private TurkishLetter(char charValue, int alphabeticIndex, boolean vowel, boolean frontal, boolean rounded, boolean voiceless,
                           boolean continuant, boolean inAscii, boolean foreign, char asciiEquivalentChar) {
         this.charValue = charValue;
-        this.upperCaseCharValue = upperCaseCharValue;
         this.alphabeticIndex = alphabeticIndex;
         this.vowel = vowel;
         this.frontal = frontal;
@@ -55,16 +53,13 @@ public class TurkishLetter {
         TurkishLetter that = (TurkishLetter) o;
 
         if (charValue != that.charValue) return false;
-        if (upperCaseCharValue != that.upperCaseCharValue) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) charValue;
-        result = 31 * result + (int) upperCaseCharValue;
-        return result;
+        return (int) charValue;
     }
 
     @Override
@@ -74,10 +69,6 @@ public class TurkishLetter {
 
     public char getCharValue() {
         return charValue;
-    }
-
-    public char getUpperCaseCharValue() {
-        return upperCaseCharValue;
     }
 
     public int getAlphabeticIndex() {
@@ -118,7 +109,6 @@ public class TurkishLetter {
 
     static class TurkishLetterBuilder {
         private char charValue;
-        private char upperCaseCharValue;
         private boolean vowel;
         private int alphabeticIndex;
         private boolean frontal = false;
@@ -129,9 +119,8 @@ public class TurkishLetter {
         private boolean foreign = false;
         private Character asciiEquivalentChar;
 
-        public TurkishLetterBuilder(char charValue, char upperCaseCharValue, int alphabeticIndex) {
+        public TurkishLetterBuilder(char charValue, int alphabeticIndex) {
             this.charValue = charValue;
-            this.upperCaseCharValue = upperCaseCharValue;
             this.alphabeticIndex = alphabeticIndex;
         }
 
@@ -148,7 +137,7 @@ public class TurkishLetter {
             Validate.isTrue(inAscii || (asciiEquivalentChar.charValue() >= 'a' && asciiEquivalentChar.charValue() <= 'z'));
 
 
-            return new TurkishLetter(charValue, upperCaseCharValue, alphabeticIndex, vowel,
+            return new TurkishLetter(charValue, alphabeticIndex, vowel,
                     frontal,
                     rounded,
                     voiceless,

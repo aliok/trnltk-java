@@ -52,7 +52,7 @@ public class SuffixFormSequence {
             final boolean previousCharIsPlus = previousChar != null && previousChar == PLUS;
             final boolean previousCharIsExclamation = previousChar != null && previousChar == EXCLAMATION;
 
-            final boolean currentLetterIsUpperCase = TurkishAlphabet.isUpperCase(currentChar);
+            final boolean currentLetterIsUpperCase = Character.isUpperCase(currentChar);
             final TurkishChar currentTurkishChar = TurkishAlphabet.getChar(currentChar);
             final TurkishLetter currentLetter = currentTurkishChar.getLetter();
 

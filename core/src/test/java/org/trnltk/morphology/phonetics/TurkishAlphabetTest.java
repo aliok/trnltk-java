@@ -28,25 +28,12 @@ import static org.hamcrest.Matchers.is;
 public class TurkishAlphabetTest {
 
     @Test
+    //Copied to Zemberek
     public void alphabetShouldNotHaveDuplicateLowerChars() {
         final HashMultiset<Character> lowerCaseChars = HashMultiset.create(Collections2.transform(TurkishAlphabet.Turkish_Letters, new Function<TurkishLetter, Character>() {
             @Override
             public Character apply(TurkishLetter input) {
                 return input.getCharValue();
-            }
-        }));
-
-        for (Multiset.Entry<Character> characterEntry : lowerCaseChars.entrySet()) {
-            assertThat("For char " + characterEntry.getElement() + ", count must be null", characterEntry.getCount(), is(1));
-        }
-    }
-
-    @Test
-    public void alphabetShouldNotHaveDuplicateUpperChars() {
-        final HashMultiset<Character> lowerCaseChars = HashMultiset.create(Collections2.transform(TurkishAlphabet.Turkish_Letters, new Function<TurkishLetter, Character>() {
-            @Override
-            public Character apply(TurkishLetter input) {
-                return input.getUpperCaseCharValue();
             }
         }));
 
