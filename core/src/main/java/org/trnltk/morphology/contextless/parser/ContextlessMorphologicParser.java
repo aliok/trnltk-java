@@ -119,7 +119,7 @@ public class ContextlessMorphologicParser {
         final LinkedList<MorphemeContainer> newCandidates = new LinkedList<MorphemeContainer>();
 
         final SuffixGraphState fromState = morphemeContainer.getLastState();
-        final Set<SuffixEdge> stateApplicableSuffixEdges = this.getApplicableSuffixesOfStateForMorhpemeContainer(fromState, morphemeContainer);
+        final Set<SuffixEdge> stateApplicableSuffixEdges = this.getApplicableSuffixesOfStateForMorphemeContainer(fromState, morphemeContainer);
 
         if (logger.isDebugEnabled())
             logger.debug(String.format("  Found applicable suffixes for morpheme_container from state %s: %s", fromState, stateApplicableSuffixEdges));
@@ -138,7 +138,7 @@ public class ContextlessMorphologicParser {
         return newCandidates;
     }
 
-    private Set<SuffixEdge> getApplicableSuffixesOfStateForMorhpemeContainer(final SuffixGraphState fromState, final MorphemeContainer morphemeContainer) {
+    private Set<SuffixEdge> getApplicableSuffixesOfStateForMorphemeContainer(final SuffixGraphState fromState, final MorphemeContainer morphemeContainer) {
         if (logger.isDebugEnabled()) {
             logger.debug("  Finding applicable suffixes for morpheme_container from state " + fromState + " : " + morphemeContainer);
             logger.debug("   Found outputs " + fromState.getOutEdges());
