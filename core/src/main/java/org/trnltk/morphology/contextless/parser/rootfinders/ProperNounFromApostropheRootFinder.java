@@ -49,7 +49,7 @@ public class ProperNounFromApostropheRootFinder implements RootFinder {
                 final String properNounCandidateUnderlyingString = properNounCandidate.getUnderlyingString();
 
                 if (StringUtils.isAllUpperCase(properNounCandidateUnderlyingString)) {
-                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondarySyntacticCategory.ABBREVIATION, null);
+                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
 
                     if (!properNounCandidate.getLastChar().getLetter().isVowel()) {
                         // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
@@ -61,7 +61,7 @@ public class ProperNounFromApostropheRootFinder implements RootFinder {
                         return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
                     }
                 } else if (Character.isUpperCase(properNounCandidate.charAt(0).getCharValue())) {
-                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondarySyntacticCategory.PROPER_NOUN, null);
+                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
 
                     final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
                     return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));

@@ -48,8 +48,8 @@ public class SuffixFormSpecifications {
         return new AppliesToRoot(rootStr);
     }
 
-    public static final Specification<MorphemeContainer> rootHasSecondarySyntacticCategory(SecondarySyntacticCategory secondarySyntacticCategory) {
-        return new RootHasSecondarySyntacticCategory(secondarySyntacticCategory);
+    public static final Specification<MorphemeContainer> rootHasSecondaryPos(SecondaryPos secondaryPos) {
+        return new RootHasSecondaryPos(secondaryPos);
     }
 
     public static final Specification<MorphemeContainer> hasLexemeAttributes(LexemeAttribute... lexemeAttributes) {
@@ -68,8 +68,8 @@ public class SuffixFormSpecifications {
         return new HasLastNonBlankDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> rootHasSyntacticCategory(PrimaryPos primaryPos) {
-        return new RootHasSyntacticCategory(primaryPos);
+    public static final Specification<MorphemeContainer> rootHasPrimaryPos(PrimaryPos primaryPos) {
+        return new RootHasPrimaryPos(primaryPos);
     }
 
     public static final Specification<MorphemeContainer> rootHasProgressiveVowelDrop() {

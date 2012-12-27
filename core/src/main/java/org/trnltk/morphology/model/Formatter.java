@@ -31,8 +31,8 @@ public class Formatter {
         final StringBuilder b = new StringBuilder();
         b.append(String.format("%s+%s", lexeme.getLemmaRoot(), morphemeContainer.getRootState().getPrimaryPos().getStringForm()));
 
-        if (lexeme.getSecondarySyntacticCategory() != null)
-            b.append("+").append(lexeme.getSecondarySyntacticCategory());
+        if (lexeme.getSecondaryPos() != null)
+            b.append("+").append(lexeme.getSecondaryPos());
 
         if (morphemeContainer.hasTransitions()) {
             for (Transition transition : morphemeContainer.getTransitions()) {
@@ -58,8 +58,8 @@ public class Formatter {
         final Lexeme lexeme = root.getLexeme();
 
         b.append(String.format("%s(%s)+%s", root.getSequence().getUnderlyingString(), lexeme.getLemma(), morphemeContainer.getRootState().getPrimaryPos().getStringForm()));
-        if (lexeme.getSecondarySyntacticCategory() != null)
-            b.append("+").append(lexeme.getSecondarySyntacticCategory().getLookupKey());
+        if (lexeme.getSecondaryPos() != null)
+            b.append("+").append(lexeme.getSecondaryPos().getStringForm());
 
         if (morphemeContainer.hasTransitions()) {
             for (Transition transition : morphemeContainer.getTransitions()) {

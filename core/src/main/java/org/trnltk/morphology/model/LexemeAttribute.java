@@ -34,7 +34,7 @@ public enum LexemeAttribute implements SupportsEnumLookup<LexemeAttribute> {
     private final static EnumLookupMap<LexemeAttribute> strLookUpMap = new EnumLookupMap<LexemeAttribute>(LexemeAttribute.class);
 
     @Override
-    public String getLookupKey() {
+    public String getStringForm() {
         return this.name();
     }
 

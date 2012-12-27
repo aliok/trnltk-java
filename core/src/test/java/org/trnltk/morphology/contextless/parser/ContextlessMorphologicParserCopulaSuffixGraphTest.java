@@ -51,7 +51,7 @@ public class ContextlessMorphologicParserCopulaSuffixGraphTest extends BaseConte
     public void should_parse_other_categories_to_verbs_zero_transition() {
         //remove some roots for keeping the tests simple!
         removeRoots("elmas", "bent", "bend", "se", "oy");
-        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("ben", PrimaryPos.Pronoun);
 
         assertParseCorrectForVerb("elmayım", "elma(elma)+Noun+A3sg+Pnon+Nom+Verb+Zero+Pres+A1sg(+yIm[yım])");
         assertParseCorrectForVerb("elmasın", "elma(elma)+Noun+A3sg+Pnon+Nom+Verb+Zero+Pres+A2sg(sIn[sın])");
@@ -197,7 +197,7 @@ public class ContextlessMorphologicParserCopulaSuffixGraphTest extends BaseConte
     public void should_parse_verbs_with_explicit_copula() {
         // remove some roots to keep tests simple
         removeRoots("on", "gelecek");
-        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("ben", PrimaryPos.Pronoun);
         assertParseCorrectForVerb("elmadır", "elma(elma)+Noun+A3sg+Pnon+Nom+Verb+Zero+Pres+A3sg+Cop(dIr[dır])");
         assertParseCorrectForVerb("müdürdür", "müdür(müdür)+Noun+A3sg+Pnon+Nom+Verb+Zero+Pres+A3sg+Cop(dIr[dür])");
         assertParseCorrectForVerb("zilidir", "zil(zil)+Noun+A3sg+Pnon+Acc(+yI[i])+Verb+Zero+Pres+A3sg+Cop(dIr[dir])", "zil(zil)+Noun+A3sg+P3sg(+sI[i])+Nom+Verb+Zero+Pres+A3sg+Cop(dIr[dir])");
@@ -252,10 +252,10 @@ public class ContextlessMorphologicParserCopulaSuffixGraphTest extends BaseConte
     public void should_parse_pronoun_tenses() {
         // remove some roots to make the test simple
         removeRoots("bend", "kimi", "kimse");
-        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
-        removeRootsExceptSyntacticCategory("ban", PrimaryPos.Pronoun);
-        removeRootsExceptSyntacticCategory("san", PrimaryPos.Pronoun);
-        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("ben", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("ban", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("san", PrimaryPos.Pronoun);
+        removeRootsExceptTheOneWithPrimaryPos("biz", PrimaryPos.Pronoun);
 
         assertParseExists("benim", "ben(ben)+Pron+Pers+A1sg+Pnon+Nom+Verb+Zero+Pres+A1sg(+yIm[im])");
         assertParseCorrectForVerb("bendim", "ben(ben)+Pron+Pers+A1sg+Pnon+Nom+Verb+Zero+Past(+ydI[di])+A1sg(m[m])");

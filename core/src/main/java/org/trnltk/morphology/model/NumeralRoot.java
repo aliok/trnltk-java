@@ -11,7 +11,7 @@ public class NumeralRoot implements Root {
     private final ImmutableRoot immutableRoot;
     private final String underlyingNumeralText;
 
-    public NumeralRoot(final TurkishSequence partialInput, final String underlyingNumeralText, final SecondarySyntacticCategory secondarySyntacticCategory,
+    public NumeralRoot(final TurkishSequence partialInput, final String underlyingNumeralText, final SecondaryPos secondaryPos,
                        final ImmutableSet<PhoneticAttribute> phoneticAttributes) {
         Validate.notNull(partialInput);
 
@@ -19,14 +19,14 @@ public class NumeralRoot implements Root {
 
         Validate.notEmpty(partialInputUnderlyingString);
         Validate.notEmpty(underlyingNumeralText);
-        Validate.notNull(secondarySyntacticCategory);
-        Validate.isTrue(SecondarySyntacticCategory.NUMERAL_APPLICABLE.contains(secondarySyntacticCategory));
+        Validate.notNull(secondaryPos);
+        Validate.isTrue(SecondaryPos.NUMERAL_APPLICABLE.contains(secondaryPos));
 
-        final PrimaryPos syntacticCategory = PrimaryPos.Numeral;
+        final PrimaryPos primaryPos = PrimaryPos.Numeral;
         final ImmutableSet<LexemeAttribute> lexemeAttributes = ImmutableSet.of();
 
-        final Lexeme lexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, syntacticCategory,
-                secondarySyntacticCategory, lexemeAttributes);
+        final Lexeme lexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, primaryPos,
+                secondaryPos, lexemeAttributes);
 
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = null;
         this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phoneticAttributes, phoneticExpectations);

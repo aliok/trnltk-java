@@ -21,16 +21,16 @@ import org.trnltk.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.MorphemeContainer;
 import zemberek3.lexicon.PrimaryPos;
 
-public class RootHasSyntacticCategory extends AbstractSpecification<MorphemeContainer> {
+public class RootHasPrimaryPos extends AbstractSpecification<MorphemeContainer> {
     private final PrimaryPos primaryPos;
 
-    public RootHasSyntacticCategory(PrimaryPos primaryPos) {
+    public RootHasPrimaryPos(PrimaryPos primaryPos) {
         this.primaryPos = primaryPos;
     }
 
     @Override
     public String describe() {
-        return String.format("root_has_syntactic_category(%s)", primaryPos);
+        return String.format("root_has_pos(%s)", primaryPos);
     }
 
     @Override

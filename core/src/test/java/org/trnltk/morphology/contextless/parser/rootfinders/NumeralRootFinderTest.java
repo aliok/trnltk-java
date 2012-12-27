@@ -22,7 +22,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.NumeralRoot;
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 
@@ -55,7 +56,7 @@ public class NumeralRootFinderTest {
     private void assertRecognizedCorrectly(final String digits, final String digitsWords) {
         final Collection<Root> rootsForPartialInput = finder.findRootsForPartialInput(new TurkishSequence(digits), null);
         assertThat(rootsForPartialInput, hasSize(1));
-        assertThat(rootsForPartialInput.iterator().next(), Matchers.<Root>equalTo(new NumeralRoot(new TurkishSequence(digits), digitsWords, SecondarySyntacticCategory.DIGITS,
+        assertThat(rootsForPartialInput.iterator().next(), Matchers.<Root>equalTo(new NumeralRoot(new TurkishSequence(digits), digitsWords, SecondaryPos.DIGITS,
                 ImmutableSet.copyOf(phoneticsAnalyzer.calculatePhoneticAttributes(digitsWords, null)))));
     }
 }

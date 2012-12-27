@@ -44,27 +44,27 @@ public class ProperNounFromApostropheRootFinderTest {
 
     @Test
     public void shouldRecognizeAbbreviations() {
-        assertRecognizedCorrectly("TR'", "TR", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("MB'", "MB", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("POL'", "POL", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-//        assertRecognizedCorrectly("KAFA1500'", "KAFA1500", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(Something));  //XXX
-//        assertRecognizedCorrectly("1500KAFA'", "1500KAFA", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(Something));  //XXX
-        assertRecognizedCorrectly("İŞÇĞÜÖ'", "İŞÇĞÜÖ", SecondarySyntacticCategory.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelRounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("TR'", "TR", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("MB'", "MB", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("POL'", "POL", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+//        assertRecognizedCorrectly("KAFA1500'", "KAFA1500", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(Something));  //XXX
+//        assertRecognizedCorrectly("1500KAFA'", "1500KAFA", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(Something));  //XXX
+        assertRecognizedCorrectly("İŞÇĞÜÖ'", "İŞÇĞÜÖ", SecondaryPos.ABBREVIATION, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelRounded, LastLetterNotVoiceless, LastLetterNotContinuant));
         assertThat(rootFinder.findRootsForPartialInput(new TurkishSequence("123'"), new TurkishSequence("123'e")), hasSize(0));
     }
 
     @Test
     public void shouldRecognizeProperNouns() {
-        assertRecognizedCorrectly("Ahmet'", "Ahmet", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterVoiceless, LastLetterNotContinuant, LastLetterVoicelessStop));
-        assertRecognizedCorrectly("Mehmed'", "Mehmed", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant, LastLetterVoicedStop));
-        assertRecognizedCorrectly("A123a'", "A123a", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("AvA'", "AvA", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("AAxxAA'", "AAxxAA", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("İstanbul'", "İstanbul", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelRounded, LastLetterNotVoiceless, LastLetterContinuant));
-        assertRecognizedCorrectly("Çanakkale'", "Çanakkale", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
-        assertRecognizedCorrectly("Ömer'", "Ömer", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
-        assertRecognizedCorrectly("Şaban'", "Şaban", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
-        assertRecognizedCorrectly("Ümmühan'", "Ümmühan", SecondarySyntacticCategory.PROPER_NOUN, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
+        assertRecognizedCorrectly("Ahmet'", "Ahmet", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterVoiceless, LastLetterNotContinuant, LastLetterVoicelessStop));
+        assertRecognizedCorrectly("Mehmed'", "Mehmed", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant, LastLetterVoicedStop));
+        assertRecognizedCorrectly("A123a'", "A123a", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("AvA'", "AvA", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("AAxxAA'", "AAxxAA", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterVowel, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("İstanbul'", "İstanbul", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelRounded, LastLetterNotVoiceless, LastLetterContinuant));
+        assertRecognizedCorrectly("Çanakkale'", "Çanakkale", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterVowel, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterNotContinuant));
+        assertRecognizedCorrectly("Ömer'", "Ömer", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelFrontal, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
+        assertRecognizedCorrectly("Şaban'", "Şaban", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
+        assertRecognizedCorrectly("Ümmühan'", "Ümmühan", SecondaryPos.ProperNoun, Sets.immutableEnumSet(LastLetterConsonant, LastVowelBack, LastVowelUnrounded, LastLetterNotVoiceless, LastLetterContinuant));
     }
 
     @Test
@@ -76,10 +76,10 @@ public class ProperNounFromApostropheRootFinderTest {
         assertThat(rootFinder.findRootsForPartialInput(new TurkishSequence("şaa'"), new TurkishSequence("şaa'e")), hasSize(0));
     }
 
-    private void assertRecognizedCorrectly(final String partialInput, final String expectedLemmaAndRoot, final SecondarySyntacticCategory expectedSecondarySyntacticCategory,
+    private void assertRecognizedCorrectly(final String partialInput, final String expectedLemmaAndRoot, final SecondaryPos expectedSecondaryPos,
                                            ImmutableSet<PhoneticAttribute> expectedPhoneticAttributes) {
 
-        final Lexeme expectedLemma = new Lexeme(expectedLemmaAndRoot, expectedLemmaAndRoot, PrimaryPos.Noun, expectedSecondarySyntacticCategory, null);
+        final Lexeme expectedLemma = new Lexeme(expectedLemmaAndRoot, expectedLemmaAndRoot, PrimaryPos.Noun, expectedSecondaryPos, null);
         final ImmutableRoot expectedRoot = new ImmutableRoot(new TurkishSequence(expectedLemmaAndRoot), expectedLemma, expectedPhoneticAttributes, null);
 
         final List<? extends Root> rootsForPartialInput = rootFinder.findRootsForPartialInput(new TurkishSequence(partialInput), null);

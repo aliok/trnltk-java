@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.NumeralRoot;
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.numeral.DigitsToTextConverter;
 import org.trnltk.morphology.phonetics.PhoneticAttribute;
@@ -36,7 +37,7 @@ public class NumeralRootFinder implements RootFinder {
             if (pattern.matcher(partialInputUnderlyingString).matches()) {
                 final String underlyingNumeralText = digitsToTextConverter.convert(partialInputUnderlyingString);
                 final ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.copyOf(this.phoneticsAnalyzer.calculatePhoneticAttributes(underlyingNumeralText, null));
-                return Arrays.asList((Root) new NumeralRoot(partialInput, underlyingNumeralText, SecondarySyntacticCategory.DIGITS, phoneticAttributes));
+                return Arrays.asList((Root) new NumeralRoot(partialInput, underlyingNumeralText, SecondaryPos.DIGITS, phoneticAttributes));
             }
         }
 

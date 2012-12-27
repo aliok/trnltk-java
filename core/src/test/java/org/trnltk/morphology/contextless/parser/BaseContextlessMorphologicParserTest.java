@@ -109,7 +109,7 @@ public abstract class BaseContextlessMorphologicParserTest {
         }
     }
 
-    protected void removeRootsExceptSyntacticCategory(final String root, final PrimaryPos primaryPos) {
+    protected void removeRootsExceptTheOneWithPrimaryPos(final String root, final PrimaryPos primaryPos) {
         final Set<Root> roots = this.clonedRootMap.get(root);
         final Iterable<Root> filteredRoots = Lists.newArrayList(Iterables.filter(roots, new Predicate<Root>() {
             @Override

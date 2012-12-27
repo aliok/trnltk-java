@@ -585,7 +585,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         ManyOf.addSuffixForm("lArcA");
 
         NOUN_NOM_DERIV.addOutSuffix(ForALotOfTime, ADVERB_ROOT);
-        ForALotOfTime.addSuffixForm("lArcA", rootHasSecondarySyntacticCategory(SecondarySyntacticCategory.TIME));
+        ForALotOfTime.addSuffixForm("lArcA", rootHasSecondaryPos(SecondaryPos.Time));
     }
 
     private void registerNounToPronounDerivations() {

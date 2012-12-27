@@ -17,7 +17,7 @@
 package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.Suffix;
 import zemberek3.lexicon.PrimaryPos;
 
@@ -56,14 +56,14 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
         final PrimaryPos primaryPos = root.getLexeme().getPrimaryPos();
-        final SecondarySyntacticCategory secondarySyntacticCategory = root.getLexeme().getSecondarySyntacticCategory();
+        final SecondaryPos secondaryPos = root.getLexeme().getSecondaryPos();
         if (Numeral.equals(primaryPos)) {
-            switch (secondarySyntacticCategory) {
+            switch (secondaryPos) {
                 case DIGITS:
                     return NUMERAL_DIGIT_CARDINAL_ROOT;
-                case CARD:
+                case Cardinal:
                     return NUMERAL_CARDINAL_ROOT;
-                case ORD:
+                case Ordinal:
                     return NUMERAL_ORDINAL_ROOT;
             }
         }

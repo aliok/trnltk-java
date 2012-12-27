@@ -19,7 +19,8 @@ package org.trnltk.morphology.contextless.parser.rootfinders;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 
@@ -45,25 +46,25 @@ public class ProperNounWithoutApostropheRootFinderTest {
             final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("A"), new TurkishSequence("Ali"));
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("A"));
-            assertThat(roots.get(0).getLexeme().getSecondarySyntacticCategory(), equalTo(SecondarySyntacticCategory.PROPER_NOUN));
+            assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
             final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Al"), new TurkishSequence("Ali"));
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Al"));
-            assertThat(roots.get(0).getLexeme().getSecondarySyntacticCategory(), equalTo(SecondarySyntacticCategory.PROPER_NOUN));
+            assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
             final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali"), new TurkishSequence("Ali"));
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Ali"));
-            assertThat(roots.get(0).getLexeme().getSecondarySyntacticCategory(), equalTo(SecondarySyntacticCategory.PROPER_NOUN));
+            assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
             final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali8"), new TurkishSequence("Ali8192"));
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Ali8"));
-            assertThat(roots.get(0).getLexeme().getSecondarySyntacticCategory(), equalTo(SecondarySyntacticCategory.PROPER_NOUN));
+            assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
     }
 

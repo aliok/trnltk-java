@@ -25,10 +25,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import zemberek3.lexicon.PrimaryPos;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishLetter;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ class LexemeCreator {
         final String line = CharMatcher.WHITESPACE.trimAndCollapseFrom(_line, ' ');
 
         String primaryPosStr = null;
-        String secondarySyntacticCategoryStr = null;
+        String secondaryPosStr = null;
         Set<String> lexemeAttributeStrs = new HashSet<String>();
 
         String rootStr;
@@ -75,7 +75,7 @@ class LexemeCreator {
                         final List<String> metaPartItems = Lists.newArrayList(Splitter.on(',').omitEmptyStrings().trimResults().split(metaPart));
                         Validate.isTrue(metaPartItems.size() == 2);
                         primaryPosStr = metaPartItems.get(0);
-                        secondarySyntacticCategoryStr = metaPartItems.get(1);
+                        secondaryPosStr = metaPartItems.get(1);
                     } else {
                         primaryPosStr = metaPart;
                     }
@@ -94,14 +94,15 @@ class LexemeCreator {
         }
 
         final PrimaryPos primaryPos = PrimaryPos.converter().enumExists(primaryPosStr) ? PrimaryPos.converter().getEnum(primaryPosStr) : null;
+        final SecondaryPos secondaryPos = SecondaryPos.converter().enumExists(secondaryPosStr) ? SecondaryPos.converter().getEnum(secondaryPosStr) : null;
 
         return this.createLexeme(lemma, rootStr,
                 primaryPos,
-                SecondarySyntacticCategory.lookup(secondarySyntacticCategoryStr),
+                secondaryPos,
                 LexemeAttribute.lookupMultiple(lexemeAttributeStrs));
     }
 
-    private Lexeme createLexeme(String lemma, String rootStr, zemberek3.lexicon.PrimaryPos primaryPos, SecondarySyntacticCategory secondarySyntacticCategory,
+    private Lexeme createLexeme(String lemma, String rootStr, zemberek3.lexicon.PrimaryPos primaryPos, SecondaryPos secondaryPos,
                                 Set<LexemeAttribute> lexemeAttributes) {
         String lemmaRoot = rootStr;
 
@@ -116,7 +117,7 @@ class LexemeCreator {
 
         lexemeAttributes = this.inferMorphemicAttributes(lemmaRoot, primaryPos, lexemeAttributes);
 
-        return new Lexeme(lemma, lemmaRoot, primaryPos, secondarySyntacticCategory, Sets.immutableEnumSet(lexemeAttributes));
+        return new Lexeme(lemma, lemmaRoot, primaryPos, secondaryPos, Sets.immutableEnumSet(lexemeAttributes));
     }
 
     private int vowelCount(String str) {

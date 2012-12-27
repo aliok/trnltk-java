@@ -38,7 +38,7 @@ import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import static org.trnltk.morphology.model.SecondarySyntacticCategory.PERSONAL;
+import static org.trnltk.morphology.model.SecondaryPos.Personal;
 import static zemberek3.lexicon.PrimaryPos.Noun;
 import static zemberek3.lexicon.PrimaryPos.Pronoun;
 
@@ -77,7 +77,7 @@ public class PredefinedPathsTest {
         predefinedPaths.createPredefinedPathOf_biz();
 
         // last one ends with transition to derivation state
-        assertDefinedPath("ben", Pronoun, PERSONAL,
+        assertDefinedPath("ben", Pronoun, Personal,
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Nom",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Acc(i[i])",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Loc(de[de])",
@@ -88,11 +88,11 @@ public class PredefinedPathsTest {
                 "ben(ben)+Pron+Pers+A1sg+Pnon+AccordingTo(ce[ce])",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Nom");
 
-        assertDefinedPath("ban", Pronoun, PERSONAL,
+        assertDefinedPath("ban", Pronoun, Personal,
                 "ban(ben)+Pron+Pers+A1sg+Pnon+Dat(a[a])");
 
         // last one ends with transition to derivation state
-        assertDefinedPath("sen", Pronoun, PERSONAL,
+        assertDefinedPath("sen", Pronoun, Personal,
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Nom",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Acc(i[i])",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Loc(de[de])",
@@ -103,10 +103,10 @@ public class PredefinedPathsTest {
                 "sen(sen)+Pron+Pers+A2sg+Pnon+AccordingTo(ce[ce])",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Nom");
 
-        assertDefinedPath("san", Pronoun, PERSONAL,
+        assertDefinedPath("san", Pronoun, Personal,
                 "san(sen)+Pron+Pers+A2sg+Pnon+Dat(a[a])");
 
-        assertDefinedPath("biz", Pronoun, PERSONAL,
+        assertDefinedPath("biz", Pronoun, Personal,
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Nom",
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Nom",
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Acc(i[i])",
@@ -248,7 +248,7 @@ public class PredefinedPathsTest {
         assertDefinedPath("or", Pronoun, null, "or(ora)+Pron+A3sg+Pnon+Loc(da[da])", "or(ora)+Pron+A3sg+Pnon+Abl(dan[dan])");
         assertDefinedPath("bur", Pronoun, null, "bur(bura)+Pron+A3sg+Pnon+Loc(da[da])", "bur(bura)+Pron+A3sg+Pnon+Abl(dan[dan])");
         assertDefinedPath("şur", Pronoun, null, "şur(şura)+Pron+A3sg+Pnon+Loc(da[da])", "şur(şura)+Pron+A3sg+Pnon+Abl(dan[dan])");
-        assertDefinedPath("ner", Pronoun, SecondarySyntacticCategory.QUESTION, "ner(nere)+Pron+Ques+A3sg+Pnon+Loc(de[de])", "ner(nere)+Pron+Ques+A3sg+Pnon+Abl(den[den])");
+        assertDefinedPath("ner", Pronoun, SecondaryPos.Question, "ner(nere)+Pron+Ques+A3sg+Pnon+Loc(de[de])", "ner(nere)+Pron+Ques+A3sg+Pnon+Abl(den[den])");
     }
 
     @Test
@@ -264,20 +264,20 @@ public class PredefinedPathsTest {
         predefinedPaths.initialize();
     }
 
-    private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondarySyntacticCategory
-            secondarySyntacticCategory, String... expectedResults) {
-        assertThat(this.getFormattedPredefinedMorhpemeContainers(rootStr, primaryPos, secondarySyntacticCategory), new ParseResultsEqualMatcher(false, expectedResults));
+    private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondaryPos
+            secondaryPos, String... expectedResults) {
+        assertThat(this.getFormattedPredefinedMorhpemeContainers(rootStr, primaryPos, secondaryPos), new ParseResultsEqualMatcher(false, expectedResults));
     }
 
     private Collection<String> getFormattedPredefinedMorhpemeContainers(String rootStr, PrimaryPos
-            primaryPos, SecondarySyntacticCategory secondarySyntacticCategory) {
+            primaryPos, SecondaryPos secondaryPos) {
         final Set<? extends Root> roots = this.rootMap.get(rootStr);
         for (Root root : roots) {
-            if (root.getLexeme().getPrimaryPos().equals(primaryPos) && Objects.equal(root.getLexeme().getSecondarySyntacticCategory(), secondarySyntacticCategory))
+            if (root.getLexeme().getPrimaryPos().equals(primaryPos) && Objects.equal(root.getLexeme().getSecondaryPos(), secondaryPos))
                 return getFormattedPredefinedMorhpemeContainersForRoot(root);
         }
 
-        fail("No root found in root map for " + rootStr + " " + primaryPos + " " + secondarySyntacticCategory);
+        fail("No root found in root map for " + rootStr + " " + primaryPos + " " + secondaryPos);
         return null;
     }
 

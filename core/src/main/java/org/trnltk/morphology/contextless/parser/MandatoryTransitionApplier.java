@@ -32,7 +32,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasProgressiveVowelDrop;
-import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasSyntacticCategory;
+import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasPrimaryPos;
 
 public class MandatoryTransitionApplier {
 
@@ -61,7 +61,7 @@ public class MandatoryTransitionApplier {
         final MandatoryTransitionRule progressiveVowelDropRule = new RequiredTransitionRuleBuilder(this.suffixGraph)
                 .condition(
                         Specifications.and(
-                                rootHasSyntacticCategory(PrimaryPos.Verb),
+                                rootHasPrimaryPos(PrimaryPos.Verb),
                                 rootHasProgressiveVowelDrop()
                         )
                 )

@@ -33,7 +33,7 @@ public class EnumLookupMap<T extends Enum & SupportsEnumLookup> {
         final HashBiMap<T, String> enumStringHashBiMap = HashBiMap.create(Maps.toMap(Arrays.asList(enumClazz.getEnumConstants()), new Function<T, String>() {
             @Override
             public String apply(T input) {
-                return input.getLookupKey();
+                return input.getStringForm();
             }
         }));
         theMap = ImmutableMap.copyOf(enumStringHashBiMap.inverse());

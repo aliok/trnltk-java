@@ -23,7 +23,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.SecondaryPos;
 import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashSet;
@@ -84,7 +85,7 @@ public class DictionaryLoaderTest {
         assertThat(lexemes, hasItem(new Lexeme("abes", "abes", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new Lexeme("abes", "abes", PrimaryPos.Adverb, null, null)));
         assertThat(lexemes, hasItem(new Lexeme("ablak", "ablak", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abuk", "abuk", PrimaryPos.Adjective, SecondarySyntacticCategory.DUPLICATOR, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new Lexeme("abuk", "abuk", PrimaryPos.Adjective, SecondaryPos.DUPLICATOR, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new Lexeme("acemborusu", "acemboru", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.CompoundP3sg, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new Lexeme("acembuselik", "acembuselik", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
         assertThat(lexemes, hasItem(new Lexeme("aciz", "aciz", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.LastVowelDrop, LexemeAttribute.NoVoicing))));
@@ -95,7 +96,7 @@ public class DictionaryLoaderTest {
         assertThat(lexemes, hasItem(new Lexeme("addetmek", "addet", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.Voicing))));
         assertThat(lexemes, hasItem(new Lexeme("addolmak", "addol", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In))));
         assertThat(lexemes, hasItem(new Lexeme("ahlat", "ahlat", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Plural))));
-        assertThat(lexemes, hasItem(new Lexeme("akşam", "akşam", PrimaryPos.Noun, SecondarySyntacticCategory.TIME, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new Lexeme("akşam", "akşam", PrimaryPos.Noun, SecondaryPos.Time, ImmutableSet.of(LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new Lexeme("atamak", "ata", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
         assertThat(lexemes, hasItem(new Lexeme("sürtmek", "sürt", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new Lexeme("yemek", "yemek", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
@@ -112,7 +113,7 @@ public class DictionaryLoaderTest {
             assertThat(lexeme.getLemmaRoot(), not(isEmptyOrNullString()));
             assertThat(lexeme.getPrimaryPos(), notNullValue());
             assertThat(lexeme.getPrimaryPos(), not(equalTo(PrimaryPos.Numeral)));
-            assertThat(lexeme.getSecondarySyntacticCategory(), not(isIn(SecondarySyntacticCategory.NUMERAL_APPLICABLE)));
+            assertThat(lexeme.getSecondaryPos(), not(isIn(SecondaryPos.NUMERAL_APPLICABLE)));
             assertThat(lexeme.getAttributes(), notNullValue());
         }
     }
@@ -125,7 +126,7 @@ public class DictionaryLoaderTest {
             assertThat(lexeme.getLemma(), not(isEmptyOrNullString()));
             assertThat(lexeme.getLemmaRoot(), not(isEmptyOrNullString()));
             assertThat(lexeme.getPrimaryPos(), equalTo(PrimaryPos.Numeral));
-            assertThat(lexeme.getSecondarySyntacticCategory(), isIn(SecondarySyntacticCategory.NUMERAL_APPLICABLE));
+            assertThat(lexeme.getSecondaryPos(), isIn(SecondaryPos.NUMERAL_APPLICABLE));
             assertThat(lexeme.getAttributes(), notNullValue());
         }
     }

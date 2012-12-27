@@ -17,5 +17,5 @@
 package org.trnltk.common;
 
 public interface SupportsEnumLookup<T extends Enum & SupportsEnumLookup> {
-    public String getLookupKey();
+    public String getStringForm();
 }

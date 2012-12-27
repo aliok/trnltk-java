@@ -165,7 +165,7 @@ public class ImmutableRootGenerator {
         final EnumSet<LexemeAttribute> newAttributes = EnumSet.copyOf(attributes);
         newAttributes.remove(LexemeAttribute.RootChange);
         final Lexeme modifiedLexeme = new Lexeme(originalLexeme.getLemma(), originalLexeme.getLemmaRoot(), originalLexeme.getPrimaryPos(),
-                originalLexeme.getSecondarySyntacticCategory(), Sets.immutableEnumSet(newAttributes));
+                originalLexeme.getSecondaryPos(), Sets.immutableEnumSet(newAttributes));
 
 
         final String unchangedRootStr = originalLexeme.getLemmaRoot();

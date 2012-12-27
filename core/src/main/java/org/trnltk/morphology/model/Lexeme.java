@@ -1,22 +1,21 @@
 package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import zemberek3.lexicon.PrimaryPos;
 
 public class Lexeme {
     private final String lemma;
     private final String lemmaRoot;
-    private final PrimaryPos syntacticCategory;
-    private final SecondarySyntacticCategory secondarySyntacticCategory;
+    private final PrimaryPos primaryPos;
+    private final SecondaryPos secondaryPos;
     private final ImmutableSet<LexemeAttribute> lexemeAttributes;
 
-    public Lexeme(String lemma, String lemmaRoot, PrimaryPos syntacticCategory, SecondarySyntacticCategory secondarySyntacticCategory, ImmutableSet<LexemeAttribute> lexemeAttributes) {
+    public Lexeme(String lemma, String lemmaRoot, PrimaryPos primaryPos, SecondaryPos secondaryPos, ImmutableSet<LexemeAttribute> lexemeAttributes) {
         this.lemma = lemma;
         this.lemmaRoot = lemmaRoot;
-        this.syntacticCategory = syntacticCategory;
-        this.secondarySyntacticCategory = secondarySyntacticCategory;
+        this.primaryPos = primaryPos;
+        this.secondaryPos = secondaryPos;
         this.lexemeAttributes = CollectionUtils.isEmpty(lexemeAttributes) ? ImmutableSet.<LexemeAttribute>of() : lexemeAttributes;
     }
 
@@ -29,11 +28,11 @@ public class Lexeme {
     }
 
     public PrimaryPos getPrimaryPos() {
-        return syntacticCategory;
+        return primaryPos;
     }
 
-    public SecondarySyntacticCategory getSecondarySyntacticCategory() {
-        return secondarySyntacticCategory;
+    public SecondaryPos getSecondaryPos() {
+        return secondaryPos;
     }
 
     public ImmutableSet<LexemeAttribute> getAttributes() {
@@ -45,8 +44,8 @@ public class Lexeme {
         return "Lexeme{" +
                 "lemma='" + lemma + '\'' +
                 ", lemmaRoot='" + lemmaRoot + '\'' +
-                ", syntacticCategory=" + syntacticCategory +
-                ", secondarySyntacticCategory=" + secondarySyntacticCategory +
+                ", primaryPos=" + primaryPos +
+                ", secondaryPos=" + secondaryPos +
                 ", lexemeAttributes=" + lexemeAttributes +
                 '}';
     }
@@ -62,8 +61,8 @@ public class Lexeme {
         if (lemmaRoot != null ? !lemmaRoot.equals(lexeme.lemmaRoot) : lexeme.lemmaRoot != null) return false;
         if (lexemeAttributes != null ? !lexemeAttributes.equals(lexeme.lexemeAttributes) : lexeme.lexemeAttributes != null)
             return false;
-        if (secondarySyntacticCategory != lexeme.secondarySyntacticCategory) return false;
-        if (syntacticCategory != lexeme.syntacticCategory) return false;
+        if (secondaryPos != lexeme.secondaryPos) return false;
+        if (primaryPos != lexeme.primaryPos) return false;
 
         return true;
     }
@@ -72,8 +71,8 @@ public class Lexeme {
     public int hashCode() {
         int result = lemma != null ? lemma.hashCode() : 0;
         result = 31 * result + (lemmaRoot != null ? lemmaRoot.hashCode() : 0);
-        result = 31 * result + (syntacticCategory != null ? syntacticCategory.hashCode() : 0);
-        result = 31 * result + (secondarySyntacticCategory != null ? secondarySyntacticCategory.hashCode() : 0);
+        result = 31 * result + (primaryPos != null ? primaryPos.hashCode() : 0);
+        result = 31 * result + (secondaryPos != null ? secondaryPos.hashCode() : 0);
         result = 31 * result + (lexemeAttributes != null ? lexemeAttributes.hashCode() : 0);
         return result;
     }

@@ -17,7 +17,8 @@
 package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondarySyntacticCategory;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.Suffix;
 import zemberek3.lexicon.PrimaryPos;
 
@@ -56,12 +57,12 @@ public class ProperNounSuffixGraph extends BaseSuffixGraph {
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
         final PrimaryPos primaryPos = root.getLexeme().getPrimaryPos();
-        final SecondarySyntacticCategory secondarySyntacticCategory = root.getLexeme().getSecondarySyntacticCategory();
-        if (secondarySyntacticCategory == null)
+        final SecondaryPos secondaryPos = root.getLexeme().getSecondaryPos();
+        if (secondaryPos == null)
             return null;
 
         if (Noun.equals(primaryPos) &&
-                (secondarySyntacticCategory.equals(SecondarySyntacticCategory.PROPER_NOUN) || secondarySyntacticCategory.equals(SecondarySyntacticCategory.ABBREVIATION)))
+                (secondaryPos.equals(SecondaryPos.ProperNoun) || secondaryPos.equals(SecondaryPos.ABBREVIATION)))
             return PROPER_NOUN_ROOT;
 
         return null;
