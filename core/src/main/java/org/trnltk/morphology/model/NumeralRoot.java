@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.PrimaryPos;
 
 public class NumeralRoot implements Root {
 
@@ -21,7 +22,7 @@ public class NumeralRoot implements Root {
         Validate.notNull(secondarySyntacticCategory);
         Validate.isTrue(SecondarySyntacticCategory.NUMERAL_APPLICABLE.contains(secondarySyntacticCategory));
 
-        final SyntacticCategory syntacticCategory = SyntacticCategory.NUMERAL;
+        final PrimaryPos syntacticCategory = PrimaryPos.Numeral;
         final ImmutableSet<LexemeAttribute> lexemeAttributes = ImmutableSet.of();
 
         final Lexeme lexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, syntacticCategory,

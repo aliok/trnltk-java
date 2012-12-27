@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.*;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -50,8 +51,8 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
             return suffixGraphState;
     }
 
-    protected SuffixGraphState registerState(String name, SuffixGraphStateType suffixGraphStateType, SyntacticCategory syntacticCategory) {
-        final SuffixGraphState suffixGraphState = new SuffixGraphState(name, suffixGraphStateType, syntacticCategory);
+    protected SuffixGraphState registerState(String name, SuffixGraphStateType suffixGraphStateType, PrimaryPos primaryPos) {
+        final SuffixGraphState suffixGraphState = new SuffixGraphState(name, suffixGraphStateType, primaryPos);
         Validate.isTrue(!this.stateMap.containsKey(name));
         Validate.isTrue(!this.stateMap.containsValue(suffixGraphState));
         Validate.isTrue(this.decorated.getSuffixGraphState(name) == null);

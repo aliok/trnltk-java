@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class ProperNounFromApostropheRootFinderTest {
     private void assertRecognizedCorrectly(final String partialInput, final String expectedLemmaAndRoot, final SecondarySyntacticCategory expectedSecondarySyntacticCategory,
                                            ImmutableSet<PhoneticAttribute> expectedPhoneticAttributes) {
 
-        final Lexeme expectedLemma = new Lexeme(expectedLemmaAndRoot, expectedLemmaAndRoot, SyntacticCategory.NOUN, expectedSecondarySyntacticCategory, null);
+        final Lexeme expectedLemma = new Lexeme(expectedLemmaAndRoot, expectedLemmaAndRoot, PrimaryPos.Noun, expectedSecondarySyntacticCategory, null);
         final ImmutableRoot expectedRoot = new ImmutableRoot(new TurkishSequence(expectedLemmaAndRoot), expectedLemma, expectedPhoneticAttributes, null);
 
         final List<? extends Root> rootsForPartialInput = rootFinder.findRootsForPartialInput(new TurkishSequence(partialInput), null);

@@ -25,6 +25,7 @@ import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,7 +53,7 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
         final String partialInputUnderlyingString = partialInput.getUnderlyingString();
 
         if (partialInput.equals(input) && StringUtils.isAllUpperCase(partialInputUnderlyingString)) {
-            final Lexeme abbreviationLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, SyntacticCategory.NOUN, SecondarySyntacticCategory.ABBREVIATION, null);
+            final Lexeme abbreviationLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondarySyntacticCategory.ABBREVIATION, null);
             if (!partialInput.getLastChar().getLetter().isVowel()) {
                 // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
                 final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput.append(TURKISH_CHAR_E_UPPERCASE), null));
@@ -74,7 +75,7 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
             // 2: P3sg doesn't apply to these words: onun Kusadasi, onun Eminonu
             // 3. Possessions are applied to 'root' : benim Kusadam etc. SKIP this case!
 
-            final Lexeme properNounLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, SyntacticCategory.NOUN, SecondarySyntacticCategory.PROPER_NOUN, null);
+            final Lexeme properNounLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondarySyntacticCategory.PROPER_NOUN, null);
 
             final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
             final ImmutableRoot properNounRoot = new ImmutableRoot(partialInput, properNounLexeme, phoneticAttributes, null);

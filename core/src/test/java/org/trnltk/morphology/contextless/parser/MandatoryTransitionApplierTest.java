@@ -29,6 +29,7 @@ import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +61,7 @@ public class MandatoryTransitionApplierTest {
         final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
-        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, SyntacticCategory.VERB, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
+        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
         final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
 
@@ -90,7 +91,7 @@ public class MandatoryTransitionApplierTest {
         final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
-        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, SyntacticCategory.NOUN, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
+        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
         final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
 
@@ -110,7 +111,7 @@ public class MandatoryTransitionApplierTest {
         final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
-        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, SyntacticCategory.VERB, null, ImmutableSet.of(LexemeAttribute.NoVoicing));
+        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.NoVoicing));
 
         final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
 
@@ -130,7 +131,7 @@ public class MandatoryTransitionApplierTest {
         final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
-        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, SyntacticCategory.VERB, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
+        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
         final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
 
@@ -150,7 +151,7 @@ public class MandatoryTransitionApplierTest {
         final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
-        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, SyntacticCategory.VERB, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop));
+        final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop));
 
         final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
 

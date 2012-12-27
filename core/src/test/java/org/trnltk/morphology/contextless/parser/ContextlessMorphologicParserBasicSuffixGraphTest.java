@@ -20,8 +20,8 @@ import com.google.common.collect.HashMultimap;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.lexicon.RootMapFactory;
+import zemberek3.lexicon.PrimaryPos;
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SyntacticCategory;
 
 public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContextlessMorphologicParserTest {
 
@@ -160,7 +160,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("çevirmiş", "çevir(çevirmek)+Verb+Pos+Narr(mIş[miş])+A3sg", "çevir(çevirmek)+Verb+Pos+Narr(mIş[miş])+Adj+Zero", "çevir(çevirmek)+Verb+Pos+Narr(mIş[miş])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
 
 
-        removeRootsExceptSyntacticCategory("el", SyntacticCategory.VERB);
+        removeRootsExceptSyntacticCategory("el", PrimaryPos.Verb);
 
         assertParseCorrect("elerim", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom");
         assertParseCorrect("elersin", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+A2sg(sIn[sin])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sin])");
@@ -537,10 +537,10 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     public void shouldParsePronouns() {
         // remove some roots to make the test simple
         removeRoots("on", "ona", "bend", "bun", "bizle", "se", "bur");
-        removeRootsExceptSyntacticCategory("ben", SyntacticCategory.PRONOUN);
-        removeRootsExceptSyntacticCategory("ban", SyntacticCategory.PRONOUN);
-        removeRootsExceptSyntacticCategory("san", SyntacticCategory.PRONOUN);
-        removeRootsExceptSyntacticCategory("biz", SyntacticCategory.PRONOUN);
+        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
+        removeRootsExceptSyntacticCategory("ban", PrimaryPos.Pronoun);
+        removeRootsExceptSyntacticCategory("san", PrimaryPos.Pronoun);
+        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
 
         assertParseCorrect("ben", "ben(ben)+Pron+Pers+A1sg+Pnon+Nom");
         assertParseCorrect("sen", "sen(sen)+Pron+Pers+A2sg+Pnon+Nom");
@@ -697,8 +697,8 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     @Test
     public void shouldParsePointQualifiers() {
         removeRoots("masad", "bend", "on", "yar", "bizle");
-        removeRootsExceptSyntacticCategory("ben", SyntacticCategory.PRONOUN);
-        removeRootsExceptSyntacticCategory("biz", SyntacticCategory.PRONOUN);
+        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
+        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
 
         assertParseCorrect("masadaki", "masa(masa)+Noun+A3sg+Pnon+Loc(dA[da])+Adj+PointQual(ki[ki])", "masa(masa)+Noun+A3sg+Pnon+Loc(dA[da])+Adj+PointQual(ki[ki])+Noun+Zero+A3sg+Pnon+Nom");
         assertParseCorrect("masamdaki", "masa(masa)+Noun+A3sg+P1sg(+Im[m])+Loc(dA[da])+Adj+PointQual(ki[ki])", "masa(masa)+Noun+A3sg+P1sg(+Im[m])+Loc(dA[da])+Adj+PointQual(ki[ki])+Noun+Zero+A3sg+Pnon+Nom");
@@ -764,7 +764,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     @Test
     public void shouldParsePronounDerivations() {
         removeRoots("on");
-        removeRootsExceptSyntacticCategory("biz", SyntacticCategory.PRONOUN);
+        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
 
 
         assertParseCorrect("bensiz",
@@ -1275,8 +1275,8 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
                 "organ(organ)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom+Adv+By(ncA[nca])");
 
         removeRoots("on", "onca", "bizle");
-        removeRootsExceptSyntacticCategory("ben", SyntacticCategory.PRONOUN);
-        removeRootsExceptSyntacticCategory("biz", SyntacticCategory.PRONOUN);
+        removeRootsExceptSyntacticCategory("ben", PrimaryPos.Pronoun);
+        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
 
         assertParseCorrect("bence", "ben(ben)+Pron+Pers+A1sg+Pnon+AccordingTo(ce[ce])");
         assertParseCorrect("sence", "sen(sen)+Pron+Pers+A2sg+Pnon+AccordingTo(ce[ce])");
@@ -1448,7 +1448,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrectForVerb("zeytinyağlarını", "zeytinyağ(zeytinyağı)+Noun+A3sg+P3pl(lAr!I[ları])+Acc(nI[nı])");
 
         removeRoots("a", "ak", "akşam");
-        removeRootsExceptSyntacticCategory("akşamüstü", SyntacticCategory.NOUN);
+        removeRootsExceptSyntacticCategory("akşamüstü", PrimaryPos.Noun);
 
         assertParseCorrectForVerb("akşamüstü", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3sg(+sI[ü])+Nom");
         assertParseCorrectForVerb("akşamüstleri", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3pl(lAr!I[leri])+Nom");
@@ -1585,7 +1585,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     @Test
     public void shouldParseRelativePronouns() {
         removeRoots("on", "se", "bizle");
-        removeRootsExceptSyntacticCategory("biz", SyntacticCategory.PRONOUN);
+        removeRootsExceptSyntacticCategory("biz", PrimaryPos.Pronoun);
 
         assertParseCorrect("masamınki", "masa(masa)+Noun+A3sg+P1sg(+Im[m])+Gen(+nIn[ın])+Pron+A3sg(ki[ki])+Pnon+Nom");
         assertParseCorrect("masanınki", "masa(masa)+Noun+A3sg+Pnon+Gen(+nIn[nın])+Pron+A3sg(ki[ki])+Pnon+Nom", "masa(masa)+Noun+A3sg+P2sg(+In[n])+Gen(+nIn[ın])+Pron+A3sg(ki[ki])+Pnon+Nom");

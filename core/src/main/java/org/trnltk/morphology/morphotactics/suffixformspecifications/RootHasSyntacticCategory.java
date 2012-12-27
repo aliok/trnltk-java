@@ -19,24 +19,24 @@ package org.trnltk.morphology.morphotactics.suffixformspecifications;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.MorphemeContainer;
-import org.trnltk.morphology.model.SyntacticCategory;
+import zemberek3.lexicon.PrimaryPos;
 
 public class RootHasSyntacticCategory extends AbstractSpecification<MorphemeContainer> {
-    private final SyntacticCategory syntacticCategory;
+    private final PrimaryPos primaryPos;
 
-    public RootHasSyntacticCategory(SyntacticCategory syntacticCategory) {
-        this.syntacticCategory = syntacticCategory;
+    public RootHasSyntacticCategory(PrimaryPos primaryPos) {
+        this.primaryPos = primaryPos;
     }
 
     @Override
     public String describe() {
-        return String.format("root_has_syntactic_category(%s)", syntacticCategory);
+        return String.format("root_has_syntactic_category(%s)", primaryPos);
     }
 
     @Override
     public boolean isSatisfiedBy(MorphemeContainer morphemeContainer) {
         Validate.notNull(morphemeContainer);
 
-        return this.syntacticCategory.equals(morphemeContainer.getRoot().getLexeme().getSyntacticCategory());
+        return this.primaryPos.equals(morphemeContainer.getRoot().getLexeme().getPrimaryPos());
     }
 }

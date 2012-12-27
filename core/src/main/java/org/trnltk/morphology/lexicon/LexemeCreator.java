@@ -25,8 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
+import zemberek3.lexicon.PrimaryPos;
 import org.trnltk.morphology.model.SecondarySyntacticCategory;
-import org.trnltk.morphology.model.SyntacticCategory;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishLetter;
 
@@ -43,7 +43,7 @@ class LexemeCreator {
 
         final String line = CharMatcher.WHITESPACE.trimAndCollapseFrom(_line, ' ');
 
-        String syntacticCategoryStr = null;
+        String primaryPosStr = null;
         String secondarySyntacticCategoryStr = null;
         Set<String> lexemeAttributeStrs = new HashSet<String>();
 
@@ -74,10 +74,10 @@ class LexemeCreator {
                     if (metaPart.contains(",")) {
                         final List<String> metaPartItems = Lists.newArrayList(Splitter.on(',').omitEmptyStrings().trimResults().split(metaPart));
                         Validate.isTrue(metaPartItems.size() == 2);
-                        syntacticCategoryStr = metaPartItems.get(0);
+                        primaryPosStr = metaPartItems.get(0);
                         secondarySyntacticCategoryStr = metaPartItems.get(1);
                     } else {
-                        syntacticCategoryStr = metaPart;
+                        primaryPosStr = metaPart;
                     }
                 } else if (metaPart.startsWith("A:")) {
                     metaPart = metaPart.substring("A:".length());
@@ -93,28 +93,30 @@ class LexemeCreator {
             }
         }
 
+        final PrimaryPos primaryPos = PrimaryPos.converter().enumExists(primaryPosStr) ? PrimaryPos.converter().getEnum(primaryPosStr) : null;
+
         return this.createLexeme(lemma, rootStr,
-                SyntacticCategory.lookup(syntacticCategoryStr),
+                primaryPos,
                 SecondarySyntacticCategory.lookup(secondarySyntacticCategoryStr),
                 LexemeAttribute.lookupMultiple(lexemeAttributeStrs));
     }
 
-    private Lexeme createLexeme(String lemma, String rootStr, SyntacticCategory syntacticCategory, SecondarySyntacticCategory secondarySyntacticCategory,
+    private Lexeme createLexeme(String lemma, String rootStr, zemberek3.lexicon.PrimaryPos primaryPos, SecondarySyntacticCategory secondarySyntacticCategory,
                                 Set<LexemeAttribute> lexemeAttributes) {
         String lemmaRoot = rootStr;
 
-        if (syntacticCategory == null) {
+        if (primaryPos == null) {
             if (rootStr.endsWith("mek") || rootStr.endsWith("mak")) {
-                syntacticCategory = SyntacticCategory.VERB;
+                primaryPos = zemberek3.lexicon.PrimaryPos.Verb;
                 lemmaRoot = rootStr.substring(0, rootStr.length() - 3);
             } else {
-                syntacticCategory = SyntacticCategory.NOUN;
+                primaryPos = zemberek3.lexicon.PrimaryPos.Noun;
             }
         }
 
-        lexemeAttributes = this.inferMorphemicAttributes(lemmaRoot, syntacticCategory, lexemeAttributes);
+        lexemeAttributes = this.inferMorphemicAttributes(lemmaRoot, primaryPos, lexemeAttributes);
 
-        return new Lexeme(lemma, lemmaRoot, syntacticCategory, secondarySyntacticCategory, Sets.immutableEnumSet(lexemeAttributes));
+        return new Lexeme(lemma, lemmaRoot, primaryPos, secondarySyntacticCategory, Sets.immutableEnumSet(lexemeAttributes));
     }
 
     private int vowelCount(String str) {
@@ -126,16 +128,16 @@ class LexemeCreator {
         return count;
     }
 
-    Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final SyntacticCategory syntacticCategory, final Set<LexemeAttribute> _lexemeAttributes) {
+    Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final zemberek3.lexicon.PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
         final TurkishLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
         final int vowelCount = this.vowelCount(lemmaRoot);
 
         final HashSet<LexemeAttribute> lexemeAttributes = new HashSet<LexemeAttribute>(_lexemeAttributes);
 
-        final boolean isVerb = SyntacticCategory.VERB.equals(syntacticCategory);
-        final boolean isNoun = SyntacticCategory.NOUN.equals(syntacticCategory);
-        final boolean isAdjective = SyntacticCategory.ADJECTIVE.equals(syntacticCategory);
+        final boolean isVerb = PrimaryPos.Verb.equals(primaryPos);
+        final boolean isNoun = PrimaryPos.Noun.equals(primaryPos);
+        final boolean isAdjective = PrimaryPos.Adjective.equals(primaryPos);
         final boolean isNounCompound = isNoun && lexemeAttributes.contains(LexemeAttribute.CompoundP3sg);
 
         if (isVerb) {

@@ -3,15 +3,16 @@ package org.trnltk.morphology.model;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
+import zemberek3.lexicon.PrimaryPos;
 
 public class Lexeme {
     private final String lemma;
     private final String lemmaRoot;
-    private final SyntacticCategory syntacticCategory;
+    private final PrimaryPos syntacticCategory;
     private final SecondarySyntacticCategory secondarySyntacticCategory;
     private final ImmutableSet<LexemeAttribute> lexemeAttributes;
 
-    public Lexeme(String lemma, String lemmaRoot, SyntacticCategory syntacticCategory, SecondarySyntacticCategory secondarySyntacticCategory, ImmutableSet<LexemeAttribute> lexemeAttributes) {
+    public Lexeme(String lemma, String lemmaRoot, PrimaryPos syntacticCategory, SecondarySyntacticCategory secondarySyntacticCategory, ImmutableSet<LexemeAttribute> lexemeAttributes) {
         this.lemma = lemma;
         this.lemmaRoot = lemmaRoot;
         this.syntacticCategory = syntacticCategory;
@@ -27,7 +28,7 @@ public class Lexeme {
         return lemmaRoot;
     }
 
-    public SyntacticCategory getSyntacticCategory() {
+    public PrimaryPos getPrimaryPos() {
         return syntacticCategory;
     }
 

@@ -19,20 +19,20 @@ package org.trnltk.morphology.morphotactics;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondarySyntacticCategory;
 import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SyntacticCategory;
+import zemberek3.lexicon.PrimaryPos;
 
-import static org.trnltk.morphology.model.SyntacticCategory.NUMERAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
+import static zemberek3.lexicon.PrimaryPos.Numeral;
 
 public class NumeralSuffixGraph extends BaseSuffixGraph {
-    private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, NUMERAL);
-    private final SuffixGraphState NUMERAL_CARDINAL_DERIV = registerState("NUMERAL_CARDINAL_DERIV", DERIVATIONAL, NUMERAL);
+    private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, Numeral);
+    private final SuffixGraphState NUMERAL_CARDINAL_DERIV = registerState("NUMERAL_CARDINAL_DERIV", DERIVATIONAL, Numeral);
 
-    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, NUMERAL);
+    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, Numeral);
 
-    private final SuffixGraphState NUMERAL_ORDINAL_ROOT = registerState("NUMERAL_ORDINAL_ROOT", TRANSFER, NUMERAL);
-    private final SuffixGraphState NUMERAL_ORDINAL_DERIV = registerState("NUMERAL_ORDINAL_DERIV", DERIVATIONAL, NUMERAL);
+    private final SuffixGraphState NUMERAL_ORDINAL_ROOT = registerState("NUMERAL_ORDINAL_ROOT", TRANSFER, Numeral);
+    private final SuffixGraphState NUMERAL_ORDINAL_DERIV = registerState("NUMERAL_ORDINAL_DERIV", DERIVATIONAL, Numeral);
 
     private final SuffixGraphState DECORATED_ADJECTIVE_ROOT = getSuffixGraphState("ADJECTIVE_ROOT");
 
@@ -55,9 +55,9 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
 
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
-        final SyntacticCategory syntacticCategory = root.getLexeme().getSyntacticCategory();
+        final PrimaryPos primaryPos = root.getLexeme().getPrimaryPos();
         final SecondarySyntacticCategory secondarySyntacticCategory = root.getLexeme().getSecondarySyntacticCategory();
-        if (NUMERAL.equals(syntacticCategory)) {
+        if (Numeral.equals(primaryPos)) {
             switch (secondarySyntacticCategory) {
                 case DIGITS:
                     return NUMERAL_DIGIT_CARDINAL_ROOT;

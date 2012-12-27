@@ -11,6 +11,7 @@ import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.*;
 
@@ -232,7 +233,7 @@ public class MorphemeContainer {
         } else {
             //TODO:!!!!  necessary for the case yurutemeyecekmisim !-> yurudemeyecekmisim
             final SuffixGraphState lastState = this.getLastState();
-            final boolean lastStateIsVerb = SyntacticCategory.VERB.equals(lastState.getSyntacticCategory());
+            final boolean lastStateIsVerb = PrimaryPos.Verb.equals(lastState.getPrimaryPos());
 
             if (!lastStateIsVerb) {
                 return ImmutableSet.of();

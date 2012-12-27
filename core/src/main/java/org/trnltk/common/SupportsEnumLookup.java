@@ -16,8 +16,6 @@
 
 package org.trnltk.common;
 
-import org.trnltk.morphology.model.SyntacticCategory;
-
 public interface SupportsEnumLookup<T extends Enum & SupportsEnumLookup> {
     public String getLookupKey();
 }

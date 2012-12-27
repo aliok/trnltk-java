@@ -19,19 +19,19 @@ package org.trnltk.morphology.morphotactics;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondarySyntacticCategory;
 import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SyntacticCategory;
+import zemberek3.lexicon.PrimaryPos;
 
-import static org.trnltk.morphology.model.SyntacticCategory.NOUN;
+import static zemberek3.lexicon.PrimaryPos.Noun;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TERMINAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 
 public class ProperNounSuffixGraph extends BaseSuffixGraph {
 
-    private final SuffixGraphState PROPER_NOUN_ROOT = registerState("PROPER_NOUN_ROOT", TRANSFER, NOUN);
-    private final SuffixGraphState PROPER_NOUN_WITH_AGREEMENT = registerState("PROPER_NOUN_WITH_AGREEMENT", TRANSFER, NOUN);
-    private final SuffixGraphState PROPER_NOUN_WITH_POSSESSION = registerState("PROPER_NOUN_WITH_POSSESSION", TRANSFER, NOUN);
-    private final SuffixGraphState PROPER_NOUN_WITH_CASE = registerState("PROPER_NOUN_WITH_CASE", TRANSFER, NOUN);
-    private final SuffixGraphState PROPER_NOUN_TERMINAL = registerState("PROPER_NOUN_TERMINAL", TERMINAL, NOUN);
+    private final SuffixGraphState PROPER_NOUN_ROOT = registerState("PROPER_NOUN_ROOT", TRANSFER, Noun);
+    private final SuffixGraphState PROPER_NOUN_WITH_AGREEMENT = registerState("PROPER_NOUN_WITH_AGREEMENT", TRANSFER, Noun);
+    private final SuffixGraphState PROPER_NOUN_WITH_POSSESSION = registerState("PROPER_NOUN_WITH_POSSESSION", TRANSFER, Noun);
+    private final SuffixGraphState PROPER_NOUN_WITH_CASE = registerState("PROPER_NOUN_WITH_CASE", TRANSFER, Noun);
+    private final SuffixGraphState PROPER_NOUN_TERMINAL = registerState("PROPER_NOUN_TERMINAL", TERMINAL, Noun);
 
     // from decorated
     private final SuffixGraphState DECORATED_NOUN_ROOT = getSuffixGraphState("NOUN_ROOT");
@@ -55,12 +55,12 @@ public class ProperNounSuffixGraph extends BaseSuffixGraph {
 
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
-        final SyntacticCategory syntacticCategory = root.getLexeme().getSyntacticCategory();
+        final PrimaryPos primaryPos = root.getLexeme().getPrimaryPos();
         final SecondarySyntacticCategory secondarySyntacticCategory = root.getLexeme().getSecondarySyntacticCategory();
         if (secondarySyntacticCategory == null)
             return null;
 
-        if (NOUN.equals(syntacticCategory) &&
+        if (Noun.equals(primaryPos) &&
                 (secondarySyntacticCategory.equals(SecondarySyntacticCategory.PROPER_NOUN) || secondarySyntacticCategory.equals(SecondarySyntacticCategory.ABBREVIATION)))
             return PROPER_NOUN_ROOT;
 

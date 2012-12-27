@@ -43,7 +43,7 @@ public class ContextlessMorphologicParserSimpleParseSetTest extends BaseContextl
     private HashMultimap<String, ? extends Root> originalRootMap;
 
     public ContextlessMorphologicParserSimpleParseSetTest() {
-        this.originalRootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
+        this.originalRootMap = RootMapFactory.createSimple();
     }
 
     @Before

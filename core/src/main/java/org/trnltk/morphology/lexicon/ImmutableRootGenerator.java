@@ -26,8 +26,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.SyntacticCategory;
 import org.trnltk.morphology.phonetics.*;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -43,19 +43,19 @@ public class ImmutableRootGenerator {
             LexemeAttribute.VoicingOpt,
             LexemeAttribute.RootChange);
 
-    private static final ImmutableMap<Pair<String, SyntacticCategory>, String> rootChanges = new ImmutableMap.Builder<Pair<String, SyntacticCategory>, String>()
-            .put(Pair.of("ben", SyntacticCategory.PRONOUN), "ban")
-            .put(Pair.of("sen", SyntacticCategory.PRONOUN), "san")
-            .put(Pair.of("demek", SyntacticCategory.VERB), "di")
-            .put(Pair.of("yemek", SyntacticCategory.VERB), "yi")
-            .put(Pair.of("hepsi", SyntacticCategory.PRONOUN), "hep")
-            .put(Pair.of("ora", SyntacticCategory.PRONOUN), "or")
-            .put(Pair.of("bura", SyntacticCategory.PRONOUN), "bur")
-            .put(Pair.of("şura", SyntacticCategory.PRONOUN), "şur")
-            .put(Pair.of("nere", SyntacticCategory.PRONOUN), "ner")
-            .put(Pair.of("içeri", (SyntacticCategory) null), "içer") // applicable to all forms of the word
-            .put(Pair.of("dışarı", (SyntacticCategory) null), "dışar") // applicable to all forms of the word
-            .put(Pair.of("birbiri", SyntacticCategory.PRONOUN), "birbir")
+    private static final ImmutableMap<Pair<String, PrimaryPos>, String> rootChanges = new ImmutableMap.Builder<Pair<String, PrimaryPos>, String>()
+            .put(Pair.of("ben", PrimaryPos.Pronoun), "ban")
+            .put(Pair.of("sen", PrimaryPos.Pronoun), "san")
+            .put(Pair.of("demek", PrimaryPos.Verb), "di")
+            .put(Pair.of("yemek", PrimaryPos.Verb), "yi")
+            .put(Pair.of("hepsi", PrimaryPos.Pronoun), "hep")
+            .put(Pair.of("ora", PrimaryPos.Pronoun), "or")
+            .put(Pair.of("bura", PrimaryPos.Pronoun), "bur")
+            .put(Pair.of("şura", PrimaryPos.Pronoun), "şur")
+            .put(Pair.of("nere", PrimaryPos.Pronoun), "ner")
+            .put(Pair.of("içeri", (PrimaryPos) null), "içer") // applicable to all forms of the word
+            .put(Pair.of("dışarı", (PrimaryPos) null), "dışar") // applicable to all forms of the word
+            .put(Pair.of("birbiri", PrimaryPos.Pronoun), "birbir")
             .build();
 
     private PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
@@ -123,7 +123,7 @@ public class ImmutableRootGenerator {
 
         if (lexemeAttributes.contains(LexemeAttribute.LastVowelDrop)) {
             modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 2) + modifiedRootStr.charAt(modifiedRootStr.length() - 1);
-            if (!SyntacticCategory.VERB.equals(lexeme.getSyntacticCategory()))
+            if (!PrimaryPos.Verb.equals(lexeme.getPrimaryPos()))
                 originalPhoneticExpectations.add(PhoneticExpectation.ConsonantStart);
 
             modifiedPhoneticExpectations.add(PhoneticExpectation.VowelStart);
@@ -155,16 +155,16 @@ public class ImmutableRootGenerator {
     }
 
     private HashSet<ImmutableRoot> handleSpecialRoots(final Lexeme originalLexeme) {
-        String changedRootStr = rootChanges.get(Pair.of(originalLexeme.getLemma(), originalLexeme.getSyntacticCategory()));
+        String changedRootStr = rootChanges.get(Pair.of(originalLexeme.getLemma(), originalLexeme.getPrimaryPos()));
         if (StringUtils.isBlank(changedRootStr))
-            changedRootStr = rootChanges.get(Pair.of(originalLexeme.getLemma(), (SyntacticCategory) null));
+            changedRootStr = rootChanges.get(Pair.of(originalLexeme.getLemma(), (PrimaryPos) null));
 
         Validate.notNull(changedRootStr, "Unhandled root change : " + originalLexeme);
 
         final ImmutableSet<LexemeAttribute> attributes = originalLexeme.getAttributes();
         final EnumSet<LexemeAttribute> newAttributes = EnumSet.copyOf(attributes);
         newAttributes.remove(LexemeAttribute.RootChange);
-        final Lexeme modifiedLexeme = new Lexeme(originalLexeme.getLemma(), originalLexeme.getLemmaRoot(), originalLexeme.getSyntacticCategory(),
+        final Lexeme modifiedLexeme = new Lexeme(originalLexeme.getLemma(), originalLexeme.getLemmaRoot(), originalLexeme.getPrimaryPos(),
                 originalLexeme.getSecondarySyntacticCategory(), Sets.immutableEnumSet(newAttributes));
 
 

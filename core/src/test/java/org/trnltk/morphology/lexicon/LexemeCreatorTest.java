@@ -17,25 +17,15 @@
 package org.trnltk.morphology.lexicon;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.io.CharSource;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.Resources;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.LexemeAttribute;
 
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
 
 public class LexemeCreatorTest {
 
@@ -63,31 +53,31 @@ public class LexemeCreatorTest {
 
         Set<LexemeAttribute> lexemeAttributes;
 
-        lexemeAttributes = loader.inferMorphemicAttributes("git", SyntacticCategory.VERB, ImmutableSet.of(VO, C_DIR));
+        lexemeAttributes = loader.inferMorphemicAttributes("git", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(VO, C_DIR));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(VO, C_DIR, AA)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("gel", SyntacticCategory.VERB, ImmutableSet.of(AI, C_DIR));
+        lexemeAttributes = loader.inferMorphemicAttributes("gel", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(AI, C_DIR));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, C_DIR, PI, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("at", SyntacticCategory.VERB, ImmutableSet.of(NVO, C_DIR));
+        lexemeAttributes = loader.inferMorphemicAttributes("at", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(NVO, C_DIR));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(NVO, C_DIR, AA)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("ata", SyntacticCategory.VERB, new HashSet<LexemeAttribute>());
+        lexemeAttributes = loader.inferMorphemicAttributes("ata", zemberek3.lexicon.PrimaryPos.Verb, new HashSet<LexemeAttribute>());
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("dola", SyntacticCategory.VERB, new HashSet<LexemeAttribute>());
+        lexemeAttributes = loader.inferMorphemicAttributes("dola", zemberek3.lexicon.PrimaryPos.Verb, new HashSet<LexemeAttribute>());
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("tanı", SyntacticCategory.VERB, ImmutableSet.of(AI));
+        lexemeAttributes = loader.inferMorphemicAttributes("tanı", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(AI));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, PVD, PI, AI, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("getir", SyntacticCategory.VERB, ImmutableSet.of(AI));
+        lexemeAttributes = loader.inferMorphemicAttributes("getir", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(AI));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, AI, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("ürk", SyntacticCategory.VERB, ImmutableSet.of(C_IT));
+        lexemeAttributes = loader.inferMorphemicAttributes("ürk", zemberek3.lexicon.PrimaryPos.Verb, ImmutableSet.of(C_IT));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(C_IT, AA, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("ağla", SyntacticCategory.VERB, new HashSet<LexemeAttribute>());
+        lexemeAttributes = loader.inferMorphemicAttributes("ağla", zemberek3.lexicon.PrimaryPos.Verb, new HashSet<LexemeAttribute>());
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
     }
 }

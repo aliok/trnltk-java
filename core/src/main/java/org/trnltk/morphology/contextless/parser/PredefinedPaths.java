@@ -8,6 +8,7 @@ import com.google.common.collect.Multimap;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -87,7 +88,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_di() {
-        final Root root_di = this.findRoot("di", SyntacticCategory.VERB, null);
+        final Root root_di = this.findRoot("di", PrimaryPos.Verb, null);
 
         final Suffix Positive = this.suffixGraph.getSuffix("Pos");
         final Suffix Negative = this.suffixGraph.getSuffix("Neg");
@@ -115,7 +116,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_yi() {
-        final Root root_yi = this.findRoot("yi", SyntacticCategory.VERB, null);
+        final Root root_yi = this.findRoot("yi", PrimaryPos.Verb, null);
 
         final Suffix Positive = this.suffixGraph.getSuffix("Pos");
         final Suffix Negative = this.suffixGraph.getSuffix("Neg");
@@ -145,8 +146,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_ben() {
-        final Root root_ben = this.findRoot("ben", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
-        final Root root_ban = this.findRoot("ban", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_ben = this.findRoot("ben", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
+        final Root root_ban = this.findRoot("ban", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A1Sg_Pron = this.suffixGraph.getSuffix("A1Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -165,8 +166,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_sen() {
-        final Root root_sen = this.findRoot("sen", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
-        final Root root_san = this.findRoot("san", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_sen = this.findRoot("sen", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
+        final Root root_san = this.findRoot("san", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A2Sg_Pron = this.suffixGraph.getSuffix("A2Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -185,7 +186,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_o_pron_pers() {
-        final Root root_o = this.findRoot("o", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -204,7 +205,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_biz() {
-        final Root root_biz = this.findRoot("biz", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_biz = this.findRoot("biz", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A1Pl_Pron = this.suffixGraph.getSuffix("A1Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -234,7 +235,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_siz() {
-        final Root root_siz = this.findRoot("siz", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_siz = this.findRoot("siz", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A2Pl_Pron = this.suffixGraph.getSuffix("A2Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -264,7 +265,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_onlar_pron_pers() {
-        final Root root_o = this.findRoot("o", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.PERSONAL);
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondarySyntacticCategory.PERSONAL);
 
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -282,7 +283,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_bu_pron_demons() {
-        final Root root_bu = this.findRoot("bu", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_bu = this.findRoot("bu", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -300,7 +301,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_su_pron_demons() {
-        final Root root_su = this.findRoot("şu", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_su = this.findRoot("şu", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -318,7 +319,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_o_pron_demons() {
-        final Root root_o = this.findRoot("o", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -336,7 +337,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_bunlar_pron_demons() {
-        final Root root_bu = this.findRoot("bu", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_bu = this.findRoot("bu", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -353,7 +354,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_sunlar_pron_demons() {
-        final Root root_su = this.findRoot("şu", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_su = this.findRoot("şu", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -370,7 +371,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_onlar_pron_demons() {
-        final Root root_o = this.findRoot("o", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.DEMONSTRATIVE);
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondarySyntacticCategory.DEMONSTRATIVE);
 
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -387,7 +388,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_kendi() {
-        final Root root_kendi = this.findRoot("kendi", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.REFLEXIVE);
+        final Root root_kendi = this.findRoot("kendi", PrimaryPos.Pronoun, SecondarySyntacticCategory.REFLEXIVE);
 
         final Suffix A1Sg_Pron = this.suffixGraph.getSuffix("A1Sg_Pron");
         final Suffix P1Sg_Pron = this.suffixGraph.getSuffix("P1Sg_Pron");
@@ -501,8 +502,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_hepsi() {
-        final Root root_hep = this.findRoot("hep", SyntacticCategory.PRONOUN, null);
-        final Root root_hepsi = this.findRoot("hepsi", SyntacticCategory.PRONOUN, null);
+        final Root root_hep = this.findRoot("hep", PrimaryPos.Pronoun, null);
+        final Root root_hepsi = this.findRoot("hepsi", PrimaryPos.Pronoun, null);
 
         final Suffix A1Pl_Pron = this.suffixGraph.getSuffix("A1Pl_Pron");
         final Suffix P1Pl_Pron = this.suffixGraph.getSuffix("P1Pl_Pron");
@@ -556,16 +557,16 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_herkes() {
-        final Root root_herkes = this.findRoot("herkes", SyntacticCategory.PRONOUN, null);
+        final Root root_herkes = this.findRoot("herkes", PrimaryPos.Pronoun, null);
 
         this.pathBuilder(root_herkes).s("A3Sg_Pron").s("Pnon_Pron").add();
     }
 
     void createPredefinedPathOf_question_particles() {
-        final Root root_mii = this.findRoot("mı", SyntacticCategory.QUESTION, null);
-        final Root root_mi = this.findRoot("mi", SyntacticCategory.QUESTION, null);
-        final Root root_mu = this.findRoot("mu", SyntacticCategory.QUESTION, null);
-        final Root root_muu = this.findRoot("mü", SyntacticCategory.QUESTION, null);
+        final Root root_mii = this.findRoot("mı", PrimaryPos.Question, null);
+        final Root root_mi = this.findRoot("mi", PrimaryPos.Question, null);
+        final Root root_mu = this.findRoot("mu", PrimaryPos.Question, null);
+        final Root root_muu = this.findRoot("mü", PrimaryPos.Question, null);
 
         final Suffix Pres_Ques = this.suffixGraph.getSuffix("Pres_Ques");
         final Suffix Past_Ques = this.suffixGraph.getSuffix("Past_Ques");
@@ -667,7 +668,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_ne() {
-        final Root root_ne = this.findRoot("ne", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.QUESTION);
+        final Root root_ne = this.findRoot("ne", PrimaryPos.Pronoun, SecondarySyntacticCategory.QUESTION);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -694,10 +695,10 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_ora_bura_sura_nere() {
-        final Root root_or = this.findRoot("or", SyntacticCategory.PRONOUN, null);
-        final Root root_bur = this.findRoot("bur", SyntacticCategory.PRONOUN, null);
-        final Root root_sur = this.findRoot("şur", SyntacticCategory.PRONOUN, null);
-        final Root root_ner = this.findRoot("ner", SyntacticCategory.PRONOUN, SecondarySyntacticCategory.QUESTION);
+        final Root root_or = this.findRoot("or", PrimaryPos.Pronoun, null);
+        final Root root_bur = this.findRoot("bur", PrimaryPos.Pronoun, null);
+        final Root root_sur = this.findRoot("şur", PrimaryPos.Pronoun, null);
+        final Root root_ner = this.findRoot("ner", PrimaryPos.Pronoun, SecondarySyntacticCategory.QUESTION);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -718,8 +719,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_iceri_disari() {
-        final Root root_icer = this.findRoot("içer", SyntacticCategory.NOUN, null);
-        final Root root_disar = this.findRoot("dışar", SyntacticCategory.NOUN, null);
+        final Root root_icer = this.findRoot("içer", PrimaryPos.Noun, null);
+        final Root root_disar = this.findRoot("dışar", PrimaryPos.Noun, null);
 
         final Suffix A3Sg_Noun = this.suffixGraph.getSuffix("A3Sg_Noun");
         final Suffix Pnon_Noun = this.suffixGraph.getSuffix("Pnon_Noun");
@@ -737,8 +738,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_bazilari_bazisi() {
-        final Root root_bazisi = this.findRoot("bazısı", SyntacticCategory.PRONOUN, null);
-        final Root root_bazilari = this.findRoot("bazıları", SyntacticCategory.PRONOUN, null);
+        final Root root_bazisi = this.findRoot("bazısı", PrimaryPos.Pronoun, null);
+        final Root root_bazilari = this.findRoot("bazıları", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -750,9 +751,9 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_kimileri_kimisi_kimi() {
-        final Root root_kimi = this.findRoot("kimi", SyntacticCategory.PRONOUN, null);
-        final Root root_kimisi = this.findRoot("kimisi", SyntacticCategory.PRONOUN, null);
-        final Root root_kimileri = this.findRoot("kimileri", SyntacticCategory.PRONOUN, null);
+        final Root root_kimi = this.findRoot("kimi", PrimaryPos.Pronoun, null);
+        final Root root_kimisi = this.findRoot("kimisi", PrimaryPos.Pronoun, null);
+        final Root root_kimileri = this.findRoot("kimileri", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -768,9 +769,9 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_birileri_birisi_biri() {
-        final Root root_biri = this.findRoot("biri", SyntacticCategory.PRONOUN, null);
-        final Root root_birisi = this.findRoot("birisi", SyntacticCategory.PRONOUN, null);
-        final Root root_birileri = this.findRoot("birileri", SyntacticCategory.PRONOUN, null);
+        final Root root_biri = this.findRoot("biri", PrimaryPos.Pronoun, null);
+        final Root root_birisi = this.findRoot("birisi", PrimaryPos.Pronoun, null);
+        final Root root_birileri = this.findRoot("birileri", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -786,8 +787,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_hicbirisi_hicbiri() {
-        final Root root_hicbiri = this.findRoot("hiçbiri", SyntacticCategory.PRONOUN, null);
-        final Root root_hicbirisi = this.findRoot("hiçbirisi", SyntacticCategory.PRONOUN, null);
+        final Root root_hicbiri = this.findRoot("hiçbiri", PrimaryPos.Pronoun, null);
+        final Root root_hicbirisi = this.findRoot("hiçbirisi", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -799,8 +800,8 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_birbiri() {
-        final Root root_birbir = this.findRoot("birbir", SyntacticCategory.PRONOUN, null);
-        final Root root_birbiri = this.findRoot("birbiri", SyntacticCategory.PRONOUN, null);
+        final Root root_birbir = this.findRoot("birbir", PrimaryPos.Pronoun, null);
+        final Root root_birbiri = this.findRoot("birbiri", PrimaryPos.Pronoun, null);
 
         this.pathBuilder(root_birbiri).s("A3Sg_Pron").s("P3Sg_Pron").add();
         this.pathBuilder(root_birbiri).s("A1Pl_Pron").s("P1Pl_Pron", "miz").add();
@@ -810,10 +811,10 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_cogu_bircogu_coklari_bircoklari() {
-        final Root root_cogu = this.findRoot("çoğu", SyntacticCategory.PRONOUN, null);
-        final Root root_bircogu = this.findRoot("birçoğu", SyntacticCategory.PRONOUN, null);
-        final Root root_coklari = this.findRoot("çokları", SyntacticCategory.PRONOUN, null);
-        final Root root_bircoklari = this.findRoot("birçokları", SyntacticCategory.PRONOUN, null);
+        final Root root_cogu = this.findRoot("çoğu", PrimaryPos.Pronoun, null);
+        final Root root_bircogu = this.findRoot("birçoğu", PrimaryPos.Pronoun, null);
+        final Root root_coklari = this.findRoot("çokları", PrimaryPos.Pronoun, null);
+        final Root root_bircoklari = this.findRoot("birçokları", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -831,7 +832,7 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_birkaci() {
-        final Root root_birkaci = this.findRoot("birkaçı", SyntacticCategory.PRONOUN, null);
+        final Root root_birkaci = this.findRoot("birkaçı", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -841,14 +842,14 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_cumlesi() {
-        final Root root_cumlesi = this.findRoot("cümlesi", SyntacticCategory.PRONOUN, null);
+        final Root root_cumlesi = this.findRoot("cümlesi", PrimaryPos.Pronoun, null);
 
         this.pathBuilder(root_cumlesi).s("A3Sg_Pron").s("P3Sg_Pron").add();
     }
 
     void createPredefinedPathOf_digeri_digerleri() {
-        final Root root_digeri = this.findRoot("diğeri", SyntacticCategory.PRONOUN, null);
-        final Root root_digerleri = this.findRoot("diğerleri", SyntacticCategory.PRONOUN, null);
+        final Root root_digeri = this.findRoot("diğeri", PrimaryPos.Pronoun, null);
+        final Root root_digerleri = this.findRoot("diğerleri", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
 
@@ -865,7 +866,7 @@ public class PredefinedPaths {
         return new PredefinedPathBuilder(suffixGraph, suffixApplier, morphemeContainerMap).root(root);
     }
 
-    private Root findRoot(final String strRoot, final SyntacticCategory syntacticCategory, final SecondarySyntacticCategory secondarySyntacticCategory) {
+    private Root findRoot(final String strRoot, final PrimaryPos primaryPos, final SecondarySyntacticCategory secondarySyntacticCategory) {
         if (!this.rootMap.containsKey(strRoot))
             throw new RuntimeException("Unable to find root " + strRoot);
 
@@ -873,7 +874,7 @@ public class PredefinedPaths {
         final Collection<? extends Root> filteredRoots = Collections2.filter(roots, new Predicate<Root>() {
             @Override
             public boolean apply(final Root root) {
-                return Objects.equal(root.getLexeme().getSyntacticCategory(), syntacticCategory) &&
+                return Objects.equal(root.getLexeme().getPrimaryPos(), primaryPos) &&
                         Objects.equal(root.getLexeme().getSecondarySyntacticCategory(), secondarySyntacticCategory);
             }
         });

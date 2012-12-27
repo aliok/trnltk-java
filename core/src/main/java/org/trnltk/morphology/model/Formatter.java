@@ -29,7 +29,7 @@ public class Formatter {
         final Lexeme lexeme = root.getLexeme();
 
         final StringBuilder b = new StringBuilder();
-        b.append(String.format("%s+%s", lexeme.getLemmaRoot(), morphemeContainer.getRootState().getSyntacticCategory().getLookupKey()));
+        b.append(String.format("%s+%s", lexeme.getLemmaRoot(), morphemeContainer.getRootState().getPrimaryPos().getStringForm()));
 
         if (lexeme.getSecondarySyntacticCategory() != null)
             b.append("+").append(lexeme.getSecondarySyntacticCategory());
@@ -57,7 +57,7 @@ public class Formatter {
         final Root root = morphemeContainer.getRoot();
         final Lexeme lexeme = root.getLexeme();
 
-        b.append(String.format("%s(%s)+%s", root.getSequence().getUnderlyingString(), lexeme.getLemma(), morphemeContainer.getRootState().getSyntacticCategory().getLookupKey()));
+        b.append(String.format("%s(%s)+%s", root.getSequence().getUnderlyingString(), lexeme.getLemma(), morphemeContainer.getRootState().getPrimaryPos().getStringForm()));
         if (lexeme.getSecondarySyntacticCategory() != null)
             b.append("+").append(lexeme.getSecondarySyntacticCategory().getLookupKey());
 
@@ -79,7 +79,7 @@ public class Formatter {
         final StringBuilder b = new StringBuilder();
 
         if (transition.isDerivational())
-            b.append(transition.getTargetState().getSyntacticCategory().getLookupKey()).append("+");
+            b.append(transition.getTargetState().getPrimaryPos().getStringForm()).append("+");
 
         final SuffixForm suffixForm = transition.getSuffixFormApplication().getSuffixForm();
         final String actualSuffixForm = transition.getSuffixFormApplication().getActualSuffixForm();

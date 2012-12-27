@@ -5,6 +5,7 @@ import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.TrueSpecification;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 
@@ -67,8 +68,8 @@ public class SuffixFormSpecifications {
         return new HasLastNonBlankDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> rootHasSyntacticCategory(SyntacticCategory syntacticCategory) {
-        return new RootHasSyntacticCategory(syntacticCategory);
+    public static final Specification<MorphemeContainer> rootHasSyntacticCategory(PrimaryPos primaryPos) {
+        return new RootHasSyntacticCategory(primaryPos);
     }
 
     public static final Specification<MorphemeContainer> rootHasProgressiveVowelDrop() {

@@ -4,86 +4,87 @@ import com.google.common.collect.ImmutableMap;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
 import org.trnltk.morphology.model.*;
+import zemberek3.lexicon.PrimaryPos;
 
-import static org.trnltk.morphology.model.SyntacticCategory.*;
+import static zemberek3.lexicon.PrimaryPos.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.*;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.*;
 
 public class BasicSuffixGraph extends BaseSuffixGraph {
     // states
-    private final SuffixGraphState NOUN_ROOT = registerState("NOUN_ROOT", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_WITH_AGREEMENT = registerState("NOUN_WITH_AGREEMENT", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_WITH_POSSESSION = registerState("NOUN_WITH_POSSESSION", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_WITH_CASE = registerState("NOUN_WITH_CASE", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_TERMINAL_TRANSFER = registerState("NOUN_TERMINAL_TRANSFER", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_TERMINAL = registerState("NOUN_TERMINAL", TERMINAL, NOUN);
-    private final SuffixGraphState NOUN_NOM_DERIV = registerState("NOUN_NOM_DERIV", DERIVATIONAL, NOUN);
-    private final SuffixGraphState NOUN_POSSESSIVE_NOM_DERIV = registerState("NOUN_POSSESSIVE_NOM_DERIV", DERIVATIONAL, NOUN);
-    private final SuffixGraphState NOUN_DERIV_WITH_CASE = registerState("NOUN_DERIV_WITH_CASE", DERIVATIONAL, NOUN);
+    private final SuffixGraphState NOUN_ROOT = registerState("NOUN_ROOT", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_WITH_AGREEMENT = registerState("NOUN_WITH_AGREEMENT", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_WITH_POSSESSION = registerState("NOUN_WITH_POSSESSION", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_WITH_CASE = registerState("NOUN_WITH_CASE", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_TERMINAL_TRANSFER = registerState("NOUN_TERMINAL_TRANSFER", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_TERMINAL = registerState("NOUN_TERMINAL", TERMINAL, Noun);
+    private final SuffixGraphState NOUN_NOM_DERIV = registerState("NOUN_NOM_DERIV", DERIVATIONAL, Noun);
+    private final SuffixGraphState NOUN_POSSESSIVE_NOM_DERIV = registerState("NOUN_POSSESSIVE_NOM_DERIV", DERIVATIONAL, Noun);
+    private final SuffixGraphState NOUN_DERIV_WITH_CASE = registerState("NOUN_DERIV_WITH_CASE", DERIVATIONAL, Noun);
 
-    private final SuffixGraphState NOUN_COMPOUND_ROOT = registerState("NOUN_COMPOUND_ROOT", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_COMPOUND_WITH_AGREEMENT = registerState("NOUN_COMPOUND_WITH_AGREEMENT", TRANSFER, NOUN);
-    private final SuffixGraphState NOUN_COMPOUND_WITH_POSSESSION = registerState("NOUN_COMPOUND_WITH_POSSESSION", TRANSFER, NOUN);
+    private final SuffixGraphState NOUN_COMPOUND_ROOT = registerState("NOUN_COMPOUND_ROOT", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_COMPOUND_WITH_AGREEMENT = registerState("NOUN_COMPOUND_WITH_AGREEMENT", TRANSFER, Noun);
+    private final SuffixGraphState NOUN_COMPOUND_WITH_POSSESSION = registerState("NOUN_COMPOUND_WITH_POSSESSION", TRANSFER, Noun);
 
-    private final SuffixGraphState VERB_ROOT = registerState("VERB_ROOT", TRANSFER, VERB);
-    private final SuffixGraphState VERB_WITH_POLARITY = registerState("VERB_WITH_POLARITY", TRANSFER, VERB);
-    private final SuffixGraphState VERB_WITH_TENSE = registerState("VERB_WITH_TENSE", TRANSFER, VERB);
-    private final SuffixGraphState VERB_TERMINAL = registerState("VERB_TERMINAL", TERMINAL, VERB);
-    private final SuffixGraphState VERB_TERMINAL_TRANSFER = registerState("VERB_TERMINAL_TRANSFER", TRANSFER, VERB);
-    private final SuffixGraphState VERB_PLAIN_DERIV = registerState("VERB_PLAIN_DERIV", DERIVATIONAL, VERB);
-    private final SuffixGraphState VERB_POLARITY_DERIV = registerState("VERB_POLARITY_DERIV", DERIVATIONAL, VERB);
-    private final SuffixGraphState VERB_WITH_TENSE_BEFORE_DERIV = registerState("VERB_WITH_TENSE_BEFORE_DERIV", TRANSFER, VERB);
-    private final SuffixGraphState VERB_TENSE_DERIV = registerState("VERB_TENSE_DERIV", DERIVATIONAL, VERB);
-    private final SuffixGraphState VERB_TENSE_ADJ_DERIV = registerState("VERB_TENSE_ADJ_DERIV", DERIVATIONAL, VERB);
+    private final SuffixGraphState VERB_ROOT = registerState("VERB_ROOT", TRANSFER, Verb);
+    private final SuffixGraphState VERB_WITH_POLARITY = registerState("VERB_WITH_POLARITY", TRANSFER, Verb);
+    private final SuffixGraphState VERB_WITH_TENSE = registerState("VERB_WITH_TENSE", TRANSFER, Verb);
+    private final SuffixGraphState VERB_TERMINAL = registerState("VERB_TERMINAL", TERMINAL, Verb);
+    private final SuffixGraphState VERB_TERMINAL_TRANSFER = registerState("VERB_TERMINAL_TRANSFER", TRANSFER, Verb);
+    private final SuffixGraphState VERB_PLAIN_DERIV = registerState("VERB_PLAIN_DERIV", DERIVATIONAL, Verb);
+    private final SuffixGraphState VERB_POLARITY_DERIV = registerState("VERB_POLARITY_DERIV", DERIVATIONAL, Verb);
+    private final SuffixGraphState VERB_WITH_TENSE_BEFORE_DERIV = registerState("VERB_WITH_TENSE_BEFORE_DERIV", TRANSFER, Verb);
+    private final SuffixGraphState VERB_TENSE_DERIV = registerState("VERB_TENSE_DERIV", DERIVATIONAL, Verb);
+    private final SuffixGraphState VERB_TENSE_ADJ_DERIV = registerState("VERB_TENSE_ADJ_DERIV", DERIVATIONAL, Verb);
 
-    private final SuffixGraphState ADJECTIVE_ROOT = registerState("ADJECTIVE_ROOT", TRANSFER, ADJECTIVE);
-    private final SuffixGraphState ADJECTIVE_PART_WITHOUT_POSSESSION = registerState("ADJECTIVE_PART_WITHOUT_POSSESSION", TRANSFER, ADJECTIVE);
-    private final SuffixGraphState ADJECTIVE_TERMINAL = registerState("ADJECTIVE_TERMINAL", TERMINAL, ADJECTIVE);
-    private final SuffixGraphState ADJECTIVE_TERMINAL_TRANSFER = registerState("ADJECTIVE_TERMINAL_TRANSFER", TRANSFER, ADJECTIVE);
-    private final SuffixGraphState ADJECTIVE_DERIV = registerState("ADJECTIVE_DERIV", DERIVATIONAL, ADJECTIVE);
+    private final SuffixGraphState ADJECTIVE_ROOT = registerState("ADJECTIVE_ROOT", TRANSFER, Adjective);
+    private final SuffixGraphState ADJECTIVE_PART_WITHOUT_POSSESSION = registerState("ADJECTIVE_PART_WITHOUT_POSSESSION", TRANSFER, Adjective);
+    private final SuffixGraphState ADJECTIVE_TERMINAL = registerState("ADJECTIVE_TERMINAL", TERMINAL, Adjective);
+    private final SuffixGraphState ADJECTIVE_TERMINAL_TRANSFER = registerState("ADJECTIVE_TERMINAL_TRANSFER", TRANSFER, Adjective);
+    private final SuffixGraphState ADJECTIVE_DERIV = registerState("ADJECTIVE_DERIV", DERIVATIONAL, Adjective);
 
-    private final SuffixGraphState ADVERB_ROOT = registerState("ADVERB_ROOT", TRANSFER, ADVERB);
-    private final SuffixGraphState ADVERB_TERMINAL = registerState("ADVERB_TERMINAL", TERMINAL, ADVERB);
-    private final SuffixGraphState ADVERB_TERMINAL_TRANSFER = registerState("ADVERB_TERMINAL_TRANSFER", TRANSFER, ADVERB);
-    private final SuffixGraphState ADVERB_DERIV = registerState("ADVERB_DERIV", DERIVATIONAL, ADVERB);
+    private final SuffixGraphState ADVERB_ROOT = registerState("ADVERB_ROOT", TRANSFER, Adverb);
+    private final SuffixGraphState ADVERB_TERMINAL = registerState("ADVERB_TERMINAL", TERMINAL, Adverb);
+    private final SuffixGraphState ADVERB_TERMINAL_TRANSFER = registerState("ADVERB_TERMINAL_TRANSFER", TRANSFER, Adverb);
+    private final SuffixGraphState ADVERB_DERIV = registerState("ADVERB_DERIV", DERIVATIONAL, Adverb);
 
-    private final SuffixGraphState PRONOUN_ROOT = registerState("PRONOUN_ROOT", TRANSFER, PRONOUN);
-    private final SuffixGraphState PRONOUN_WITH_AGREEMENT = registerState("PRONOUN_WITH_AGREEMENT", TRANSFER, PRONOUN);
-    private final SuffixGraphState PRONOUN_WITH_POSSESSION = registerState("PRONOUN_WITH_POSSESSION", TRANSFER, PRONOUN);
-    private final SuffixGraphState PRONOUN_WITH_CASE = registerState("PRONOUN_WITH_CASE", TRANSFER, PRONOUN);
-    private final SuffixGraphState PRONOUN_NOM_DERIV = registerState("PRONOUN_NOM_DERIV", DERIVATIONAL, PRONOUN);
-    private final SuffixGraphState PRONOUN_TERMINAL = registerState("PRONOUN_TERMINAL", TERMINAL, PRONOUN);
-    private final SuffixGraphState PRONOUN_TERMINAL_TRANSFER = registerState("PRONOUN_TERMINAL_TRANSFER", TRANSFER, PRONOUN);
-    private final SuffixGraphState PRONOUN_DERIV_WITH_CASE = registerState("PRONOUN_DERIV_WITH_CASE", DERIVATIONAL, PRONOUN);
+    private final SuffixGraphState PRONOUN_ROOT = registerState("PRONOUN_ROOT", TRANSFER, Pronoun);
+    private final SuffixGraphState PRONOUN_WITH_AGREEMENT = registerState("PRONOUN_WITH_AGREEMENT", TRANSFER, Pronoun);
+    private final SuffixGraphState PRONOUN_WITH_POSSESSION = registerState("PRONOUN_WITH_POSSESSION", TRANSFER, Pronoun);
+    private final SuffixGraphState PRONOUN_WITH_CASE = registerState("PRONOUN_WITH_CASE", TRANSFER, Pronoun);
+    private final SuffixGraphState PRONOUN_NOM_DERIV = registerState("PRONOUN_NOM_DERIV", DERIVATIONAL, Pronoun);
+    private final SuffixGraphState PRONOUN_TERMINAL = registerState("PRONOUN_TERMINAL", TERMINAL, Pronoun);
+    private final SuffixGraphState PRONOUN_TERMINAL_TRANSFER = registerState("PRONOUN_TERMINAL_TRANSFER", TRANSFER, Pronoun);
+    private final SuffixGraphState PRONOUN_DERIV_WITH_CASE = registerState("PRONOUN_DERIV_WITH_CASE", DERIVATIONAL, Pronoun);
 
-    private final SuffixGraphState DETERMINER_ROOT_TERMINAL = registerState("DETERMINER_ROOT_TERMINAL", TERMINAL, DETERMINER);
+    private final SuffixGraphState DETERMINER_ROOT_TERMINAL = registerState("DETERMINER_ROOT_TERMINAL", TERMINAL, Determiner);
 
-    private final SuffixGraphState INTERJECTION_ROOT_TERMINAL = registerState("INTERJECTION_ROOT_TERMINAL", TERMINAL, INTERJECTION);
+    private final SuffixGraphState INTERJECTION_ROOT_TERMINAL = registerState("INTERJECTION_ROOT_TERMINAL", TERMINAL, Interjection);
 
-    private final SuffixGraphState CONJUNCTION_ROOT_TERMINAL = registerState("CONJUNCTION_ROOT_TERMINAL", TERMINAL, CONJUNCTION);
+    private final SuffixGraphState CONJUNCTION_ROOT_TERMINAL = registerState("CONJUNCTION_ROOT_TERMINAL", TERMINAL, Conjunction);
 
-    private final SuffixGraphState QUESTION_ROOT = registerState("QUESTION_ROOT", TRANSFER, QUESTION);
-    private final SuffixGraphState QUESTION_WITH_TENSE = registerState("QUESTION_WITH_TENSE", TRANSFER, QUESTION);
-    private final SuffixGraphState QUESTION_WITH_AGREEMENT = registerState("QUESTION_WITH_AGREEMENT", TRANSFER, QUESTION);
-    private final SuffixGraphState QUESTION_TERMINAL = registerState("QUESTION_TERMINAL", TERMINAL, QUESTION);
+    private final SuffixGraphState QUESTION_ROOT = registerState("QUESTION_ROOT", TRANSFER, Question);
+    private final SuffixGraphState QUESTION_WITH_TENSE = registerState("QUESTION_WITH_TENSE", TRANSFER, Question);
+    private final SuffixGraphState QUESTION_WITH_AGREEMENT = registerState("QUESTION_WITH_AGREEMENT", TRANSFER, Question);
+    private final SuffixGraphState QUESTION_TERMINAL = registerState("QUESTION_TERMINAL", TERMINAL, Question);
 
-    private final SuffixGraphState PUNC_ROOT_TERMINAL = registerState("PUNC_ROOT_TERMINAL", TERMINAL, PUNCTUATION);
+    private final SuffixGraphState PUNC_ROOT_TERMINAL = registerState("PUNC_ROOT_TERMINAL", TERMINAL, Punctuation);
 
-    private final SuffixGraphState PART_ROOT_TERMINAL = registerState("PART_ROOT_TERMINAL", TERMINAL, PARTICLE);
+    private final SuffixGraphState PART_ROOT_TERMINAL = registerState("PART_ROOT_TERMINAL", TERMINAL, PostPositive);
 
 
-    private final ImmutableMap<SyntacticCategory, SuffixGraphState> rootStateMap = new ImmutableMap.Builder<SyntacticCategory, SuffixGraphState>()
-            .put(NOUN, NOUN_ROOT)
-            .put(VERB, VERB_ROOT)
-            .put(ADVERB, ADVERB_ROOT)
-            .put(ADJECTIVE, ADJECTIVE_ROOT)
-            .put(PRONOUN, PRONOUN_ROOT)
-            .put(DETERMINER, DETERMINER_ROOT_TERMINAL)
-            .put(INTERJECTION, INTERJECTION_ROOT_TERMINAL)
-            .put(CONJUNCTION, CONJUNCTION_ROOT_TERMINAL)
-            .put(PUNCTUATION, PUNC_ROOT_TERMINAL)
-            .put(PARTICLE, PART_ROOT_TERMINAL)
-            .put(QUESTION, QUESTION_ROOT)
+    private final ImmutableMap<PrimaryPos, SuffixGraphState> rootStateMap = new ImmutableMap.Builder<PrimaryPos, SuffixGraphState>()
+            .put(Noun, NOUN_ROOT)
+            .put(Verb, VERB_ROOT)
+            .put(Adverb, ADVERB_ROOT)
+            .put(Adjective, ADJECTIVE_ROOT)
+            .put(Pronoun, PRONOUN_ROOT)
+            .put(Determiner, DETERMINER_ROOT_TERMINAL)
+            .put(Interjection, INTERJECTION_ROOT_TERMINAL)
+            .put(Conjunction, CONJUNCTION_ROOT_TERMINAL)
+            .put(Punctuation, PUNC_ROOT_TERMINAL)
+            .put(PostPositive, PART_ROOT_TERMINAL)          //TODO-INTEGRATION: particle or postpositive?
+            .put(Question, QUESTION_ROOT)
             .build();
 
     // suffixes
@@ -309,7 +310,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
-        final SuffixGraphState defaultState = this.rootStateMap.get(root.getLexeme().getSyntacticCategory());
+        final SuffixGraphState defaultState = this.rootStateMap.get(root.getLexeme().getPrimaryPos());
         if (defaultState == null)
             return null;
 

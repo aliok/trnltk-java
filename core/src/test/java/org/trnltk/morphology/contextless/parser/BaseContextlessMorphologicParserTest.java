@@ -29,7 +29,10 @@ import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsDontExi
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsExistMatcher;
 import org.trnltk.morphology.model.Formatter;
-import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.MorphemeContainer;
+import org.trnltk.morphology.model.Root;
+import org.trnltk.morphology.model.TurkishSequence;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.*;
 
@@ -106,12 +109,12 @@ public abstract class BaseContextlessMorphologicParserTest {
         }
     }
 
-    protected void removeRootsExceptSyntacticCategory(final String root, final SyntacticCategory syntacticCategory) {
+    protected void removeRootsExceptSyntacticCategory(final String root, final PrimaryPos primaryPos) {
         final Set<Root> roots = this.clonedRootMap.get(root);
         final Iterable<Root> filteredRoots = Lists.newArrayList(Iterables.filter(roots, new Predicate<Root>() {
             @Override
             public boolean apply(Root input) {
-                return input.getLexeme().getSyntacticCategory().equals(syntacticCategory);
+                return input.getLexeme().getPrimaryPos().equals(primaryPos);
             }
         }));
         this.clonedRootMap.replaceValues(root, filteredRoots);

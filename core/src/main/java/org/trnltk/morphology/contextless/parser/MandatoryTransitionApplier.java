@@ -20,9 +20,13 @@ import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.MorphemeContainer;
+import org.trnltk.morphology.model.Suffix;
+import org.trnltk.morphology.model.SuffixForm;
+import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,14 +54,14 @@ public class MandatoryTransitionApplier {
 
     private void createRules() {
         // English translation to following code fragment:
-        // if root has syn cat VERB and root has progressive vowel drop
+        // if root has syn cat Verb and root has progressive vowel drop
         // and its state is VERB_ROOT
         // add positive suffix, and then progressive suffix
 
         final MandatoryTransitionRule progressiveVowelDropRule = new RequiredTransitionRuleBuilder(this.suffixGraph)
                 .condition(
                         Specifications.and(
-                                rootHasSyntacticCategory(SyntacticCategory.VERB),
+                                rootHasSyntacticCategory(PrimaryPos.Verb),
                                 rootHasProgressiveVowelDrop()
                         )
                 )

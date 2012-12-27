@@ -44,8 +44,9 @@ public class EnumLookupMap<T extends Enum & SupportsEnumLookup> {
         if (StringUtils.isBlank(lookupKey))
             return null;
 
-        if (theMap.containsKey(lookupKey))
-            return theMap.get(lookupKey);
+        final T t = theMap.get(lookupKey);
+        if (t != null)
+            return t;
         else
             throw new IllegalArgumentException("No enum constant found for lookup key " + lookupKey);
     }

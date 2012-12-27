@@ -30,6 +30,7 @@ import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -38,8 +39,8 @@ import java.util.Set;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import static org.trnltk.morphology.model.SecondarySyntacticCategory.PERSONAL;
-import static org.trnltk.morphology.model.SyntacticCategory.NOUN;
-import static org.trnltk.morphology.model.SyntacticCategory.PRONOUN;
+import static zemberek3.lexicon.PrimaryPos.Noun;
+import static zemberek3.lexicon.PrimaryPos.Pronoun;
 
 public class PredefinedPathsTest {
 
@@ -76,7 +77,7 @@ public class PredefinedPathsTest {
         predefinedPaths.createPredefinedPathOf_biz();
 
         // last one ends with transition to derivation state
-        assertDefinedPath("ben", PRONOUN, PERSONAL,
+        assertDefinedPath("ben", Pronoun, PERSONAL,
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Nom",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Acc(i[i])",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Loc(de[de])",
@@ -87,11 +88,11 @@ public class PredefinedPathsTest {
                 "ben(ben)+Pron+Pers+A1sg+Pnon+AccordingTo(ce[ce])",
                 "ben(ben)+Pron+Pers+A1sg+Pnon+Nom");
 
-        assertDefinedPath("ban", PRONOUN, PERSONAL,
+        assertDefinedPath("ban", Pronoun, PERSONAL,
                 "ban(ben)+Pron+Pers+A1sg+Pnon+Dat(a[a])");
 
         // last one ends with transition to derivation state
-        assertDefinedPath("sen", PRONOUN, PERSONAL,
+        assertDefinedPath("sen", Pronoun, PERSONAL,
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Nom",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Acc(i[i])",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Loc(de[de])",
@@ -102,10 +103,10 @@ public class PredefinedPathsTest {
                 "sen(sen)+Pron+Pers+A2sg+Pnon+AccordingTo(ce[ce])",
                 "sen(sen)+Pron+Pers+A2sg+Pnon+Nom");
 
-        assertDefinedPath("san", PRONOUN, PERSONAL,
+        assertDefinedPath("san", Pronoun, PERSONAL,
                 "san(sen)+Pron+Pers+A2sg+Pnon+Dat(a[a])");
 
-        assertDefinedPath("biz", PRONOUN, PERSONAL,
+        assertDefinedPath("biz", Pronoun, PERSONAL,
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Nom",
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Nom",
                 "biz(biz)+Pron+Pers+A1pl+Pnon+Acc(i[i])",
@@ -132,7 +133,7 @@ public class PredefinedPathsTest {
         predefinedPaths.createPredefinedPathOf_hepsi();
 
         // last one ends with transition to derivation state
-        assertDefinedPath("hepsi", PRONOUN, null,
+        assertDefinedPath("hepsi", Pronoun, null,
                 "hepsi(hepsi)+Pron+A3pl+P3pl+Nom",
                 "hepsi(hepsi)+Pron+A3pl+P3pl+Acc(ni[ni])",
                 "hepsi(hepsi)+Pron+A3pl+P3pl+Dat(ne[ne])",
@@ -144,7 +145,7 @@ public class PredefinedPathsTest {
                 "hepsi(hepsi)+Pron+A3pl+P3pl+Nom");
 
         // last one ends with transition to derivation state
-        assertDefinedPath("hep", PRONOUN, null,
+        assertDefinedPath("hep", Pronoun, null,
                 "hep(hepsi)+Pron+A1pl+P1pl(imiz[imiz])+Nom",
                 "hep(hepsi)+Pron+A1pl+P1pl(imiz[imiz])+Acc(i[i])",
                 "hep(hepsi)+Pron+A1pl+P1pl(imiz[imiz])+Dat(e[e])",
@@ -170,7 +171,7 @@ public class PredefinedPathsTest {
         predefinedPaths.createPredefinedPathOf_question_particles();
 
         // last one ends with transition to derivation state
-        assertDefinedPath("mı", SyntacticCategory.QUESTION, null,
+        assertDefinedPath("mı", PrimaryPos.Question, null,
                 "mı(mı)+Ques+Pres+A1sg(yım[yım])",
                 "mı(mı)+Ques+Pres+A2sg(sın[sın])",
                 "mı(mı)+Ques+Pres+A3sg",
@@ -203,59 +204,59 @@ public class PredefinedPathsTest {
         predefinedPaths.createPredefinedPathOf_cumlesi();
         predefinedPaths.createPredefinedPathOf_digeri_digerleri();
 
-        assertDefinedPath("bazıları", PRONOUN, null, "bazıları(bazıları)+Pron+A3sg+P3sg", "bazıları(bazıları)+Pron+A3sg+P1pl(mız[mız])", "bazıları(bazıları)+Pron+A3sg+P2pl(nız[nız])");
-        assertDefinedPath("bazısı", PRONOUN, null, "bazısı(bazısı)+Pron+A3sg+P3sg");
+        assertDefinedPath("bazıları", Pronoun, null, "bazıları(bazıları)+Pron+A3sg+P3sg", "bazıları(bazıları)+Pron+A3sg+P1pl(mız[mız])", "bazıları(bazıları)+Pron+A3sg+P2pl(nız[nız])");
+        assertDefinedPath("bazısı", Pronoun, null, "bazısı(bazısı)+Pron+A3sg+P3sg");
 
-        assertDefinedPath("kimileri", PRONOUN, null, "kimileri(kimileri)+Pron+A3sg+P3sg", "kimileri(kimileri)+Pron+A3sg+P1pl(miz[miz])", "kimileri(kimileri)+Pron+A3sg+P2pl(niz[niz])");
-        assertDefinedPath("kimisi", PRONOUN, null, "kimisi(kimisi)+Pron+A3sg+P3sg");
-        assertDefinedPath("kimi", PRONOUN, null, "kimi(kimi)+Pron+A3sg+P3sg", "kimi(kimi)+Pron+A3sg+P1pl(miz[miz])", "kimi(kimi)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("kimileri", Pronoun, null, "kimileri(kimileri)+Pron+A3sg+P3sg", "kimileri(kimileri)+Pron+A3sg+P1pl(miz[miz])", "kimileri(kimileri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("kimisi", Pronoun, null, "kimisi(kimisi)+Pron+A3sg+P3sg");
+        assertDefinedPath("kimi", Pronoun, null, "kimi(kimi)+Pron+A3sg+P3sg", "kimi(kimi)+Pron+A3sg+P1pl(miz[miz])", "kimi(kimi)+Pron+A3sg+P2pl(niz[niz])");
 
-        assertDefinedPath("birileri", PRONOUN, null, "birileri(birileri)+Pron+A3sg+P3sg", "birileri(birileri)+Pron+A3sg+P1pl(miz[miz])", "birileri(birileri)+Pron+A3sg+P2pl(niz[niz])");
-        assertDefinedPath("birisi", PRONOUN, null, "birisi(birisi)+Pron+A3sg+P3sg");
-        assertDefinedPath("biri", PRONOUN, null, "biri(biri)+Pron+A3sg+P3sg", "biri(biri)+Pron+A3sg+P1pl(miz[miz])", "biri(biri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("birileri", Pronoun, null, "birileri(birileri)+Pron+A3sg+P3sg", "birileri(birileri)+Pron+A3sg+P1pl(miz[miz])", "birileri(birileri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("birisi", Pronoun, null, "birisi(birisi)+Pron+A3sg+P3sg");
+        assertDefinedPath("biri", Pronoun, null, "biri(biri)+Pron+A3sg+P3sg", "biri(biri)+Pron+A3sg+P1pl(miz[miz])", "biri(biri)+Pron+A3sg+P2pl(niz[niz])");
 
-        assertDefinedPath("hiçbirisi", PRONOUN, null, "hiçbirisi(hiçbirisi)+Pron+A3sg+P3sg");
-        assertDefinedPath("hiçbiri", PRONOUN, null, "hiçbiri(hiçbiri)+Pron+A3sg+P3sg", "hiçbiri(hiçbiri)+Pron+A3sg+P1pl(miz[miz])", "hiçbiri(hiçbiri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("hiçbirisi", Pronoun, null, "hiçbirisi(hiçbirisi)+Pron+A3sg+P3sg");
+        assertDefinedPath("hiçbiri", Pronoun, null, "hiçbiri(hiçbiri)+Pron+A3sg+P3sg", "hiçbiri(hiçbiri)+Pron+A3sg+P1pl(miz[miz])", "hiçbiri(hiçbiri)+Pron+A3sg+P2pl(niz[niz])");
 
-        assertDefinedPath("birbiri", PRONOUN, null, "birbiri(birbiri)+Pron+A3sg+P3sg", "birbiri(birbiri)+Pron+A1pl+P1pl(miz[miz])", "birbiri(birbiri)+Pron+A2pl+P2pl(niz[niz])");
-        assertDefinedPath("birbir", PRONOUN, null, "birbir(birbiri)+Pron+A3pl+P3pl(leri[leri])");
+        assertDefinedPath("birbiri", Pronoun, null, "birbiri(birbiri)+Pron+A3sg+P3sg", "birbiri(birbiri)+Pron+A1pl+P1pl(miz[miz])", "birbiri(birbiri)+Pron+A2pl+P2pl(niz[niz])");
+        assertDefinedPath("birbir", Pronoun, null, "birbir(birbiri)+Pron+A3pl+P3pl(leri[leri])");
 
-        assertDefinedPath("çoğu", PRONOUN, null, "çoğu(çoğu)+Pron+A3sg+P3sg", "çoğu(çoğu)+Pron+A3sg+P1pl(muz[muz])", "çoğu(çoğu)+Pron+A3sg+P2pl(nuz[nuz])");
-        assertDefinedPath("birçoğu", PRONOUN, null, "birçoğu(birçoğu)+Pron+A3sg+P3sg", "birçoğu(birçoğu)+Pron+A3sg+P1pl(muz[muz])", "birçoğu(birçoğu)+Pron+A3sg+P2pl(nuz[nuz])");
-        assertDefinedPath("çokları", PRONOUN, null, "çokları(çokları)+Pron+A3sg+P3pl");
-        assertDefinedPath("birçokları", PRONOUN, null, "birçokları(birçokları)+Pron+A3sg+P3pl");
+        assertDefinedPath("çoğu", Pronoun, null, "çoğu(çoğu)+Pron+A3sg+P3sg", "çoğu(çoğu)+Pron+A3sg+P1pl(muz[muz])", "çoğu(çoğu)+Pron+A3sg+P2pl(nuz[nuz])");
+        assertDefinedPath("birçoğu", Pronoun, null, "birçoğu(birçoğu)+Pron+A3sg+P3sg", "birçoğu(birçoğu)+Pron+A3sg+P1pl(muz[muz])", "birçoğu(birçoğu)+Pron+A3sg+P2pl(nuz[nuz])");
+        assertDefinedPath("çokları", Pronoun, null, "çokları(çokları)+Pron+A3sg+P3pl");
+        assertDefinedPath("birçokları", Pronoun, null, "birçokları(birçokları)+Pron+A3sg+P3pl");
 
-        assertDefinedPath("birkaçı", PRONOUN, null, "birkaçı(birkaçı)+Pron+A3sg+P3sg", "birkaçı(birkaçı)+Pron+A3sg+P1pl(mız[mız])", "birkaçı(birkaçı)+Pron+A3sg+P2pl(nız[nız])");
+        assertDefinedPath("birkaçı", Pronoun, null, "birkaçı(birkaçı)+Pron+A3sg+P3sg", "birkaçı(birkaçı)+Pron+A3sg+P1pl(mız[mız])", "birkaçı(birkaçı)+Pron+A3sg+P2pl(nız[nız])");
 
-        assertDefinedPath("cümlesi", PRONOUN, null, "cümlesi(cümlesi)+Pron+A3sg+P3sg");
+        assertDefinedPath("cümlesi", Pronoun, null, "cümlesi(cümlesi)+Pron+A3sg+P3sg");
 
-        assertDefinedPath("diğeri", PRONOUN, null, "diğeri(diğeri)+Pron+A3sg+P3sg", "diğeri(diğeri)+Pron+A3sg+P1pl(miz[miz])", "diğeri(diğeri)+Pron+A3sg+P2pl(niz[niz])");
-        assertDefinedPath("diğerleri", PRONOUN, null, "diğerleri(diğerleri)+Pron+A3sg+P3pl", "diğerleri(diğerleri)+Pron+A3sg+P1pl(miz[miz])", "diğerleri(diğerleri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("diğeri", Pronoun, null, "diğeri(diğeri)+Pron+A3sg+P3sg", "diğeri(diğeri)+Pron+A3sg+P1pl(miz[miz])", "diğeri(diğeri)+Pron+A3sg+P2pl(niz[niz])");
+        assertDefinedPath("diğerleri", Pronoun, null, "diğerleri(diğerleri)+Pron+A3sg+P3pl", "diğerleri(diğerleri)+Pron+A3sg+P1pl(miz[miz])", "diğerleri(diğerleri)+Pron+A3sg+P2pl(niz[niz])");
     }
 
     @Test
     public void test_should_have_paths_for_irregular_pronouns() {
         predefinedPaths.createPredefinedPathOf_herkes();
 
-        assertDefinedPath("herkes", PRONOUN, null, "herkes(herkes)+Pron+A3sg+Pnon");
+        assertDefinedPath("herkes", Pronoun, null, "herkes(herkes)+Pron+A3sg+Pnon");
     }
 
     @Test
     public void test_should_have_paths_for_pronouns_bura_sura_ora() {
         predefinedPaths.createPredefinedPathOf_ora_bura_sura_nere();
 
-        assertDefinedPath("or", PRONOUN, null, "or(ora)+Pron+A3sg+Pnon+Loc(da[da])", "or(ora)+Pron+A3sg+Pnon+Abl(dan[dan])");
-        assertDefinedPath("bur", PRONOUN, null, "bur(bura)+Pron+A3sg+Pnon+Loc(da[da])", "bur(bura)+Pron+A3sg+Pnon+Abl(dan[dan])");
-        assertDefinedPath("şur", PRONOUN, null, "şur(şura)+Pron+A3sg+Pnon+Loc(da[da])", "şur(şura)+Pron+A3sg+Pnon+Abl(dan[dan])");
-        assertDefinedPath("ner", PRONOUN, SecondarySyntacticCategory.QUESTION, "ner(nere)+Pron+Ques+A3sg+Pnon+Loc(de[de])", "ner(nere)+Pron+Ques+A3sg+Pnon+Abl(den[den])");
+        assertDefinedPath("or", Pronoun, null, "or(ora)+Pron+A3sg+Pnon+Loc(da[da])", "or(ora)+Pron+A3sg+Pnon+Abl(dan[dan])");
+        assertDefinedPath("bur", Pronoun, null, "bur(bura)+Pron+A3sg+Pnon+Loc(da[da])", "bur(bura)+Pron+A3sg+Pnon+Abl(dan[dan])");
+        assertDefinedPath("şur", Pronoun, null, "şur(şura)+Pron+A3sg+Pnon+Loc(da[da])", "şur(şura)+Pron+A3sg+Pnon+Abl(dan[dan])");
+        assertDefinedPath("ner", Pronoun, SecondarySyntacticCategory.QUESTION, "ner(nere)+Pron+Ques+A3sg+Pnon+Loc(de[de])", "ner(nere)+Pron+Ques+A3sg+Pnon+Abl(den[den])");
     }
 
     @Test
     public void test_should_have_paths_for_iceri_disari() {
         predefinedPaths.createPredefinedPathOf_iceri_disari();
 
-        assertDefinedPath("içer", NOUN, null, "içer(içeri)+Noun+A3sg+Pnon+Loc(de[de])", "içer(içeri)+Noun+A3sg+Pnon+Abl(den[den])", "içer(içeri)+Noun+A3sg+P3sg(si[si])");
-        assertDefinedPath("dışar", NOUN, null, "dışar(dışarı)+Noun+A3sg+Pnon+Loc(da[da])", "dışar(dışarı)+Noun+A3sg+Pnon+Abl(dan[dan])", "dışar(dışarı)+Noun+A3sg+P3sg(sı[sı])");
+        assertDefinedPath("içer", Noun, null, "içer(içeri)+Noun+A3sg+Pnon+Loc(de[de])", "içer(içeri)+Noun+A3sg+Pnon+Abl(den[den])", "içer(içeri)+Noun+A3sg+P3sg(si[si])");
+        assertDefinedPath("dışar", Noun, null, "dışar(dışarı)+Noun+A3sg+Pnon+Loc(da[da])", "dışar(dışarı)+Noun+A3sg+Pnon+Abl(dan[dan])", "dışar(dışarı)+Noun+A3sg+P3sg(sı[sı])");
     }
 
     @Test
@@ -263,20 +264,20 @@ public class PredefinedPathsTest {
         predefinedPaths.initialize();
     }
 
-    private void assertDefinedPath(String rootStr, SyntacticCategory syntacticCategory, SecondarySyntacticCategory
+    private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondarySyntacticCategory
             secondarySyntacticCategory, String... expectedResults) {
-        assertThat(this.getFormattedPredefinedMorhpemeContainers(rootStr, syntacticCategory, secondarySyntacticCategory), new ParseResultsEqualMatcher(false, expectedResults));
+        assertThat(this.getFormattedPredefinedMorhpemeContainers(rootStr, primaryPos, secondarySyntacticCategory), new ParseResultsEqualMatcher(false, expectedResults));
     }
 
-    private Collection<String> getFormattedPredefinedMorhpemeContainers(String rootStr, SyntacticCategory
-            syntacticCategory, SecondarySyntacticCategory secondarySyntacticCategory) {
+    private Collection<String> getFormattedPredefinedMorhpemeContainers(String rootStr, PrimaryPos
+            primaryPos, SecondarySyntacticCategory secondarySyntacticCategory) {
         final Set<? extends Root> roots = this.rootMap.get(rootStr);
         for (Root root : roots) {
-            if (root.getLexeme().getSyntacticCategory().equals(syntacticCategory) && Objects.equal(root.getLexeme().getSecondarySyntacticCategory(), secondarySyntacticCategory))
+            if (root.getLexeme().getPrimaryPos().equals(primaryPos) && Objects.equal(root.getLexeme().getSecondarySyntacticCategory(), secondarySyntacticCategory))
                 return getFormattedPredefinedMorhpemeContainersForRoot(root);
         }
 
-        fail("No root found in root map for " + rootStr + " " + syntacticCategory + " " + secondarySyntacticCategory);
+        fail("No root found in root map for " + rootStr + " " + primaryPos + " " + secondarySyntacticCategory);
         return null;
     }
 

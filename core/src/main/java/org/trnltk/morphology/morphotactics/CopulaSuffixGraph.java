@@ -18,25 +18,29 @@ package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.MorphemeContainer;
+import org.trnltk.morphology.model.Root;
+import org.trnltk.morphology.model.Suffix;
+import org.trnltk.morphology.model.SuffixGroup;
+import zemberek3.lexicon.PrimaryPos;
 
-import static org.trnltk.morphology.model.SyntacticCategory.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
+import static zemberek3.lexicon.PrimaryPos.*;
 
 public class CopulaSuffixGraph extends BaseSuffixGraph {
-    private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, NOUN);
-    private final SuffixGraphState ADJECTIVE_COPULA = registerState("ADJECTIVE_COPULA", DERIVATIONAL, ADJECTIVE);
-    private final SuffixGraphState ADVERB_COPULA = registerState("ADVERB_COPULA", DERIVATIONAL, ADVERB);
-    private final SuffixGraphState PRONOUN_COPULA = registerState("PRONOUN_COPULA", DERIVATIONAL, PRONOUN);
+    private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, Noun);
+    private final SuffixGraphState ADJECTIVE_COPULA = registerState("ADJECTIVE_COPULA", DERIVATIONAL, Adjective);
+    private final SuffixGraphState ADVERB_COPULA = registerState("ADVERB_COPULA", DERIVATIONAL, Adverb);
+    private final SuffixGraphState PRONOUN_COPULA = registerState("PRONOUN_COPULA", DERIVATIONAL, Pronoun);
 
-    private final SuffixGraphState VERB_DEGIL_ROOT = registerState("VERB_DEGIL_ROOT", TRANSFER, VERB);
+    private final SuffixGraphState VERB_DEGIL_ROOT = registerState("VERB_DEGIL_ROOT", TRANSFER, Verb);
 
-    private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE = registerState("VERB_COPULA_WITHOUT_TENSE", TRANSFER, VERB);
-    private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE_DERIV = registerState("VERB_COPULA_WITHOUT_TENSE_DERIV", DERIVATIONAL, VERB);
-    private final SuffixGraphState VERB_COPULA_WITH_TENSE = registerState("VERB_COPULA_WITH_TENSE", TRANSFER, VERB);
+    private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE = registerState("VERB_COPULA_WITHOUT_TENSE", TRANSFER, Verb);
+    private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE_DERIV = registerState("VERB_COPULA_WITHOUT_TENSE_DERIV", DERIVATIONAL, Verb);
+    private final SuffixGraphState VERB_COPULA_WITH_TENSE = registerState("VERB_COPULA_WITH_TENSE", TRANSFER, Verb);
 
     /// from decorated
     private final SuffixGraphState DECORATED_ADJECTIVE_DERIV = getSuffixGraphState("ADJECTIVE_DERIV");
@@ -97,8 +101,8 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
 
     @Override
     protected SuffixGraphState doGetDefaultStateForRoot(Root root) {
-        final SyntacticCategory syntacticCategory = root.getLexeme().getSyntacticCategory();
-        if (syntacticCategory.equals(VERB) && root.getSequence().getUnderlyingString().equals(DEGIL))
+        final PrimaryPos primaryPos = root.getLexeme().getPrimaryPos();
+        if (primaryPos.equals(Verb) && root.getSequence().getUnderlyingString().equals(DEGIL))
             return VERB_DEGIL_ROOT;
 
         return null;

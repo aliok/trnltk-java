@@ -3,20 +3,20 @@ package org.trnltk.morphology.morphotactics;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SyntacticCategory;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 
 public class SuffixGraphState {
     private final String name;
     private final SuffixGraphStateType type;
-    private final SyntacticCategory syntacticCategory;
+    private final PrimaryPos primaryPos;
     private ImmutableSet<SuffixEdge> outEdges;
 
-    public SuffixGraphState(String name, SuffixGraphStateType suffixGraphStateType, SyntacticCategory syntacticCategory) {
+    public SuffixGraphState(String name, SuffixGraphStateType suffixGraphStateType, PrimaryPos primaryPos) {
         this.name = name;
         this.type = suffixGraphStateType;
-        this.syntacticCategory = syntacticCategory;
+        this.primaryPos = primaryPos;
         this.outEdges = ImmutableSet.of();
     }
 
@@ -24,8 +24,8 @@ public class SuffixGraphState {
         return name;
     }
 
-    public SyntacticCategory getSyntacticCategory() {
-        return syntacticCategory;
+    public PrimaryPos getPrimaryPos() {
+        return primaryPos;
     }
 
     public SuffixGraphStateType getType() {
