@@ -53,7 +53,7 @@ public class ContextlessMorphologicParserSimpleParseSetTest extends BaseContextl
 
     @Override
     protected ContextlessMorphologicParser buildParser(HashMultimap<String, Root> clonedRootMap) {
-        return ContextlessMorphologicParserFactory.createWithBigGraphForRootMap(clonedRootMap);
+        return ContextlessMorphologicParserFactory.createSimple();
     }
 
     @Override

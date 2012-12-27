@@ -33,7 +33,7 @@ import java.util.*;
 
 public class ContextlessMorphologicParser {
     static Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);    //could be used in other places too!
-    private final RequiredTransitionApplier requiredTransitionApplier;
+    private final MandatoryTransitionApplier mandatoryTransitionApplier;
 
     private SuffixGraph suffixGraph;
     private PredefinedPaths predefinedPaths;
@@ -45,7 +45,7 @@ public class ContextlessMorphologicParser {
         this.predefinedPaths = predefinedPaths;
         this.rootFinders = rootFinders;
         this.suffixApplier = suffixApplier;
-        this.requiredTransitionApplier = new RequiredTransitionApplier(suffixGraph, suffixApplier);
+        this.mandatoryTransitionApplier = new MandatoryTransitionApplier(suffixGraph, suffixApplier);
     }
 
     public LinkedList<MorphemeContainer> parse(final TurkishSequence input) {
@@ -60,12 +60,12 @@ public class ContextlessMorphologicParser {
             }
         }
 
-        logger.debug("Applying required transitions to candidates");
+        logger.debug("Applying mandatory transitions to candidates");
 
-        final List<MorphemeContainer> candidateMorphemeContainersWithRequiredTransitions = requiredTransitionApplier.applyRequiredTransitionsToMorphemeContainers(candidateMorphemeContainers, input);
+        final List<MorphemeContainer> candidateMorphemeContainersWithMandatoryTransitions = mandatoryTransitionApplier.applyMandatoryTransitionsToMorphemeContainers(candidateMorphemeContainers, input);
 
         final LinkedList<MorphemeContainer> results = new LinkedList<MorphemeContainer>();
-        final LinkedList<MorphemeContainer> newCandidates = this.traverseCandidates(candidateMorphemeContainersWithRequiredTransitions, results, input);
+        final LinkedList<MorphemeContainer> newCandidates = this.traverseCandidates(candidateMorphemeContainersWithMandatoryTransitions, results, input);
 
         if (CollectionUtils.isNotEmpty(newCandidates))
             throw new IllegalStateException("There are still parse morpheme containers to traverse, but traversing is finished : " + newCandidates.toString());

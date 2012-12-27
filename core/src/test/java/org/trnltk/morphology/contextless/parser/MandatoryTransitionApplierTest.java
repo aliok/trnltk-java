@@ -36,9 +36,9 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class RequiredTransitionApplierTest {
+public class MandatoryTransitionApplierTest {
 
-    RequiredTransitionApplier transitionApplier;
+    MandatoryTransitionApplier transitionApplier;
     SuffixGraph suffixGraph;
 
     @Before
@@ -48,7 +48,7 @@ public class RequiredTransitionApplierTest {
 
         SuffixApplier suffixApplier = new SuffixApplier(new PhoneticsEngine(new SuffixFormSequenceApplier()));
 
-        transitionApplier = new RequiredTransitionApplier(suffixGraph, suffixApplier);
+        transitionApplier = new MandatoryTransitionApplier(suffixGraph, suffixApplier);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class RequiredTransitionApplierTest {
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
-        final List<MorphemeContainer> retrievedList = transitionApplier.applyRequiredTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
+        final List<MorphemeContainer> retrievedList = transitionApplier.applyMandatoryTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
         assertThat(retrievedList, hasSize(1));
         assertThat(retrievedList.get(0).getRoot(), Matchers.<Root>equalTo(root));
 
@@ -96,7 +96,7 @@ public class RequiredTransitionApplierTest {
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
-        final List<MorphemeContainer> retrievedList = transitionApplier.applyRequiredTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
+        final List<MorphemeContainer> retrievedList = transitionApplier.applyMandatoryTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
         assertThat(retrievedList, hasSize(1));
         assertThat(retrievedList.get(0), sameInstance(morphemeContainer));
     }
@@ -116,7 +116,7 @@ public class RequiredTransitionApplierTest {
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
-        final List<MorphemeContainer> retrievedList = transitionApplier.applyRequiredTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
+        final List<MorphemeContainer> retrievedList = transitionApplier.applyMandatoryTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
         assertThat(retrievedList, hasSize(1));
         assertThat(retrievedList.get(0), sameInstance(morphemeContainer));
     }
@@ -136,7 +136,7 @@ public class RequiredTransitionApplierTest {
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
-        final List<MorphemeContainer> retrievedList = transitionApplier.applyRequiredTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
+        final List<MorphemeContainer> retrievedList = transitionApplier.applyMandatoryTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
         assertThat(retrievedList, hasSize(1));
         assertThat(retrievedList.get(0), sameInstance(morphemeContainer));
     }
@@ -156,7 +156,7 @@ public class RequiredTransitionApplierTest {
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
-        final List<MorphemeContainer> retrievedList = transitionApplier.applyRequiredTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
+        final List<MorphemeContainer> retrievedList = transitionApplier.applyMandatoryTransitionsToMorphemeContainers(Arrays.asList(morphemeContainer), new TurkishSequence("atıyorum"));
         assertThat(retrievedList, hasSize(0));
     }
 }
