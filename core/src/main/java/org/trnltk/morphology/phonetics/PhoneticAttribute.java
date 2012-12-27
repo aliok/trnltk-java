@@ -16,25 +16,45 @@
 
 package org.trnltk.morphology.phonetics;
 
-public enum PhoneticAttribute {
-    LastLetterVowel,
-    LastLetterConsonant,
+import zemberek3.structure.StringEnum;
+import zemberek3.structure.StringEnumMap;
 
-    LastVowelFrontal,
-    LastVowelBack,
-    LastVowelRounded,
-    LastVowelUnrounded,
+public enum PhoneticAttribute implements StringEnum<PhoneticAttribute> {
+    LastLetterVowel("LLV"),
+    LastLetterConsonant("LLC"),
 
-    LastLetterVoiceless,
-    LastLetterNotVoiceless,
-    LastLetterContinuant,
-    LastLetterNotContinuant,
+    LastVowelFrontal("LVF"),
+    LastVowelBack("LVB"),
+    LastVowelRounded("LVR"),
+    LastVowelUnrounded("LVuR"),
 
-    LastLetterVoicedStop,
-    LastLetterVoicelessStop,
+    LastLetterVoiceless("LLVless"),
+    LastLetterNotVoiceless("LLNotVless"),
+    LastLetterContinuant("LLCont"),
+    LastLetterNotContinuant("LLNotCont"),
 
-    FirstLetterVowel,
-    FirstLetterConsonant,
+    LastLetterVoicedStop("LLVoicedStop"),
+    LastLetterVoicelessStop("LLStop"),
 
-    HasNoVowel;
+    FirstLetterVowel("FLV"),
+    FirstLetterConsonant("FLC"),
+
+    HasNoVowel("NoVow");
+
+    private final static StringEnumMap<PhoneticAttribute> shortFormToPosMap = StringEnumMap.get(PhoneticAttribute.class);
+
+    private final String shortForm;
+
+    private PhoneticAttribute(String shortForm) {
+        this.shortForm = shortForm;
+    }
+
+    @Override
+    public String getStringForm() {
+        return shortForm;
+    }
+
+    public static StringEnumMap<PhoneticAttribute> converter() {
+        return shortFormToPosMap;
+    }
 }
