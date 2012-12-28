@@ -157,6 +157,7 @@ public class ContextlessMorphologicParser {
         if (logger.isDebugEnabled())
             logger.debug("   Filtered out the applied suffixes since last derivation " + morphemeContainer.getSuffixesSinceDerivationSuffix() + " : " + outEdges);
 
+        //TODO: following seems unnecessary!
         // filter out suffixes if one of the suffixes of whose group is already added since last derivation
         outEdges = Sets.filter(outEdges, new Predicate<SuffixEdge>() {
             @Override
