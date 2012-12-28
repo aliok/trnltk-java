@@ -18,11 +18,11 @@ package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableSet;
 import org.trnltk.morphology.model.SuffixFormSequence;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 
 public class SuffixFormSequenceRuleApplier {
 
-    public Character apply(SuffixFormSequence.SuffixFormSequenceRule rule, ImmutableSet<PhoneticAttribute> phoneticAttributesOfSurface) {
+    public Character apply(SuffixFormSequence.SuffixFormSequenceRule rule, ImmutableSet<PhonAttr> phoneticAttributesOfSurface) {
         return rule.apply(phoneticAttributesOfSurface);
     }
 }

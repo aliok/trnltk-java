@@ -1,7 +1,7 @@
 package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 
 public interface Root {
@@ -9,7 +9,7 @@ public interface Root {
 
     public Lexeme getLexeme();
 
-    public ImmutableSet<PhoneticAttribute> getPhoneticAttributes();
+    public ImmutableSet<PhonAttr> getPhonAttrs();
 
     public ImmutableSet<PhoneticExpectation> getPhoneticExpectations();
 }

@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import zemberek3.lexicon.PrimaryPos;
 
@@ -35,17 +35,17 @@ import static org.hamcrest.Matchers.hasSize;
 public class ImmutableRootGeneratorTest {
     ImmutableRootGenerator generator;
 
-    PhoneticAttribute LLV = PhoneticAttribute.LastLetterVowel;
-    PhoneticAttribute LLC = PhoneticAttribute.LastLetterConsonant;
+    PhonAttr LLV = PhonAttr.LastLetterVowel;
+    PhonAttr LLC = PhonAttr.LastLetterConsonant;
 
-    PhoneticAttribute LVR = PhoneticAttribute.LastVowelRounded;
-    PhoneticAttribute LVU = PhoneticAttribute.LastVowelUnrounded;
-    PhoneticAttribute LVF = PhoneticAttribute.LastVowelFrontal;
-    PhoneticAttribute LVB = PhoneticAttribute.LastVowelBack;
+    PhonAttr LVR = PhonAttr.LastVowelRounded;
+    PhonAttr LVU = PhonAttr.LastVowelUnrounded;
+    PhonAttr LVF = PhonAttr.LastVowelFrontal;
+    PhonAttr LVB = PhonAttr.LastVowelBack;
 
-    PhoneticAttribute LLVless = PhoneticAttribute.LastLetterVoiceless;
-    PhoneticAttribute LLVlessStop = PhoneticAttribute.LastLetterVoicelessStop;
-    PhoneticAttribute LLNotVless = PhoneticAttribute.LastLetterNotVoiceless;
+    PhonAttr LLVless = PhonAttr.LastLetterVoiceless;
+    PhonAttr LLVlessStop = PhonAttr.LastLetterVoicelessStop;
+    PhonAttr LLNotVless = PhonAttr.LastLetterNotVoiceless;
 
     @Before
     public void setUp() throws Exception {

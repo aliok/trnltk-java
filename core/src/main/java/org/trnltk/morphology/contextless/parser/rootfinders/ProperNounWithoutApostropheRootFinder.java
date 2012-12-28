@@ -21,7 +21,7 @@ import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.*;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
@@ -56,12 +56,12 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
             final Lexeme abbreviationLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
             if (!partialInput.getLastChar().getLetter().isVowel()) {
                 // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
-                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput.append(TURKISH_CHAR_E_UPPERCASE), null));
-                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phoneticAttributes, null));
+                final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput.append(TURKISH_CHAR_E_UPPERCASE), null));
+                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phonAttrs, null));
 
             } else {
-                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
-                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phoneticAttributes, null));
+                final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
+                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phonAttrs, null));
             }
         }
         {
@@ -77,8 +77,8 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
 
             final Lexeme properNounLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
 
-            final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
-            final ImmutableRoot properNounRoot = new ImmutableRoot(partialInput, properNounLexeme, phoneticAttributes, null);
+            final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
+            final ImmutableRoot properNounRoot = new ImmutableRoot(partialInput, properNounLexeme, phonAttrs, null);
             return Arrays.asList(properNounRoot);
         }
     }

@@ -21,7 +21,7 @@ import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.*;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
@@ -53,18 +53,18 @@ public class ProperNounFromApostropheRootFinder implements RootFinder {
 
                     if (!properNounCandidate.getLastChar().getLetter().isVowel()) {
                         // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
-                        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate.append(TURKISH_CHAR_E_UPPERCASE), null));
-                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
+                        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate.append(TURKISH_CHAR_E_UPPERCASE), null));
+                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
 
                     } else {
-                        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
-                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
+                        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
+                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
                     }
                 } else if (Character.isUpperCase(properNounCandidate.charAt(0).getCharValue())) {
                     final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
 
-                    final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
-                    return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
+                    final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
+                    return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
                 }
             }
         }

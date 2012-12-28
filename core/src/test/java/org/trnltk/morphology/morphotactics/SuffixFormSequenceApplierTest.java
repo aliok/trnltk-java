@@ -25,7 +25,7 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.trnltk.morphology.model.SuffixFormSequence;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -49,20 +49,20 @@ public class SuffixFormSequenceApplierTest {
     public void setUp() throws Exception {
         applier = new SuffixFormSequenceApplier();
 
-        when(rule_A.apply(Matchers.<ImmutableSet<PhoneticAttribute>>any())).thenReturn(null);
+        when(rule_A.apply(Matchers.<ImmutableSet<PhonAttr>>any())).thenReturn(null);
 
-        when(rule_B.apply(ImmutableSet.of(PhoneticAttribute.LastLetterConsonant))).thenReturn('c');
+        when(rule_B.apply(ImmutableSet.of(PhonAttr.LastLetterConsonant))).thenReturn('c');
 
-        when(rule_B.apply(ImmutableSet.of(PhoneticAttribute.LastLetterVoicelessStop))).thenReturn('b');
+        when(rule_B.apply(ImmutableSet.of(PhonAttr.LastLetterVoicelessStop))).thenReturn('b');
 
         when(suffixFormSequence.getRules()).thenReturn(ImmutableList.of(rule_A, rule_B));
     }
 
     @Test
     public void shouldApply() throws Exception {
-        assertThat(applier.apply(suffixFormSequence, ImmutableSet.<PhoneticAttribute>of()), equalTo(""));
-        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterConsonant)), equalTo("c"));
-        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterVoicelessStop)), equalTo("b"));
-        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterVowel)), equalTo(""));
+        assertThat(applier.apply(suffixFormSequence, ImmutableSet.<PhonAttr>of()), equalTo(""));
+        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhonAttr.LastLetterConsonant)), equalTo("c"));
+        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhonAttr.LastLetterVoicelessStop)), equalTo("b"));
+        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhonAttr.LastLetterVowel)), equalTo(""));
     }
 }

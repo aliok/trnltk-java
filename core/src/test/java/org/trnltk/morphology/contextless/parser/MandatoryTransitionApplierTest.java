@@ -25,7 +25,7 @@ import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -58,12 +58,12 @@ public class MandatoryTransitionApplierTest {
         String lemmaRootStr = "ata";
         String lemmaStr = "atamak";
 
-        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
+        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
         final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
-        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
+        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phonAttrs, phoneticExpectations);
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
@@ -88,12 +88,12 @@ public class MandatoryTransitionApplierTest {
         String lemmaRootStr = "ata";
         String lemmaStr = "atamak";
 
-        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
+        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
         final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
-        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
+        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phonAttrs, phoneticExpectations);
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
@@ -108,12 +108,12 @@ public class MandatoryTransitionApplierTest {
         String lemmaRootStr = "ata";
         String lemmaStr = "atamak";
 
-        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
+        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
         final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.NoVoicing));
 
-        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
+        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phonAttrs, phoneticExpectations);
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
@@ -128,12 +128,12 @@ public class MandatoryTransitionApplierTest {
         String lemmaRootStr = "ata";
         String lemmaStr = "atamak";
 
-        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
+        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
         final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.NoVoicing));
 
-        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
+        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phonAttrs, phoneticExpectations);
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 
@@ -148,12 +148,12 @@ public class MandatoryTransitionApplierTest {
         String lemmaRootStr = "ata";
         String lemmaStr = "atamak";
 
-        final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
+        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(new PhoneticsAnalyzer().calculatePhoneticAttributes(rootStr, null));
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = ImmutableSet.of(PhoneticExpectation.VowelStart);
 
         final Lexeme lexeme = new Lexeme(lemmaStr, lemmaRootStr, PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.ProgressiveVowelDrop));
 
-        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phoneticAttributes, phoneticExpectations);
+        final ImmutableRoot root = new ImmutableRoot(rootStr, lexeme, phonAttrs, phoneticExpectations);
 
         final MorphemeContainer morphemeContainer = new MorphemeContainer(root, this.suffixGraph.getSuffixGraphState("VERB_ROOT"), "ıyorum");
 

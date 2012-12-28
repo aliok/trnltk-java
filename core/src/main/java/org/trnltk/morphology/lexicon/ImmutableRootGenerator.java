@@ -26,11 +26,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import zemberek3.lexicon.PrimaryPos;
+import zemberek3.lexicon.tr.PhonAttr;
 import zemberek3.structure.TurkicLetter;
 
 import java.util.Collection;
@@ -76,8 +76,8 @@ public class ImmutableRootGenerator {
         if (CollectionUtils.containsAny(lexeme.getAttributes(), modifiersToWatch)) {
             return this.generateModifiedRootNodes(lexeme);
         } else {
-            Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), lexeme.getAttributes());
-            final ImmutableRoot root = new ImmutableRoot(lexeme.getLemmaRoot(), lexeme, Sets.immutableEnumSet(phoneticAttributes), null);
+            Set<PhonAttr> phonAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), lexeme.getAttributes());
+            final ImmutableRoot root = new ImmutableRoot(lexeme.getLemmaRoot(), lexeme, Sets.immutableEnumSet(phonAttrs), null);
             return Sets.newHashSet(root);
         }
     }
@@ -90,8 +90,8 @@ public class ImmutableRootGenerator {
         final String lemmaRoot = lexeme.getLemmaRoot();
         String modifiedRootStr = lexeme.getLemmaRoot();
 
-        final EnumSet<PhoneticAttribute> originalPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
-        final EnumSet<PhoneticAttribute> modifiedPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
+        final EnumSet<PhonAttr> originalPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
+        final EnumSet<PhonAttr> modifiedPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
 
         final EnumSet<PhoneticExpectation> originalPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
         final EnumSet<PhoneticExpectation> modifiedPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
@@ -102,7 +102,7 @@ public class ImmutableRootGenerator {
             Validate.notNull(voicedLastLetter);
             modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.charValue();
 
-            modifiedPhoneticAttrs.remove(PhoneticAttribute.LastLetterVoicelessStop);
+            modifiedPhoneticAttrs.remove(PhonAttr.LastLetterVoicelessStop);
 
             if (!lexemeAttributes.contains(LexemeAttribute.VoicingOpt)) {
                 originalPhoneticExpectations.add(PhoneticExpectation.ConsonantStart);
@@ -126,10 +126,10 @@ public class ImmutableRootGenerator {
         }
 
         if (lexemeAttributes.contains(LexemeAttribute.InverseHarmony)) {
-            originalPhoneticAttrs.add(PhoneticAttribute.LastVowelFrontal);
-            originalPhoneticAttrs.remove(PhoneticAttribute.LastVowelBack);
-            modifiedPhoneticAttrs.add(PhoneticAttribute.LastVowelFrontal);
-            modifiedPhoneticAttrs.remove(PhoneticAttribute.LastVowelBack);
+            originalPhoneticAttrs.add(PhonAttr.LastVowelFrontal);
+            originalPhoneticAttrs.remove(PhonAttr.LastVowelBack);
+            modifiedPhoneticAttrs.add(PhonAttr.LastVowelFrontal);
+            modifiedPhoneticAttrs.remove(PhonAttr.LastVowelBack);
         }
 
         if (lexemeAttributes.contains(LexemeAttribute.ProgressiveVowelDrop)) {

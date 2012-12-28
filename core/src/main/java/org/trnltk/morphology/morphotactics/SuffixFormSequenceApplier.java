@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.morphology.model.SuffixFormSequence;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import java.util.Set;
 
@@ -38,7 +38,7 @@ public class SuffixFormSequenceApplier {
             SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_VOWEL_I_WITH_HARMONY
     );
 
-    public String apply(final SuffixFormSequence suffixFormSequence, final Set<PhoneticAttribute> phoneticAttributesOfSurface) {
+    public String apply(final SuffixFormSequence suffixFormSequence, final Set<PhonAttr> phoneticAttributesOfSurface) {
         final StringBuilder builder = new StringBuilder();
         for (SuffixFormSequence.SuffixFormSequenceRule rule : suffixFormSequence.getRules()) {
             final Character c = rule.apply(phoneticAttributesOfSurface);
@@ -51,7 +51,7 @@ public class SuffixFormSequenceApplier {
         return builder.toString().trim();
     }
 
-    public boolean isApplicable(final SuffixFormSequence suffixFormSequence, final Set<PhoneticAttribute> phoneticAttributesOfSurface) {
+    public boolean isApplicable(final SuffixFormSequence suffixFormSequence, final Set<PhonAttr> phoneticAttributesOfSurface) {
         final ImmutableList<SuffixFormSequence.SuffixFormSequenceRule> rules = suffixFormSequence.getRules();
         if (CollectionUtils.isEmpty(rules))
             return true;
@@ -59,7 +59,7 @@ public class SuffixFormSequenceApplier {
         // the only case where the suffix form is not applicable is, having two vowels together
         // following code (unfortunately) assumes, in the suffix form, there are no 2 vowels in a row!
 
-        final boolean lastSurfaceLetterIsVowel = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVowel);
+        final boolean lastSurfaceLetterIsVowel = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVowel);
 
         if (!lastSurfaceLetterIsVowel)
             return true;

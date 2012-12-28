@@ -7,7 +7,7 @@ import org.trnltk.common.specification.Specification;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
 import java.util.ArrayList;
@@ -67,9 +67,9 @@ public class SuffixApplier {
 
         final TurkishSequence soFar = morphemeContainer.getSurfaceSoFar();
         final ImmutableSet<LexemeAttribute> morphemeContainerLexemeAttributes = morphemeContainer.getLexemeAttributes();
-        final ImmutableSet<PhoneticAttribute> morphemeContainerPhoneticAttributes = morphemeContainer.getPhoneticAttributes();
+        final ImmutableSet<PhonAttr> morphemeContainerPhonAttrs = morphemeContainer.getPhonAttrs();
 
-        final Pair<TurkishSequence, String> appliedPhonetics = this.phoneticsEngine.apply(soFar, morphemeContainerPhoneticAttributes, suffixForm.getForm(), morphemeContainerLexemeAttributes);
+        final Pair<TurkishSequence, String> appliedPhonetics = this.phoneticsEngine.apply(soFar, morphemeContainerPhonAttrs, suffixForm.getForm(), morphemeContainerLexemeAttributes);
         final TurkishSequence modifiedWord = appliedPhonetics.getLeft();
         final String fittingSuffixForm = appliedPhonetics.getRight();
         final String appliedStr = modifiedWord.getUnderlyingString() + fittingSuffixForm;
@@ -130,7 +130,7 @@ public class SuffixApplier {
             return false;
         }
 
-        if (!phoneticsEngine.isSuffixFormApplicable(morphemeContainer.getPhoneticAttributes(), suffixForm.getForm())) {
+        if (!phoneticsEngine.isSuffixFormApplicable(morphemeContainer.getPhonAttrs(), suffixForm.getForm())) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("      Suffix form '%s' is not phonetically applicable to '%s', skipping.", suffixForm.getForm(), morphemeContainer.getSurfaceSoFar()));
 

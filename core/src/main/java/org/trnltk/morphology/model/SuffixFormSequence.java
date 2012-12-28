@@ -19,7 +19,7 @@ package org.trnltk.morphology.model;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
 import zemberek3.structure.TurkicLetter;
@@ -185,7 +185,7 @@ public class SuffixFormSequence {
             return charToAdd;
         }
 
-        public Character apply(Set<PhoneticAttribute> phoneticAttributesOfSurface) {
+        public Character apply(Set<PhonAttr> phoneticAttributesOfSurface) {
             return this.ruleType.apply(this.charToAdd, phoneticAttributesOfSurface);
         }
     }
@@ -193,23 +193,23 @@ public class SuffixFormSequence {
     public static enum SuffixFormSequenceRuleType {
         INSERT_NONVOWEL_LETTER {
             @Override
-            public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
+            public Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface) {
                 return charToAdd.getCharValue();
             }
         },
 
         INSERT_VOWEL_WITHOUT_HARMONY {
             @Override
-            public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
+            public Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface) {
                 return charToAdd.getCharValue();
             }
         },
 
         INSERT_VOWEL_A_WITH_HARMONY {
             @Override
-            public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelBack) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelFrontal);
+            public Character apply(TurkishChar _notUsed, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhonAttr.LastVowelBack) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastVowelFrontal);
 
                 if (lastVowelBack)
                     return 'a';
@@ -220,11 +220,11 @@ public class SuffixFormSequence {
 
         INSERT_VOWEL_I_WITH_HARMONY {
             @Override
-            public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelBack) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelFrontal);
-                final boolean lastLetterUnrounded = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelUnrounded) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelRounded);
+            public Character apply(TurkishChar _notUsed, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhonAttr.LastVowelBack) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastVowelFrontal);
+                final boolean lastLetterUnrounded = phoneticAttributesOfSurface.contains(PhonAttr.LastVowelUnrounded) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastVowelRounded);
 
                 if (lastVowelBack) {
                     if (lastLetterUnrounded)
@@ -242,9 +242,9 @@ public class SuffixFormSequence {
 
         INSERT_VOWEL_I_WITH_HARMONY_AND_NO_ROUNDING {
             @Override
-            public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelBack) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastVowelFrontal);
+            public Character apply(TurkishChar _notUsed, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastVowelBack = phoneticAttributesOfSurface.contains(PhonAttr.LastVowelBack) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastVowelFrontal);
 
                 if (lastVowelBack)
                     return 'ı';
@@ -255,9 +255,9 @@ public class SuffixFormSequence {
 
         INSERT_OPTIONAL_VOWEL {
             @Override
-            public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVowel) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterConsonant);
+            public Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVowel) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastLetterConsonant);
 
                 if (lastLetterVowel)
                     return null;
@@ -268,9 +268,9 @@ public class SuffixFormSequence {
 
         INSERT_OPTIONAL_CONSONANT {
             @Override
-            public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastLetterConsonant = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterConsonant) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVowel);
+            public Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastLetterConsonant = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterConsonant) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVowel);
 
                 if (lastLetterConsonant)
                     return null;
@@ -281,9 +281,9 @@ public class SuffixFormSequence {
 
         INSERT_OPTIONAL_VOWEL_A_WITH_HARMONY {
             @Override
-            public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVowel) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterConsonant);
+            public Character apply(TurkishChar _notUsed, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVowel) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastLetterConsonant);
 
                 if (lastLetterVowel)
                     return null;
@@ -294,9 +294,9 @@ public class SuffixFormSequence {
 
         INSERT_OPTIONAL_VOWEL_I_WITH_HARMONY {
             @Override
-            public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVowel) ||
-                        !phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterConsonant);
+            public Character apply(TurkishChar _notUsed, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastLetterVowel = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVowel) ||
+                        !phoneticAttributesOfSurface.contains(PhonAttr.LastLetterConsonant);
                 if (lastLetterVowel)
                     return null;
                 else
@@ -306,8 +306,8 @@ public class SuffixFormSequence {
 
         INSERT_DEVOICABLE_LETTER {
             @Override
-            public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
-                final boolean lastLetterVoiceless = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVoiceless);
+            public Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface) {
+                final boolean lastLetterVoiceless = phoneticAttributesOfSurface.contains(PhonAttr.LastLetterVoiceless);
                 if (lastLetterVoiceless)
                     return TurkishAlphabet.devoiceLetter(charToAdd.getLetter()).charValue();
                 else
@@ -315,7 +315,7 @@ public class SuffixFormSequence {
             }
         };
 
-        public abstract Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface);
+        public abstract Character apply(TurkishChar charToAdd, Set<PhonAttr> phoneticAttributesOfSurface);
 
     }
 }

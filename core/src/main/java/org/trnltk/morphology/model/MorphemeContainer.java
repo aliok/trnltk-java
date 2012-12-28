@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import zemberek3.lexicon.PrimaryPos;
@@ -31,7 +31,7 @@ public class MorphemeContainer {
     private String wholeSurface;
     private ImmutableSet<PhoneticExpectation> phoneticExpectations;
     private ImmutableSet<LexemeAttribute> lexemeAttributes;
-    private ImmutableSet<PhoneticAttribute> phoneticAttributes;
+    private ImmutableSet<PhonAttr> phonAttrs;
 
     // below are changed with transitions, but do have a value set in constructor
     private Transition lastTransition = null;
@@ -55,7 +55,7 @@ public class MorphemeContainer {
         this.wholeSurface = Strings.nullToEmpty(this.surfaceSoFar.getUnderlyingString()) + Strings.nullToEmpty(this.remainingSurface);
         this.phoneticExpectations = Sets.immutableEnumSet(root.getPhoneticExpectations());
         this.lexemeAttributes = this.root.getLexeme().getAttributes();
-        this.phoneticAttributes = this.root.getPhoneticAttributes();
+        this.phonAttrs = this.root.getPhonAttrs();
     }
 
     public MorphemeContainer(final MorphemeContainer toCopy) {
@@ -69,7 +69,7 @@ public class MorphemeContainer {
         this.wholeSurface = toCopy.wholeSurface;
         this.phoneticExpectations = toCopy.phoneticExpectations;
         this.lexemeAttributes = toCopy.lexemeAttributes;
-        this.phoneticAttributes = toCopy.phoneticAttributes;
+        this.phonAttrs = toCopy.phonAttrs;
 
         this.lastTransition = toCopy.lastTransition;
         this.lastDerivationTransition = toCopy.lastDerivationTransition;
@@ -134,7 +134,7 @@ public class MorphemeContainer {
         if (suffixFormApplication.getSuffixForm().getForm().isNotBlank())
             this.lastNonBlankTransition = newTransition;
 
-        this.phoneticAttributes = this.findPhoneticAttributes();
+        this.phonAttrs = this.findPhoneticAttributes();
         this.lexemeAttributes = this.findLexemeAttributes();
     }
 
@@ -186,8 +186,8 @@ public class MorphemeContainer {
         return rootState;
     }
 
-    public ImmutableSet<PhoneticAttribute> getPhoneticAttributes() {
-        return this.phoneticAttributes;
+    public ImmutableSet<PhonAttr> getPhonAttrs() {
+        return this.phonAttrs;
     }
 
     public ImmutableSet<PhoneticExpectation> getPhoneticExpectations() {
@@ -251,15 +251,15 @@ public class MorphemeContainer {
 
     }
 
-    private ImmutableSet<PhoneticAttribute> findPhoneticAttributes() {
+    private ImmutableSet<PhonAttr> findPhoneticAttributes() {
         if (this.hasTransitions()) {
             final String suffixSoFar = this.surfaceSoFar.substring(this.root.getSequence().length());
             if (StringUtils.isBlank(suffixSoFar) || !StringUtils.isAlphanumeric(suffixSoFar))
-                return this.root.getPhoneticAttributes();
+                return this.root.getPhonAttrs();
             else
                 return Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(this.getSurfaceSoFar(), this.getLexemeAttributes()));
         } else {
-            return root.getPhoneticAttributes();
+            return root.getPhonAttrs();
         }
     }
 

@@ -19,6 +19,7 @@ package org.trnltk.morphology.phonetics;
 import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
+import zemberek3.lexicon.tr.PhonAttr;
 import zemberek3.structure.TurkicLetter;
 
 import java.util.Collection;
@@ -26,30 +27,30 @@ import java.util.EnumSet;
 
 public class PhoneticsAnalyzer {
 
-    public EnumSet<PhoneticAttribute> calculatePhoneticAttributes(final String surface, Collection<LexemeAttribute> lexemeAttributes) {
+    public EnumSet<PhonAttr> calculatePhoneticAttributes(final String surface, Collection<LexemeAttribute> lexemeAttributes) {
         return this.calculatePhoneticAttributes(new TurkishSequence(surface), lexemeAttributes);
     }
 
-    public EnumSet<PhoneticAttribute> calculatePhoneticAttributes(final TurkishSequence surface, Collection<LexemeAttribute> lexemeAttributes) {
-        final EnumSet<PhoneticAttribute> phoneticAttributes = this.calculatePhoneticAttributesOfPlainSequence(surface);
+    public EnumSet<PhonAttr> calculatePhoneticAttributes(final TurkishSequence surface, Collection<LexemeAttribute> lexemeAttributes) {
+        final EnumSet<PhonAttr> phonAttrs = this.calculatePhoneticAttributesOfPlainSequence(surface);
         if (CollectionUtils.isEmpty(lexemeAttributes))
-            return phoneticAttributes;
+            return phonAttrs;
 
         if (lexemeAttributes.contains(LexemeAttribute.InverseHarmony)) {
-            if (phoneticAttributes.contains(PhoneticAttribute.LastVowelBack)) {
-                phoneticAttributes.remove(PhoneticAttribute.LastVowelBack);
-                phoneticAttributes.add(PhoneticAttribute.LastVowelFrontal);
-            } else if (phoneticAttributes.contains(PhoneticAttribute.LastVowelFrontal)) {
-                phoneticAttributes.remove(PhoneticAttribute.LastVowelFrontal);
-                phoneticAttributes.add(PhoneticAttribute.LastVowelBack);
+            if (phonAttrs.contains(PhonAttr.LastVowelBack)) {
+                phonAttrs.remove(PhonAttr.LastVowelBack);
+                phonAttrs.add(PhonAttr.LastVowelFrontal);
+            } else if (phonAttrs.contains(PhonAttr.LastVowelFrontal)) {
+                phonAttrs.remove(PhonAttr.LastVowelFrontal);
+                phonAttrs.add(PhonAttr.LastVowelBack);
             }
         }
 
-        return phoneticAttributes;
+        return phonAttrs;
     }
 
-    EnumSet<PhoneticAttribute> calculatePhoneticAttributesOfPlainSequence(final TurkishSequence surface) {
-        final EnumSet<PhoneticAttribute> attributes = EnumSet.noneOf(PhoneticAttribute.class);
+    EnumSet<PhonAttr> calculatePhoneticAttributesOfPlainSequence(final TurkishSequence surface) {
+        final EnumSet<PhonAttr> attributes = EnumSet.noneOf(PhonAttr.class);
         final TurkishChar lastVowelChar = surface.getLastVowel();
         final TurkishChar lastChar = surface.getLastChar();
         final TurkicLetter lastLetter = lastChar.getLetter();
@@ -57,27 +58,27 @@ public class PhoneticsAnalyzer {
         if (lastVowelChar != null) {
             final TurkicLetter lastVowelLetter = lastVowelChar.getLetter();
             if (lastVowelLetter.isRounded())
-                attributes.add(PhoneticAttribute.LastVowelRounded);
+                attributes.add(PhonAttr.LastVowelRounded);
             else
-                attributes.add(PhoneticAttribute.LastVowelUnrounded);
+                attributes.add(PhonAttr.LastVowelUnrounded);
 
             if (lastVowelLetter.isFrontal())
-                attributes.add(PhoneticAttribute.LastVowelFrontal);
+                attributes.add(PhonAttr.LastVowelFrontal);
             else
-                attributes.add(PhoneticAttribute.LastVowelBack);
+                attributes.add(PhonAttr.LastVowelBack);
         }
 
         if (lastLetter.isVowel())
-            attributes.add(PhoneticAttribute.LastLetterVowel);
+            attributes.add(PhonAttr.LastLetterVowel);
         else
-            attributes.add(PhoneticAttribute.LastLetterConsonant);
+            attributes.add(PhonAttr.LastLetterConsonant);
 
         if (lastLetter.isVoiceless()) {
-            attributes.add(PhoneticAttribute.LastLetterVoiceless);
+            attributes.add(PhonAttr.LastLetterVoiceless);
             if (lastLetter.isStopConsonant() && !lastLetter.isVowel())
-                attributes.add(PhoneticAttribute.LastLetterVoicelessStop);
+                attributes.add(PhonAttr.LastLetterVoicelessStop);
         } else {
-            attributes.add(PhoneticAttribute.LastLetterNotVoiceless);
+            attributes.add(PhonAttr.LastLetterNotVoiceless);
         }
 
         return attributes;

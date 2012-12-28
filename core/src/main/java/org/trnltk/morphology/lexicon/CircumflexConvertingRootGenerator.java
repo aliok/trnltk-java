@@ -86,7 +86,7 @@ public class CircumflexConvertingRootGenerator extends ImmutableRootGenerator {
                 }
 
                 final ImmutableRoot rootWithoutCircumflexes = new ImmutableRoot(new TurkishSequence(newRootChars),
-                        lexeme, rootWithCircumflexes.getPhoneticAttributes(), rootWithCircumflexes.getPhoneticExpectations());
+                        lexeme, rootWithCircumflexes.getPhonAttrs(), rootWithCircumflexes.getPhoneticExpectations());
 
                 roots.add(rootWithoutCircumflexes);
             }

@@ -26,6 +26,7 @@ import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SuffixFormSequence;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
+import zemberek3.lexicon.tr.PhonAttr;
 import zemberek3.structure.TurkicLetter;
 
 import java.util.ArrayList;
@@ -43,21 +44,21 @@ public class PhoneticsEngine {
         this.suffixFormSequenceApplier = suffixFormSequenceApplier;
     }
 
-    public boolean isSuffixFormApplicable(final Set<PhoneticAttribute> phoneticAttributes, final SuffixFormSequence suffixFormSequence) {
+    public boolean isSuffixFormApplicable(final Set<PhonAttr> phonAttrs, final SuffixFormSequence suffixFormSequence) {
         if (!suffixFormSequence.isNotBlank())
             return true;
 
-        if (CollectionUtils.isEmpty(phoneticAttributes))
+        if (CollectionUtils.isEmpty(phonAttrs))
             return false;
 
-        return this.suffixFormSequenceApplier.isApplicable(suffixFormSequence, phoneticAttributes);
+        return this.suffixFormSequenceApplier.isApplicable(suffixFormSequence, phonAttrs);
     }
 
     public Pair<TurkishSequence, String> apply(TurkishSequence surface, SuffixFormSequence form, Collection<LexemeAttribute> lexemeAttributes) {
         return this.apply(surface, phoneticsAnalyzer.calculatePhoneticAttributes(surface, lexemeAttributes), form, lexemeAttributes);
     }
 
-    public Pair<TurkishSequence, String> apply(final TurkishSequence surface, final Set<PhoneticAttribute> _phoneticAttributes, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> _lexemeAttributes) {
+    public Pair<TurkishSequence, String> apply(final TurkishSequence surface, final Set<PhonAttr> _phonAttrs, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> _lexemeAttributes) {
         if (surface == null || surface.isBlank())
             return Pair.of(null, null);
 
@@ -65,20 +66,20 @@ public class PhoneticsEngine {
             return Pair.of(surface, StringUtils.EMPTY);
 
         final Collection<LexemeAttribute> lexemeAttributes = _lexemeAttributes == null ? new ArrayList<LexemeAttribute>() : _lexemeAttributes;
-        final Set<PhoneticAttribute> phoneticAttributes = _phoneticAttributes == null ? ImmutableSet.<PhoneticAttribute>of() : _phoneticAttributes;
+        final Set<PhonAttr> phonAttrs = _phonAttrs == null ? ImmutableSet.<PhonAttr>of() : _phonAttrs;
 
-        return this.handlePhonetics(surface, phoneticAttributes, suffixFormSequence, lexemeAttributes);
+        return this.handlePhonetics(surface, phonAttrs, suffixFormSequence, lexemeAttributes);
     }
 
-    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> lexemeAttributes) {
+    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhonAttr> phonAttrs, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> lexemeAttributes) {
         TurkishSequence newSurface = _surface;
 
         // first try voicing
-        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && suffixFormSequence.isFirstLetterVowel()) {
+        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phonAttrs.contains(PhonAttr.LastLetterVoicelessStop) && suffixFormSequence.isFirstLetterVowel()) {
             newSurface = _surface.voiceLastLetterIfPossible();
         }
 
-        final String appliedSuffixForm = suffixFormSequenceApplier.apply(suffixFormSequence, phoneticAttributes);
+        final String appliedSuffixForm = suffixFormSequenceApplier.apply(suffixFormSequence, phonAttrs);
 
         return Pair.of(newSurface, appliedSuffixForm);
     }

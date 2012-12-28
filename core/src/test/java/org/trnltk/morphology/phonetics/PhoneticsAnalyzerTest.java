@@ -19,6 +19,7 @@ package org.trnltk.morphology.phonetics;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.TurkishSequence;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import java.util.EnumSet;
 
@@ -36,17 +37,17 @@ public class PhoneticsAnalyzerTest {
 
     @Test
     public void shouldCalculatePhoneticAttributes() {
-        PhoneticAttribute LLV = PhoneticAttribute.LastLetterVowel;
-        PhoneticAttribute LLC = PhoneticAttribute.LastLetterConsonant;
+        PhonAttr LLV = PhonAttr.LastLetterVowel;
+        PhonAttr LLC = PhonAttr.LastLetterConsonant;
 
-        PhoneticAttribute LVR = PhoneticAttribute.LastVowelRounded;
-        PhoneticAttribute LVU = PhoneticAttribute.LastVowelUnrounded;
-        PhoneticAttribute LVF = PhoneticAttribute.LastVowelFrontal;
-        PhoneticAttribute LVB = PhoneticAttribute.LastVowelBack;
+        PhonAttr LVR = PhonAttr.LastVowelRounded;
+        PhonAttr LVU = PhonAttr.LastVowelUnrounded;
+        PhonAttr LVF = PhonAttr.LastVowelFrontal;
+        PhonAttr LVB = PhonAttr.LastVowelBack;
 
-        PhoneticAttribute LLVless = PhoneticAttribute.LastLetterVoiceless;
-        PhoneticAttribute LLVlessStop = PhoneticAttribute.LastLetterVoicelessStop;
-        PhoneticAttribute LLNotVless = PhoneticAttribute.LastLetterNotVoiceless;
+        PhonAttr LLVless = PhonAttr.LastLetterVoiceless;
+        PhonAttr LLVlessStop = PhonAttr.LastLetterVoicelessStop;
+        PhonAttr LLNotVless = PhonAttr.LastLetterNotVoiceless;
 
         assertThat(EnumSet.of(LLV, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("e"))));
         assertThat(EnumSet.of(LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("el"))));

@@ -5,10 +5,9 @@ import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.NumeralRoot;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.numeral.DigitsToTextConverter;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 
 import java.util.ArrayList;
@@ -36,8 +35,8 @@ public class NumeralRootFinder implements RootFinder {
             final String partialInputUnderlyingString = partialInput.getUnderlyingString();
             if (pattern.matcher(partialInputUnderlyingString).matches()) {
                 final String underlyingNumeralText = digitsToTextConverter.convert(partialInputUnderlyingString);
-                final ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.copyOf(this.phoneticsAnalyzer.calculatePhoneticAttributes(underlyingNumeralText, null));
-                return Arrays.asList((Root) new NumeralRoot(partialInput, underlyingNumeralText, SecondaryPos.DIGITS, phoneticAttributes));
+                final ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.copyOf(this.phoneticsAnalyzer.calculatePhoneticAttributes(underlyingNumeralText, null));
+                return Arrays.asList((Root) new NumeralRoot(partialInput, underlyingNumeralText, SecondaryPos.DIGITS, phonAttrs));
             }
         }
 

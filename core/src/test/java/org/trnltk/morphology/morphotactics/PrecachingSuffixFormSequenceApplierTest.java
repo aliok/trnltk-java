@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.SuffixFormSequence;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -40,11 +40,11 @@ public class PrecachingSuffixFormSequenceApplierTest {
     public void shouldHaveValue() throws Exception {
         // check only once, cannot test all!
         {
-            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhoneticAttribute.LastLetterVowel));
+            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhonAttr.LastLetterVowel));
             assertThat(str, equalTo("m"));
         }
         {
-            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhoneticAttribute.LastLetterVowel, PhoneticAttribute.FirstLetterVowel));
+            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhonAttr.LastLetterVowel, PhonAttr.FirstLetterVowel));
             assertThat(str, equalTo("m"));
         }
     }

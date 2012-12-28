@@ -2,7 +2,7 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticExpectation;
 import zemberek3.lexicon.PrimaryPos;
 
@@ -12,7 +12,7 @@ public class NumeralRoot implements Root {
     private final String underlyingNumeralText;
 
     public NumeralRoot(final TurkishSequence partialInput, final String underlyingNumeralText, final SecondaryPos secondaryPos,
-                       final ImmutableSet<PhoneticAttribute> phoneticAttributes) {
+                       final ImmutableSet<PhonAttr> phonAttrs) {
         Validate.notNull(partialInput);
 
         final String partialInputUnderlyingString = partialInput.getUnderlyingString();
@@ -29,7 +29,7 @@ public class NumeralRoot implements Root {
                 secondaryPos, lexemeAttributes);
 
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = null;
-        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phoneticAttributes, phoneticExpectations);
+        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phonAttrs, phoneticExpectations);
 
         this.underlyingNumeralText = underlyingNumeralText;
     }
@@ -45,8 +45,8 @@ public class NumeralRoot implements Root {
     }
 
     @Override
-    public ImmutableSet<PhoneticAttribute> getPhoneticAttributes() {
-        return immutableRoot.getPhoneticAttributes();
+    public ImmutableSet<PhonAttr> getPhonAttrs() {
+        return immutableRoot.getPhonAttrs();
     }
 
     @Override

@@ -22,15 +22,15 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.*;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import zemberek3.lexicon.PrimaryPos;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.trnltk.morphology.phonetics.PhoneticAttribute.*;
+import static zemberek3.lexicon.tr.PhonAttr.*;
 
 public class ProperNounFromApostropheRootFinderTest {
     ProperNounFromApostropheRootFinder rootFinder;
@@ -77,10 +77,10 @@ public class ProperNounFromApostropheRootFinderTest {
     }
 
     private void assertRecognizedCorrectly(final String partialInput, final String expectedLemmaAndRoot, final SecondaryPos expectedSecondaryPos,
-                                           ImmutableSet<PhoneticAttribute> expectedPhoneticAttributes) {
+                                           ImmutableSet<PhonAttr> expectedPhonAttrs) {
 
         final Lexeme expectedLemma = new Lexeme(expectedLemmaAndRoot, expectedLemmaAndRoot, PrimaryPos.Noun, expectedSecondaryPos, null);
-        final ImmutableRoot expectedRoot = new ImmutableRoot(new TurkishSequence(expectedLemmaAndRoot), expectedLemma, expectedPhoneticAttributes, null);
+        final ImmutableRoot expectedRoot = new ImmutableRoot(new TurkishSequence(expectedLemmaAndRoot), expectedLemma, expectedPhonAttrs, null);
 
         final List<? extends Root> rootsForPartialInput = rootFinder.findRootsForPartialInput(new TurkishSequence(partialInput), null);
         assertThat(rootsForPartialInput, hasSize(1));

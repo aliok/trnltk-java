@@ -21,7 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.SuffixFormSequence;
 import org.trnltk.morphology.model.SuffixFormSequenceRuleStub;
-import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import zemberek3.lexicon.tr.PhonAttr;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -42,15 +42,15 @@ public class SuffixFormSequenceRuleApplierTest {
     public void shouldApplySimpleRules() {
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('m', SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_NONVOWEL_LETTER);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = mock(ImmutableSet.class);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('m'));
-            verifyZeroInteractions(phoneticAttributes);
+            ImmutableSet<PhonAttr> phonAttrs = mock(ImmutableSet.class);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('m'));
+            verifyZeroInteractions(phonAttrs);
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('a', SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_VOWEL_WITHOUT_HARMONY);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = mock(ImmutableSet.class);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('a'));
-            verifyZeroInteractions(phoneticAttributes);
+            ImmutableSet<PhonAttr> phonAttrs = mock(ImmutableSet.class);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('a'));
+            verifyZeroInteractions(phonAttrs);
         }
     }
 
@@ -59,18 +59,18 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_VOWEL_A_WITH_HARMONY;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('a'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), equalTo('a'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('a'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('a'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('e'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('e'));
         }
     }
 
@@ -79,33 +79,33 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_VOWEL_I_WITH_HARMONY;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('i'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('i'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('u'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('u'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('u'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('u'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ü'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ü'));
         }
     }
 
@@ -114,33 +114,33 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_VOWEL_I_WITH_HARMONY_AND_NO_ROUNDING;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('i'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('i'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('i'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('i'));
         }
     }
 
@@ -149,48 +149,48 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_OPTIONAL_VOWEL_A_WITH_HARMONY;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterVowel);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterVowel);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterVowel, PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterVowel, PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterVowel, PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterVowel, PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('a'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('a'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('a'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('a'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('e'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('e'));
         }
     }
 
@@ -199,63 +199,63 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_OPTIONAL_VOWEL_I_WITH_HARMONY;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelBack, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelBack, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastVowelFrontal, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastVowelFrontal, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelBack);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ı'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelBack);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ı'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelFrontal);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('i'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelFrontal);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('i'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('u'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('u'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelBack, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('u'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelBack, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('u'));
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub(RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant, PhoneticAttribute.LastVowelFrontal, PhoneticAttribute.LastVowelRounded);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('ü'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant, PhonAttr.LastVowelFrontal, PhonAttr.LastVowelRounded);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('ü'));
         }
     }
 
@@ -264,18 +264,18 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_OPTIONAL_VOWEL;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('a', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('o', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterVowel);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterVowel);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('e', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('e'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('e'));
         }
     }
 
@@ -284,18 +284,18 @@ public class SuffixFormSequenceRuleApplierTest {
         final SuffixFormSequence.SuffixFormSequenceRuleType RULE_TYPE = SuffixFormSequence.SuffixFormSequenceRuleType.INSERT_OPTIONAL_CONSONANT;
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('k', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of();
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of();
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('l', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterConsonant);
-            assertThat(applier.apply(rule, phoneticAttributes), nullValue());
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterConsonant);
+            assertThat(applier.apply(rule, phonAttrs), nullValue());
         }
         {
             final SuffixFormSequence.SuffixFormSequenceRule rule = new SuffixFormSequenceRuleStub('m', RULE_TYPE);
-            ImmutableSet<PhoneticAttribute> phoneticAttributes = ImmutableSet.of(PhoneticAttribute.LastLetterVowel);
-            assertThat(applier.apply(rule, phoneticAttributes), equalTo('m'));
+            ImmutableSet<PhonAttr> phonAttrs = ImmutableSet.of(PhonAttr.LastLetterVowel);
+            assertThat(applier.apply(rule, phonAttrs), equalTo('m'));
         }
     }
 }
