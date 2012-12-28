@@ -23,7 +23,7 @@ import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import zemberek3.lexicon.tr.PhonAttr;
-import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.tr.PhoneticExpectation;
 import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashSet;

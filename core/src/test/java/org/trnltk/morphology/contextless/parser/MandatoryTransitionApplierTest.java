@@ -26,7 +26,7 @@ import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import zemberek3.lexicon.tr.PhonAttr;
-import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 import zemberek3.lexicon.PrimaryPos;

@@ -9,7 +9,7 @@ import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import zemberek3.lexicon.tr.PhonAttr;
-import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import zemberek3.lexicon.PrimaryPos;
 

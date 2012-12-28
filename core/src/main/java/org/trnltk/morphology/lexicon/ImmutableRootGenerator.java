@@ -26,7 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import zemberek3.lexicon.PrimaryPos;

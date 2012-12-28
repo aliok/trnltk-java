@@ -3,7 +3,7 @@ package org.trnltk.morphology.model;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
 import zemberek3.lexicon.tr.PhonAttr;
-import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import zemberek3.lexicon.tr.PhoneticExpectation;
 import zemberek3.lexicon.PrimaryPos;
 
 public class NumeralRoot implements Root {
