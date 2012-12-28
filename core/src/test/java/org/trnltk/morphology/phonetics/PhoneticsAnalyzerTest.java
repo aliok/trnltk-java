@@ -44,20 +44,17 @@ public class PhoneticsAnalyzerTest {
         PhoneticAttribute LVF = PhoneticAttribute.LastVowelFrontal;
         PhoneticAttribute LVB = PhoneticAttribute.LastVowelBack;
 
-        PhoneticAttribute LLCont = PhoneticAttribute.LastLetterContinuant;
-        PhoneticAttribute LLNotCont = PhoneticAttribute.LastLetterNotContinuant;
-
         PhoneticAttribute LLVless = PhoneticAttribute.LastLetterVoiceless;
         PhoneticAttribute LLVlessStop = PhoneticAttribute.LastLetterVoicelessStop;
         PhoneticAttribute LLNotVless = PhoneticAttribute.LastLetterNotVoiceless;
 
-        assertThat(EnumSet.of(LLNotCont, LLV, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("e"))));
-        assertThat(EnumSet.of(LLCont, LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("el"))));
-        assertThat(EnumSet.of(LLNotCont, LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("ek"))));
-        assertThat(EnumSet.of(LLCont, LLC, LVU, LVF, LLVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("eh"))));
-        assertThat(EnumSet.of(LLCont, LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elm"))));
-        assertThat(EnumSet.of(LLNotCont, LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elk"))));
-        assertThat(EnumSet.of(LLNotCont, LLV, LVU, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elma"))));
-        assertThat(EnumSet.of(LLNotCont, LLV, LVR, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elmo"))));
+        assertThat(EnumSet.of(LLV, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("e"))));
+        assertThat(EnumSet.of(LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("el"))));
+        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("ek"))));
+        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("eh"))));
+        assertThat(EnumSet.of(LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elm"))));
+        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elk"))));
+        assertThat(EnumSet.of(LLV, LVU, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elma"))));
+        assertThat(EnumSet.of(LLV, LVR, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elmo"))));
     }
 }

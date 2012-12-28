@@ -22,7 +22,7 @@ import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.phonetics.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import org.trnltk.morphology.phonetics.TurkishLetter;
+import zemberek3.structure.TurkicLetter;
 
 import java.util.Set;
 
@@ -54,7 +54,7 @@ public class SuffixFormSequence {
 
             final boolean currentLetterIsUpperCase = Character.isUpperCase(currentChar);
             final TurkishChar currentTurkishChar = TurkishAlphabet.getChar(currentChar);
-            final TurkishLetter currentLetter = currentTurkishChar.getLetter();
+            final TurkicLetter currentLetter = currentTurkishChar.getLetter();
 
             if (i == 0 && TurkishAlphabet.Devoicable_Letters.contains(currentLetter)) {
                 rulesBuilder.add(new SuffixFormSequenceRule(currentTurkishChar, SuffixFormSequenceRuleType.INSERT_DEVOICABLE_LETTER));
@@ -309,7 +309,7 @@ public class SuffixFormSequence {
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
                 final boolean lastLetterVoiceless = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVoiceless);
                 if (lastLetterVoiceless)
-                    return TurkishAlphabet.devoice(charToAdd.getLetter()).getCharValue();
+                    return TurkishAlphabet.devoiceLetter(charToAdd.getLetter()).charValue();
                 else
                     return charToAdd.getCharValue();
             }

@@ -30,10 +30,7 @@ public enum PhoneticAttribute implements StringEnum<PhoneticAttribute> {
 
     LastLetterVoiceless("LLVless"),
     LastLetterNotVoiceless("LLNotVless"),
-    LastLetterContinuant("LLCont"),
-    LastLetterNotContinuant("LLNotCont"),
 
-    LastLetterVoicedStop("LLVoicedStop"),
     LastLetterVoicelessStop("LLStop"),
 
     FirstLetterVowel("FLV"),

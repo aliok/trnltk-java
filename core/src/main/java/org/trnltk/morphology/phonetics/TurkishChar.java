@@ -16,17 +16,19 @@
 
 package org.trnltk.morphology.phonetics;
 
+import zemberek3.structure.TurkicLetter;
+
 public class TurkishChar {
 
     private final char charValue;
-    private final TurkishLetter letter;
+    private final TurkicLetter letter;
 
-    public TurkishChar(char charValue, TurkishLetter letter) {
+    public TurkishChar(char charValue, TurkicLetter letter) {
         this.charValue = charValue;
         this.letter = letter;
     }
 
-    public TurkishLetter getLetter() {
+    public TurkicLetter getLetter() {
         return letter;
     }
 

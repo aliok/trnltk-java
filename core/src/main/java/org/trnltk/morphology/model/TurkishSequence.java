@@ -20,7 +20,7 @@ import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import org.trnltk.morphology.phonetics.TurkishLetter;
+import zemberek3.structure.TurkicLetter;
 
 import java.util.Arrays;
 
@@ -111,10 +111,10 @@ public class TurkishSequence {
 
     public TurkishSequence voiceLastLetterIfPossible() {
         final TurkishChar lastChar = this.getLastChar();
-        final TurkishLetter letter = lastChar.getLetter();
-        final TurkishLetter voicedLetter = TurkishAlphabet.voice(letter);
+        final TurkicLetter letter = lastChar.getLetter();
+        final TurkicLetter voicedLetter = TurkishAlphabet.voiceLetter(letter);
         if (voicedLetter != null)
-            return this.subsequence(0, this.count - 1).append(voicedLetter.getCharValue() + "");
+            return this.subsequence(0, this.count - 1).append(voicedLetter.charValue() + "");
         else
             return this;
     }

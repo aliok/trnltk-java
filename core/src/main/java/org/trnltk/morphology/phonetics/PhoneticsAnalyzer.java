@@ -19,6 +19,7 @@ package org.trnltk.morphology.phonetics;
 import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
+import zemberek3.structure.TurkicLetter;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -51,10 +52,10 @@ public class PhoneticsAnalyzer {
         final EnumSet<PhoneticAttribute> attributes = EnumSet.noneOf(PhoneticAttribute.class);
         final TurkishChar lastVowelChar = surface.getLastVowel();
         final TurkishChar lastChar = surface.getLastChar();
-        final TurkishLetter lastLetter = lastChar.getLetter();
+        final TurkicLetter lastLetter = lastChar.getLetter();
 
         if (lastVowelChar != null) {
-            final TurkishLetter lastVowelLetter = lastVowelChar.getLetter();
+            final TurkicLetter lastVowelLetter = lastVowelChar.getLetter();
             if (lastVowelLetter.isRounded())
                 attributes.add(PhoneticAttribute.LastVowelRounded);
             else
@@ -73,18 +74,11 @@ public class PhoneticsAnalyzer {
 
         if (lastLetter.isVoiceless()) {
             attributes.add(PhoneticAttribute.LastLetterVoiceless);
-            if (!lastLetter.isContinuant() && !lastLetter.isVowel())
+            if (lastLetter.isStopConsonant() && !lastLetter.isVowel())
                 attributes.add(PhoneticAttribute.LastLetterVoicelessStop);
         } else {
             attributes.add(PhoneticAttribute.LastLetterNotVoiceless);
-            if (!lastLetter.isContinuant() && !lastLetter.isVowel())
-                attributes.add(PhoneticAttribute.LastLetterVoicedStop);
         }
-
-        if (lastLetter.isContinuant())
-            attributes.add(PhoneticAttribute.LastLetterContinuant);
-        else
-            attributes.add(PhoneticAttribute.LastLetterNotContinuant);
 
         return attributes;
     }

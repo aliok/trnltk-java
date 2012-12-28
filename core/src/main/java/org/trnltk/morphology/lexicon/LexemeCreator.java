@@ -26,8 +26,8 @@ import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
+import zemberek3.structure.TurkicLetter;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishLetter;
 import zemberek3.lexicon.PrimaryPos;
 
 import java.util.HashSet;
@@ -131,7 +131,7 @@ class LexemeCreator {
 
     Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final zemberek3.lexicon.PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
-        final TurkishLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
+        final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
         final int vowelCount = this.vowelCount(lemmaRoot);
 
         final HashSet<LexemeAttribute> lexemeAttributes = new HashSet<LexemeAttribute>(_lexemeAttributes);
@@ -151,12 +151,12 @@ class LexemeCreator {
         return lexemeAttributes;
     }
 
-    private void inferNounOrAdjectiveMorphemicAttributes(String lemmaRoot, TurkishLetter lastLetter, int vowelCount, HashSet<LexemeAttribute> lexemeAttributes) {
+    private void inferNounOrAdjectiveMorphemicAttributes(String lemmaRoot, TurkicLetter lastLetter, int vowelCount, HashSet<LexemeAttribute> lexemeAttributes) {
         if (lexemeAttributes.contains(LexemeAttribute.VoicingOpt)) {
             lexemeAttributes.remove(LexemeAttribute.Voicing);
             lexemeAttributes.remove(LexemeAttribute.NoVoicing);
         } else {
-            if (vowelCount > 1 && lastLetter.isVoiceless() && !lastLetter.isContinuant()
+            if (vowelCount > 1 && lastLetter.isStopConsonant()
                     && !lexemeAttributes.contains(LexemeAttribute.NoVoicing) && !lexemeAttributes.contains(LexemeAttribute.InverseHarmony))
                 lexemeAttributes.add(LexemeAttribute.Voicing);
             else if (lemmaRoot.endsWith("nk") || lemmaRoot.endsWith("og") || lemmaRoot.endsWith("rt"))
@@ -175,7 +175,7 @@ class LexemeCreator {
         }
     }
 
-    private void inferVerbMorphemicAttributes(TurkishLetter lastLetter, int vowelCount, HashSet<LexemeAttribute> lexemeAttributes) {
+    private void inferVerbMorphemicAttributes(TurkicLetter lastLetter, int vowelCount, HashSet<LexemeAttribute> lexemeAttributes) {
         if (lastLetter.isVowel()) {
             lexemeAttributes.add(LexemeAttribute.ProgressiveVowelDrop);
             lexemeAttributes.add(LexemeAttribute.Passive_In);

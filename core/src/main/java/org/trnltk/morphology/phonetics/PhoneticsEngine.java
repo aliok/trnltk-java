@@ -26,6 +26,7 @@ import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SuffixFormSequence;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
+import zemberek3.structure.TurkicLetter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -146,9 +147,9 @@ public class PhoneticsEngine {
             return true;
 
         else if (voicingAllowed && inputUnderlyingString.startsWith(appliedStr.substring(0, appliedStr.length() - 1))) {
-            final TurkishLetter lastLetterOfApplication = TurkishAlphabet.getLetterForChar(appliedStr.charAt(appliedStr.length() - 1));
+            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getLetterForChar(appliedStr.charAt(appliedStr.length() - 1));
             final TurkishChar lastLetterOfInputPart = input.charAt(appliedStr.length() - 1);
-            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.voice(lastLetterOfApplication));
+            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.voiceLetter(lastLetterOfApplication));
         }
 
         return false;

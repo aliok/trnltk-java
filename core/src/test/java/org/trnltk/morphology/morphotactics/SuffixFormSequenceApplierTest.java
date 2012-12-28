@@ -51,7 +51,7 @@ public class SuffixFormSequenceApplierTest {
 
         when(rule_A.apply(Matchers.<ImmutableSet<PhoneticAttribute>>any())).thenReturn(null);
 
-        when(rule_B.apply(ImmutableSet.of(PhoneticAttribute.LastLetterVoicedStop))).thenReturn('a');
+        when(rule_B.apply(ImmutableSet.of(PhoneticAttribute.LastLetterConsonant))).thenReturn('c');
 
         when(rule_B.apply(ImmutableSet.of(PhoneticAttribute.LastLetterVoicelessStop))).thenReturn('b');
 
@@ -61,7 +61,7 @@ public class SuffixFormSequenceApplierTest {
     @Test
     public void shouldApply() throws Exception {
         assertThat(applier.apply(suffixFormSequence, ImmutableSet.<PhoneticAttribute>of()), equalTo(""));
-        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterVoicedStop)), equalTo("a"));
+        assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterConsonant)), equalTo("c"));
         assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterVoicelessStop)), equalTo("b"));
         assertThat(applier.apply(suffixFormSequence, ImmutableSet.of(PhoneticAttribute.LastLetterVowel)), equalTo(""));
     }

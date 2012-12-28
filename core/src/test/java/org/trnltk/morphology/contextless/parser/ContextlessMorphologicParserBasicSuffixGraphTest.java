@@ -1633,7 +1633,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("rüzgâr", "rüzgâr(rüzgâr)+Noun+A3sg+Pnon+Nom");
         assertParseCorrect("rüzgârımı", "rüzgâr(rüzgâr)+Noun+A3sg+P1sg(+Im[ım])+Acc(+yI[ı])");
         assertParseCorrect("alenîleşmek", "alenî(alenî)+Adj+Verb+Become(lAş[leş])+Pos+Noun+Inf(mAk[mek])+A3sg+Pnon+Nom");
-        assertParseCorrect("cülûstan", "cülûs(cülûs)+Noun+A3sg+Pnon+Abl(dAn[tan])");
+        assertParseCorrect("cülûsten", "cülûs(cülûs)+Noun+A3sg+Pnon+Abl(dAn[ten])");
         assertParseCorrect("hâlâ", "hâlâ(hâlâ)+Adv+Time");
     }
 
@@ -1642,7 +1642,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("rüzgar", "rüzgar(rüzgâr)+Noun+A3sg+Pnon+Nom");
         assertParseCorrect("rüzgarımı", "rüzgar(rüzgâr)+Noun+A3sg+P1sg(+Im[ım])+Acc(+yI[ı])");
         assertParseCorrect("alenileşmek", "aleni(alenî)+Adj+Verb+Become(lAş[leş])+Pos+Noun+Inf(mAk[mek])+A3sg+Pnon+Nom");
-        assertParseCorrect("cülustan", "cülus(cülûs)+Noun+A3sg+Pnon+Abl(dAn[tan])");
+        assertParseCorrect("cülusten", "cülus(cülûs)+Noun+A3sg+Pnon+Abl(dAn[ten])");
         assertParseCorrect("hala", "hala(hâlâ)+Adv+Time", "hala(hala)+Noun+A3sg+Pnon+Nom", "hal(hal)+Noun+A3sg+Pnon+Dat(+yA[a])");
     }
 }

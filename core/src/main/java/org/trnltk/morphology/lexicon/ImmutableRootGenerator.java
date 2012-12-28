@@ -26,8 +26,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.phonetics.*;
+import org.trnltk.morphology.phonetics.PhoneticAttribute;
+import org.trnltk.morphology.phonetics.PhoneticExpectation;
+import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
+import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import zemberek3.lexicon.PrimaryPos;
+import zemberek3.structure.TurkicLetter;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -93,20 +97,12 @@ public class ImmutableRootGenerator {
         final EnumSet<PhoneticExpectation> modifiedPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
 
         if (CollectionUtils.containsAny(lexemeAttributes, Sets.immutableEnumSet(LexemeAttribute.Voicing, LexemeAttribute.VoicingOpt))) {
-            final TurkishLetter lastLetter = TurkishAlphabet.getLetterForChar(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
-            final TurkishLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.voice(lastLetter);
+            final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
+            final TurkicLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.voiceLetter(lastLetter);
             Validate.notNull(voicedLastLetter);
-            modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.getCharValue();
+            modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.charValue();
 
             modifiedPhoneticAttrs.remove(PhoneticAttribute.LastLetterVoicelessStop);
-
-            if (voicedLastLetter.isContinuant()) {
-                modifiedPhoneticAttrs.remove(PhoneticAttribute.LastLetterNotContinuant);
-                modifiedPhoneticAttrs.add(PhoneticAttribute.LastLetterContinuant);
-            } else {
-                modifiedPhoneticAttrs.remove(PhoneticAttribute.LastLetterContinuant);
-                modifiedPhoneticAttrs.add(PhoneticAttribute.LastLetterNotContinuant);
-            }
 
             if (!lexemeAttributes.contains(LexemeAttribute.VoicingOpt)) {
                 originalPhoneticExpectations.add(PhoneticExpectation.ConsonantStart);

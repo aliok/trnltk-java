@@ -27,13 +27,13 @@ import java.util.LinkedList;
 
 public class CircumflexConvertingRootGenerator extends ImmutableRootGenerator {
 
-    private static final char CIRCUMFLEX_A = TurkishAlphabet.L_ac.getCharValue();
-    private static final char CIRCUMFLEX_I = TurkishAlphabet.L_ic.getCharValue();
-    private static final char CIRCUMFLEX_U = TurkishAlphabet.L_uc.getCharValue();
+    private static final char CIRCUMFLEX_A = TurkishAlphabet.L_ac.charValue();
+    private static final char CIRCUMFLEX_I = TurkishAlphabet.L_ic.charValue();
+    private static final char CIRCUMFLEX_U = TurkishAlphabet.L_uc.charValue();
 
-    private static final char PLAIN_A = TurkishAlphabet.L_a.getCharValue();
-    private static final char PLAIN_I = TurkishAlphabet.L_i.getCharValue();
-    private static final char PLAIN_U = TurkishAlphabet.L_u.getCharValue();
+    private static final char PLAIN_A = TurkishAlphabet.L_a.charValue();
+    private static final char PLAIN_I = TurkishAlphabet.L_i.charValue();
+    private static final char PLAIN_U = TurkishAlphabet.L_u.charValue();
 
 
     @Override
