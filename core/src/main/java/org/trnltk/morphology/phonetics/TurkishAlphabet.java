@@ -21,6 +21,7 @@ import zemberek3.structure.TurkicLetter;
 
 public class TurkishAlphabet extends zemberek3.structure.TurkishAlphabet {
 
+    //TODO-INTEGRATION: following is ugly and temporary
     private static final zemberek3.structure.TurkishAlphabet ZEMBEREK_ALPHABET_INSTANCE = new zemberek3.structure.TurkishAlphabet();
 
     public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(zemberek3.structure.TurkishAlphabet.devoicingMap.keySet());
