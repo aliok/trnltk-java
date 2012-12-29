@@ -21,8 +21,12 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.NumeralRoot;
+import org.trnltk.morphology.model.Root;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.List;
 
@@ -307,7 +311,7 @@ public class NumeralRootFinderTest {
             @Override
             public boolean matches(Object item) {
                 NumeralRoot root = (NumeralRoot) item;
-                return root.getUnderlyingNumeralText().equals(str) && root.getPhoneticAttributes().equals(phoneticsAnalyzer.calculatePhoneticAttributes(str, null));
+                return root.getUnderlyingNumeralText().equals(str) && root.getPhonAttrs().equals(phoneticsAnalyzer.calculatePhoneticAttributes(str, null));
             }
 
             @Override
@@ -339,8 +343,8 @@ public class NumeralRootFinderTest {
             @Override
             public boolean matches(Object item) {
                 NumeralRoot root = (NumeralRoot) item;
-                return SyntacticCategory.NUMERAL.equals(root.getLexeme().getSyntacticCategory()) &&
-                        SecondarySyntacticCategory.DIGITS.equals(root.getLexeme().getSecondarySyntacticCategory());
+                return PrimaryPos.Numeral.equals(root.getLexeme().getPrimaryPos()) &&
+                        SecondaryPos.DIGITS.equals(root.getLexeme().getSecondaryPos());
             }
 
             @Override
