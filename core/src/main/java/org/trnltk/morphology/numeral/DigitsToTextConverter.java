@@ -150,7 +150,7 @@ public class DigitsToTextConverter {
     private String convertNaturalNumberToWords(BigInteger naturalNumber) {
         Validate.isTrue(naturalNumber.compareTo(ZERO) >= 0);
         Validate.isTrue(naturalNumber.compareTo(MAX_NATURAL_NUMBER_SUPPORTED) <= 0,
-                "Given number " + naturalNumber + " is larger than maximum supported natual number " + MAX_NATURAL_NUMBER_SUPPORTED);
+                "Given number " + naturalNumber + " is larger than maximum supported natural number " + MAX_NATURAL_NUMBER_SUPPORTED);
 
         StringBuilder result = new StringBuilder();
 
