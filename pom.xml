@@ -89,7 +89,7 @@
     </dependencies>
 
     <properties>
-        <trnltk-version>1.0-SNAPSHOT</trnltk-version>
+        <trnltk-version>1.0.1-SNAPSHOT</trnltk-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
