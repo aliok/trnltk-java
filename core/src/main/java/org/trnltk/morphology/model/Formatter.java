@@ -177,4 +177,13 @@ public class Formatter {
 
         return b.toString();
     }
+
+    public static Collection<String> formatMorphemeContainersWithDerivationGrouping(Collection<MorphemeContainer> morphemeContainers) {
+        return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return Formatter.formatMorphemeContainerWithDerivationGrouping(input);
+            }
+        });
+    }
 }
