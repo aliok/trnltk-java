@@ -35,6 +35,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>zemberek</groupId>
+            <artifactId>zemberek</artifactId>
+            <version>3.0.0-alpha2</version>
+        </dependency>
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
@@ -78,13 +83,6 @@
             <artifactId>mockito-all</artifactId>
             <version>1.9.0</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>zemberek3</groupId>
-            <artifactId>zemberek3</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>D:/devl/personal/zemberek/zemberek3.0.0-alpha2-full.jar</systemPath>
         </dependency>
     </dependencies>
 

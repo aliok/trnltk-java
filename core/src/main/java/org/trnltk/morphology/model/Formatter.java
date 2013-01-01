@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import zemberek3.lexicon.PrimaryPos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,11 +32,11 @@ import java.util.List;
 
 public class Formatter {
 
-    private static final ImmutableSet<Pair<SyntacticCategory, SecondarySyntacticCategory>> DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP
-            = new ImmutableSet.Builder<Pair<SyntacticCategory, SecondarySyntacticCategory>>()
-            .add(Pair.of(SyntacticCategory.ADVERB, SecondarySyntacticCategory.QUESTION))
-            .add(Pair.of(SyntacticCategory.ADVERB, SecondarySyntacticCategory.TIME))
-            .add(Pair.of(SyntacticCategory.ADJECTIVE, SecondarySyntacticCategory.QUESTION))
+    private static final ImmutableSet<Pair<PrimaryPos, SecondaryPos>> DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP
+            = new ImmutableSet.Builder<Pair<PrimaryPos, SecondaryPos>>()
+            .add(Pair.of(PrimaryPos.Adverb, SecondaryPos.Question))
+            .add(Pair.of(PrimaryPos.Adverb, SecondaryPos.Time))
+            .add(Pair.of(PrimaryPos.Adjective, SecondaryPos.Question))
             .build();
 
     /**
@@ -108,8 +109,8 @@ public class Formatter {
      */
     public static String formatMorphemeContainerWithDerivationGrouping(MorphemeContainer morphemeContainer) {
         final Lexeme lexeme = morphemeContainer.getRoot().getLexeme();
-        final SyntacticCategory primaryPos = lexeme.getSyntacticCategory();
-        final SecondarySyntacticCategory secondaryPos = lexeme.getSecondarySyntacticCategory();
+        final PrimaryPos primaryPos = lexeme.getPrimaryPos();
+        final SecondaryPos secondaryPos = lexeme.getSecondaryPos();
 
         final String lemmaRoot = lexeme.getLemmaRoot();
 
@@ -118,12 +119,12 @@ public class Formatter {
             if (DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP.contains(Pair.of(primaryPos, secondaryPos)))
                 secondaryPosStr = null;
             else
-                secondaryPosStr = secondaryPos.getLookupKey();
+                secondaryPosStr = secondaryPos.getStringForm();
         } else {
             secondaryPosStr = null;
         }
 
-        final String formattedLexeme = Joiner.on("+").skipNulls().join(Arrays.asList(lemmaRoot, primaryPos.getLookupKey(), secondaryPosStr));
+        final String formattedLexeme = Joiner.on("+").skipNulls().join(Arrays.asList(lemmaRoot, primaryPos.getStringForm(), secondaryPosStr));
 
         final List<List<String>> groups = new ArrayList<List<String>>();
         List<String> currentGroup = new ArrayList<String>(Arrays.asList(formattedLexeme));
@@ -131,7 +132,7 @@ public class Formatter {
         for (Transition transition : morphemeContainer.getTransitions()) {
             if (transition.isDerivational()) {
                 groups.add(currentGroup);
-                currentGroup = new ArrayList<String>(Arrays.asList(transition.getTargetState().getSyntacticCategory().getLookupKey()));
+                currentGroup = new ArrayList<String>(Arrays.asList(transition.getTargetState().getPrimaryPos().getStringForm()));
             }
 
             final Suffix suffix = transition.getSuffixFormApplication().getSuffixForm().getSuffix();

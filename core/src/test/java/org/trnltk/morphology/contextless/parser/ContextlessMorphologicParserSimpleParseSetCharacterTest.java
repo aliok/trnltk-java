@@ -41,6 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Ignore
 public class ContextlessMorphologicParserSimpleParseSetCharacterTest extends BaseContextlessMorphologicParserTest {
 
     private static final ImmutableMap<String, String> PARSE_RESULT_REPLACE_HACK_MAP = new ImmutableMap.Builder<String, String>()
