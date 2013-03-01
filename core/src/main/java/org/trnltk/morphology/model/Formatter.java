@@ -16,9 +16,27 @@
 
 package org.trnltk.morphology.model;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class Formatter {
+
+    private static final ImmutableSet<Pair<SyntacticCategory, SecondarySyntacticCategory>> DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP
+            = new ImmutableSet.Builder<Pair<SyntacticCategory, SecondarySyntacticCategory>>()
+            .add(Pair.of(SyntacticCategory.ADVERB, SecondarySyntacticCategory.QUESTION))
+            .add(Pair.of(SyntacticCategory.ADVERB, SecondarySyntacticCategory.TIME))
+            .add(Pair.of(SyntacticCategory.ADJECTIVE, SecondarySyntacticCategory.QUESTION))
+            .build();
 
     /**
      * @param morphemeContainer the MC
@@ -48,6 +66,15 @@ public class Formatter {
         return b.toString();
     }
 
+    public static Collection<String> formatMorphemeContainers(final Collection<MorphemeContainer> morphemeContainers) {
+        return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return Formatter.formatMorphemeContainer(input);
+            }
+        });
+    }
+
     /**
      * @param morphemeContainer the MC
      * @return kitab(kitap)+Noun+A3sg+Pnon+Dat(+yA[a]) for word 'kitaba'
@@ -75,6 +102,64 @@ public class Formatter {
         return b.toString();
     }
 
+    /**
+     * @param morphemeContainer the MC
+     * @return (1,"kitap+Noun+A3sg+Pnon+Dat")
+     */
+    public static String formatMorphemeContainerWithDerivationGrouping(MorphemeContainer morphemeContainer) {
+        final Lexeme lexeme = morphemeContainer.getRoot().getLexeme();
+        final SyntacticCategory primaryPos = lexeme.getSyntacticCategory();
+        final SecondarySyntacticCategory secondaryPos = lexeme.getSecondarySyntacticCategory();
+
+        final String lemmaRoot = lexeme.getLemmaRoot();
+
+        final String secondaryPosStr;
+        if (secondaryPos != null) {
+            if (DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP.contains(Pair.of(primaryPos, secondaryPos)))
+                secondaryPosStr = null;
+            else
+                secondaryPosStr = secondaryPos.getLookupKey();
+        } else {
+            secondaryPosStr = null;
+        }
+
+        final String formattedLexeme = Joiner.on("+").skipNulls().join(Arrays.asList(lemmaRoot, primaryPos.getLookupKey(), secondaryPosStr));
+
+        final List<List<String>> groups = new ArrayList<List<String>>();
+        List<String> currentGroup = new ArrayList<String>(Arrays.asList(formattedLexeme));
+
+        for (Transition transition : morphemeContainer.getTransitions()) {
+            if (transition.isDerivational()) {
+                groups.add(currentGroup);
+                currentGroup = new ArrayList<String>(Arrays.asList(transition.getTargetState().getSyntacticCategory().getLookupKey()));
+            }
+
+            final Suffix suffix = transition.getSuffixFormApplication().getSuffixForm().getSuffix();
+            if (suffix instanceof FreeTransitionSuffix)
+                continue;
+            else
+                currentGroup.add(suffix.getPrettyName());
+
+        }
+
+        groups.add(currentGroup);
+
+        final List<String> formattedGroups = Lists.transform(groups, new Function<List<String>, String>() {
+            @Override
+            public String apply(List<String> input) {
+                return Joiner.on("+").join(input);
+            }
+        });
+
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < formattedGroups.size(); i++) {
+            final String formattedGroup = formattedGroups.get(i);
+            builder.append("(").append(i + 1).append(",\"").append(formattedGroup).append("\")");
+        }
+
+        return builder.toString();
+    }
+
     private static String formatTransition(final Transition transition, final boolean includeForm) {
         final StringBuilder b = new StringBuilder();
 
@@ -93,4 +178,12 @@ public class Formatter {
         return b.toString();
     }
 
+    public static Collection<String> formatMorphemeContainersWithDerivationGrouping(Collection<MorphemeContainer> morphemeContainers) {
+        return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return Formatter.formatMorphemeContainerWithDerivationGrouping(input);
+            }
+        });
+    }
 }

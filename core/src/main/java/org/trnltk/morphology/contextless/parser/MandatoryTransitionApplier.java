@@ -30,7 +30,7 @@ import java.util.List;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasProgressiveVowelDrop;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasSyntacticCategory;
 
-public class RequiredTransitionApplier {
+public class MandatoryTransitionApplier {
 
     // not good to use other classes' loggers
     // however, it is good to have less things to turn on and off during debugging
@@ -39,9 +39,9 @@ public class RequiredTransitionApplier {
     private final SuffixGraph suffixGraph;
     private final SuffixApplier suffixApplier;
 
-    private final LinkedList<RequiredTransitionRule> requiredTransitionRules = new LinkedList<RequiredTransitionRule>();
+    private final LinkedList<MandatoryTransitionRule> mandatoryTransitionRules = new LinkedList<MandatoryTransitionRule>();
 
-    public RequiredTransitionApplier(final SuffixGraph suffixGraph, final SuffixApplier suffixApplier) {
+    public MandatoryTransitionApplier(final SuffixGraph suffixGraph, final SuffixApplier suffixApplier) {
         this.suffixGraph = suffixGraph;
         this.suffixApplier = suffixApplier;
 
@@ -54,7 +54,7 @@ public class RequiredTransitionApplier {
         // and its state is VERB_ROOT
         // add positive suffix, and then progressive suffix
 
-        final RequiredTransitionRule progressiveVowelDropRule = new RequiredTransitionRuleBuilder(this.suffixGraph)
+        final MandatoryTransitionRule progressiveVowelDropRule = new RequiredTransitionRuleBuilder(this.suffixGraph)
                 .condition(
                         Specifications.and(
                                 rootHasSyntacticCategory(SyntacticCategory.VERB),
@@ -68,22 +68,22 @@ public class RequiredTransitionApplier {
 
         // more rule can be added
 
-        this.requiredTransitionRules.add(progressiveVowelDropRule);
+        this.mandatoryTransitionRules.add(progressiveVowelDropRule);
     }
 
-    List<MorphemeContainer> applyRequiredTransitionsToMorphemeContainers(final List<MorphemeContainer> morphemeContainers, final TurkishSequence input) {
+    List<MorphemeContainer> applyMandatoryTransitionsToMorphemeContainers(final List<MorphemeContainer> morphemeContainers, final TurkishSequence input) {
         final List<MorphemeContainer> newMorphemeContainers = new LinkedList<MorphemeContainer>();
         for (MorphemeContainer morphemeContainer : morphemeContainers) {
             MorphemeContainer newMorhpemeContainer = morphemeContainer;
 
-            for (RequiredTransitionRule requiredTransitionRule : this.requiredTransitionRules) {
-                if (!requiredTransitionRule.getCondition().isSatisfiedBy(newMorhpemeContainer))
+            for (MandatoryTransitionRule mandatoryTransitionRule : this.mandatoryTransitionRules) {
+                if (!mandatoryTransitionRule.getCondition().isSatisfiedBy(newMorhpemeContainer))
                     continue;
-                if (!requiredTransitionRule.getSourceState().equals(newMorhpemeContainer.getLastState()))
+                if (!mandatoryTransitionRule.getSourceState().equals(newMorhpemeContainer.getLastState()))
                     continue;
 
-                for (RequiredTransitionRuleStep requiredTransitionRuleStep : requiredTransitionRule.getRequiredTransitionRuleSteps()) {
-                    newMorhpemeContainer = applyRequiredTransitionRuleStepToMorphemeContainer(newMorhpemeContainer, requiredTransitionRuleStep, input);
+                for (MandatoryTransitionRuleStep mandatoryTransitionRuleStep : mandatoryTransitionRule.getMandatoryTransitionRuleSteps()) {
+                    newMorhpemeContainer = applyRequiredTransitionRuleStepToMorphemeContainer(newMorhpemeContainer, mandatoryTransitionRuleStep, input);
                     if (newMorhpemeContainer == null)
                         break;
                 }
@@ -98,16 +98,16 @@ public class RequiredTransitionApplier {
         return newMorphemeContainers;
     }
 
-    private MorphemeContainer applyRequiredTransitionRuleStepToMorphemeContainer(MorphemeContainer morphemeContainer, RequiredTransitionRuleStep requiredTransitionRuleStep, TurkishSequence input) {
-        final SuffixForm suffixForm = requiredTransitionRuleStep.getSuffixForm();
+    private MorphemeContainer applyRequiredTransitionRuleStepToMorphemeContainer(MorphemeContainer morphemeContainer, MandatoryTransitionRuleStep mandatoryTransitionRuleStep, TurkishSequence input) {
+        final SuffixForm suffixForm = mandatoryTransitionRuleStep.getSuffixForm();
         final Suffix suffix = suffixForm.getSuffix();
         if (!this.suffixApplier.transitionAllowedForSuffix(morphemeContainer, suffix))
-            throw new IllegalStateException(String.format("There is a matching required transition rule, but suffix \"%s\" cannot be applied to %s", suffix, morphemeContainer));
+            throw new IllegalStateException(String.format("There is a matching mandatory transition rule, but suffix \"%s\" cannot be applied to %s", suffix, morphemeContainer));
 
-        morphemeContainer = this.suffixApplier.trySuffixForm(morphemeContainer, suffixForm, requiredTransitionRuleStep.getTargetState(), input);
+        morphemeContainer = this.suffixApplier.trySuffixForm(morphemeContainer, suffixForm, mandatoryTransitionRuleStep.getTargetState(), input);
         if (morphemeContainer == null) {
             if (logger.isDebugEnabled())
-                logger.debug(String.format("There is a matching required transition rule, but suffix form \"%s\" cannot be applied to %s", suffixForm, morphemeContainer));
+                logger.debug(String.format("There is a matching mandatory transition rule, but suffix form \"%s\" cannot be applied to %s", suffixForm, morphemeContainer));
             return null;
         } else {
             return morphemeContainer;
@@ -119,7 +119,7 @@ public class RequiredTransitionApplier {
 
         private Specification<MorphemeContainer> condition;
         private SuffixGraphState sourceState;
-        private LinkedList<RequiredTransitionRuleStep> steps = new LinkedList<RequiredTransitionRuleStep>();
+        private LinkedList<MandatoryTransitionRuleStep> steps = new LinkedList<MandatoryTransitionRuleStep>();
 
         private RequiredTransitionRuleBuilder(final SuffixGraph suffixGraph) {
             this.suffixGraph = suffixGraph;
@@ -143,30 +143,30 @@ public class RequiredTransitionApplier {
             Validate.notNull(suffixForm);
             Validate.notNull(targetState);
 
-            this.steps.add(new RequiredTransitionRuleStep(suffixForm, targetState));
+            this.steps.add(new MandatoryTransitionRuleStep(suffixForm, targetState));
             return this;
         }
 
-        public RequiredTransitionRule build() {
+        public MandatoryTransitionRule build() {
             Validate.notNull(this.sourceState);
             Validate.notNull(this.condition);
             Validate.notEmpty(this.steps);
 
-            return new RequiredTransitionRule(condition, sourceState, steps);
+            return new MandatoryTransitionRule(condition, sourceState, steps);
         }
     }
 
-    private static class RequiredTransitionRule {
+    private static class MandatoryTransitionRule {
         private Specification<MorphemeContainer> condition;
         private SuffixGraphState sourceState;
-        private List<RequiredTransitionRuleStep> requiredTransitionRuleSteps;
+        private List<MandatoryTransitionRuleStep> mandatoryTransitionRuleSteps;
 
-        private RequiredTransitionRule(Specification<MorphemeContainer> condition, SuffixGraphState sourceState,
-                                       List<RequiredTransitionRuleStep> requiredTransitionRuleSteps) {
-            Validate.notEmpty(requiredTransitionRuleSteps);
+        private MandatoryTransitionRule(Specification<MorphemeContainer> condition, SuffixGraphState sourceState,
+                                        List<MandatoryTransitionRuleStep> mandatoryTransitionRuleSteps) {
+            Validate.notEmpty(mandatoryTransitionRuleSteps);
             this.condition = condition;
             this.sourceState = sourceState;
-            this.requiredTransitionRuleSteps = requiredTransitionRuleSteps;
+            this.mandatoryTransitionRuleSteps = mandatoryTransitionRuleSteps;
         }
 
         public SuffixGraphState getSourceState() {
@@ -177,16 +177,16 @@ public class RequiredTransitionApplier {
             return condition;
         }
 
-        public List<RequiredTransitionRuleStep> getRequiredTransitionRuleSteps() {
-            return requiredTransitionRuleSteps;
+        public List<MandatoryTransitionRuleStep> getMandatoryTransitionRuleSteps() {
+            return mandatoryTransitionRuleSteps;
         }
     }
 
-    private static class RequiredTransitionRuleStep {
+    private static class MandatoryTransitionRuleStep {
         private final SuffixForm suffixForm;
         private final SuffixGraphState targetState;
 
-        private RequiredTransitionRuleStep(SuffixForm suffixForm, SuffixGraphState targetState) {
+        private MandatoryTransitionRuleStep(SuffixForm suffixForm, SuffixGraphState targetState) {
             this.suffixForm = suffixForm;
             this.targetState = targetState;
         }

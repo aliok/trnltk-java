@@ -43,7 +43,7 @@ public class ContextlessMorphologicParserSimpleParseSetTest extends BaseContextl
     private HashMultimap<String, ? extends Root> originalRootMap;
 
     public ContextlessMorphologicParserSimpleParseSetTest() {
-        this.originalRootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
+        this.originalRootMap = RootMapFactory.createSimple();
     }
 
     @Before
@@ -53,7 +53,7 @@ public class ContextlessMorphologicParserSimpleParseSetTest extends BaseContextl
 
     @Override
     protected ContextlessMorphologicParser buildParser(HashMultimap<String, Root> clonedRootMap) {
-        return ContextlessMorphologicParserFactory.createWithBigGraphForRootMap(clonedRootMap);
+        return ContextlessMorphologicParserFactory.createSimple();
     }
 
     @Override
