@@ -8,7 +8,7 @@ TRNLTK is rewritten in Java.
 
 Some definitions
 ----------------
-<---
+<!---
 Example Term
 gideceğini Surface
 gideceğini+Noun Surface+SurfacePos
@@ -31,7 +31,7 @@ Body kitapçılık
 BodySurface kitapçılığ
 
 -->
-<---
+<!---
 Tables below generated using http://www.sensefulsolutions.com/2010/10/format-text-as-table.html
 -->
 <table><tbody><tr><th>Example</th><th>Term</th></tr><tr><td>gideceğini</td><td>Surface</td></tr><tr><td>gideceğini+Noun</td><td>Surface+SurfacePos</td></tr><tr><td>gidecek</td><td>Body</td></tr><tr><td>gidecek+Noun</td><td>Body+BodyPos</td></tr><tr><td>gideceğ</td><td>BodySurface</td></tr><tr><td>gitmek</td><td>Lemma</td></tr><tr><td>gitmek+Verb</td><td>Lemma+LemmaPos=Lexeme</td></tr><tr><td>git</td><td>Root</td></tr><tr><td>gid</td><td>RootSurface</td></tr><tr><td>(y)AcAk</td><td>SuffixForm</td></tr><tr><td>ecek</td><td>SuffixFormBody</td></tr><tr><td>eceğ</td><td>SuffixFormSurface</td></tr></tbody></table>
