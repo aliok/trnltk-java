@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableMultimap;

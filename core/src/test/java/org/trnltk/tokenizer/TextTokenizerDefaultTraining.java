@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -12,8 +12,9 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingData;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingEntry;
+import org.trnltk.tokenizer.*;
+import org.trnltk.tokenizer.data.TokenizerTrainingData;
+import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 
 import java.io.FileNotFoundException;
 import java.util.*;

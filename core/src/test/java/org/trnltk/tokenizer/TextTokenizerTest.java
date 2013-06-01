@@ -5,9 +5,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.trnltk.tokenizer.experiment.TextTokenizer;
-import org.trnltk.tokenizer.experiment.TextTokenizerTrainer;
-import org.trnltk.tokenizer.experiment.TokenizationGraph;
+import org.trnltk.tokenizer.TextTokenizer;
 import org.trnltk.util.RegexMatcher;
 
 import java.io.FileNotFoundException;

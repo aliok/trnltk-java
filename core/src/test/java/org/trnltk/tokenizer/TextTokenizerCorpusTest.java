@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -13,6 +13,7 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.trnltk.tokenizer.*;
 import org.trnltk.util.DiffUtil;
 
 import java.io.BufferedWriter;

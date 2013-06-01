@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 public class TokenizationUtils {
     public static String normalizeQuotesHyphens(String input) {

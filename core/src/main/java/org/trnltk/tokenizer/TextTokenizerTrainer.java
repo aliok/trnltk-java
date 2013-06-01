@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
@@ -6,8 +6,8 @@ import com.google.common.base.Splitter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingData;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingEntry;
+import org.trnltk.tokenizer.data.TokenizerTrainingData;
+import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 import org.trnltk.util.DiffUtil;
 
 import java.io.FileNotFoundException;

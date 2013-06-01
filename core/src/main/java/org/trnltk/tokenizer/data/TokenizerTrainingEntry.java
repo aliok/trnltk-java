@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment.data;
+package org.trnltk.tokenizer.data;
 
 public class TokenizerTrainingEntry {
     private String text;

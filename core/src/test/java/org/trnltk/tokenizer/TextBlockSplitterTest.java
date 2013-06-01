@@ -1,7 +1,10 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.trnltk.tokenizer.TextBlock;
+import org.trnltk.tokenizer.TextBlockSplitter;
+import org.trnltk.tokenizer.TextBlockType;
 
 import java.util.LinkedList;
 

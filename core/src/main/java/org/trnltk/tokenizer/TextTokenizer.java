@@ -1,159 +1,230 @@
 package org.trnltk.tokenizer;
 
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.log4j.Logger;
+import org.trnltk.tokenizer.*;
 
-import java.util.Collections;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.FileNotFoundException;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Set;
 
+/**
+ * @author Ali Ok
+ */
 public class TextTokenizer {
 
-    private static final ImmutableSet<Character> PUNC_CHARS = new ImmutableSet.Builder<Character>()
-            .add(
-                    '.', ',', ',', '-', '!', '?', ':', '-', '\"', '(', ')',
-                    ';', '/', '[', ']', '{', '}', '$', '€', '£', '¥', '#', '%', '+'
-            )
-            .build();     //  " ' " and " - ", is not included on purpose
+    static Logger logger = Logger.getLogger(TextTokenizer.class);
 
-    public Iterable<String> tokenize(String text) {
-        if (Strings.isNullOrEmpty(text))
-            return Collections.emptyList();
+    private static final String SPACE = " ";
 
-        text = text.trim();
-        text = normalizeQuotesHyphens(text);
-        text = separateParantsesQuotesFromSentence(text);
-        text = this.insertSpacesForPuncChars(text);
-        text = this.replaceAllWhiteSpaceWithSingleSpace(text);
+    protected final int blockSize;
+    protected final TokenizationGraph graph;
+    protected final boolean strict;
 
-        return Splitter.on(' ').trimResults().omitEmptyStrings().split(text);
+    protected final TextBlockSplitter textBlockSplitter;
+
+    protected final TextTokenizerStats stats;
+
+    private TextTokenizer(TextTokenizerBuilder builder) {
+        this.blockSize = builder.blockSize;
+        this.graph = builder.graph;
+        this.strict = builder.strict;
+        this.stats = builder.recordStats ? new TextTokenizerStats() : null;
+
+        this.textBlockSplitter = new TextBlockSplitter();
     }
 
-    /**
-     * insert space before punc chars. except:
-     * <p/>
-     * 1. Dot comes after number : "3."
-     * <p/>
-     * 2. Punc char comes after punc char : "..." (except comma after dot)
-     * <p/>
-     * 3. The apostrophe used in a proper name or a number : "Ahmet'in", "3'e", "3.'ye"
-     * <p/>
-     * 4. The quoted stuff for emphasis : 'Cok "aptal"di o adam' #TODO
-     * <p/>
-     * 5. Punc chars between numbers : "5:20", "5.123.456", "5,12" (but not "5, 6, 7")
-     * <p/>
-     *
-     * @param text input
-     * @return modified input
-     */
-    private String insertSpacesForPuncChars(String text) {
-        /*
-        * # use a string builder(?). add chars directly, except we need to insert space in front of them.
-        * # with a random access list(string builder), we can check the last char for the exception cases described above
-         */
+    public LinkedList<String> tokenize(String text) {
+        if (logger.isDebugEnabled())
+            logger.debug("Tokenizing text: '" + text + "'");
 
-        final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            final char currentChar = text.charAt(i);
-            if (!PUNC_CHARS.contains(currentChar)) {
-                builder.append(currentChar);
+        text = text.replaceAll("  +", " "); // remove multiple consequent space chars
+        text = text.trim();
+
+        final LinkedList<TextBlock> textBlocks = textBlockSplitter.splitToTextParts(text);
+        this.textBlockSplitter.addTextStartsAndEnds(textBlocks, this.blockSize);
+
+        final LinkedList<String> tokens = new LinkedList<String>();
+
+        StringBuilder currentTokenBuilder = new StringBuilder();
+
+
+        for (int i = this.blockSize; i <= textBlocks.size() - this.blockSize; i++) {
+            final TextBlockGroup leftTextBlockGroup = this.textBlockSplitter.getTextBlockGroup(textBlocks, this.blockSize, i - this.blockSize);
+            final TextBlockGroup rightTextBlockGroup = this.textBlockSplitter.getTextBlockGroup(textBlocks, this.blockSize, i);
+
+            if (logger.isDebugEnabled())
+                logger.debug("Applying rule for left : " + leftTextBlockGroup.getTextBlockTypeGroup() + " right :" + rightTextBlockGroup.getTextBlockTypeGroup());
+
+
+            boolean addSpace;
+            try {
+                addSpace = this.graph.isAddSpace(leftTextBlockGroup, rightTextBlockGroup, textBlocks, i);
+                if (this.stats != null)
+                    this.stats.addSuccess(leftTextBlockGroup, rightTextBlockGroup);
+            } catch (MissingTokenizationRuleException ex) {
+                if (strict) {
+                    throw ex;
+                } else {
+                    addSpace = false;
+                    if (this.stats != null)
+                        this.stats.addFail(ex);
+                }
+            }
+
+            final String textToAdd = rightTextBlockGroup.getFirstTextBlock().getText();
+            if (addSpace || SPACE.equals(textToAdd)) {
+                if (currentTokenBuilder.length() > 0)
+                    tokens.add(currentTokenBuilder.toString());
+
+                if (SPACE.equals(textToAdd))
+                    currentTokenBuilder = new StringBuilder();
+                else
+                    currentTokenBuilder = new StringBuilder(textToAdd);
             } else {
-                if (builder.length() == 0) {
-                    builder.append(currentChar);
-                    continue;
-                }
-
-                final Character lastChar = builder.length() > 0 ? builder.charAt(builder.length() - 1) : null;
-                final Character nextChar = i + 1 >= text.length() ? null : text.charAt(i + 1);
-
-                boolean addSpace = true;
-
-                final boolean lastCharIsPuncChar = lastChar != null && PUNC_CHARS.contains(lastChar);
-                final boolean lastCharIsDigit = lastChar != null && Character.isDigit(lastChar);
-                final boolean nextCharIsDigit = nextChar != null && Character.isDigit(nextChar);
-
-                // check case #1
-                if (lastCharIsDigit && currentChar == '.') {
-                    addSpace = false;
-                }
-
-                // check case #2
-                else if (lastCharIsPuncChar) {
-                    addSpace = currentChar == ',' && lastChar == '.';
-                }
-
-                //check case #3
-//                else if(){
-//                    // apostrophe is not a punc char anymore
-//                }
-
-                //case #4 is not yet supported
-
-                // check case #5
-                else if (lastCharIsDigit && nextCharIsDigit) {
-                    addSpace = false;
-                }
-                if (addSpace)
-                    builder.append(' ');
-
-                builder.append(currentChar);
+                currentTokenBuilder.append(textToAdd);
             }
         }
-        return builder.toString();
+
+        if (currentTokenBuilder.length() > 0)
+            tokens.add(currentTokenBuilder.toString());
+
+        return tokens;
     }
 
-    private String replaceAllWhiteSpaceWithSingleSpace(String text) {
-        return text.replaceAll("\\s+", " ");
+    public TextTokenizerStats getStats() {
+        return stats;
     }
 
     /**
-     * applies separateBeginEndSymbolsFromWord to each key in the input string.
-     * <p>examples:
-     * <p>'evet, "%15'i" kadar mi yoksa 12? -> ' evet , " %15'i " kadar mi yoksa 12 ?
+     * Creates a default text tokenizer : block size of 2, non-strict mode,
+     * without recording stats, trained with default training data, without tracking training data
      *
-     * @param input input sentence.
-     * @return input sentence but symbols on the beginning and end sybols are separated.
+     * @return the built and trained tokenizer
+     * @see TextTokenizer#createDefaultTextTokenizer(boolean)
      */
-    public static String separateParantsesQuotesFromSentence(String input) {
-        StringBuilder sb = new StringBuilder(input.length() + 7);
-        for (String block : Splitter.on(" ").split(input)) {
-            sb.append(separateParantsesQuotesFromWord(block)).append(" ");
+    public static TextTokenizer createDefaultTextTokenizer() {
+        return createDefaultTextTokenizer(false);
+    }
+
+    /**
+     * Creates a default text tokenizer : block size of 2, non-strict mode,
+     * without recording stats, trained with default training data
+     *
+     * @param recordExamples Shall the trainer record stats and keep examples?
+     * @return the built and trained tokenizer
+     */
+    public static TextTokenizer createDefaultTextTokenizer(boolean recordExamples) {
+        try {
+            final TokenizationGraph graph = TextTokenizerTrainer.buildDefaultTokenizationGraph(recordExamples);
+            return TextTokenizer.newBuilder()
+                    .blockSize(2)
+                    .graph(graph)
+                    .build();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return sb.toString().trim();
     }
 
-    static Pattern PARANTHESIS_QUOTES_SEPARATOR = Pattern.compile("^(['\\\"\\(\\)\\[\\]{}]+|)(.+?)([\\)\\(\\[\\]{}'\\\"]+|)$");
+    public static TextTokenizerBuilder newBuilder() {
+        return new TextTokenizerBuilder();
+    }
 
-    /**
-     * <p>separates paranthesis and quotes from words.
-     *
-     * @param input input string.
-     * @return output.
-     */
-    public static String separateParantsesQuotesFromWord(String input) {
-        Matcher matcher = PARANTHESIS_QUOTES_SEPARATOR.matcher(input);
-        if (!matcher.find()) {
-            return input;
+    public static class TextTokenizerBuilder {
+        private boolean strict = false;
+        private Integer blockSize;
+        private boolean recordStats = false;
+        private TokenizationGraph graph;
+
+        public TextTokenizerBuilder blockSize(Integer blockSize) {
+            this.blockSize = blockSize;
+            return this;
         }
-        StringBuilder sb = new StringBuilder(input.length() + 3);
-        sb.append(matcher.group(1)).append(" ").append(matcher.group(2)).append(" ").append(matcher.group(3));
-        return sb.toString().trim();
+
+        public TextTokenizerBuilder strict() {
+            this.strict = true;
+            return this;
+        }
+
+        public TextTokenizerBuilder recordStats() {
+            this.recordStats = true;
+            return this;
+        }
+
+        public TextTokenizerBuilder graph(TokenizationGraph graph) {
+            this.graph = graph;
+            return this;
+        }
+
+        public TextTokenizer build() {
+            Validate.notNull(this.blockSize, "blockSize not provided!");
+            Validate.notNull(this.graph, "graph not provided!");
+
+            return new TextTokenizer(this);
+        }
     }
 
+    public static class TextTokenizerStats {
 
-    /**
-     * This method converts different single and double quote symbols to a unified form.
-     * also it reduces two connected single quotes to a one double quote.
-     *
-     * @param input input string.
-     * @return cleaned input string.
-     */
-    public static String normalizeQuotesHyphens(String input) {
-        // rdquo, ldquo, laquo, raquo, Prime sybols in unicode.
-        return input
-                .replaceAll("[\u201C\u201D\u00BB\u00AB\u2033\u0093\u0094]|''", "\"")
-                .replaceAll("[\u0091\u0092\u2032´`’‘]", "'")
-                .replaceAll("[\u0096\u0097–]", "-");
+        private final HashMultiset<Pair<TextBlockTypeGroup, TextBlockTypeGroup>> successSet = HashMultiset.create();
+        private final HashMultimap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, MissingTokenizationRuleException> failMap = HashMultimap.create();
+
+        public void addSuccess(TextBlockGroup leftTextBlockGroup, TextBlockGroup rightTextBlockGroup) {
+            successSet.add(Pair.of(leftTextBlockGroup.getTextBlockTypeGroup(), rightTextBlockGroup.getTextBlockTypeGroup()));
+        }
+
+        public void addFail(MissingTokenizationRuleException ex) {
+            final TextBlockGroup leftTextBlockGroup = ex.getLeftTextBlockGroup();
+            final TextBlockGroup rightTextBlockGroup = ex.getRightTextBlockGroup();
+
+            failMap.put(Pair.of(leftTextBlockGroup.getTextBlockTypeGroup(), rightTextBlockGroup.getTextBlockTypeGroup()), ex);
+        }
+
+
+        /**
+         * Build a map sorted by number of success.
+         *
+         * @return the map
+         */
+        public LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Integer> buildSortedSuccessMap() {
+            final ImmutableMultiset<Pair<TextBlockTypeGroup, TextBlockTypeGroup>> sortedSet = Multisets.copyHighestCountFirst(successSet);
+
+            // use LinkedHashMap to preserve insertion order
+            final LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Integer> map = new LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Integer>();
+
+            for (Pair<TextBlockTypeGroup, TextBlockTypeGroup> pair : sortedSet) {
+                map.put(pair, successSet.count(pair));
+            }
+
+            return map;
+        }
+
+        /**
+         * Build a map sorted by number of fails.
+         *
+         * @return the map
+         */
+        public LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Set<MissingTokenizationRuleException>> buildSortedFailMap() {
+
+            Multiset<Pair<TextBlockTypeGroup, TextBlockTypeGroup>> failedPairSet = HashMultiset.create();
+            for (Pair<TextBlockTypeGroup, TextBlockTypeGroup> pair : failMap.keys()) {
+                failedPairSet.add(pair);
+            }
+
+            failedPairSet = Multisets.copyHighestCountFirst(failedPairSet);
+
+            // use LinkedHashMap to preserve insertion order
+            final LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Set<MissingTokenizationRuleException>> map
+                    = new LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Set<MissingTokenizationRuleException>>();
+            for (Pair<TextBlockTypeGroup, TextBlockTypeGroup> pair : failedPairSet) {
+                map.put(pair, failMap.get(pair));
+            }
+
+            return map;
+        }
     }
 }
+

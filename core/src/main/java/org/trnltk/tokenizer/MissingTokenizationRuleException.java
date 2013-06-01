@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment;
+package org.trnltk.tokenizer;
 
 public class MissingTokenizationRuleException extends RuntimeException {
     private final TextBlockGroup leftTextBlockGroup;

@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingData;
-import org.trnltk.tokenizer.experiment.data.TokenizerTrainingEntry;
+import org.trnltk.tokenizer.data.TokenizerTrainingData;
+import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 
 import java.io.File;
 import java.io.FileInputStream;

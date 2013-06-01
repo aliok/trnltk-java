@@ -1,4 +1,4 @@
-package org.trnltk.tokenizer.experiment.data;
+package org.trnltk.tokenizer.data;
 
 import com.google.common.io.Resources;
 import org.yaml.snakeyaml.TypeDescription;
