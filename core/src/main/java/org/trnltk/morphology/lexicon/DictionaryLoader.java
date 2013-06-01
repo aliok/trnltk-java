@@ -32,6 +32,16 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Creates {@link Lexeme}s from dictionary file(s).
+ * <p/>
+ * A dictionary file is in the following format:
+ * <pre>
+ *     # this is a comment
+ *     word [P:PrimaryPos, SecondaryPos; A:Attribute1,Attribute2; R:RootOfCompound]
+ * </pre>
+ * Please see {@code master-dictionary.dict} and {@code master-numeral-dictionary.dict} for the bundled dictionaries.
+ */
 public class DictionaryLoader {
 
     private static final String COMMENT_SYMBOL = "#";
@@ -42,7 +52,7 @@ public class DictionaryLoader {
     }
 
     public static HashSet<Lexeme> loadDefaultNumeralMasterDictionary() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-numeral-dictionary.txt"), Charset.forName("utf-8"));
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-numeral-dictionary.dict"), Charset.forName("utf-8"));
         return new DictionaryLoader().load(supplier);
     }
 
