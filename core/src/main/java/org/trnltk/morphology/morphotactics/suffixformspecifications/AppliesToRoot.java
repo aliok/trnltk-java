@@ -18,7 +18,7 @@ package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
 import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 public class AppliesToRoot extends AbstractSpecification<MorphemeContainer> {
     private final String rootStr;

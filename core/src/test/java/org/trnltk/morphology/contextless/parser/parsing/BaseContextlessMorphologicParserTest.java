@@ -30,10 +30,10 @@ import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsDontExistMatcher;
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsExistMatcher;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.*;
 
@@ -100,7 +100,7 @@ public abstract class BaseContextlessMorphologicParserTest {
         return Lists.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
             @Override
             public String apply(MorphemeContainer input) {
-                return Formatter.formatMorphemeContainerWithForms(input);
+                return MorphemeContainerFormatter.formatMorphemeContainerWithForms(input);
             }
         });
     }

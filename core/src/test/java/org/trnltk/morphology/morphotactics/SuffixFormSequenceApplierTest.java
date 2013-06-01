@@ -24,8 +24,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.suffix.SuffixFormSequence;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

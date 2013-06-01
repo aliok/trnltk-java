@@ -20,9 +20,9 @@ import com.google.common.collect.HashMultimap;
 import org.junit.Before;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserCopulaSuffixGraphTest;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.util.List;
 

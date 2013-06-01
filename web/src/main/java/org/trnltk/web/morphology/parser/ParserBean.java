@@ -23,11 +23,11 @@ import com.google.common.primitives.Ints;
 import org.apache.log4j.Logger;
 import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.TurkishSequence;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -64,6 +64,7 @@ public class ParserBean implements Serializable {
         }
     };
 
+    @SuppressWarnings("unchecked")
     static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
 
     public void parse() {
@@ -85,7 +86,7 @@ public class ParserBean implements Serializable {
             this.parseResults = Lists.transform(morphologicParser.parse(new TurkishSequence(this.surface)), new Function<MorphemeContainer, String>() {
                 @Override
                 public String apply(MorphemeContainer input) {
-                    return Formatter.formatMorphemeContainerWithForms(input);
+                    return MorphemeContainerFormatter.formatMorphemeContainerWithForms(input);
                 }
             });
 

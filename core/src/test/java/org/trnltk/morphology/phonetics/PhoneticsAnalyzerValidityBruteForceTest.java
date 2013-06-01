@@ -17,8 +17,8 @@
 package org.trnltk.morphology.phonetics;
 
 import org.junit.Test;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttributeMetadata;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
 
 import java.util.EnumSet;
 import java.util.HashSet;

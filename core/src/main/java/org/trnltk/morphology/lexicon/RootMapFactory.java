@@ -17,8 +17,8 @@
 package org.trnltk.morphology.lexicon;
 
 import com.google.common.collect.HashMultimap;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.Root;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.Root;
 
 import java.util.Collection;
 import java.util.HashSet;

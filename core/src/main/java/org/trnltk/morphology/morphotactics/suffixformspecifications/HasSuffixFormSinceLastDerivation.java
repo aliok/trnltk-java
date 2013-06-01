@@ -20,10 +20,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixTransition;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixTransition;
 import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.util.Collection;
 import java.util.Set;

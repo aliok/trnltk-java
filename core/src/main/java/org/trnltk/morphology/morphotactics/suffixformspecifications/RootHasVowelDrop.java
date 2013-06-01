@@ -17,9 +17,11 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.*;
 
 public class RootHasVowelDrop extends AbstractSpecification<MorphemeContainer> {
 

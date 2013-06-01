@@ -16,13 +16,13 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.model.suffix.Suffix;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.suffixbased.SuffixGroup;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.suffix.SuffixGroup;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,7 +31,7 @@ import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIO
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.*;
+import static org.trnltk.model.lexicon.PrimaryPos.*;
 
 public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, Noun);

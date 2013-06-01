@@ -30,19 +30,20 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.rootfinders.DictionaryRootFinder;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.*;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.suffix.*;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.*;
 
@@ -156,7 +157,7 @@ public class CharSuffixGraphExtractorDrawingTest {
             contextlessMorphologicParser.setListener(new ContextlessMorphologicParserListener() {
                 @Override
                 public void onMorphemeContainerInvalidated(MorphemeContainer morphemeContainer) {
-                    final boolean added = strPaths.add(Formatter.formatMorphemeContainerWithForms(morphemeContainer));
+                    final boolean added = strPaths.add(MorphemeContainerFormatter.formatMorphemeContainerWithForms(morphemeContainer));
                     if (added)
                         invalidatedPaths.add(morphemeContainer);
                 }

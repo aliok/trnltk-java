@@ -27,7 +27,7 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.rootfinders.*;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.contextless.parser.suffixbased.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
@@ -35,9 +35,9 @@ import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.testmatchers.BaseParseResultsMatcher;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -266,7 +266,7 @@ public class FolderContextlessMorphologicParsingTest {
                     final List<String> resultStrs = Lists.newArrayList(Lists.transform(results, new Function<MorphemeContainer, String>() {
                         @Override
                         public String apply(MorphemeContainer input) {
-                            return Formatter.formatMorphemeContainerDetailed(input);
+                            return MorphemeContainerFormatter.formatMorphemeContainerDetailed(input);
                         }
                     }));
 

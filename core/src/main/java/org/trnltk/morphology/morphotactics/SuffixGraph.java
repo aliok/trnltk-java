@@ -16,9 +16,9 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixForm;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixForm;
 
 import java.util.Collection;
 

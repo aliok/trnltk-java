@@ -18,9 +18,10 @@ package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 

@@ -18,11 +18,11 @@ package org.trnltk.morphology.contextless.parser.formbased;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.Root;
+import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.HashMap;
 import java.util.Map;

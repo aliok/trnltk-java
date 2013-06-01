@@ -16,26 +16,26 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.suffix.Suffix;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.trnltk.morphology.model.SecondaryPos.*;
+import static org.trnltk.model.lexicon.PrimaryPos.Numeral;
+import static org.trnltk.model.lexicon.SecondaryPos.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.Numeral;
 
 public class NumeralSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, Numeral, Cardinal);
     private final SuffixGraphState NUMERAL_CARDINAL_DERIV = registerState("NUMERAL_CARDINAL_DERIV", DERIVATIONAL, Numeral, Cardinal);
 
-    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, Numeral, CARDINAL_DIGITS);
-    private final SuffixGraphState NUMERAL_DIGIT_ORDINAL_ROOT = registerState("NUMERAL_DIGIT_ORDINAL_ROOT", TRANSFER, Numeral, ORDINAL_DIGITS);
+    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, Numeral, DigitsCardinal);
+    private final SuffixGraphState NUMERAL_DIGIT_ORDINAL_ROOT = registerState("NUMERAL_DIGIT_ORDINAL_ROOT", TRANSFER, Numeral, DigitsOrdinal);
     private final SuffixGraphState NUMERAL_DIGIT_RANGE_ROOT = registerState("NUMERAL_DIGIT_RANGE_ROOT", TRANSFER, Numeral, Range);
 
     private final SuffixGraphState NUMERAL_ORDINAL_ROOT = registerState("NUMERAL_ORDINAL_ROOT", TRANSFER, Numeral, Ordinal);
@@ -73,9 +73,9 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
         final SecondaryPos secondaryPos = root.getLexeme().getSecondaryPos();
         if (Numeral.equals(primaryPos)) {
             switch (secondaryPos) {
-                case CARDINAL_DIGITS:
+                case DigitsCardinal:
                     return NUMERAL_DIGIT_CARDINAL_ROOT;
-                case ORDINAL_DIGITS:
+                case DigitsOrdinal:
                     return NUMERAL_DIGIT_ORDINAL_ROOT;
                 case Cardinal:
                     return NUMERAL_CARDINAL_ROOT;

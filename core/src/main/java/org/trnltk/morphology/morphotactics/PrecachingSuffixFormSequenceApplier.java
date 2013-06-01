@@ -19,10 +19,10 @@ package org.trnltk.morphology.morphotactics;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixForm;
-import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixForm;
+import org.trnltk.model.suffix.SuffixFormSequence;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.Collection;
 import java.util.Set;

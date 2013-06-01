@@ -16,8 +16,8 @@
 
 package org.trnltk.morphology.contextless.parser.suffixbased;
 
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.letter.TurkishSequence;
 
 import java.util.List;
 

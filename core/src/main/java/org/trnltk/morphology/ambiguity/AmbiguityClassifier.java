@@ -24,9 +24,9 @@ import com.google.common.collect.Multisets;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.json.JSONException;
-import org.trnltk.morphology.ambiguity.model.ParseResult;
-import org.trnltk.morphology.ambiguity.model.ParseResultDifference;
-import org.trnltk.morphology.ambiguity.model.WordParseResultEntry;
+import org.trnltk.model.ambiguity.morphology.ParseResult;
+import org.trnltk.model.ambiguity.morphology.ParseResultDifference;
+import org.trnltk.model.ambiguity.morphology.WordParseResultEntry;
 
 import java.io.File;
 import java.io.IOException;

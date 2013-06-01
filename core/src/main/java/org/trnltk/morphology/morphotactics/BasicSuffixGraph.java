@@ -17,22 +17,22 @@
 package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableMap;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixGroup;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.trnltk.model.lexicon.PrimaryPos.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.*;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.*;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.*;
 
 public class BasicSuffixGraph extends BaseSuffixGraph {
     // states

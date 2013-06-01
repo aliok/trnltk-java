@@ -21,7 +21,7 @@ import com.google.common.primitives.Ints;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.trnltk.morphology.ambiguity.model.*;
+import org.trnltk.model.ambiguity.morphology.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;

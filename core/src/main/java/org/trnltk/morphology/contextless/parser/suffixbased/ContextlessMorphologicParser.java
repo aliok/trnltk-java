@@ -23,13 +23,13 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixGroup;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixGroup;
 import org.trnltk.morphology.morphotactics.SuffixEdge;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
@@ -126,7 +126,7 @@ public class ContextlessMorphologicParser implements MorphologicParser {
                         if (logger.isDebugEnabled()) {
                             logger.debug("Found a terminal result --------------------->");
                             logger.debug(morphemeContainerForCandidate);
-                            logger.debug(Formatter.formatMorphemeContainerWithForms(morphemeContainerForCandidate));
+                            logger.debug(MorphemeContainerFormatter.formatMorphemeContainerWithForms(morphemeContainerForCandidate));
                         }
                     } else {
                         if (logger.isDebugEnabled())

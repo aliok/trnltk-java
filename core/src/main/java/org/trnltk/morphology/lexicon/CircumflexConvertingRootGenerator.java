@@ -16,11 +16,11 @@
 
 package org.trnltk.morphology.lexicon;
 
-import org.trnltk.morphology.model.ImmutableRoot;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.structure.TurkishAlphabet;
-import org.trnltk.morphology.model.structure.TurkishChar;
+import org.trnltk.model.lexicon.ImmutableRoot;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.letter.TurkishAlphabet;
+import org.trnltk.model.letter.TurkishChar;
 
 import java.util.HashSet;
 import java.util.LinkedList;

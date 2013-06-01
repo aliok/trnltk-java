@@ -23,13 +23,10 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.ImmutableLexeme;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
-import org.trnltk.morphology.model.structure.TurkicLetter;
-import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.model.lexicon.*;
+
+import org.trnltk.model.letter.TurkicLetter;
+import org.trnltk.model.letter.TurkishAlphabet;
 
 import java.util.HashSet;
 import java.util.List;

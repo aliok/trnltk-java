@@ -18,8 +18,7 @@ package org.trnltk.morphology.contextless.parser.suffixbased.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.util.List;
 import java.util.Map;

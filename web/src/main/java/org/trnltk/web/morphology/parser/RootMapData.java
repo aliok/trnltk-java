@@ -21,9 +21,9 @@ import org.trnltk.morphology.lexicon.CircumflexConvertingRootGenerator;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.ImmutableRootGenerator;
 import org.trnltk.morphology.lexicon.RootMapGenerator;
-import org.trnltk.morphology.model.ImmutableRoot;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.Root;
+import org.trnltk.model.lexicon.ImmutableRoot;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.Root;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;

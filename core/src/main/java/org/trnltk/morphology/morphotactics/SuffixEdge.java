@@ -17,7 +17,7 @@
 package org.trnltk.morphology.morphotactics;
 
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.model.suffix.Suffix;
 
 public class SuffixEdge {
     private final Suffix suffix;

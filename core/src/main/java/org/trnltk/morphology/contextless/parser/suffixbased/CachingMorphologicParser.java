@@ -16,10 +16,10 @@
 
 package org.trnltk.morphology.contextless.parser.suffixbased;
 
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 
 import java.util.*;

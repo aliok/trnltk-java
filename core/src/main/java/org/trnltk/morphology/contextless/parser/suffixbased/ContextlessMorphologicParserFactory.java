@@ -17,14 +17,14 @@
 package org.trnltk.morphology.contextless.parser.suffixbased;
 
 import com.google.common.collect.Multimap;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinder;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.rootfinders.*;
+import org.trnltk.morphology.contextless.rootfinder.RootFinder;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.lexicon.CircumflexConvertingRootGenerator;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.RootMapGenerator;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.Root;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 

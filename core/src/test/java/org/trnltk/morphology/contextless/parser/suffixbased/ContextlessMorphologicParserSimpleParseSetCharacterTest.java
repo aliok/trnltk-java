@@ -22,9 +22,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserSimpleParseSetCharacterTest;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.io.IOException;
 import java.util.List;

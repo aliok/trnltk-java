@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.EnumSet;
 import java.util.Map;

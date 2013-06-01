@@ -21,11 +21,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.ImmutableLexeme;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -85,7 +81,7 @@ public class DictionaryLoaderTest {
         assertThat(lexemes, hasItem(new ImmutableLexeme("abes", "abes", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("abes", "abes", PrimaryPos.Adverb, null, null)));
         assertThat(lexemes, hasItem(new ImmutableLexeme("ablak", "ablak", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new ImmutableLexeme("abuk", "abuk", PrimaryPos.Adjective, SecondaryPos.DUPLICATOR, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abuk", "abuk", PrimaryPos.Adjective, SecondaryPos.Duplicator, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("acemborusu", "acemboru", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.CompoundP3sg, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("acembuselik", "acembuselik", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("aciz", "aciz", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.LastVowelDrop, LexemeAttribute.NoVoicing))));

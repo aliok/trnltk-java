@@ -19,7 +19,7 @@ package org.trnltk.morphology.morphotactics;
 import com.google.common.base.Predicate;
 import org.junit.Test;
 import org.trnltk.morphology.contextless.parser.formbased.SampleSuffixGraph;
-import org.trnltk.morphology.model.suffixbased.SuffixGroup;
+import org.trnltk.model.suffix.SuffixGroup;
 
 import java.util.HashMap;
 import java.util.HashSet;

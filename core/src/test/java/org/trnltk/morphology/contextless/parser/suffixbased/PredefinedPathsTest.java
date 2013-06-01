@@ -22,17 +22,19 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import org.junit.Before;
 import org.junit.Test;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.ImmutableRootGenerator;
 import org.trnltk.morphology.lexicon.RootMapGenerator;
-import org.trnltk.morphology.model.*;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -40,9 +42,9 @@ import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import static org.trnltk.morphology.model.SecondaryPos.Personal;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.Noun;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.Pronoun;
+import static org.trnltk.model.lexicon.PrimaryPos.Noun;
+import static org.trnltk.model.lexicon.PrimaryPos.Pronoun;
+import static org.trnltk.model.lexicon.SecondaryPos.Personal;
 
 public class PredefinedPathsTest {
 
@@ -266,8 +268,7 @@ public class PredefinedPathsTest {
         predefinedPaths.initialize();
     }
 
-    private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondaryPos
-            secondaryPos, String... expectedResults) {
+    private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondaryPos secondaryPos, String... expectedResults) {
         assertThat(this.getFormattedPredefinedMorhpemeContainers(rootStr, primaryPos, secondaryPos), new ParseResultsEqualMatcher(false, expectedResults));
     }
 
@@ -288,7 +289,7 @@ public class PredefinedPathsTest {
         return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
             @Override
             public String apply(MorphemeContainer input) {
-                return Formatter.formatMorphemeContainerWithForms(input);
+                return MorphemeContainerFormatter.formatMorphemeContainerWithForms(input);
             }
         });
     }

@@ -25,16 +25,8 @@ import com.google.common.io.Resources;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserFactory;
-import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.Formatter;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -187,7 +179,7 @@ public abstract class BaseContextlessMorphologicParserSimpleParseSetCharacterTes
                 unparsableSurfaces.add(surfaceToParse + "\t" + expectedResult);
                 unparsable++;
             } else {
-                final Collection<String> formattedRetrievedResults = Formatter.formatMorphemeContainersWithDerivationGrouping(retrievedResults);
+                final Collection<String> formattedRetrievedResults = MorphemeContainerFormatter.formatMorphemeContainersWithDerivationGrouping(retrievedResults);
                 if (!formattedRetrievedResults.contains(expectedResult)) {
                     if (printSurfaces) {
                         System.out.println("Surface '" + surfaceToParse + "' is parseable, but expected result '" + expectedResult + "' is not found!");

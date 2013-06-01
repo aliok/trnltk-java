@@ -18,9 +18,9 @@ package org.trnltk.web.morphology.parser;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinder;
-import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.rootfinders.*;
+import org.trnltk.morphology.contextless.rootfinder.RootFinder;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

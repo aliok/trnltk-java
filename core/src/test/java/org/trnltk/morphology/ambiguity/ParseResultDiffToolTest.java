@@ -23,10 +23,10 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONException;
 import org.junit.Test;
-import org.trnltk.morphology.ambiguity.model.ParseResult;
-import org.trnltk.morphology.ambiguity.model.ParseResultDifference;
-import org.trnltk.morphology.ambiguity.model.ParseResultPartDifference;
-import org.trnltk.morphology.ambiguity.model.RootDifference;
+import org.trnltk.model.ambiguity.morphology.ParseResult;
+import org.trnltk.model.ambiguity.morphology.ParseResultDifference;
+import org.trnltk.model.ambiguity.morphology.ParseResultPartDifference;
+import org.trnltk.model.ambiguity.morphology.RootDifference;
 
 import java.lang.reflect.Field;
 import java.util.List;

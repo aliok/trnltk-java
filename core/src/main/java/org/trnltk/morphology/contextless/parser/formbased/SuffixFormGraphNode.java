@@ -19,11 +19,11 @@ package org.trnltk.morphology.contextless.parser.formbased;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.trnltk.morphology.model.suffixbased.SuffixForm;
-import org.trnltk.morphology.model.suffixbased.SuffixFormApplication;
+import org.trnltk.model.suffix.SuffixForm;
+import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticExpectation;
 
 import java.util.Collection;
 import java.util.HashSet;

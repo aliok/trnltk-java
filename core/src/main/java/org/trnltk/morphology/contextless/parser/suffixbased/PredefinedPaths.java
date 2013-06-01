@@ -22,11 +22,12 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.*;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.Collections;

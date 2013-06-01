@@ -17,8 +17,8 @@
 package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableSet;
-import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.suffix.SuffixFormSequence;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 public class SuffixFormSequenceRuleApplier {
 

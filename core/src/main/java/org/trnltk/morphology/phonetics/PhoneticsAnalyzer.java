@@ -21,12 +21,12 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
-import org.trnltk.morphology.model.structure.TurkicLetter;
-import org.trnltk.morphology.model.structure.TurkishAlphabet;
-import org.trnltk.morphology.model.structure.TurkishChar;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.letter.TurkicLetter;
+import org.trnltk.model.letter.TurkishAlphabet;
+import org.trnltk.model.letter.TurkishChar;
 
 import java.util.Collection;
 import java.util.EnumSet;

@@ -16,7 +16,7 @@
 
 package org.trnltk.morphology.contextless.parser.formbased;
 
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 public interface ContextlessMorphologicParserListener {
 

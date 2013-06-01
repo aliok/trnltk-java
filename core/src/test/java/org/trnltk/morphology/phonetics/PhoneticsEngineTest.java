@@ -21,11 +21,11 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import org.trnltk.morphology.model.TurkishSequence;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.suffix.SuffixFormSequence;
+import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
+import org.trnltk.model.lexicon.PhoneticExpectation;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -19,11 +19,11 @@ package org.trnltk.morphology.lexicon;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.ImmutableLexeme;
-import org.trnltk.morphology.model.ImmutableRoot;
-import org.trnltk.morphology.model.Lexeme;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.ImmutableLexeme;
+import org.trnltk.model.lexicon.ImmutableRoot;
+import org.trnltk.model.lexicon.Lexeme;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.HashSet;
 

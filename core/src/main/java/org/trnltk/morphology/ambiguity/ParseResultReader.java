@@ -19,9 +19,9 @@ package org.trnltk.morphology.ambiguity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.trnltk.morphology.ambiguity.model.ParseResult;
-import org.trnltk.morphology.ambiguity.model.ParseResultPart;
-import org.trnltk.morphology.ambiguity.model.WordParseResultEntry;
+import org.trnltk.model.ambiguity.morphology.ParseResult;
+import org.trnltk.model.ambiguity.morphology.ParseResultPart;
+import org.trnltk.model.ambiguity.morphology.WordParseResultEntry;
 
 import java.io.BufferedReader;
 import java.io.IOException;

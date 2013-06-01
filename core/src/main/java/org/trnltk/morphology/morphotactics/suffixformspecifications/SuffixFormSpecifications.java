@@ -17,14 +17,15 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import com.google.common.collect.Sets;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixGroup;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixGroup;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.TrueSpecification;
-import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 

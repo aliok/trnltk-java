@@ -24,7 +24,7 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.InputSupplier;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.StringUtils;
-import org.trnltk.morphology.model.Lexeme;
+import org.trnltk.model.lexicon.Lexeme;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

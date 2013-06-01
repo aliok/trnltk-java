@@ -18,9 +18,9 @@ package org.trnltk.morphology.phonetics;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.EnumSet;
 import java.util.Set;

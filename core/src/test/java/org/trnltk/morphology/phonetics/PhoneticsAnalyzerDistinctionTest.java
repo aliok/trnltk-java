@@ -27,9 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserSimpleParseSetCharacterTest;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttributeMetadata;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

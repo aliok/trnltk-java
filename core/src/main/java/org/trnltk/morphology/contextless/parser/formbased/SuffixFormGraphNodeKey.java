@@ -19,7 +19,7 @@ package org.trnltk.morphology.contextless.parser.formbased;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.Set;
 

@@ -18,9 +18,9 @@ package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
 import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.suffixbased.SuffixTransition;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixTransition;
 
 public class HasSuffixFormAsLastDerivation extends AbstractSpecification<MorphemeContainer> {
     private final Suffix suffix;

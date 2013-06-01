@@ -16,7 +16,7 @@
 
 package org.trnltk.morphology.contextless.parser.suffixbased.cache;
 
-import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.model.morpheme.MorphemeContainer;
 
 import java.util.List;
 import java.util.Map;

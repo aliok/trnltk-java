@@ -16,17 +16,17 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.suffixbased.Suffix;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.lexicon.SecondaryPos;
+import org.trnltk.model.suffix.Suffix;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.trnltk.model.lexicon.PrimaryPos.Noun;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TERMINAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
-import static org.trnltk.morphology.model.lexicon.PrimaryPos.Noun;
 
 public class ProperNounSuffixGraph extends BaseSuffixGraph {
 
@@ -64,7 +64,7 @@ public class ProperNounSuffixGraph extends BaseSuffixGraph {
             return null;
 
         if (Noun.equals(primaryPos) &&
-                (secondaryPos.equals(SecondaryPos.ProperNoun) || secondaryPos.equals(SecondaryPos.ABBREVIATION)))
+                (secondaryPos.equals(SecondaryPos.ProperNoun) || secondaryPos.equals(SecondaryPos.Abbreviation)))
             return PROPER_NOUN_ROOT;
 
         return null;

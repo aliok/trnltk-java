@@ -20,8 +20,8 @@ import com.google.common.collect.ImmutableSet;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.Set;
