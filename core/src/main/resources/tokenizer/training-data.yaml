@@ -1,0 +1,2139 @@
+# descriptions copied from TDK's website
+# http://www.tdk.gov.tr/index.php?option=com_content&view=article&id=187:Noktalama-Isaretleri-Aciklamalar&catid=50:yazm-kurallar&Itemid=132
+# TDK is Turkish Language Association
+
+entries:
+################################ Nokta
+# Cümlenin sonuna konur:
+- text: |
+    1932 yılında kurulmuştur.
+  tknz: |
+    1932 yılında kurulmuştur .
+
+# Bazı kısaltmaların sonuna konur:
+- text: |
+    Alb., Dr., Yrd. Doç., Prof., Cad., Sok., s., sf., vb., Alm., Ar., İng. vb.
+  tknz: |
+    Alb. , Dr. , Yrd. Doç. , Prof. , Cad. , Sok. , s. , sf. , vb. , Alm. , Ar. , İng. vb.
+
+# Sayılardan sonra sıra bildirmek için konur:
+- text: |
+    3., 15.; 2. Cadde, 20. Sokak, 4. Levent
+  tknz: |
+    3. , 15. ; 2. Cadde , 20. Sokak , 4. Levent
+- text: |
+    II. Mehmet, XIV. Louis, XV. yüzyıl;
+  tknz: |
+    II. Mehmet , XIV. Louis , XV. yüzyıl ;
+
+# Arka arkaya sıralandıkları için virgülle veya çizgiyle ayrılan rakamlardan yalnızca sonuncu rakamdan sonra nokta konur:
+- text: |
+    3, 4 ve 7. maddeler;
+  tknz: |
+    3 , 4 ve 7. maddeler ;
+- text: |
+    XII - XIV. yüzyıllar arasında vb.
+  tknz: |
+    XII - XIV. yüzyıllar arasında vb.
+
+
+# Bir yazının maddelerini gösteren rakam veya harflerden sonra konur:
+- text: |
+    I. Sunum
+    1. Introduction
+    A. Giris
+    a. Girmeyis
+  tknz: |
+    I. Sunum
+    1. Introduction
+    A. Giris
+    a. Girmeyis
+- text: |
+    II. Kapanis
+    2. End
+    B. Bitis
+    b. Bitmeyis
+  tknz: |
+    II. Kapanis
+    2. End
+    B. Bitis
+    b. Bitmeyis
+
+# Tarihlerin yazılışında gün, ay ve yılı gösteren sayıları birbirinden ayırmak için konur:
+- text: |
+    29.5.1453, 29.X.1923
+  tknz: |
+    29.5.1453 , 29.X.1923
+
+# Saat ve dakika gösteren sayıları birbirinden ayırmak için konur:
+- text: |
+    Tren 09.15'te kalktı. Toplantı 13.00'te başladı.
+  tknz: |
+    Tren 09.15'te kalktı . Toplantı 13.00'te başladı .
+
+# Kitap, dergi vb.nin künyelerinin sonuna konur
+- text: |
+    Agâh Sırrı Levend, Türk Dilinde Gelişme ve Sadeleşme Evreleri, TDK Yayınları, Ankara, 1960.
+  tknz: |
+    Agâh Sırrı Levend , Türk Dilinde Gelişme ve Sadeleşme Evreleri , TDK Yayınları , Ankara , 1960 .
+
+# Dört ve dörtten çok rakamlı sayılar sondan sayılmak üzere üçlü gruplara ayrılarak yazılır ve araya nokta konur:
+- text: |
+    1.000, 326.197, 49.750.812
+  tknz: |
+    1.000 , 326.197 , 49.750.812
+
+# Genel Ağ adreslerinde kullanılır:
+#TODO: matching urls is a real problem
+#- text: |
+#    http://tdk.org.tr
+#  tknz: |
+#    http://tdk.org.tr
+
+# Matematikte çarpma işareti yerine kullanılır:
+- text: |
+    4.5=20, 12.6=72
+  tknz: |
+    4.5 = 20 , 12.6 = 72
+
+
+
+
+
+
+################################ Virgül
+#1. Birbiri ardınca sıralanan eş görevli kelime ve kelime gruplarının arasına konur:
+- text: |
+    Fırtınadan, soğuktan, karanlıktan ve biraz da korkudan sonra bu sıcak, aydınlık ve sevimli odanın havasında erir gibi oldum.
+  tknz: |
+    Fırtınadan , soğuktan , karanlıktan ve biraz da korkudan sonra bu sıcak , aydınlık ve sevimli odanın havasında erir gibi oldum .
+- text: |
+    Sessiz dereler, solgun ağaçlar, sarı güller
+  tknz: |
+    Sessiz dereler , solgun ağaçlar , sarı güller
+- text: |
+    Zindana atılan mahkûmlar gibi titreşerek, haykırarak geri geri kaçmaya uğraşıyorduk. (Hüseyin Rahmi Gürpınar)
+  tknz: |
+    Zindana atılan mahkûmlar gibi titreşerek , haykırarak geri geri kaçmaya uğraşıyorduk . ( Hüseyin Rahmi Gürpınar )
+- text: |
+    Köyde kim çaresiz kalırsa, kimin işi bozulursa İstanbul yolunu tutar. (Ömer Seyfettin)
+  tknz: |
+    Köyde kim çaresiz kalırsa , kimin işi bozulursa İstanbul yolunu tutar . ( Ömer Seyfettin )
+
+#2. Sıralı cümleleri birbirinden ayırmak için konur:
+- text: |
+    Umduk, bekledik, düşündük. (Yakup Kadri Karaosmanoğlu)
+  tknz: |
+    Umduk , bekledik , düşündük . ( Yakup Kadri Karaosmanoğlu )
+
+#3. Uzun cümlelerde yüklemden uzak düşmüş olan özneyi belirtmek için konur:
+- text: |
+    Saniye Hanımefendi, merdivenlerde oğlunun ayak seslerini duyar duymaz, hasretlisini karşılamaya atılan bir genç kadın gibi koltuğundan fırlamış ve ona kapıyı kendi eliyle açmaya gelmişti. (Yakup Kadri Karaosmanoğlu)
+  tknz: |
+    Saniye Hanımefendi , merdivenlerde oğlunun ayak seslerini duyar duymaz , hasretlisini karşılamaya atılan bir genç kadın gibi koltuğundan fırlamış ve ona kapıyı kendi eliyle açmaya gelmişti . ( Yakup Kadri Karaosmanoğlu )
+
+#4. Cümle içinde ara sözleri veya ara cümleleri ayırmak için ara sözlerin veya ara cümlelerin başına ve sonuna konur:
+- text: |
+    Zemin bu kadar koyu bir kırmızıya dönüşünce, bir an için de olsa, belirginliğini yitiriverdi sivilceleri. (Elif Şafak)
+  tknz: |
+    Zemin bu kadar koyu bir kırmızıya dönüşünce , bir an için de olsa , belirginliğini yitiriverdi sivilceleri . ( Elif Şafak )
+- text: |
+    Şimdi, efendiler, müsaade buyurursanız, size bir sual sorayım. (Atatürk)
+  tknz: |
+    Şimdi , efendiler , müsaade buyurursanız , size bir sual sorayım . ( Atatürk )
+
+#5. Anlama güç kazandırmak için tekrarlanan kelimeler arasına ko­nur:
+- text: |
+    Akşam, yine akşam, yine akşam,
+  tknz: |
+    Akşam , yine akşam , yine akşam ,
+- text: |
+    Göllerde bu dem bir kamış olsam! (Ahmet Haşim)
+  tknz: |
+    Göllerde bu dem bir kamış olsam ! ( Ahmet Haşim )
+
+#6. Tırnak içinde olmayan alıntı cümlelerinden sonra konur:
+- text: |
+    Adana'ya yarın gideceğim, dedi.
+  tknz: |
+    Adana'ya yarın gideceğim , dedi .
+- text: |
+    Aç karnına sigara içmekle hiç de iyi etmiyorsun, dedi. (Necati Cumalı)
+  tknz: |
+    Aç karnına sigara içmekle hiç de iyi etmiyorsun , dedi . ( Necati Cumalı )
+
+#7. Konuşma çizgisinden sonraki alıntı cümlesinin bitimine konur:
+- text: |
+    - Bu akşam Datça'ya gidiyor musunuz, diye sordu.
+  tknz: |
+    - Bu akşam Datça'ya gidiyor musunuz , diye sordu .
+
+#8. Edebî eserlerde konuşma bölümünden önceki ifadenin sonuna konur:
+- text: |
+    Bahçe kapısını açtı. Sermet Bey'e,
+    - Bu anahtar köşkü de açar, dedi. (Ömer Seyfettin)
+  tknz: |
+    Bahçe kapısını açtı . Sermet Bey'e ,
+    - Bu anahtar köşkü de açar , dedi . ( Ömer Seyfettin )
+
+#9. Kendisinden sonraki cümleye bağlı olarak ret, kabul ve teşvik bildiren hayır, yok, evet, peki, pekâlâ, tamam, olur, hayhay, başüstüne, öyle, haydi, elbette gibi kelimelerden sonra konur: 
+- text: |
+    Peki, gideriz.
+  tknz: |
+    Peki , gideriz .
+- text: |
+    Olur, ben de size katılırım.
+  tknz: |
+    Olur , ben de size katılırım .
+- text: |
+    Hayhay, memnun oluruz.
+  tknz: |
+    Hayhay , memnun oluruz .
+- text: |
+    Haydi, geç kalıyoruz.
+  tknz: |
+    Haydi , geç kalıyoruz .
+- text: |
+    Evet, kırk seneden beri Türkçe merhale merhale Türkleşiyor. (Yahya Kemal Beyatlı)
+  tknz: |
+    Evet , kırk seneden beri Türkçe merhale merhale Türkleşiyor . ( Yahya Kemal Beyatlı )
+
+#10. Bir kelimenin kendisinden sonra gelen kelime veya kelime grup­larıyla yapı ve anlam bakımından bağlantısı olmadığını göstermek ve anlam karışıklığını önlemek için kullanılır:
+- text: |
+    Bu, tek gözlü, genç fakat ihtiyar görünen bir adamcağızdır. (Halit Ziya Uşaklıgil)
+  tknz: |
+    Bu , tek gözlü , genç fakat ihtiyar görünen bir adamcağızdır . ( Halit Ziya Uşaklıgil )
+- text: |
+    Bu gece, eğlenceleri içlerine sinmedi. (Reşat Nuri Güntekin)
+  tknz: |
+    Bu gece , eğlenceleri içlerine sinmedi . ( Reşat Nuri Güntekin )
+
+#11. Hitap için kullanılan kelimelerden sonra konur:
+- text: |
+    Efendiler, bilirsiniz ki hayat demek, mücadele, müsademe demektir. (Atatürk)
+  tknz: |
+    Efendiler , bilirsiniz ki hayat demek , mücadele , müsademe demektir . ( Atatürk )
+- text: |
+    Sayın Başkan,
+  tknz: |
+    Sayın Başkan ,
+- text: |
+    Sevgili Kardeşim,
+  tknz: |
+    Sevgili Kardeşim ,
+- text: |
+    Değerli Arkadaşım,
+  tknz: |
+    Değerli Arkadaşım ,
+
+#12. Sayıların yazılışında kesirleri ayırmak için kullanılır: 
+- text: |
+    38,6 (otuz sekiz tam, onda altı)
+  tknz: |
+    38,6 ( otuz sekiz tam , onda altı )
+- text: |
+    0,45 (sıfır tam, yüzde kırk beş)
+  tknz: |
+    0,45 ( sıfır tam , yüzde kırk beş )
+
+#13. Metin içinde art arda gelen zarf-fiil eki almış kelimelerden sonra konur:
+- text: |
+    Ancak yemekte bir karara varıp, arkadaşına dikkatli dikkatli bakarak konuştu.
+  tknz: |
+    Ancak yemekte bir karara varıp , arkadaşına dikkatli dikkatli bakarak konuştu .
+#UYARI: Metin içinde zarf-fiil eki almış kelimelerden sonra virgül konmaz:
+- text: |
+    Cumaları bahçede buluştukça kıza kendisinin adi bir mektep talebesi olmadığını anlatmaya çalışıyordu. (Halide Edip Adıvar)
+  tknz: |
+    Cumaları bahçede buluştukça kıza kendisinin adi bir mektep talebesi olmadığını anlatmaya çalışıyordu . ( Halide Edip Adıvar )
+- text: |
+    Şimdiye dek, ben kendimi bildim bileli kimse Değirmenoluk köyünden kaçıp da başka köyde çobanlık, yanaşmalık etmedi. (Yaşar Kemal)
+  tknz: |
+    Şimdiye dek , ben kendimi bildim bileli kimse Değirmenoluk köyünden kaçıp da başka köyde çobanlık , yanaşmalık etmedi . ( Yaşar Kemal )
+- text: |
+    Meydanlığa varmadan bir iki defa İsmail kendisini gördü mü diye kahveye baktı. (Necati Cumalı)
+  tknz: |
+    Meydanlığa varmadan bir iki defa İsmail kendisini gördü mü diye kahveye baktı . ( Necati Cumalı )
+
+#14. Özne olarak kullanıldıklarında bu, şu, o zamirlerinden sonra konur:
+- text: |
+    Bu, benim gibi yazarlar için hiç kolay olmaz.
+  tknz: |
+    Bu , benim gibi yazarlar için hiç kolay olmaz .
+- text: |
+    O, eski defterleri çoktan kapatmış, Osmanlıya kucağını açmıştı. (Tarık Buğra)
+  tknz: |
+    O , eski defterleri çoktan kapatmış , Osmanlıya kucağını açmıştı . ( Tarık Buğra )
+
+#15. Kitap, dergi vb.nin künyelerinde yazar, eser, basımevi vb. maddelerden sonra konur:
+- text: |
+    Falih Rıfkı ATAY, Tuna Kıyıları, Remzi Kitabevi, İstanbul, 1938.
+  tknz: |
+    Falih Rıfkı ATAY , Tuna Kıyıları , Remzi Kitabevi , İstanbul , 1938 .
+#Yazarın soyadı önce yazılmışsa soyadından sonra da virgül konur:
+- text: |
+    ERGİN, Muharrem, Dede Korkut Kitabı, Ankara, 1958.
+  tknz: |
+    ERGİN , Muharrem , Dede Korkut Kitabı , Ankara , 1958 .
+#UYARI: Metin içinde ve, veya, yahut, ya ... ya bağlaçlarından önce de sonra da virgül konmaz:
+- text: |
+    Nihat sabaha kadar uyuyamadı ve şafak sökerken Faik'e bol teşekkürlerle dolu bir kâğıt bırakarak iki gün evvelki cephe dönüşü kıyafeti ile sokağa fırladı. (Peyami Safa)
+  tknz: |
+    Nihat sabaha kadar uyuyamadı ve şafak sökerken Faik'e bol teşekkürlerle dolu bir kâğıt bırakarak iki gün evvelki cephe dönüşü kıyafeti ile sokağa fırladı . ( Peyami Safa )
+- text: |
+    Ya şevk içinde harap ol ya aşk içinde gönül
+    Ya lale açmalıdır göğsümüzde yahut gül! (Yahya Kemal Beyatlı)
+  tknz: |
+    Ya şevk içinde harap ol ya aşk içinde gönül
+    Ya lale açmalıdır göğsümüzde yahut gül ! ( Yahya Kemal Beyatlı )
+#UYARI: Tekrarlı bağlaçlardan önce ve sonra virgül konmaz:
+- text: |
+    Hem gider hem ağlar.
+  tknz: |
+    Hem gider hem ağlar .
+- text: |
+    Ya bu deveyi gütmeli ya bu diyardan gitmeli. (Atasözü)
+  tknz: |
+    Ya bu deveyi gütmeli ya bu diyardan gitmeli . ( Atasözü )
+- text: |
+    Gerek nesirde gerek nazımda yeni bir söyleyişe ulaşılmıştır.
+  tknz: |
+    Gerek nesirde gerek nazımda yeni bir söyleyişe ulaşılmıştır .
+- text: |
+    Siz ister inanın ister inanmayın, bir gün bile durmam.
+  tknz: |
+    Siz ister inanın ister inanmayın , bir gün bile durmam .
+- text: |
+    Ne kız verir ne dünürü küstürür.
+  tknz: |
+    Ne kız verir ne dünürü küstürür .
+- text: |
+    Bu kurallar bugün de yarın da geçerli olacaktır.
+  tknz: |
+    Bu kurallar bugün de yarın da geçerli olacaktır .
+#UYARI: Cümlede pekiştirme ve bağlama görevinde kullanılan da / de bağlacından sonra virgül konmaz:
+- text: |
+    İmlamız lisanımız düzelince, lisanımız da kafamız düzelince düzelecek çünkü o da ancak onlar kadar bozuktur, fazla değil! (Yahya Kemal Beyatlı)
+  tknz: |
+    İmlamız lisanımız düzelince , lisanımız da kafamız düzelince düzelecek çünkü o da ancak onlar kadar bozuktur , fazla değil ! ( Yahya Kemal Beyatlı )
+#UYARI: Metin içinde -ınca / -ince anlamıyla zarf-fiil görevinde kulla­nılan mı / mi ekinden sonra virgül konmaz:
+- text: |
+    Ben aç yattım mı kötü kötü rüyalar görürüm nedense. (Orhan Kemal)
+  tknz: |
+    Ben aç yattım mı kötü kötü rüyalar görürüm nedense . ( Orhan Kemal )
+- text: |
+    Öyle zekiler vardır, konuştular mı ağızlarından bal akıyor sanırsın. (Attila İlhan)
+  tknz: |
+    Öyle zekiler vardır , konuştular mı ağızlarından bal akıyor sanırsın . ( Attila İlhan )
+#UYARI: Şart ekinden sonra virgül konmaz:
+- text: |
+    Tenha köşelerde ağız ağıza konuşurken yanlarına biri gelecek olursa hemen susuyorlardı. (Reşat Nuri Güntekin)
+  tknz: |
+    Tenha köşelerde ağız ağıza konuşurken yanlarına biri gelecek olursa hemen susuyorlardı . ( Reşat Nuri Güntekin )
+- text: |
+    Gör gözlerinle de aklın yatarsa anlatıver millete. (Tarık Buğra)
+  tknz: |
+    Gör gözlerinle de aklın yatarsa anlatıver millete . ( Tarık Buğra )
+
+
+
+
+
+############################ Noktalı Virgül ( ; )
+#1. Cümle içinde virgüllerle ayrılmış tür veya takımları birbirinden ayırmak için konur:
+- text: |
+    Erkek çocuklara Doğan, Tuğrul, Aslan, Orhan; kız çocuklara ise İnci, Çiçek, Gönül, Yonca adları verilir.
+  tknz: |
+    Erkek çocuklara Doğan , Tuğrul , Aslan , Orhan ; kız çocuklara ise İnci , Çiçek , Gönül , Yonca adları verilir .
+- text: |
+    Türkiye, İngiltere, Azerbaycan; Ankara, Londra, Bakü.
+  tknz: |
+    Türkiye , İngiltere , Azerbaycan ; Ankara , Londra , Bakü .
+
+#2. Ögeleri arasında virgül bulunan sıralı cümleleri birbirinden ayır­mak için konur: Sevinçten, heyecandan içim içime sığmıyor; bağırmak, kahkahalar atmak, ağlamak istiyorum.
+- text: |
+    At ölür, meydan kalır; yiğit ölür, şan kalır. (Atasözü)
+  tknz: |
+    At ölür , meydan kalır ; yiğit ölür , şan kalır . ( Atasözü )
+
+#3. İkiden fazla eş değer ögeler arasında virgül bulunan cümlelerde özneden sonra noktalı virgül konabilir:
+- text: |
+    Yeni usul şiirimiz; zevksiz, köksüz, acemice görünüyordu. (Yahya Kemal Beyatlı)
+  tknz: |
+    Yeni usul şiirimiz ; zevksiz , köksüz , acemice görünüyordu . ( Yahya Kemal Beyatlı )
+
+
+
+
+############################# İki Nokta (: )
+# 1.Kendisiyle ilgili örnek verilecek cümlenin sonuna konur:
+- text: |
+    Millî Edebiyat akımının temsilcilerinden bir kısmını sıralayalım: Ömer Seyfettin, Halide Edip Adıvar, Ziya Gökalp, Mehmet Emin Yurdakul, Ali Canip Yöntem.
+  tknz: |
+    Millî Edebiyat akımının temsilcilerinden bir kısmını sıralayalım : Ömer Seyfettin , Halide Edip Adıvar , Ziya Gökalp , Mehmet Emin Yurdakul , Ali Canip Yöntem .
+
+#2. Kendisiyle ilgili açıklama verilecek cümlenin sonuna konur:
+- text: |
+    Bu kararın istinat ettiği en kuvvetli muhakeme ve mantık şu idi: Esas, Türk milletinin haysiyetli ve şerefli bir millet olarak yaşamasıdır. (Atatürk)
+  tknz: |
+    Bu kararın istinat ettiği en kuvvetli muhakeme ve mantık şu idi : Esas , Türk milletinin haysiyetli ve şerefli bir millet olarak yaşamasıdır . ( Atatürk )
+- text: |
+    Kendimi takdim edeyim: Meclis kâtiplerindenim. (Falih Rıfkı Atay)
+  tknz: |
+    Kendimi takdim edeyim : Meclis kâtiplerindenim . ( Falih Rıfkı Atay )
+
+#3. Ses bilgisinde uzun ünlüyü göstermek için kullanılır:
+# not supported
+#- text: |
+#    a:ile, ka:til, usu:le, i:cat.
+#  tknz: |
+#    a:ile, ka:til, usu:le, i:cat.
+
+#4. Karşılıklı konuşmalarda, konuşan kişiyi belirten sözlerden sonra konur:
+- text: |
+    Bilge Kağan: Türklerim, işitin!
+    Üstten gök çökmedikçe,
+    alttan yer delinmedikçe
+    ülkenizi, törenizi kim bozabilir sizin?
+    Koro: Göğe erer başımız
+    başınla senin!
+    Bilge Kağan: Ulusum birleşip yücelsin diye
+    gece uyumadım, gündüz oturmadım.
+    Türklerim Bilge Kağan der bana.
+    Ben her şeyi onlar için bildim.
+    Nöbetteyim! (A. Turan Oflazoğlu)
+  tknz: |
+    Bilge Kağan : Türklerim , işitin !
+    Üstten gök çökmedikçe ,
+    alttan yer delinmedikçe
+    ülkenizi , törenizi kim bozabilir sizin ?
+    Koro : Göğe erer başımız
+    başınla senin !
+    Bilge Kağan : Ulusum birleşip yücelsin diye
+    gece uyumadım , gündüz oturmadım .
+    Türklerim Bilge Kağan der bana .
+    Ben her şeyi onlar için bildim .
+    Nöbetteyim ! ( A. Turan Oflazoğlu )
+  # could be problem --> "A. Turan"
+  # hmm, not it's not a problem :)
+
+#5. Edebî eserlerde konuşma bölümünden önceki ifadenin sonuna konur:
+- text: |
+    - Buğdayla arpadan başka ne biter bu topraklarda?
+    Ziraatçı sayar:
+    - Yulaf, pancar, zerzevat, tütün... (Falih Rıfkı Atay)
+  tknz: |
+    - Buğdayla arpadan başka ne biter bu topraklarda ?
+    Ziraatçı sayar :
+    - Yulaf , pancar , zerzevat , tütün ... ( Falih Rıfkı Atay )
+
+#6. Genel Ağ adreslerinde kullanılır:
+# we have it above
+
+#7. Matematikte bölme işareti olarak kullanılır:
+- text: |
+    56:8, 100:2
+  tknz: |
+    56:8 , 100:2
+
+
+
+########################################################Üç Nokta ( ... )
+#1. Anlatım olarak tamamlanmamış cümlelerin sonuna konur:
+- text: |
+    Ne çare ki çirkinliği hemencecik ve herkes tarafından görülüveriyordu da bu yanı... (Tarık Buğra)
+  tknz: |
+    Ne çare ki çirkinliği hemencecik ve herkes tarafından görülüveriyordu da bu yanı ... ( Tarık Buğra )
+
+#2. Kaba sayıldığı için veya bir başka sebepten dolayı açık yazılmak is­tenmeyen kelime ve bölümlerin yerine konur: Kılavuzu karga olanın burnu b...tan çıkmaz.
+- text: |
+    Arabacı B...'a yaklaştığını söylüyor, ikide bir fırsat bularak arabanın içine doğru başını çeviriyordu. (Ahmet Hamdi Tanpınar)
+  tknz: |
+    Arabacı B...'a yaklaştığını söylüyor , ikide bir fırsat bularak arabanın içine doğru başını çeviriyordu . ( Ahmet Hamdi Tanpınar )
+
+#3. Alıntılarda başta, ortada ve sonda alınmayan kelime veya bölümle­rin yerine konur:
+- text: |
+    ... derken şehrin öte başından boğuk boğuk sesler gelmeye başladı... (Tarık Buğra)
+  tknz: |
+    ... derken şehrin öte başından boğuk boğuk sesler gelmeye başladı ... ( Tarık Buğra )
+
+#4. Sözün bir yerde kesilerek geri kalan bölümün okuyucunun hayal dünyasına bırakıldığını göstermek veya ifadeye güç katmak için konur:
+- text: |
+    Sana uğurlar olsun... Ayrılıyor yolumuz! (Faruk Nafiz Çamlıbel)
+  tknz: |
+    Sana uğurlar olsun ... Ayrılıyor yolumuz ! ( Faruk Nafiz Çamlıbel )
+- text: |
+    Binaenaleyh, biz her vasıtadan, yalnız ve ancak, bir noktainazardan istifade ederiz. O noktainazar
+    şudur: Türk milletini, medeni cihanda layık olduğu mevkiye isat etmek ve Türk cumhuriyetini
+    sarsılmaz temelleri üzerinde, her gün, daha ziyade takviye etmek... (Atatürk)
+  tknz: |
+    Binaenaleyh , biz her vasıtadan , yalnız ve ancak , bir noktainazardan istifade ederiz . O noktainazar
+    şudur : Türk milletini , medeni cihanda layık olduğu mevkiye isat etmek ve Türk cumhuriyetini
+    sarsılmaz temelleri üzerinde , her gün , daha ziyade takviye etmek ... ( Atatürk )
+
+#5. Ünlem ve seslenmelerde anlatımı pekiştirmek için konur:
+- text: |
+    Gölgeler yaklaştılar. Bir adım kalınca onu kıyafetinden tanıdılar:
+    — Koca Ali... Koca Ali, be!.. (Ömer Seyfettin)
+  tknz: |
+    Gölgeler yaklaştılar . Bir adım kalınca onu kıyafetinden tanıdılar :
+    — Koca Ali ... Koca Ali , be !.. ( Ömer Seyfettin )
+#UYARI: Ünlem ve soru işaretinden sonra üç nokta yerine iki nokta konulması yeterlidir:
+- text: |
+    Gök ekini biçer gibi!.. Başaklar daha dolmadan. (Tarık Buğra)
+  tknz: |
+    Gök ekini biçer gibi !.. Başaklar daha dolmadan . ( Tarık Buğra )
+- text: |
+    Nasıl da akşam oldu?.. Nasıl da yavrucaklar sustu?.. Nasıl da serçecikler yuvalarına sığındı?.. (Necip Fazıl Kısakürek)
+  tknz: |
+    Nasıl da akşam oldu ?.. Nasıl da yavrucaklar sustu ?.. Nasıl da serçecikler yuvalarına sığındı ?.. ( Necip Fazıl Kısakürek )
+
+#6. Karşılıklı konuşmalarda, yeterli olmayan, eksik bırakılan cevap­larda kullanılır:
+- text: |
+    — Yabancı yok!
+    — Kimsin?
+    — Ali...
+    — Hangi Ali?
+    — ...
+    — Sen misin, Ali usta?
+    — Benim!..
+    — Ne arıyorsun bu vakit buralarda?
+    — Hiç...
+    — Nasıl hiç? Suya çekicini mi düşürdün yoksa!..
+    — !.. (Ömer Seyfettin)
+  tknz: |
+    — Yabancı yok !
+    — Kimsin ?
+    — Ali ...
+    — Hangi Ali ?
+    — ...
+    — Sen misin , Ali usta ?
+    — Benim !..
+    — Ne arıyorsun bu vakit buralarda ?
+    — Hiç ...
+    — Nasıl hiç ? Suya çekicini mi düşürdün yoksa !..
+    — !.. ( Ömer Seyfettin )
+#UYARI: Üç nokta yerine iki veya daha çok nokta kullanılmaz.
+
+
+
+
+############################################## Soru İşareti ( ? )
+#1. Soru eki veya sözü içeren cümle veya sözlerin sonuna konur:
+- text: |
+    Ne zaman tükenecek bu yollar, arabacı? (Faruk Nafiz Çamlıbel)
+  tknz: |
+    Ne zaman tükenecek bu yollar , arabacı ? ( Faruk Nafiz Çamlıbel )
+- text: |
+    Atatürk bana sordu:
+    — Yeni yazıyı tatbik etmek için ne düşündünüz? (Falih Rıfkı Atay)
+  tknz: |
+    Atatürk bana sordu :
+    — Yeni yazıyı tatbik etmek için ne düşündünüz ? ( Falih Rıfkı Atay )
+
+# 2. Soru bildiren ancak soru eki veya sözü içermeyen cümlelerin sonuna konur:
+- text: |
+    Gümrükteki memur başını kaldırdı:
+    — Adınız?
+  tknz: |
+    Gümrükteki memur başını kaldırdı :
+    — Adınız ?
+
+#3. Bilinmeyen, kesin olmayan veya şüpheyle karşılanan yer, tarih vb. durumlar için kullanılır:
+- text: |
+    Yunus Emre (1240 ?-1320) (Doğum yeri: ?)
+  tknz: |
+    Yunus Emre ( 1240 ?-1320 ) ( Doğum yeri : ? )
+- text: |
+    1496 (?) yılında doğan Fuzuli...
+  tknz: |
+    1496 ( ? ) yılında doğan Fuzuli ...
+- text: |
+    Ankara'dan Antalya'ya arabayla üç saatte (?) gitmiş.
+  tknz: |
+    Ankara'dan Antalya'ya arabayla üç saatte ( ? ) gitmiş .
+#UYARI: mı / mi ekini alan yan cümle temel cümlenin zarf tümleci olduğunda cümlenin sonuna soru işareti konmaz:
+- text: |
+    Akşam oldu mu sürüler döner. Hava karardı mı eve gideriz.
+  tknz: |
+    Akşam oldu mu sürüler döner . Hava karardı mı eve gideriz .
+- text: |
+    Bahar gelip de nehir çağıl çağıl kabarmaya başlamaz mı içimi geri kalmış bir saat huzursuzluğu kaplardı. (Haldun Taner)
+  tknz: |
+    Bahar gelip de nehir çağıl çağıl kabarmaya başlamaz mı içimi geri kalmış bir saat huzursuzluğu kaplardı . ( Haldun Taner )
+#UYARI: Soru ifadesi taşıyan sıralı ve bağlı cümlelerde soru işareti en sona konur:
+- text: |
+    Çok yakından mı bu sesler, çok uzaklardan mı?
+  tknz: |
+    Çok yakından mı bu sesler , çok uzaklardan mı ?
+- text: |
+    Üsküdar'dan mı, Hisar'dan mı, Kavaklardan mı? (Yahya Kemal Beyatlı)
+  tknz: |
+    Üsküdar'dan mı , Hisar'dan mı , Kavaklardan mı ? ( Yahya Kemal Beyatlı )
+
+
+
+
+
+###############################################Ünlem İşareti ( ! )
+#1. Sevinç, kıvanç, acı, korku, şaşma gibi duyguları anlatan cümle veya ibarele­rin sonuna konur: Hava ne kadar da sıcak! Aşk olsun! Ne kadar akıllı adamlar var! Vah vah!
+- text: |
+    Ne mutlu Türk'üm diyene! (Atatürk)
+  tknz: |
+    Ne mutlu Türk'üm diyene ! ( Atatürk )
+
+#2. Seslenme, hitap ve uyarı sözlerinden sonra konur:
+- text: |
+    Ordular! İlk hedefiniz Akdeniz'dir, ileri! (Atatürk)
+  tknz: |
+    Ordular ! İlk hedefiniz Akdeniz'dir , ileri ! ( Atatürk )
+- text: |
+    Ey Türk gençliği! Birinci vazifen; Türk istiklalini, Türk cumhuriyetini, ilelebet, muhafaza ve müdafaa etmektir. (Atatürk)
+  tknz: |
+    Ey Türk gençliği ! Birinci vazifen ; Türk istiklalini , Türk cumhuriyetini , ilelebet , muhafaza ve müdafaa etmektir . ( Atatürk )
+- text: |
+    Ak tolgalı beylerbeyi haykırdı: İlerle! (Yahya Kemal Beyatlı)
+  tknz: |
+    Ak tolgalı beylerbeyi haykırdı : İlerle ! ( Yahya Kemal Beyatlı )
+- text: |
+    Dur, yolcu! Bilmeden gelip bastığın
+    Bu toprak bir devrin battığı yerdir. (Necmettin Halil Onan)
+  tknz: |
+    Dur , yolcu ! Bilmeden gelip bastığın
+    Bu toprak bir devrin battığı yerdir . ( Necmettin Halil Onan )
+#UYARI: Ünlem işareti, seslenme ve hitap sözlerinden hemen sonra konulabi­leceği gibi cümlenin sonuna da konabilir:
+- text: |
+    Arkadaş, biz bu yolda türküler tuttururken
+    Sana uğurlar olsun... Ayrılıyor yolumuz! (Faruk Nafiz Çamlıbel)
+  tknz: |
+    Arkadaş , biz bu yolda türküler tuttururken
+    Sana uğurlar olsun ... Ayrılıyor yolumuz ! ( Faruk Nafiz Çamlıbel )
+
+#3. Alay, kinaye veya küçümseme anlamı kazandırılmak istenen sözden hemen sonra yay ayraç içinde ünlem işareti kullanılır:
+- text: |
+    İsteseymiş bir günde bitirirmiş (!) ama ne yazık ki vakti yokmuş (!).
+  tknz: |
+    İsteseymiş bir günde bitirirmiş ( ! ) ama ne yazık ki vakti yokmuş ( ! ) .
+- text: |
+    Adam, akıllı (!) olduğunu söylüyor.
+  tknz: |
+    Adam , akıllı ( ! ) olduğunu söylüyor .
+
+
+
+
+############################################################Kısa Çizgi ( - )
+#1. Satıra sığmayan kelimeler bölünürken satır sonuna konur:
+- text: |
+    Soğuktan mı titriyordum, yoksa heyecandan, üzüntüden mi bil-
+    mem. Havuzun suyu bulanık. Kapının saatleri 12'yi geçmiş. Kanepe-
+    lerde kimseler yok. Tramvay ne fena gıcırdadı! Tramvayda-
+    ki adam bir tanıdık mı idi acaba? Ne diye öyle dönüp dönüp baktı?
+    Yoksa kimseciklerin oturmadığı kanepelerde bu saatte pek başıboş-
+    lar mı oturur? (Sait Faik Abasıyanık)
+  tknz: |
+    Soğuktan mı titriyordum , yoksa heyecandan , üzüntüden mi bil-
+    mem. Havuzun suyu bulanık . Kapının saatleri 12'yi geçmiş . Kanepe-
+    lerde kimseler yok . Tramvay ne fena gıcırdadı ! Tramvayda-
+    ki adam bir tanıdık mı idi acaba ? Ne diye öyle dönüp dönüp baktı ?
+    Yoksa kimseciklerin oturmadığı kanepelerde bu saatte pek başıboş-
+    lar mı oturur ? ( Sait Faik Abasıyanık )
+
+#2. Cümle içinde ara sözleri veya ara cümleleri ayırmak için ara sözlerin veya ara cümlelerin başına ve sonuna konur, bitişik yazılır:
+- text: |
+    Küçük bir sürü -dört inekle birkaç koyun- köye giren geniş yolun ağzında durmuştu. (Ömer Seyfettin)
+  tknz: |
+    Küçük bir sürü - dört inekle birkaç koyun - köye giren geniş yolun ağzında durmuştu . ( Ömer Seyfettin )
+
+#3. Kelimelerin kökleri, gövdeleri ve eklerini birbirinden ayırmak için kullanılır:
+# Not supported
+#- text: |
+#    al-ış, dur-ak, gör-gü-süz-lük vb.
+#  tknz: |
+#    al-ış, dur-ak, gör-gü-süz-lük vb.
+
+#4. Fiil kök ve gövdelerini göstermek için kullanılır:
+# Not supported
+#- text: |
+#    al-, dur-, gör-, ver-; başar-, kana-, okut-, taşla-, yazdır- vb.
+#  tknz: |
+#    al-, dur-, gör-, ver-; başar-, kana-, okut-, taşla-, yazdır- vb.
+
+#5. İsim yapma eklerinin başına, fiil yapma eklerinin başına ve sonuna konur:
+# Not supported
+#- text: |
+#    -ak, -den, -ış, -lık; -ımsa-; -la-; -tır- vb.
+#  tknz: |
+#    -ak, -den, -ış, -lık; -ımsa-; -la-; -tır- vb.
+
+#6. Heceleri göstermek için kullanılır:
+# Not supported
+#- text: |
+#    a-raş-tır-ma, bi-le-zik, du-ruş-ma, ku-yum-cu-luk, prog-ram, ya-zar-lık vb.
+#  tknz: |
+#    a-raş-tır-ma, bi-le-zik, du-ruş-ma, ku-yum-cu-luk, prog-ram, ya-zar-lık vb.
+
+#7. Arasında, ve, ile, ila, ...-den ...-e anlamlarını vermek için kelimeler veya sayılar arasında kullanılır:
+- text: |
+    Aydın-İzmir yolu, Türk-Alman ilişkileri, Ural-Altay dil grubu, Dil ve Tarih-Coğrafya Fakültesi
+  tknz: |
+    Aydın - İzmir yolu , Türk - Alman ilişkileri , Ural - Altay dil grubu , Dil ve Tarih - Coğrafya Fakültesi
+- text: |
+    09.30-10.30, Beşiktaş-Fenerbahçe karşılaşması,
+  tknz: |
+    09.30-10.30 , Beşiktaş - Fenerbahçe karşılaşması ,
+- text: |
+    Manas Destanı'nda soy-dil-din üçgeni,
+  tknz: |
+    Manas Destanı'nda soy - dil - din üçgeni ,
+- text: |
+    1914-1918 Birinci Dünya Savaşı, Türkçe-Fransızca Sözlük vb.
+  tknz: |
+    1914-1918 Birinci Dünya Savaşı , Türkçe - Fransızca Sözlük vb.
+#UYARI: Cümle içinde sayı adlarının yinelenmesinde araya kısa çizgi konmaz:
+- text: |
+    On on beş yıl. Üç beş kişi geldi.
+  tknz: |
+    On on beş yıl . Üç beş kişi geldi .
+
+#8. Matematikte çıkarma işareti olarak kullanılır:
+- text: |
+    50-20
+  tknz: |
+    50-20
+
+#9. Sıfırdan küçük değerleri göstermek için kullanılır:
+- text: |
+    -2 °C
+  tknz: |
+    -2 ° C
+
+
+
+###################################################Uzun Çizgi (—)
+#Yazıda satır başına alınan konuşmaları göstermek için kullanılır. Buna konuşma çizgisi de denir.
+- text: |
+    Frankfurt'a gelene herkesin sorduğu şunlardır:
+    — Eski şehri gezdin mi?
+    — Rothschild'in evine gittin mi?
+    — Goethe'nin evini gezdin mi? (Ahmet Haşim)
+  tknz: |
+    Frankfurt'a gelene herkesin sorduğu şunlardır :
+    — Eski şehri gezdin mi ?
+    — Rothschild'in evine gittin mi ?
+    — Goethe'nin evini gezdin mi ? ( Ahmet Haşim )
+
+#Oyunlarda uzun çizgi konuşanın adından sonra da konabilir:
+- text: |
+    Sıtkı Bey — Kaleyi kurtarmak için daha güzel bir çare var. Gerçekten ölecek adam ister.
+    İslam Bey — Ben daha ölmedim. (Namık Kemal)
+  tknz: |
+    Sıtkı Bey — Kaleyi kurtarmak için daha güzel bir çare var . Gerçekten ölecek adam ister .
+    İslam Bey — Ben daha ölmedim . ( Namık Kemal )
+#UYARI: Konuşmalar tırnak içinde verildiğinde uzun çizgi kul­lanılmaz.
+- text: |
+    Arabamız tutarken Erciyes'in yolunu:
+    "Hancı dedim, bildin mi Maraşlı Şeyhoğlu'nu?" (Faruk Nafiz Çamlıbel)
+  tknz: |
+    Arabamız tutarken Erciyes'in yolunu :
+    " Hancı dedim , bildin mi Maraşlı Şeyhoğlu'nu ? " ( Faruk Nafiz Çamlıbel )
+
+
+#########################################################Eğik Çizgi ( / )
+#1. Dizeler yan yana yazıldığında aralarına konur:
+- text: |
+    Korkma! Sönmez bu şafaklarda yüzen al sancak / Sönmeden yurdumun üstünde tüten en son ocak / O benim milletimin yıldızıdır, parlayacak / O benimdir, o benim milletimindir ancak. (Mehmet Akif Ersoy)
+  tknz: |
+    Korkma ! Sönmez bu şafaklarda yüzen al sancak / Sönmeden yurdumun üstünde tüten en son ocak / O benim milletimin yıldızıdır , parlayacak / O benimdir , o benim milletimindir ancak . ( Mehmet Akif Ersoy )
+#2. Adres yazarken apartman numarası ile daire numarası arasına ve semt ile şehir arasına konur:
+- text: |
+    Altay Sokağı No.: 21/6 Kurtuluş / ANKARA
+  tknz: |
+    Altay Sokağı No. : 21/6 Kurtuluş / ANKARA
+#Ülke adı yazılacağında ise:
+- text: |
+    Atatürk Bulvarı No.: 217
+    06680 Kavaklıdere / Ankara
+    TÜRKİYE
+  tknz: |
+    Atatürk Bulvarı No. : 217
+    06680 Kavaklıdere / Ankara
+    TÜRKİYE
+
+#3. Tarihlerin yazılışında gün, ay ve yılı gösteren sayıları birbirinden ayırmak için konur:
+- text: |
+    18/11/1969, 15/IX/1994 vb.
+  tknz: |
+    18/11/1969 , 15/IX/1994 vb.
+
+#4. Dil bilgisinde eklerin farklı biçimlerini göstermek için kullanılır:
+# not supported
+#- text: |
+#    -a /-e, -an /-en, -lık /-lik, -madan /-meden vb.
+#  tknz: |
+#    -a /-e, -an /-en, -lık /-lik, -madan /-meden vb.
+
+#5. Genel Ağ adreslerinde kullanılır:
+# we have it above
+
+#6. Matematikte bölme işareti olarak kullanılır:
+- text: |
+    70/2=35
+  tknz: |
+    70/2 = 35
+
+#7. Fizik, matematik vb. alanlarda birimler arası orantıları gösterirken eğik çizgi araya boşluk konulmadan kullanılır:
+# not supported
+#- text: |
+#    g/sn (gram/saniye)
+#  tknz: |
+#    g/sn (gram/saniye)
+
+
+
+
+########################################Ters Eğik Çizgi ( \ )
+#Bilişim uygulamalarında art arda gelen dizinleri birbirinden ayırt etmek için kullanılır:
+# hard to match!
+#- text: |
+#    C:\Belgelerim\Türk İşaret Dili\Kitapçık.indd
+#  tknz: |
+#    C:\Belgelerim\Türk İşaret Dili\Kitapçık.indd
+
+
+
+
+
+##########################################Tırnak İşareti ( " " )
+#1. Başka bir kimseden veya yazıdan olduğu gibi aktarılan sözler tır­nak içine alınır:
+- text: |
+    Türk Dil Kurumu binasının yan cephesinde Atatürk'ün "Türk dili, Türk milletinin kalbidir, zihnidir." sözü yazılıdır.
+  tknz: |
+    Türk Dil Kurumu binasının yan cephesinde Atatürk'ün " Türk dili , Türk milletinin kalbidir , zihnidir . " sözü yazılıdır .
+- text: |
+    Dil ve Tarih-Coğrafya Fakültesinin ön cephesinde Atatürk'ün "Hayatta en hakiki mürşit ilimdir." vecizesi yer almaktadır.
+  tknz: |
+    Dil ve Tarih - Coğrafya Fakültesinin ön cephesinde Atatürk'ün " Hayatta en hakiki mürşit ilimdir . " vecizesi yer almaktadır .
+- text: |
+    Ulu önderin "Ne mutlu Türk'üm diyene!" sözü her Türk'ü duygulandırır.
+  tknz: |
+    Ulu önderin " Ne mutlu Türk'üm diyene ! " sözü her Türk'ü duygulandırır .
+- text: |
+    Bakınız, şair vatanı ne güzel tarif ediyor:
+    "Bayrakları bayrak yapan üstündeki kandır.
+    Toprak eğer uğrunda ölen varsa vatandır."
+  tknz: |
+    Bakınız , şair vatanı ne güzel tarif ediyor :
+    " Bayrakları bayrak yapan üstündeki kandır .
+    Toprak eğer uğrunda ölen varsa vatandır . "
+#UYARI: Tırnak içindeki alıntının sonunda bulunan işaret (nokta, soru işareti, ünlem işareti vb.) tırnak içinde kalır:
+- text: |
+    "İzmir üzerine dünyada bir şehir daha yoktur!" diyorlar. (Yahya Kemal Beyatlı)
+  tknz: |
+    " İzmir üzerine dünyada bir şehir daha yoktur ! " diyorlar . ( Yahya Kemal Beyatlı )
+
+#2. Özel olarak vurgulanmak istenen sözler tırnak içine alınır:
+- text: |
+    Yeni bir "barış taarruzu" başladı.
+  tknz: |
+    Yeni bir " barış taarruzu " başladı .
+
+#3. Cümle içerisinde eserlerin ve yazıların adları ile bölüm başlıkları tırnak içine alınır:
+- text: |
+    Bugün öğrenciler "Kendi Gök Kubbemiz" adlı şiiri incelediler.
+  tknz: |
+    Bugün öğrenciler " Kendi Gök Kubbemiz " adlı şiiri incelediler .
+- text: |
+    "Yazım Kuralları" bölümünde bazı uyarılara yer verilmiştir.
+  tknz: |
+    " Yazım Kuralları " bölümünde bazı uyarılara yer verilmiştir .
+#UYARI: Cümle içerisinde özel olarak belirtilmek istenen sözler, kitap ve dergi adları ve başlıkları tırnak içine alınmaksızın eğik yazıyla dizilerek de gösterilebilir:
+- text: |
+    Höyük sözü Anadolu'da tepe olarak geçer.
+  tknz: |
+    Höyük sözü Anadolu'da tepe olarak geçer .
+- text: |
+    Cahit Sıtkı'nın Şairin Ölümü şiirini Yahya Kemal çok sevmişti. (Ahmet Hamdi Tanpınar)
+  tknz: |
+    Cahit Sıtkı'nın Şairin Ölümü şiirini Yahya Kemal çok sevmişti . ( Ahmet Hamdi Tanpınar )
+#UYARI: Tırnak içine alınan sözlerden sonra gelen ekleri ayırmak için kesme işareti kulla­nılmaz:
+# this is an arguable decision
+- text: |
+    Elif Şafak'ın "Bit Palas"ını okudunuz mu?
+  tknz: |
+    Elif Şafak'ın " Bit Palas "ını okudunuz mu ?
+
+# 4. Bilimsel çalışmalarda künye verilirken makale adları tırnak içinde yazılır.
+
+
+#########################################################Tek Tırnak İşareti ( ' ' )
+#Tırnak içinde verilen cümlenin içinde yeniden tırnağa alınması gereken bir sözü, ibareyi belirtmek için kullanılır:
+- text: |
+    Edebiyat öğretmeni "Şiirler içinde 'Han Duvarları' gibisi var mı?" dedi ve Faruk Nafiz'in bu güzel şiirini okumaya başladı.
+  tknz: |
+    Edebiyat öğretmeni " Şiirler içinde ' Han Duvarları ' gibisi var mı ? " dedi ve Faruk Nafiz'in bu güzel şiirini okumaya başladı .
+- text: |
+    "Atatürk henüz 'Gazi Mustafa Kemal Paşa' idi. Benden ona dair bir kitap için ön söz istemişlerdi." (Falih Rıfkı Atay)
+  tknz: |
+    " Atatürk henüz ' Gazi Mustafa Kemal Paşa ' idi . Benden ona dair bir kitap için ön söz istemişlerdi . " ( Falih Rıfkı Atay )
+
+#########################################################Denden İşareti (") SKIPPED
+#
+#Bir yazıdaki maddelerin sıralanmasında veya bir çizelgede alt alta gelen aynı sözlerin, söz gruplarının ve sayıların tekrar yazılmasını önlemek için kullanılır:
+#a. Etken fiil
+#b. Edilgen "
+#c. Dönüşlü "
+#ç. İşteş "
+
+
+
+##########################################################Yay Ayraç ( )
+#1. Cümledeki anlamı tamamlayan ve cümlenin dışında kalan ek bilgiler için kullanılır. Yay ayraç içinde bulunan ve yargı bildiren anlatımların sonuna uygun noktalama işareti konur:
+- text: |
+    Anadolu kentlerini, köylerini (Köy sözünü de çekinerek yazıyorum.) gezsek bile görmek için değil, kendimizi göstermek için geziyoruz. (Nurullah Ataç)
+  tknz: |
+    Anadolu kentlerini , köylerini ( Köy sözünü de çekinerek yazıyorum . ) gezsek bile görmek için değil , kendimizi göstermek için geziyoruz . ( Nurullah Ataç )
+
+#2. Özel veya cins isme ait ek, ayraçtan önce yazılır:
+- text: |
+    Yunus Emre'nin (1240?-1320)...
+  tknz: |
+    Yunus Emre'nin ( 1240?-1320 ) ...
+- text: |
+    İmek fiilinin (ek fiil) geniş zamanı şahıs ekleriyle çekilir.
+  tknz: |
+    İmek fiilinin ( ek fiil ) geniş zamanı şahıs ekleriyle çekilir .
+
+#3. Tiyatro eserlerinde ve senaryolarda konuşanın hareketlerini, durumunu açıkla­mak ve göstermek için kullanılır:
+- text: |
+    İhtiyar - (Yavaş yavaş Kaymakam'a yaklaşır.) Ne oluyor beyefendi? Allah rızası için bana da anlatın... (Reşat Nuri Güntekin)
+  tknz: |
+    İhtiyar - ( Yavaş yavaş Kaymakam'a yaklaşır . ) Ne oluyor beyefendi ? Allah rızası için bana da anlatın ... ( Reşat Nuri Güntekin )
+
+#4. Alıntıların aktarıldığı eseri, yazarı veya künye bilgilerini göstermek için kullanılır:
+- text: |
+    Cihanın tarihi, vatanı uğrunda senin kadar uğraşan, kanını döken bir millet daha gösteremez.
+    Senin kadar kimse kendi vatanına sahip olmaya hak kazanmamıştır.
+    Bu vatan ya senindir ya kimsenin. (Ahmet Hikmet Müftüoğlu)
+  tknz: |
+    Cihanın tarihi , vatanı uğrunda senin kadar uğraşan , kanını döken bir millet daha gösteremez .
+    Senin kadar kimse kendi vatanına sahip olmaya hak kazanmamıştır .
+    Bu vatan ya senindir ya kimsenin . ( Ahmet Hikmet Müftüoğlu )
+- text: |
+    Eşin var, aşiyanın var, baharın var ki beklerdin
+    Kıyametler koparmak neydi ey bülbül, nedir derdin? (Mehmet Akif Ersoy)
+  tknz: |
+    Eşin var , aşiyanın var , baharın var ki beklerdin
+    Kıyametler koparmak neydi ey bülbül , nedir derdin ? ( Mehmet Akif Ersoy )
+- text: |
+    Bir isim kökü, gerektiğinde çeşitli eklerle fiil kökü durumuna getirilebilir (Zülfikar 1991:45).
+  tknz: |
+    Bir isim kökü , gerektiğinde çeşitli eklerle fiil kökü durumuna getirilebilir ( Zülfikar 1991:45 ) .
+
+#5. Alıntılarda, alınmayan kelime veya bölümle­rin yerine konulan üç nokta, yay ayraç içine alınabilir.
+
+#6. Bir söze alay, kinaye veya küçümseme anlamı kazandırmak için kullanılan ünlem işareti yay ayraç içine alınır:
+- text: |
+    Adam, akıllı (!) olduğunu söylüyor.
+  tknz: |
+    Adam , akıllı ( ! ) olduğunu söylüyor .
+
+#7. Bir bilginin şüpheyle karşılandığını veya kesin olmadığını gös­termek için kullanılan soru işareti yay ayraç içine alınır:
+- text: |
+    1496 (?) yılında doğan Fuzuli...
+  tknz: |
+    1496 ( ? ) yılında doğan Fuzuli ...
+#8. Bir yazının maddelerini gösteren sayı ve harflerden sonra kapama ayracı konur:
+- text: |
+    I) ilk madde
+  tknz: |
+    I) ilk madde
+- text: |
+    1) ilk madde
+  tknz: |
+    1) ilk madde
+- text: |
+    A) ilk madde
+  tknz: |
+    A) ilk madde
+- text: |
+    a) ilk madde
+  tknz: |
+    a) ilk madde
+- text: |
+    II) ikinci madde
+    2) ikinci madde
+    B) ikinci madde
+    b) ikinci madde
+  tknz: |
+    II) ikinci madde
+    2) ikinci madde
+    B) ikinci madde
+    b) ikinci madde
+
+- text: |
+    Necati Özensoy? Burada.
+    Necati Özensoy? Burada,
+    Necati Özensoy? Burada!
+    Necati Özensoy? Burada?
+    Necati Özensoy? Burada mi?
+  tknz: |
+    Necati Özensoy ? Burada .
+    Necati Özensoy ? Burada ,
+    Necati Özensoy ? Burada !
+    Necati Özensoy ? Burada ?
+    Necati Özensoy ? Burada mi ?
+
+
+
+
+#################################################################Köşeli Ayraç ( [ ] )
+#1. Ayraç içinde ayraç kullanılması gereken durumlarda yay ayraçtan önce köşeli ayraç kullanılır:
+- text: |
+    Halikarnas Balıkçısı [Cevat Şakir Kabaağaçlı (1886-1973)] en güzel eserlerini Bodrum'da yazmıştır.
+  tknz: |
+    Halikarnas Balıkçısı [ Cevat Şakir Kabaağaçlı ( 1886-1973 ) ] en güzel eserlerini Bodrum'da yazmıştır .
+
+#2. Metin aktarmalarında, çevirilerde, alıntılarda çalışmayı yapanın eklediği sözler için kullanılır:
+- text: |
+    "Eldem, Osmanlıda en önemli fark[ın], mezar taşının şeklinde ortaya çık[tığını] söyledikten sonra..." (Hilmi Yavuz)
+  tknz: |
+    " Eldem , Osmanlıda en önemli fark[ın] , mezar taşının şeklinde ortaya çık[tığını] söyledikten sonra ... " ( Hilmi Yavuz )
+
+#3. Kaynak olarak verilen kitap veya makalelerin künyelerine ilişkin bazı ayrıntıları göstermek için kullanılır:
+# TODO: ambiguous
+#- text: |
+#    Reşat Nuri [Güntekin], Çalıkuşu, Dersaadet, 1922. Server Bedi [Peyami Safa]
+#  tknz: |
+#    Reşat Nuri [ Güntekin ] , Çalıkuşu , Dersaadet , 1922 . Server Bedi [ Peyami Safa ]
+
+
+
+
+###################################################################Kesme İşareti ( ' )
+#1. Özel adlara getirilen iyelik, durum ve bildirme ekleri kesme işaretiyle ayrılır:
+- text: |
+    Kurtuluş Savaşı'nı, Atatürk'üm, Türkiye'mizin, Fatih Sultan Mehmet'e, Muhibbi'nin,
+    Gül Baba'ya, Sultan Ana'nın, Mehmet Emin Yurdakul'dan, Kâzım Karabekir'i, Yunus Emre'yi,
+    Ziya Gökalp'tan, Refik Halit Karay'mış, Ahmet Cevat Emre'dir, Namık Kemal'se, Şinasi'yle,
+    Alman'sınız, Kırgız'ım, Karakeçili'nin, Osmanlı Devleti'ndeki, Cebrail'den,
+    Çanakkale Boğazı'nın, Samanyolu'nda, Sait Halim Paşa Yalısı'ndan, Resmî Gazete'de,
+    Millî Eğitim Temel Kanunu'na, Telif Hakkı Yayın ve Satış Yönetmeliği'ni,
+    Eski Çağ'ın, Yükselme Dönemi'nin, Cumhuriyet Dönemi Türk Edebiyatı'na vb.
+  tknz: |
+    Kurtuluş Savaşı'nı , Atatürk'üm , Türkiye'mizin , Fatih Sultan Mehmet'e , Muhibbi'nin ,
+    Gül Baba'ya , Sultan Ana'nın , Mehmet Emin Yurdakul'dan , Kâzım Karabekir'i , Yunus Emre'yi ,
+    Ziya Gökalp'tan , Refik Halit Karay'mış , Ahmet Cevat Emre'dir , Namık Kemal'se , Şinasi'yle ,
+    Alman'sınız , Kırgız'ım , Karakeçili'nin , Osmanlı Devleti'ndeki , Cebrail'den ,
+    Çanakkale Boğazı'nın , Samanyolu'nda , Sait Halim Paşa Yalısı'ndan , Resmî Gazete'de ,
+    Millî Eğitim Temel Kanunu'na , Telif Hakkı Yayın ve Satış Yönetmeliği'ni ,
+    Eski Çağ'ın , Yükselme Dönemi'nin , Cumhuriyet Dönemi Türk Edebiyatı'na vb.
+- text: |
+    "Onun için Batı'da bunlara birer fonksiyon buluyorlar." (Burhan Felek)
+  tknz: |
+    " Onun için Batı'da bunlara birer fonksiyon buluyorlar . " ( Burhan Felek )
+- text: |
+    1919 senesi Mayıs'ının 19'uncu günü Samsun'a çıktım. (Atatürk)
+  tknz: |
+    1919 senesi Mayıs'ının 19'uncu günü Samsun'a çıktım . ( Atatürk )
+# Yer bildiren özel isimlerde kısaltmalı söyleyiş söz konusu olduğu zaman ekten önce kesme işareti kullanılır:
+- text: |
+    Hisar'dan, Boğaz'dan vb.
+  tknz: |
+    Hisar'dan , Boğaz'dan vb.
+# Belli bir kanun, tüzük, yönetmelik kastedildiğinde büyük harfle yazılan kanun, tüzük, yönetmelik sözlerinin ek alması durumunda kesme işareti kullanılır:
+- text: |
+    Bu Kanun'un 17. maddesinin c bendi...
+  tknz: |
+    Bu Kanun'un 17. maddesinin c bendi ...
+- text: |
+    Yukarıda adı geçen Yönetmelik'in 2'nci maddesine göre... vb.
+  tknz: |
+    Yukarıda adı geçen Yönetmelik'in 2'nci maddesine göre ... vb.
+# Özel adlar için yay ayraç içinde bir açıklama yapıldığında kesme işareti yay ayraçtan önce kullanılır:
+- text: |
+    Yunus Emre'nin (1240?-1320), Yakup Kadri'nin (Karaosmanoğlu) vb.
+  tknz: |
+    Yunus Emre'nin ( 1240?-1320 ) , Yakup Kadri'nin ( Karaosmanoğlu ) vb.
+# Ek getirildiğinde Avrupa Birliği kesme işareti ile kullanılır:
+- text: |
+    Avrupa Birliği'ne üye ülkeler...
+  tknz: |
+    Avrupa Birliği'ne üye ülkeler ...
+# UYARI: Sonunda 3. teklik kişi iyelik eki olan özel ada, bu ek dışında başka bir iyelik eki getirildiğinde kesme işareti konmaz:
+- text: |
+    Boğaz Köprümüzün güzelliği, Amik Ovamızın bitki örtüsü, Kuşadamızdaki liman vb.
+  tknz: |
+    Boğaz Köprümüzün güzelliği , Amik Ovamızın bitki örtüsü , Kuşadamızdaki liman vb.
+#UYARI: Kurum, kuruluş, kurul, birleşim, oturum ve iş yeri adlarına gelen ekler kesmeyle ayrılmaz:
+- text: |
+    Türkiye Büyük Millet Meclisine, Türk Dil Kurumundan, Türkiye Petrolleri Anonim Ortaklığına,
+    Türk Dili ve Edebiyatı Bölümü Başkanlığının; Bakanlar Kurulunun, Danışma Kurulundan,
+    Yürütme Kuruluna; Türkiye Büyük Millet Meclisinin 112'nci Birleşiminin 2'nci Oturumunda;
+    Mavi Köşe Bakkaliyesinden vb.
+  tknz: |
+    Türkiye Büyük Millet Meclisine , Türk Dil Kurumundan , Türkiye Petrolleri Anonim Ortaklığına ,
+    Türk Dili ve Edebiyatı Bölümü Başkanlığının ; Bakanlar Kurulunun , Danışma Kurulundan ,
+    Yürütme Kuruluna ; Türkiye Büyük Millet Meclisinin 112'nci Birleşiminin 2'nci Oturumunda ;
+    Mavi Köşe Bakkaliyesinden vb.
+#UYARI: Başbakanlık, Rektörlük vb. sözler ünlüyle başlayan bir ek geldiğinde Başbakanlığa, Rektörlüğe vb. biçimlerde yazılır.
+#UYARI: Özel adlara getirilen yapım ekleri, çokluk eki ve bunlardan sonra gelen diğer ekler kesmeyle ayrılmaz:
+- text: |
+    Türklük, Türkleşmek, Türkçü, Türkçülük, Türkçe, Müslümanlık, Hristiyanlık, Avrupalı,
+    Avrupalılaşmak, Aydınlı, Konyalı, Bursalı, Ahmetler, Mehmetler, Yakup Kadriler,
+    Türklerin, Türklüğün, Türkleşmekte, Türkçenin, Müslümanlıkta, Hollandalıdan, Hristiyanlıktan, Atatürkçülüğün vb.
+  tknz: |
+    Türklük , Türkleşmek , Türkçü , Türkçülük , Türkçe , Müslümanlık , Hristiyanlık , Avrupalı ,
+    Avrupalılaşmak , Aydınlı , Konyalı , Bursalı , Ahmetler , Mehmetler , Yakup Kadriler ,
+    Türklerin , Türklüğün , Türkleşmekte , Türkçenin , Müslümanlıkta , Hollandalıdan , Hristiyanlıktan , Atatürkçülüğün vb.
+#UYARI: Sonunda p, ç, t, k ünsüzlerinden biri bulunan Ahmet, Çelik, Halit, Şahap; Bosna-Hersek; Kerkük, Sinop, Tokat, Zonguldak gibi özel adlara ünlüyle başlayan ek getirildiğinde kesme işaretine rağmen Ahmedi, Halidi, Şahabı; Bosna-Herseği; Kerküğü, Sinobu, Tokadı, Zonguldağı biçiminde son ses yumuşatılarak söylenir.
+#UYARI: Özel adlar yerine kullanılan "o" zamiri cümle içinde büyük harfle yazılmaz ve kendisinden sonra gelen ekler kesme işaretiyle ayrıl­maz.
+
+#2. Kişi adlarından sonra gelen saygı ve unvan sözlerine getirilen ekleri ayırmak için konur:
+- text: |
+    Nihat Bey'e, Ayşe Hanım'dan, Mahmut Efendi'ye, Enver Paşa'ya; Türk Dil Kurumu Başkanı'na vb.
+  tknz: |
+    Nihat Bey'e , Ayşe Hanım'dan , Mahmut Efendi'ye , Enver Paşa'ya ; Türk Dil Kurumu Başkanı'na vb.
+
+#3. Kısaltmalara getirilen ekleri ayırmak için konur:
+- text: |
+    TBMM'nin, TDK'nin, BM'de, ABD'de, TV'ye vb.
+  tknz: |
+    TBMM'nin , TDK'nin , BM'de , ABD'de , TV'ye vb.
+
+#4. Sayılara getirilen ekleri ayırmak için konur:
+- text: |
+    1985'te, 8'inci madde, 2'nci kat; 7,65'lik, 9,65'lik, 657'yle vb.
+  tknz: |
+    1985'te , 8'inci madde , 2'nci kat ; 7,65'lik , 9,65'lik , 657'yle vb.
+
+#5. Belirli bir tarih bildiren ay ve gün adlarına gelen ekleri ayırmak için konur:
+- text: |
+    Başvurular 17 Aralık'a kadar sürecektir.
+  tknz: |
+    Başvurular 17 Aralık'a kadar sürecektir .
+- text: |
+    Yabancı Sözlere Karşılıklar Kılavuzu'nun veri tabanının Genel Ağ'da hizmete sunulduğu gün olan 12 Temmuz 2010 Pazartesi'nin TDK için önemi büyüktür.
+  tknz: |
+    Yabancı Sözlere Karşılıklar Kılavuzu'nun veri tabanının Genel Ağ'da hizmete sunulduğu gün olan 12 Temmuz 2010 Pazartesi'nin TDK için önemi büyüktür .
+
+#6. Seslerin ölçü ve söyleyiş gereği düştüğünü göstermek için kullanılır:
+- text: |
+    Bir ok attım karlı dağın ardına
+    Düştü m'ola sevdiğimin yurduna
+    İl yanmazken ben yanarım derdine
+    Engel aramızı açtı n'eyleyim (Karacaoğlan)
+  tknz: |
+    Bir ok attım karlı dağın ardına
+    Düştü m'ola sevdiğimin yurduna
+    İl yanmazken ben yanarım derdine
+    Engel aramızı açtı n'eyleyim ( Karacaoğlan )
+- text: |
+    Şems'in gözlerine bir şüphe çöreklendi: "Dostum ne'n var? Her şey yolunda mı?" (Elif Şafak)
+  tknz: |
+    Şems'in gözlerine bir şüphe çöreklendi : " Dostum ne'n var ? Her şey yolunda mı ? " ( Elif Şafak )
+- text: |
+    Güzelliğin on par'etmez
+    Bu bendeki aşk olmasa (Âşık Veysel)
+  tknz: |
+    Güzelliğin on par'etmez
+    Bu bendeki aşk olmasa ( Âşık Veysel )
+
+
+#7. Bir ek veya harften sonra gelen ekleri ayırmak için konur:
+- text: |
+    a'dan z'ye kadar,
+  tknz: |
+    a'dan z'ye kadar ,
+#TODO: not supported!
+#- text: |
+#    Türkçede -lık'la yapılmış sözler.
+#  tknz: |
+#    Türkçede -lık'la yapılmış sözler .
+
+
+
+####################################################################################
+################################## rules discovered during tests
+####################################################################################
+
+- text: |
+    (Tutanak Hizmetleri Başkanlığı geldi.)
+  tknz: |
+    ( Tutanak Hizmetleri Başkanlığı geldi . )
+
+- text: |
+    1.- madde bir
+  tknz: |
+    1.- madde bir
+- text: |
+    a.- madde bir
+  tknz: |
+    a.- madde bir
+- text: |
+    I.- madde bir
+  tknz: |
+    I.- madde bir
+- text: |
+    1.- madde
+  tknz: |
+    1.- madde
+- text: |
+    a.- madde
+  tknz: |
+    a.- madde
+- text: |
+    I.- madde
+  tknz: |
+    I.- madde
+
+- text: |
+    verdikleri (11/18, 11/21, 11/22) esas
+  tknz: |
+    verdikleri ( 11/18 , 11/21 , 11/22 ) esas
+
+- text: |
+    ...Baluken ve 21 milletvekilinin, Türkiye'de iş kazaları...
+  tknz: |
+    ... Baluken ve 21 milletvekilinin , Türkiye'de iş kazaları ...
+
+- text: |
+    Açılma Saati: 14.00
+  tknz: |
+    Açılma Saati : 14.00
+
+- text: |
+    Yılmaz ve 21 milletvekilinin; uygulamalarında siyasi nüfuzunu
+  tknz: |
+    Yılmaz ve 21 milletvekilinin ; uygulamalarında siyasi nüfuzunu
+
+- text: |
+    BAŞKAN: Başkan Vekili Mehmet SAĞLAM
+  tknz: |
+    BAŞKAN : Başkan Vekili Mehmet SAĞLAM
+
+- text: |
+    KÂTİP ÜYELER: Mustafa HAMARAT (Ordu), Muhammet Bilal MACİT (İstanbul)
+  tknz: |
+    KÂTİP ÜYELER : Mustafa HAMARAT ( Ordu ) , Muhammet Bilal MACİT ( İstanbul )
+
+- text: |
+    -----0-----
+  tknz: |
+    -----0-----
+
+- text: |
+    ORMAN VE SU İŞLERİ BAKANI VEYSEL EROĞLU (Afyonkarahisar) - Irlamaz Vadisi'ni gördünüz mü?
+  tknz: |
+    ORMAN VE SU İŞLERİ BAKANI VEYSEL EROĞLU ( Afyonkarahisar ) - Irlamaz Vadisi'ni gördünüz mü ?
+
+- text: |
+    ...ilgili şurada; "Bakanlık, ...
+  tknz: |
+    ... ilgili şurada ; " Bakanlık , ...
+
+- text: |
+    BAŞKAN - Sayın milletvekilleri, Türkiye...
+  tknz: |
+    BAŞKAN - Sayın milletvekilleri , Türkiye ...
+
+- text: |
+    sesleniyorum; Iğdır'ı hayalî haritalar iç
+  tknz: |
+    sesleniyorum ; Iğdır'ı hayalî haritalar iç
+
+- text: |
+    birseyi verecektir. Iğdır'ın yapısını
+  tknz: |
+    birseyi verecektir . Iğdır'ın yapısını
+
+- text: |
+    OKTAY VURAL (İzmir) - Konuşmuyorsunuz.
+  tknz: |
+    OKTAY VURAL ( İzmir ) - Konuşmuyorsunuz .
+
+- text: |
+    Ben 5-6 bini son üç
+  tknz: |
+    Ben 5-6 bini son üç
+
+- text: |
+    gelir beklentisi 1,4 milyon lira
+  tknz: |
+    gelir beklentisi 1,4 milyon lira
+
+- text: |
+    şunu söylüyorlar: "Tarım Bakanına biz teşekkür ediyoruz; daha önce 'Limuzini','Chevroleti' biz araba markası
+  tknz: |
+    şunu söylüyorlar : " Tarım Bakanına biz teşekkür ediyoruz ; daha önce 'Limuzini' , 'Chevroleti' biz araba markası
+
+- text: |
+    da size söyleyeyim: "Madde 1: Ben her zaman haklıyım. Madde 2: Haksız olduğum durumlarda 1'inci maddeye bakınız." (CHP sıralarından alkışlar)
+    Teşekkür ederim. [ak parti sıralarından alkışlar, MHP ve CHP sıralarından alkışlar (!)]
+  tknz: |
+    da size söyleyeyim : " Madde 1 : Ben her zaman haklıyım . Madde 2 : Haksız olduğum durumlarda 1'inci maddeye bakınız . " ( CHP sıralarından alkışlar )
+    Teşekkür ederim . [ ak parti sıralarından alkışlar , MHP ve CHP sıralarından alkışlar ( ! ) ]
+
+- text: |
+    Bir diğer şeyi söyleyeyim: 5199 sayılı bir Kanun var, Hayvanları
+  tknz: |
+    Bir diğer şeyi söyleyeyim : 5199 sayılı bir Kanun var , Hayvanları
+
+- text: |
+    İhsan Sabri Çağlayangil'in
+  tknz: |
+    İhsan Sabri Çağlayangil'in
+
+- text: |
+    düzenleyen ve konuşan Halide Edip'tir.
+  tknz: |
+    düzenleyen ve konuşan Halide Edip'tir .
+- text: |
+    yüzde 40'tır.
+  tknz: |
+    yüzde 40'tır .
+
+- text: |
+    faiz oranı % 25 civarındaydı.
+    olan , % 2 olmali
+  tknz: |
+    faiz oranı % 25 civarındaydı .
+    olan , % 2 olmali
+
+- text: |
+    başladık, İzmir'de yapıyoruz,
+  tknz: |
+    başladık , İzmir'de yapıyoruz ,
+
+- text: |
+    yüzde 25, 26'lar civarındadır.
+  tknz: |
+    yüzde 25 , 26'lar civarındadır .
+
+- text: |
+    edilmesi için alınması gereken önlemlerin ,
+  tknz: |
+    edilmesi için alınması gereken önlemlerin ,
+
+- text: |
+    hariç, 53.540 personel ve 1.499 tane
+  tknz: |
+    hariç , 53.540 personel ve 1.499 tane
+- text: |
+    değerli milletvekilleri; 14 kasım dünya diyabet günü. ulkemizde 2,6 milyon
+  tknz: |
+    değerli milletvekilleri ; 14 kasım dünya diyabet günü . ulkemizde 2,6 milyon
+
+- text: |
+    , uzman yardımcılığı
+  tknz: |
+    , uzman yardımcılığı
+- text: |
+    , 25 bin TL'ye
+    …yüzde 51,6
+  tknz: |
+    , 25 bin TL'ye
+    … yüzde 51,6
+
+- text: |
+    yüzde 100, ortaöğretimde yüzde 85 oranına
+  tknz: |
+    yüzde 100 , ortaöğretimde yüzde 85 oranına
+
+- text: |
+    yüzde 11 iken bizde yüzde 18'dir. Bu rakamı niye
+  tknz: |
+    yüzde 11 iken bizde yüzde 18'dir . Bu rakamı niye
+
+- text: |
+    Gaziantep'teki çiftçilerin %26'sı Antepfıstığı tarımıyla uğraşarak geçimini bu üründen sağlamaktadır.
+    yanı sıra elektrikten alınan %1 enerji fonu, %2
+  tknz: |
+    Gaziantep'teki çiftçilerin %26'sı Antepfıstığı tarımıyla uğraşarak geçimini bu üründen sağlamaktadır .
+    yanı sıra elektrikten alınan % 1 enerji fonu , % 2
+
+- text: |
+    Getirilmek istenen 4+4+4 formüllü eğitim yasasıyla kadın okulsuzlaştırılmak isteniyor.
+    Getirilmek istenen 4+4+4'u oyle
+    Getirilmek istenen "4+4+4'u oyle
+    Getirilmek istenen? 4+4+4'u oyle
+    onu da söyleyelim. 4-4-4'ü bunun için
+    onu da söyleyelim, 4-4-4'ü bunun için
+    onu da söyleyelim; 4-4-4'ü bunun için
+    onu da söyleyelim! 4-4-4'ü bunun için
+    onu da söyleyelim. "4-4-4'ü bunun için
+    "4+4+4" diye
+    '4+4+4' diye
+    evet ben "4+4+4" diye
+    evet ben '4+4+4' diye
+    evet ben, "4+4+4" diye
+    evet ben, '4+4+4' diye
+    evet ben. "4+4+4" diye
+    evet ben. '4+4+4' diye
+    arkadaşlar, 4+4+4, 6287 sayılı
+    arkadaşlar, 4+4+4, sayılı
+    arkadaşlar, 4+4+4, vb. sayılı
+
+
+  tknz: |
+    Getirilmek istenen 4 + 4 + 4 formüllü eğitim yasasıyla kadın okulsuzlaştırılmak isteniyor .
+    Getirilmek istenen 4 + 4 + 4'u oyle
+    Getirilmek istenen " 4 + 4 + 4'u oyle
+    Getirilmek istenen ? 4 + 4 + 4'u oyle
+    onu da söyleyelim . 4-4-4'ü bunun için
+    onu da söyleyelim , 4-4-4'ü bunun için
+    onu da söyleyelim ; 4-4-4'ü bunun için
+    onu da söyleyelim ! 4-4-4'ü bunun için
+    onu da söyleyelim . " 4-4-4'ü bunun için
+    " 4 + 4 + 4 " diye
+    ' 4 + 4 + 4 ' diye
+    evet ben " 4 + 4 + 4 " diye
+    evet ben ' 4 + 4 + 4 ' diye
+    evet ben , " 4 + 4 + 4 " diye
+    evet ben , ' 4 + 4 + 4 ' diye
+    evet ben . " 4 + 4 + 4 " diye
+    evet ben . ' 4 + 4 + 4 ' diye
+    arkadaşlar , 4 + 4 + 4 , 6287 sayılı
+    arkadaşlar , 4 + 4 + 4 , sayılı
+    arkadaşlar , 4 + 4 + 4 , vb. sayılı
+
+- text: |
+    gelelim 4+4+4'e yani "dert+dert+dert"e. Bizim eğitim
+  tknz: |
+    gelelim 4 + 4 + 4'e yani " dert + dert + dert "e . Bizim eğitim
+
+- text: |
+    ilgili bile .
+  tknz: |
+    ilgili bile .
+
+- text: |
+    yüzölçümünün % 70'inin çayır ve
+  tknz: |
+    yüzölçümünün % 70'inin çayır ve
+
+
+- text: |
+    kısaltacağız , birçok bu türlü
+  tknz: |
+    kısaltacağız , birçok bu türlü
+
+- text: |
+    Adres, automobile.de uzantılı bir
+  tknz: |
+    Adres , automobile.de uzantılı bir
+- text: |
+    demek mümkündü.Sanki mahkeme kabul
+  tknz: |
+    demek mümkündü . Sanki mahkeme kabul
+- text: |
+    kamplarında eğitim alan R.K., polise Aranmamak için E.A'ya eylemler; A.Z., K.Q. ve A.A.'ya ise neler neler
+  tknz: |
+    kamplarında eğitim alan R . K . , polise Aranmamak için E . A'ya eylemler ; A . Z . , K . Q . ve A . A.'ya ise neler neler
+
+- text: |
+    bulut ve WiFi PayPal üzerinden iPhone PayPal vesair iOs'u PayPal'i birseyler iPad,iMac, iWhatever; PayPal,DayDal, ZayZol
+  tknz: |
+    bulut ve WiFi PayPal üzerinden iPhone PayPal vesair iOs'u PayPal'i birseyler iPad , iMac , iWhatever ; PayPal , DayDal , ZayZol
+- text: |
+    WiFi üzerinden iPhone vesair
+  tknz: |
+    WiFi üzerinden iPhone vesair
+
+- text: |
+    A2'nin ön...otomobil yeni A2'nin ön P1 izlemesini P10, sunacak P2.
+  tknz: |
+    A2'nin ön ... otomobil yeni A2'nin ön P1 izlemesini P10 , sunacak P2 .
+
+- text: |
+    birisi ︙oyle boyle - ︙kimler (︙oyle "︙miymis︙"︙.︙.'-gercek
+  tknz: |
+    birisi ︙ oyle boyle - ︙ kimler ( ︙ oyle " ︙ miymis ︙ "︙ . ︙ . ' - gercek
+- text: |
+    dincer (devamla)-şimdi oraya nitelik
+    dincer (devamla)- şimdi oraya nitelik
+    dincer (devamla) - şimdi oraya nitelik
+    dincer (devamla)-…şimdi oraya nitelik
+    dincer (devamla)- …şimdi oraya nitelik
+    dincer (devamla) - …şimdi oraya nitelik
+    dincer (devamla) - …şimdi, oraya nitelik
+    dincer (devamla) - … şimdi oraya nitelik
+    dincer (devamla) - 11.350 tane fidan, 303
+    dincer (devamla)-…derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla)- …derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla)- … derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) -…derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) - …derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) - … derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla)-...şimdi oraya nitelik
+    dincer (devamla)- ...şimdi oraya nitelik
+    dincer (devamla) - ...şimdi oraya nitelik
+    dincer (devamla) - ...şimdi, oraya nitelik
+    dincer (devamla) - ... şimdi oraya nitelik
+    dincer (devamla)-...derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla)- ...derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla)- ... derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) -...derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) - ...derviş'in taşeronluğunu yapan, milliyetçilerin
+    dincer (devamla) - ... derviş'in taşeronluğunu yapan, milliyetçilerin
+    'de yüzde 91 ilköğretimde okullaşma,…
+    'de yüzde 91 ilköğretimde okullaşma;…
+    'de yüzde 91 ilköğretimde okullaşma!…
+    'de yüzde 91 ilköğretimde okullaşma.…
+    'de yüzde 91 ilköğretimde okullaşma¬…
+    'de yüzde 91 ilköğretimde okullaşma…,
+    'de yüzde 91 ilköğretimde okullaşma…;
+    'de yüzde 91 ilköğretimde okullaşma…!
+    'de yüzde 91 ilköğretimde okullaşma….
+    'de yüzde 91 ilköğretimde okullaşma…¬
+  tknz: |
+    dincer ( devamla ) - şimdi oraya nitelik
+    dincer ( devamla ) - şimdi oraya nitelik
+    dincer ( devamla ) - şimdi oraya nitelik
+    dincer ( devamla ) - … şimdi oraya nitelik
+    dincer ( devamla ) - … şimdi oraya nitelik
+    dincer ( devamla ) - … şimdi oraya nitelik
+    dincer ( devamla ) - … şimdi, oraya nitelik
+    dincer ( devamla ) - … şimdi oraya nitelik
+    dincer ( devamla ) - 11.350 tane fidan , 303
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - … derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... şimdi oraya nitelik
+    dincer ( devamla ) - ... şimdi oraya nitelik
+    dincer ( devamla ) - ... şimdi oraya nitelik
+    dincer ( devamla ) - ... şimdi , oraya nitelik
+    dincer ( devamla ) - ... şimdi oraya nitelik
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    dincer ( devamla ) - ... derviş'in taşeronluğunu yapan , milliyetçilerin
+    ' de yüzde 91 ilköğretimde okullaşma , …
+    ' de yüzde 91 ilköğretimde okullaşma ; …
+    ' de yüzde 91 ilköğretimde okullaşma ! …
+    ' de yüzde 91 ilköğretimde okullaşma . …
+    ' de yüzde 91 ilköğretimde okullaşma ¬ …
+    ' de yüzde 91 ilköğretimde okullaşma … ,
+    ' de yüzde 91 ilköğretimde okullaşma … ;
+    ' de yüzde 91 ilköğretimde okullaşma … !
+    ' de yüzde 91 ilköğretimde okullaşma … .
+    ' de yüzde 91 ilköğretimde okullaşma … ¬
+- text: |
+    burada "delil" dediğimiz… Aslında bina
+    inceleme başlattı. Yahya Fidan'a…
+    inceleme başlattı. Yahya Fidan!…
+    yahya fidan…"
+    Bakanlığa intikal etmiş. bakanlık…
+  tknz: |
+    burada "delil" dediğimiz … Aslında bina
+    inceleme başlattı . Yahya Fidan'a …
+    inceleme başlattı . Yahya Fidan ! …
+    yahya fidan … "
+    Bakanlığa intikal etmiş . bakanlık …
+
+- text: |
+    bunu diyebilir. 30 kuruşa metreküpünün
+    milyon adet fidan dikilecektir." 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir!" 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir," 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir:" 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir¬" 15 milyon adet fidan dikeceksiniz
+  tknz: |
+    bunu diyebilir . 30 kuruşa metreküpünün
+    milyon adet fidan dikilecektir . " 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir ! " 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir , " 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir : " 15 milyon adet fidan dikeceksiniz
+    milyon adet fidan dikilecektir ¬ " 15 milyon adet fidan dikeceksiniz
+
+- text: |
+    korkmaz (isparta) - "küçük adamlar
+  tknz: |
+    korkmaz ( isparta ) - " küçük adamlar
+- text: |
+    veysel bey (devamla) - 1972 yıllarında
+    veysel bey (devamla) - 1972'incisi: efendim,
+    vermek istiyorum: 1996'yla 2009 yılları
+    mesela, -sudan söz ettiği zaman,
+  tknz: |
+    veysel bey ( devamla ) - 1972 yıllarında
+    veysel bey ( devamla ) - 1972'incisi : efendim ,
+    vermek istiyorum : 1996'yla 2009 yılları
+    mesela , - sudan söz ettiği zaman ,
+
+- text: |
+    bir değer yani 6-7 kişiden birini
+    istihbarat sonucu, F-16'larla
+  tknz: |
+    bir değer yani 6-7 kişiden birini
+    istihbarat sonucu , F-16'larla
+
+- text: |
+    Şimşek'in cevabı (7/11324)
+    verdiğimiz (11/18), (11/21) ve
+    ilişkin önergesi (10/410)
+    milletvekilleri, (11/15) esas numaralı
+    milletvekilleri! (11/15) esas numaralı
+    milletvekilleri? (11/15) esas numaralı
+    milletvekilleri¬ (11/15) esas numaralı
+    sayin milletvekilleri. (11/15) esas numaralı
+  tknz: |
+    Şimşek'in cevabı ( 7/11324 )
+    verdiğimiz ( 11/18 ) , ( 11/21 ) ve
+    ilişkin önergesi ( 10/410 )
+    milletvekilleri , ( 11/15 ) esas numaralı
+    milletvekilleri ! ( 11/15 ) esas numaralı
+    milletvekilleri ? ( 11/15 ) esas numaralı
+    milletvekilleri ¬ ( 11/15 ) esas numaralı
+    sayin milletvekilleri . ( 11/15 ) esas numaralı
+- text: |
+    dairesinden bir yazı aldı 14/9/2012 tarihinde yani
+  tknz: |
+    dairesinden bir yazı aldı 14/9/2012 tarihinde yani
+
+- text: |
+    Topcu'yla ilgili "hamaset" demek
+    okuyayım: "Herhâlde içeriği şudur: 'Niçin bu kadar
+  tknz: |
+    Topcu'yla ilgili "hamaset" demek
+    okuyayım : " Herhâlde içeriği şudur : ' Niçin bu kadar
+
+- text: |
+    bununla da yetinmiyor, "Benim burada bir kâr mahrumiyetim var" diyor. Yani "Ben bu
+  tknz: |
+    bununla da yetinmiyor , " Benim burada bir kâr mahrumiyetim var " diyor . Yani " Ben bu
+
+- text: |
+    vural (izmir) - "evet." dediniz.
+  tknz: |
+    vural ( izmir ) - " evet . " dediniz .
+- text: |
+    vural (izmir)- 'evet.' dediniz.
+  tknz: |
+    vural ( izmir ) - ' evet . ' dediniz .
+- text: |
+    oktay vural (izmir) - "savunmayacağız" dediniz, "bakan savunur." dediniz.
+  tknz: |
+    oktay vural ( izmir ) - "savunmayacağız" dediniz , " bakan savunur . " dediniz .
+- text: |
+    alim kim (kütahya) - 2002'de 35 bin. Bakan burada, yanlış bilgilendiriyorsun. 34 bin 500 küsur.
+  tknz: |
+    alim kim ( kütahya ) - 2002'de 35 bin . Bakan burada , yanlış bilgilendiriyorsun . 34 bin 500 küsur .
+- text: |
+    hizmet etmiş bir kişiyim. "Gelin şu doğru işleri yapın
+  tknz: |
+    hizmet etmiş bir kişiyim . " Gelin şu doğru işleri yapın
+
+- text: |
+    birsey
+  tknz: |
+    birsey
+- text: |
+    birsey.
+  tknz: |
+    birsey .
+- text: |
+    birsey!
+  tknz: |
+    birsey !
+- text: |
+    birsey,
+  tknz: |
+    birsey ,
+- text: |
+    birsey...
+  tknz: |
+    birsey ...
+- text: |
+    'birsey
+  tknz: |
+    ' birsey
+- text: |
+    "birsey
+  tknz: |
+    " birsey
+- text: |
+    307
+  tknz: |
+    307
+- text: |
+    307.
+  tknz: |
+    307.
+- text: |
+    307'
+  tknz: |
+    307 '
+- text: |
+    307!
+  tknz: |
+    307 !
+- text: |
+    307?
+  tknz: |
+    307 ?
+- text: |
+    307¬
+  tknz: |
+    307 ¬
+- text: |
+    '307
+  tknz: |
+    ' 307
+- text: |
+    "307
+  tknz: |
+    " 307
+- text: |
+    '
+  tknz: |
+    '
+- text: |
+    "
+  tknz: |
+    "
+- text: |
+    :
+  tknz: |
+    :
+- text: |
+    ;
+  tknz: |
+    ;
+- text: |
+    -
+  tknz: |
+    -
+- text: |
+    ,
+  tknz: |
+    ,
+- text: |
+    .
+  tknz: |
+    .
+- text: |
+    =
+  tknz: |
+    =
+- text: |
+    ¬
+  tknz: |
+    ¬
+
+- text: |
+    sızamasalar bile 2/B arazilerinin
+  tknz: |
+    sızamasalar bile 2/B arazilerinin
+
+# not supported : 40 milyar -40 katrilyon eski parayla- . minus 40 or dash 40?
+- text: |
+    konusunda geldiğimizde -ki özellikle
+    7,5'a 40 milyar -40 katrilyo
+    çok iyi biliyor- 14 milyon
+    bu arada -falan konusunda geldiğimizde- diyorum,
+    ben cd'de -biz bunlardan ne aldığımızı biliyoruz- tam 1,5
+    kurumsal hâle getirilmesi eleştirilecek -neyse- "yok efendim şu
+    çalışmalarınızdan verim alacağınız, çalışan-iş yeri barışını
+    çalışmalarınızdan verim alacağınız; çalışan-iş yeri barışını
+    çalışmalarınızdan verim alacağınız "çalışan-iş yeri barışını
+    çalışmalarınızdan verim alacağınız! çalışan-iş yeri barışını
+    çalışmalarınızdan verim alacağınız¬ çalışan-iş yeri barışını
+    milyon -izmir'in 11'di- kira ve benzeri gelirleri
+    parayla 2 milyon para- alıyorsunuz. 15 milyon ağaç dikmek
+    788 bin 499 metreküp -yani 73 milyon metreküp- malzemeyle
+  tknz: |
+    konusunda geldiğimizde - ki özellikle
+    7,5'a 40 milyar -40 katrilyo
+    çok iyi biliyor - 14 milyon
+    bu arada - falan konusunda geldiğimizde - diyorum ,
+    ben cd'de - biz bunlardan ne aldığımızı biliyoruz - tam 1,5
+    kurumsal hâle getirilmesi eleştirilecek -neyse- " yok efendim şu
+    çalışmalarınızdan verim alacağınız , çalışan - iş yeri barışını
+    çalışmalarınızdan verim alacağınız ; çalışan - iş yeri barışını
+    çalışmalarınızdan verim alacağınız " çalışan - iş yeri barışını
+    çalışmalarınızdan verim alacağınız ! çalışan - iş yeri barışını
+    çalışmalarınızdan verim alacağınız ¬ çalışan - iş yeri barışını
+    milyon - izmir'in 11'di - kira ve benzeri gelirleri
+    parayla 2 milyon para - alıyorsunuz . 15 milyon ağaç dikmek
+    788 bin 499 metreküp - yani 73 milyon metreküp - malzemeyle
+
+- text: |
+    evet "cd'yi aldim" demisti.
+    evet "vb. seyler oldu" demisti.
+    evet "ben, geldim" demisti.
+    evet "o; aldim" demisti.
+    evet "12 aldim" demisti.
+    evet "12'yi aldim" demisti.
+    evet "12.'yi aldim" demisti.
+    evet "12-13 aldim" demisti.
+    (MHP sıralarından "ooo…" sesleri)
+    (MHP sıralarından "eee?" sesleri)
+    sıralarından "oo" sesleri) KPSS'yle mi girdiler?
+    sıralarından "oo" sesleri) KPSS" dedi
+    sıralarından "oo" sesleri) KPSS.
+    sıralarından "oo" sesleri) KPSS!
+    sıralarından "oo" sesleri) KPSS?
+    sıralarından "oo" sesleri) KPSS¬
+    sıralarından "oo" sesleri) KPSS...
+    yani "Yükseköğretime Geçiş Sınavı"nda, birinci basamak sınavında meslek
+    yani "Yükseköğretime Geçiş Sınavı"nda; birinci basamak sınavında meslek
+    yani "Yükseköğretime Geçiş Sınavı"nda! birinci basamak sınavında meslek
+    yani "Yükseköğretime Geçiş Sınavı"nda¬ birinci basamak sınavında meslek
+    yani "Yükseköğretime Geçiş Sınavı"nda. birinci basamak sınavında meslek
+    olmalıydınız, teessüf ederiz.'" diye bu şekilde Twitter'da
+    olmalıydınız, teessüf ederiz!'" diye bu şekilde Twitter'da
+    olmalıydınız, teessüf ederiz?'" diye bu şekilde Twitter'da
+    olmalıydınız, teessüf ederiz(?)'" diye bu şekilde Twitter'da
+    olmalıydınız, teessüf ederiz.¬" diye bu şekilde Twitter'da
+    omzunda, gelirler sizin davulunuzu 'dan, dan, dan' çalarlar
+    omzunda, gelirler sizin davulunuzu 'dan. dan. dan' çalarlar
+    omzunda, gelirler sizin davulunuzu 'dan! dan. dan' çalarlar
+    omzunda, gelirler sizin davulunuzu 'dan¬ dan. dan' çalarlar
+    omzunda, gelirler sizin davulunuzu 'dan? dan. dan' çalarlar
+    omzunda, gelirler sizin davulunuzu "dan, dan, dan" çalarlar
+    omzunda, gelirler sizin davulunuzu "dan. dan. dan" çalarlar
+    omzunda, gelirler sizin davulunuzu "dan! dan. dan" çalarlar
+    omzunda, gelirler sizin davulunuzu "dan¬ dan. dan" çalarlar
+    omzunda, gelirler sizin davulunuzu "dan? dan. dan" çalarlar
+  tknz: |
+    evet " cd'yi aldim " demisti .
+    evet " vb. seyler oldu " demisti .
+    evet " ben , geldim " demisti .
+    evet " o ; aldim " demisti .
+    evet " 12 aldim " demisti .
+    evet " 12'yi aldim " demisti .
+    evet " 12.'yi aldim " demisti .
+    evet " 12-13 aldim " demisti .
+    ( MHP sıralarından " ooo … " sesleri )
+    ( MHP sıralarından " eee ? " sesleri )
+    sıralarından "oo" sesleri ) KPSS'yle mi girdiler ?
+    sıralarından "oo" sesleri ) KPSS " dedi
+    sıralarından "oo" sesleri ) KPSS .
+    sıralarından "oo" sesleri ) KPSS !
+    sıralarından "oo" sesleri ) KPSS ?
+    sıralarından "oo" sesleri ) KPSS ¬
+    sıralarından "oo" sesleri ) KPSS ...
+    yani " Yükseköğretime Geçiş Sınavı "nda , birinci basamak sınavında meslek
+    yani " Yükseköğretime Geçiş Sınavı "nda ; birinci basamak sınavında meslek
+    yani " Yükseköğretime Geçiş Sınavı "nda ! birinci basamak sınavında meslek
+    yani " Yükseköğretime Geçiş Sınavı "nda ¬ birinci basamak sınavında meslek
+    yani " Yükseköğretime Geçiş Sınavı "nda . birinci basamak sınavında meslek
+    olmalıydınız , teessüf ederiz . ' " diye bu şekilde Twitter'da
+    olmalıydınız , teessüf ederiz ! ' " diye bu şekilde Twitter'da
+    olmalıydınız , teessüf ederiz ? ' " diye bu şekilde Twitter'da
+    olmalıydınız , teessüf ederiz ( ? ) ' " diye bu şekilde Twitter'da
+    olmalıydınız , teessüf ederiz . ¬ " diye bu şekilde Twitter'da
+    omzunda , gelirler sizin davulunuzu ' dan , dan , dan ' çalarlar
+    omzunda , gelirler sizin davulunuzu ' dan . dan . dan ' çalarlar
+    omzunda , gelirler sizin davulunuzu ' dan ! dan . dan ' çalarlar
+    omzunda , gelirler sizin davulunuzu ' dan ¬ dan . dan ' çalarlar
+    omzunda , gelirler sizin davulunuzu ' dan ? dan . dan ' çalarlar
+    omzunda , gelirler sizin davulunuzu " dan , dan , dan " çalarlar
+    omzunda , gelirler sizin davulunuzu " dan . dan . dan " çalarlar
+    omzunda , gelirler sizin davulunuzu " dan ! dan . dan " çalarlar
+    omzunda , gelirler sizin davulunuzu " dan ¬ dan . dan " çalarlar
+    omzunda , gelirler sizin davulunuzu " dan ? dan . dan " çalarlar
+
+- text: |
+    eğitimciler, 0-6, 3-5; 5-6: 5-6! 5-6. 5-6€ gibi yaş kategorilerini
+  tknz: |
+    eğitimciler , 0-6 , 3-5 ; 5-6 : 5-6 ! 5-6 . 5-6 € gibi yaş kategorilerini
+
+- text: |
+    ortaöğretimde yüzde 51,6, ilköğretimde yüzde 91,5; evet oyle
+  tknz: |
+    ortaöğretimde yüzde 51,6 , ilköğretimde yüzde 91,5 ; evet oyle
+
+- text: |
+    eğitim-sen'in tüzüğü'nde yer alan "eğitim-sen, toplumun bütün...
+  tknz: |
+    eğitim - sen'in tüzüğü'nde yer alan " eğitim - sen , toplumun bütün ...
+
+- text: |
+    2013 bütçesinde -inşallah, sizlerin de desteğiyle geçeceğine inanıyorum- bu rakam 47,5 milyar
+    kazandırılması gerekiyor. 1996'dan 2009'a kadar
+    devam etti. 442.722 öğrenciyi kaydettik biz.
+    devam etti. 442,5 öğrenciyi kaydettik biz.
+    yapılan -size soruyorum- 5-10 kişinin girdiği
+  tknz: |
+    2013 bütçesinde - inşallah , sizlerin de desteğiyle geçeceğine inanıyorum - bu rakam 47,5 milyar
+    kazandırılması gerekiyor . 1996'dan 2009'a kadar
+    devam etti . 442.722 öğrenciyi kaydettik biz .
+    devam etti . 442,5 öğrenciyi kaydettik biz .
+    yapılan - size soruyorum - 5-10 kişinin girdiği
+
+- text: |
+    65 vekâleten atama yapıldı. 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı, 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı; 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı! 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı- 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı¬ 21/11/2011 tarihinde
+    kitabın adı: "İşletme yönetimi" 21/10/2005 tarihinde YÖK
+    kitabın adı: 'İşletme yönetimi' 21/10/2005 tarihinde YÖK
+    kitabın adı: "İşletme yönetimi! 21/10/2005 tarihinde YÖK
+    elinden alıyor. 7/11/2005'te Sayın Dinçer itiraz
+  tknz: |
+    65 vekâleten atama yapıldı . 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı , 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı ; 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı ! 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı - 21/11/2011 tarihinde
+    65 vekâleten atama yapıldı ¬ 21/11/2011 tarihinde
+    kitabın adı : " İşletme yönetimi " 21/10/2005 tarihinde YÖK
+    kitabın adı : ' İşletme yönetimi ' 21/10/2005 tarihinde YÖK
+    kitabın adı : " İşletme yönetimi ! 21/10/2005 tarihinde YÖK
+    elinden alıyor . 7/11/2005'te Sayın Dinçer itiraz
+
+- text: |
+    diyor ki: "yoksul ... gösterdiler." "yoksul ... gösterdiler."
+    diyor ki: "yoksul ... gösterdiler.", "yoksul ... gösterdiler."
+    diyor ki: "yoksul ... gösterdiler."! "yoksul ... gösterdiler."
+    diyor ki: "yoksul ... gösterdiler.". "yoksul ... gösterdiler."
+    diyor ki: "yoksul ... gösterdiler."¬ "yoksul ... gösterdiler."
+  tknz: |
+    diyor ki : " yoksul ... gösterdiler . " " yoksul ... gösterdiler . "
+    diyor ki : " yoksul ... gösterdiler . " , " yoksul ... gösterdiler . "
+    diyor ki : " yoksul ... gösterdiler . " ! " yoksul ... gösterdiler . "
+    diyor ki : " yoksul ... gösterdiler . " . " yoksul ... gösterdiler . "
+    diyor ki : " yoksul ... gösterdiler . " ¬ " yoksul ... gösterdiler . "
+
+- text: |
+    açılan "hayat boyu öğrenme"yle ilgili
+  tknz: |
+    açılan " hayat boyu öğrenme "yle ilgili
+
+- text: |
+    (x)
+    (x) açık oylama kesin
+    (.) açık oylama kesin
+    orgutu (ILO)'nun yaptığı
+    "orgutu (ILO)"nun yaptığı
+    orgutu (ILO)!
+  tknz: |
+    ( x )
+    ( x ) açık oylama kesin
+    ( . ) açık oylama kesin
+    orgutu ( ILO ) 'nun yaptığı
+    " orgutu ( ILO ) "nun yaptığı
+    orgutu ( ILO ) !
+
+- text: |
+    ...vermek durumundayız.'" (CHP sıralarından alkışlar)
+    evet burası...bakın, bunun gibi
+    evet burası..."bakın, bunun gibi
+    evet burası...,bakın, bunun gibi
+    evet burası..."bakın, bunun gibi
+    evet burası...¬bakın, bunun gibi
+    evet burası... 'bakın, bunun gibi
+    evet burası... bakın, bunun gibi
+    evet burası... "bakın, bunun gibi
+    evet burası... ,bakın, bunun gibi
+    evet burası... "bakın, bunun gibi
+    evet burası... ¬bakın, bunun gibi
+    evet burası... ' bakın, bunun gibi
+    evet burası... " bakın, bunun gibi
+    evet burası... , bakın, bunun gibi
+    evet burası... " bakın, bunun gibi
+    evet burası... ¬ bakın, bunun gibi
+    evet burası... ' bakın, bunun gibi
+    evet burası ...bakın, bunun gibi
+    evet burası ..."bakın, bunun gibi
+    evet burası ...,bakın, bunun gibi
+    evet burası ..."bakın, bunun gibi
+    evet burası ...¬bakın, bunun gibi
+    evet burası ... 'bakın, bunun gibi
+    evet burası ... bakın, bunun gibi
+    evet burası ... "bakın, bunun gibi
+    evet burası ... ,bakın, bunun gibi
+    evet burası ... "bakın, bunun gibi
+    evet burası ... ¬bakın, bunun gibi
+    evet burası ... ' bakın, bunun gibi
+    evet burası ... " bakın, bunun gibi
+    evet burası ... , bakın, bunun gibi
+    evet burası ... " bakın, bunun gibi
+    evet burası ... ¬ bakın, bunun gibi
+    evet burası ... ' bakın, bunun gibi
+    evet burası...bakın, bunun gibi
+    evet burası..." bakın, bunun gibi
+    evet burası..., bakın, bunun gibi
+    evet burası..." bakın, bunun gibi
+    evet burası...¬ bakın, bunun gibi
+  tknz: |
+    ... vermek durumundayız . ' " ( CHP sıralarından alkışlar )
+    evet burası ... bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+    evet burası ... ' bakın , bunun gibi
+    evet burası ... bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... , bakın , bunun gibi
+    evet burası ... " bakın , bunun gibi
+    evet burası ... ¬ bakın , bunun gibi
+
+- text: |
+    yanlış söylüyorsun, olmuyor. 34 bin 500 atama
+    yanlış söylüyorsun; olmuyor. 34 bin 500 atama
+    askeriyeye gideriz, 'Müslümansın' diye elerler.
+    zafer İslam'ın" diye sokak
+  tknz: |
+    yanlış söylüyorsun , olmuyor . 34 bin 500 atama
+    yanlış söylüyorsun ; olmuyor . 34 bin 500 atama
+    askeriyeye gideriz , 'Müslümansın' diye elerler .
+    zafer İslam'ın " diye sokak
+
+- text: |
+    A.birinci madde
+    değil midir?.
+    çalınsın, tüm hayaller yıkılsın . Gir sınavlara, bütün sınavlara
+    "Neden bu gensoruyu verdik?", detaylarıyla paylaşmak istiyorum sizlerle
+    ama meseleyi "sahte grev/sahici grev" ekseninde tartışan herkes
+    katkımızın olduğu biyer ve Kur'an-ı Kerim derslerine olan
+    uzak, kıstası, ölçüsü nedir?... Sonra çünkü getirdiklerini kendisi
+    2009 yılının Ocak ayında %1,5, Ekim ayında ise
+    şu mükellef..
+    (AK PARTİ sıralarından alkışlar) Ya, bilip bilmediğin her konuda
+  tknz: |
+    A. birinci madde
+    değil midir ? .
+    çalınsın , tüm hayaller yıkılsın . Gir sınavlara , bütün sınavlara
+    " Neden bu gensoruyu verdik ? " , detaylarıyla paylaşmak istiyorum sizlerle
+    ama meseleyi " sahte grev / sahici grev " ekseninde tartışan herkes
+    katkımızın olduğu biyer ve Kur'an - ı Kerim derslerine olan
+    uzak , kıstası , ölçüsü nedir ?... Sonra çünkü getirdiklerini kendisi
+    2009 yılının Ocak ayında %1,5 , Ekim ayında ise
+    şu mükellef ..
+    ( AK PARTİ sıralarından alkışlar ) Ya , bilip bilmediğin her konuda
+
+- text: |
+    akşam 19:00-20:00'de
+  tknz: |
+    akşam 19:00-20:00'de
+
+- text: |
+    ince'ye sordum, "benim 'esra' diye yanımda çalışan
+    - Yılda 35 bin; 2002'de de 35 bin
+    4'üncü maddesinin (I) bendi gereğince kurumlar
+    teşekkür ediyorum.(alkislar gelir
+    muharrem ince (yalova) - altına da şey yazalım: "haram helal ver allah'ım, garip kulun yer allah'ım."
+    en önemli metasıdır, metaıdır."diyor. doğru, eğer sermayenin
+    İstanbul"
+    gibi problem olmaması için "31/12/2014, saat 16
+    Başkanı ısrar ediyor söylediğinde. 'sizin bu konuda doğru söylemediğinizi
+    var: "apo'yu asacağız", "erkekler gibi başörtüsünü
+    sıralarından "Bravo" sesleri, alkışlar)
+    oyle diyorsunuz. (MHP sıralarından alkışlar) 2010 yılında hisse devri olmuş
+    yazı yazıyor, diyor ki: "4 kattan küçük 9 kattan
+    SEYFETTİN YILMAZ (devamla) -bakın, başka bir şey "31/12/2014
+    saat 16;59'a kadar bütün
+  tknz: |
+    ince'ye sordum , " benim 'esra' diye yanımda çalışan
+    - Yılda 35 bin ; 2002'de de 35 bin
+    4'üncü maddesinin ( I ) bendi gereğince kurumlar
+    teşekkür ediyorum . ( alkislar gelir
+    muharrem ince ( yalova ) - altına da şey yazalım : " haram helal ver allah'ım , garip kulun yer allah'ım . "
+    en önemli metasıdır , metaıdır . " diyor . doğru , eğer sermayenin
+    İstanbul "
+    gibi problem olmaması için " 31/12/2014 , saat 16
+    Başkanı ısrar ediyor söylediğinde . ' sizin bu konuda doğru söylemediğinizi
+    var : " apo'yu asacağız " , " erkekler gibi başörtüsünü
+    sıralarından " Bravo " sesleri , alkışlar )
+    oyle diyorsunuz . ( MHP sıralarından alkışlar ) 2010 yılında hisse devri olmuş
+    yazı yazıyor , diyor ki : " 4 kattan küçük 9 kattan
+    SEYFETTİN YILMAZ ( devamla ) - bakın , başka bir şey " 31/12/2014
+    saat 16 ; 59'a kadar bütün
+
+- text: |
+    milyar para verir mi? 303 milyara 11.300 tane
+    (Devamla) - Yine 2002 yılında… Affedersiniz, ortaöğretimde yüzde
+    bu yolsuzluğun faturası kime kesiliyor? "inayet kara" diye bir
+    diye talimat verdim. 2/B'yi çözmüşsek biz çözdük.
+    evet, işte buyurun: 7,3 milyon metreküpten 13,
+    toplam elektrik tüketiminin % 3,4'ü, toplam abone
+  tknz: |
+    milyar para verir mi ? 303 milyara 11.300 tane
+    ( Devamla ) - Yine 2002 yılında … Affedersiniz , ortaöğretimde yüzde
+    bu yolsuzluğun faturası kime kesiliyor ? " inayet kara " diye bir
+    diye talimat verdim . 2/B'yi çözmüşsek biz çözdük .
+    evet , işte buyurun : 7,3 milyon metreküpten 13 ,
+    toplam elektrik tüketiminin % 3,4'ü , toplam abone
+
+- text: |
+    3.'de ucusa gecti.
+    elma fiyatlari 3.'de ucusa gecti.
+    ben "..." dedi adam.
+    iyi guzel.... dedi adam.
+    iyi guzel....
+    iyi guzel...
+    iyi guzel ...
+    5:20 gibi gelecek.
+    Bu işlemin adı 'amelasyon'du.
+    Bu işlemin adı "amelasyon"du.
+    5.600,1234 TL verdim.
+    ABD'de elma fiyatları uçuşa geçti ..
+  tknz: |
+    3.'de ucusa gecti .
+    elma fiyatlari 3.'de ucusa gecti .
+    ben "..." dedi adam .
+    iyi guzel .... dedi adam .
+    iyi guzel ....
+    iyi guzel ...
+    iyi guzel ...
+    5:20 gibi gelecek .
+    Bu işlemin adı 'amelasyon'du .
+    Bu işlemin adı "amelasyon"du .
+    5.600,1234 TL verdim .
+    ABD'de elma fiyatları uçuşa geçti ..
+
+- text: |
+    (Fiyatları) "arttı."
+    [5.]
+  tknz: |
+    ( Fiyatları ) " arttı . "
+    [ 5. ]
+
+# not supported!
+#- text: |
+#    açılan 'hayat boyu öğrenme'yle ilgili
+#    açılan "öğrenme"yle ilgili
+#    açılan 'öğrenme'yle ilgili
+#  tknz: |
+#    açılan ' hayat boyu öğrenme 'yle ilgili
+#    açılan "öğrenme"yle ilgili
+#    açılan 'öğrenme'yle ilgili

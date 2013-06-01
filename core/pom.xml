@@ -15,8 +15,34 @@
     <name>TRNLTK Core</name>
     <description>TRNLTK Core</description>
 
+    <dependencies>
+        <dependency>
+            <artifactId>diff_match_patch</artifactId>
+            <groupId>diff_match_patch</groupId>
+            <version>current</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.11</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>google-diff-patch-match</id>
+            <name>google-diff-patch-match</name>
+            <url>http://google-diff-match-patch.googlecode.com/svn/trunk/maven/</url>
+        </repository>
+        <repository>
+            <id>Sonatype-public</id>
+            <name>SnakeYAML repository</name>
+            <url>http://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     </properties>
 
 </project>

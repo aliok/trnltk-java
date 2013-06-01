@@ -16,6 +16,18 @@
         <module>web</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>zemberek-google-code-repo</id>
+            <url>svn:https://zemberek-repo.googlecode.com/svn/maven/repo</url>
+        </repository>
+        <snapshotRepository>
+            <id>zemberek-snapshots-google-code-repo</id>
+            <url>svn:https://zemberek-repo.googlecode.com/svn/maven/snapshot-repo</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -24,21 +36,35 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${encoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.12</version>
+            </extension>
+        </extensions>
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>zemberek</groupId>
-            <artifactId>zemberek</artifactId>
-            <version>3.0.0-alpha2</version>
-        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -58,6 +84,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>14.0-rc1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20090211</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -86,9 +117,18 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+    </repositories>
+
     <properties>
-        <trnltk-version>1.0.1-SNAPSHOT</trnltk-version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <trnltk-version>1.0.2-SNAPSHOT</trnltk-version>
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     </properties>
 
 </project>
