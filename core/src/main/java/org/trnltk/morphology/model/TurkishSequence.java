@@ -37,7 +37,7 @@ public class TurkishSequence {
         this.chars = new TurkishChar[this.count];
         for (int i = 0; i < underlyingString.length(); i++) {
             char c = underlyingString.charAt(i);
-            TurkishChar turkishChar = TurkishAlphabet.getInstance().getChar(c);
+            TurkishChar turkishChar = TurkishAlphabet.getChar(c);
             this.chars[i] = turkishChar;
             if (turkishChar.getLetter().isVowel()) {
                 if (this.firstVowel == null)
@@ -58,7 +58,7 @@ public class TurkishSequence {
         System.arraycopy(charsFirst, 0, this.chars, 0, charsFirst.length);
         for (int i = 0; i < strSecond.length(); i++) {
             char charOfSecondStr = strSecond.charAt(i);
-            TurkishChar turkishCharOfSecondStr = TurkishAlphabet.getInstance().getChar(charOfSecondStr);
+            TurkishChar turkishCharOfSecondStr = TurkishAlphabet.getChar(charOfSecondStr);
             this.chars[i + charsFirst.length] = turkishCharOfSecondStr;
             if (turkishCharOfSecondStr.getLetter().isVowel()) {
                 if (this.firstVowel == null)
@@ -123,7 +123,7 @@ public class TurkishSequence {
     public TurkishSequence voiceLastLetterIfPossible() {
         final TurkishChar lastChar = this.getLastChar();
         final TurkicLetter letter = lastChar.getLetter();
-        final TurkicLetter voicedLetter = TurkishAlphabet.getInstance().voice(letter);
+        final TurkicLetter voicedLetter = TurkishAlphabet.voice(letter);
         if (voicedLetter != null)
             return this.subsequence(0, this.count - 1).append(voicedLetter.charValue() + "");
         else

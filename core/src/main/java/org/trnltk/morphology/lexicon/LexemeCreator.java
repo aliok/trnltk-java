@@ -124,7 +124,7 @@ class LexemeCreator {
     private int vowelCount(String str) {
         int count = 0;
         for (char c : str.toCharArray()) {
-            if (TurkishAlphabet.getInstance().getLetter(c).isVowel())
+            if (TurkishAlphabet.getLetter(c).isVowel())
                 count++;
         }
         return count;
@@ -132,7 +132,7 @@ class LexemeCreator {
 
     Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
-        final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(lastChar);
+        final TurkicLetter lastLetter = TurkishAlphabet.getLetter(lastChar);
         final int vowelCount = this.vowelCount(lemmaRoot);
 
         final HashSet<LexemeAttribute> lexemeAttributes = new HashSet<LexemeAttribute>(_lexemeAttributes);

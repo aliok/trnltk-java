@@ -59,7 +59,7 @@ public class SuffixFormSequence {
             final boolean previousCharIsExclamation = previousChar != null && previousChar == EXCLAMATION;
 
             final boolean currentLetterIsUpperCase = Character.isUpperCase(currentChar);
-            final TurkishChar currentTurkishChar = TurkishAlphabet.getInstance().getChar(currentChar);
+            final TurkishChar currentTurkishChar = TurkishAlphabet.getChar(currentChar);
             final TurkicLetter currentLetter = currentTurkishChar.getLetter();
 
             if (rulesBuilder.allRulesOptional() && TurkishAlphabet.Devoicable_Letters.contains(currentLetter)) {
@@ -134,15 +134,15 @@ public class SuffixFormSequence {
         if (!this.isNotBlank())
             return false;
 
-        if (TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(0)).isVowel())
+        if (TurkishAlphabet.getLetter(this.suffixFormStr.charAt(0)).isVowel())
             return true;
 
         if (this.suffixFormStr.charAt(0) == PLUS) {
             if (this.suffixFormStr.length() >= 3)
-                return TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(1)).isVowel()
-                        || TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(2)).isVowel();
+                return TurkishAlphabet.getLetter(this.suffixFormStr.charAt(1)).isVowel()
+                        || TurkishAlphabet.getLetter(this.suffixFormStr.charAt(2)).isVowel();
             if (this.suffixFormStr.length() >= 2)
-                return TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(1)).isVowel();
+                return TurkishAlphabet.getLetter(this.suffixFormStr.charAt(1)).isVowel();
         }
 
 
@@ -183,7 +183,7 @@ public class SuffixFormSequence {
         if (charBeforeLastChar == EXCLAMATION)
             return false;
 
-        final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(lastChar);
+        final TurkicLetter lastLetter = TurkishAlphabet.getLetter(lastChar);
         return TurkishAlphabet.Voicable_Letters.contains(lastLetter);
     }
 
@@ -333,7 +333,7 @@ public class SuffixFormSequence {
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
                 final boolean lastLetterVoiceless = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVoiceless);
                 if (lastLetterVoiceless)
-                    return TurkishAlphabet.getInstance().devoice(charToAdd.getLetter()).charValue();
+                    return TurkishAlphabet.devoice(charToAdd.getLetter()).charValue();
                 else
                     return charToAdd.getCharValue();
             }

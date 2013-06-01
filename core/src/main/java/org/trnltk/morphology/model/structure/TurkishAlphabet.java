@@ -128,62 +128,19 @@ public class TurkishAlphabet {
             N_0, N_1, N_2, N_3, N_4, N_5, N_6, N_7, N_8, N_9
     };
 
-    public static final int ALPHABET_LETTER_COUNT = TURKISH_LETTERS.length;
-
     // 0x15f is the maximum char value in turkish specific characters. It is the size
     // of our lookup tables. This could be done better, but for now it works.
     private static final int MAX_CHAR_VALUE = 0x20ac + 1;
     private static final TurkicLetter[] CHAR_TO_LETTER_LOOKUP = new TurkicLetter[MAX_CHAR_VALUE];
-    private static final char[] TURKISH_ALPHABET_CHARS = new char[MAX_CHAR_VALUE];
-    private static final int[] TURKISH_ALPHABET_INDEXES = new int[MAX_CHAR_VALUE];
-    private static final boolean[] VOWEL_TABLE = new boolean[MAX_CHAR_VALUE];
     private static final boolean[] VALID_CHAR_TABLE = new boolean[MAX_CHAR_VALUE];
 
     static {
         Arrays.fill(CHAR_TO_LETTER_LOOKUP, TurkicLetter.UNDEFINED);
-        Arrays.fill(TURKISH_ALPHABET_INDEXES, -1);
         Arrays.fill(VALID_CHAR_TABLE, false);
         for (TurkicLetter turkicLetter : TURKISH_LETTERS) {
             CHAR_TO_LETTER_LOOKUP[turkicLetter.charValue()] = turkicLetter;
-            TURKISH_ALPHABET_CHARS[turkicLetter.alphabeticIndex() - 1] = turkicLetter.charValue();
-            TURKISH_ALPHABET_INDEXES[turkicLetter.charValue()] = turkicLetter.alphabeticIndex();
             VALID_CHAR_TABLE[turkicLetter.charValue()] = true;
-            if (turkicLetter.isVowel()) {
-                VOWEL_TABLE[turkicLetter.charValue()] = true;
-            }
         }
-    }
-
-    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.devoicingMap.keySet());
-    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.voicingMap.keySet());
-    public static final ImmutableSetMultimap<TurkicLetter, TurkicLetter> Inverse_Voicing_Map = new ImmutableSetMultimap.Builder<TurkicLetter, TurkicLetter>()
-            .put(TurkishAlphabet.L_b, TurkishAlphabet.L_p)
-            .put(TurkishAlphabet.L_c, TurkishAlphabet.L_cc)
-            .put(TurkishAlphabet.L_d, TurkishAlphabet.L_t)
-            .put(TurkishAlphabet.L_g, TurkishAlphabet.L_k)
-            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_g)
-            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_k)
-            .build();
-
-    public boolean isVowel(char c) {
-        return !(c >= MAX_CHAR_VALUE || !VALID_CHAR_TABLE[c]) && VOWEL_TABLE[c];
-    }
-
-    public boolean hasVowel(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (isVowel(str.charAt(i)))
-                return true;
-        }
-        return false;
-    }
-
-    public int vowelCount(String str) {
-        int count = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (isVowel(str.charAt(i)))
-                count++;
-        }
-        return count;
     }
 
     protected static final ImmutableMap<TurkicLetter, TurkicLetter> devoicingMap = new ImmutableMap.Builder<TurkicLetter, TurkicLetter>()
@@ -194,10 +151,6 @@ public class TurkishAlphabet {
             .put(L_gg, L_k)
             .build();
 
-    public TurkicLetter devoice(TurkicLetter l) {
-        return devoicingMap.get(l);
-    }
-
     protected static final ImmutableMap<TurkicLetter, TurkicLetter> voicingMap = new ImmutableMap.Builder<TurkicLetter, TurkicLetter>().
             put(L_p, L_b).
             put(L_k, L_gg).
@@ -206,8 +159,26 @@ public class TurkishAlphabet {
             put(L_g, L_gg).
             build();
 
+    public static final ImmutableSetMultimap<TurkicLetter, TurkicLetter> Inverse_Voicing_Map = new ImmutableSetMultimap.Builder<TurkicLetter, TurkicLetter>()
+            .put(TurkishAlphabet.L_b, TurkishAlphabet.L_p)
+            .put(TurkishAlphabet.L_c, TurkishAlphabet.L_cc)
+            .put(TurkishAlphabet.L_d, TurkishAlphabet.L_t)
+            .put(TurkishAlphabet.L_g, TurkishAlphabet.L_k)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_g)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_k)
+            .build();
+    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.devoicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.voicingMap.keySet());
 
-    public TurkicLetter voice(TurkicLetter l) {
+    private TurkishAlphabet() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static TurkicLetter devoice(TurkicLetter l) {
+        return devoicingMap.get(l);
+    }
+
+    public static TurkicLetter voice(TurkicLetter l) {
         return voicingMap.get(l);
     }
 
@@ -218,54 +189,15 @@ public class TurkishAlphabet {
      * @return TurkishLetter equivalent.
      * @throws IllegalArgumentException if input character is out of alphabet.
      */
-    public TurkicLetter getLetter(char c) {
+    public static TurkicLetter getLetter(char c) {
         if (c >= MAX_CHAR_VALUE || !VALID_CHAR_TABLE[c])
             return TurkicLetter.builder(c, 9999).build();
         else return CHAR_TO_LETTER_LOOKUP[c];
     }
 
-    public TurkishChar getChar(char c) {
+    public static TurkishChar getChar(char c) {
         final TurkicLetter letterForChar = getLetter(c);
         return new TurkishChar(c, letterForChar);
-    }
-
-    /**
-     * returns the TurkicLetter equivalent with given alphabetic index. index starts from 1.
-     *
-     * @param alphabeticIndex alphabetical index. starts from 1
-     * @return TurkicLetter for given alphabetical index.
-     * @throws IllegalArgumentException if index is [< 1] or [> alphabetsize]
-     */
-    public TurkicLetter getLetter(int alphabeticIndex) {
-        if (alphabeticIndex < 1 || alphabeticIndex > ALPHABET_LETTER_COUNT)
-            throw new IllegalArgumentException("Unexpected alphabetic index:" + alphabeticIndex);
-        return TURKISH_LETTERS[alphabeticIndex - 1];
-    }
-
-    /**
-     * returns the alphabetic index of a char.
-     *
-     * @param c char
-     * @return alphabetic index.
-     * @throws IllegalArgumentException if char is out of alphabet.
-     */
-    public int getAlphabeticIndex(char c) {
-        if (!isValid(c))
-            throw new IllegalArgumentException("unexpected char:" + c + " code:" + (int) c);
-        return TURKISH_ALPHABET_INDEXES[c];
-    }
-
-    /**
-     * retrieves a character from alphabetical index.
-     *
-     * @param alphabeticIndex index
-     * @return char.
-     * @throws IllegalArgumentException if alphabeticIndex is [< 1] or [> alphabetsize]
-     */
-    public char getCharByAlphabeticIndex(int alphabeticIndex) {
-        if (alphabeticIndex < 1 || alphabeticIndex > ALPHABET_LETTER_COUNT)
-            throw new IllegalArgumentException("Unexpected alphabetic index:" + alphabeticIndex);
-        return TURKISH_ALPHABET_CHARS[alphabeticIndex - 1];
     }
 
     /**
@@ -274,20 +206,8 @@ public class TurkishAlphabet {
      * @param c character to check
      * @return true if it is part of the Turkish alphabet. false otherwise
      */
-    public final boolean isValid(char c) {
+    public static final boolean isValid(char c) {
         return c < MAX_CHAR_VALUE && VALID_CHAR_TABLE[c];
     }
 
-    public byte[] toByteIndexes(String s) {
-        byte[] indexes = new byte[s.length()];
-        for (int i = 0; i < indexes.length; i++) {
-            indexes[i] = (byte) getAlphabeticIndex(s.charAt(i));
-        }
-        return indexes;
-    }
-
-    private static final TurkishAlphabet INSTANCE = new TurkishAlphabet();
-    public static final TurkishAlphabet getInstance(){
-        return INSTANCE;
-    }
 }

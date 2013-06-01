@@ -105,7 +105,7 @@ public class PhoneticsEngine {
     private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final String suffixFormToApply, final Collection<LexemeAttribute> lexemeAttributes) {
         TurkishSequence newSurface = _surface;
 
-        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getInstance().getLetter(suffixFormToApply.charAt(0));
+        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getLetter(suffixFormToApply.charAt(0));
 
         // first try voicing
         if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && letterForFirstCharOfSuffixFormToApply.isVowel()) {
@@ -143,9 +143,9 @@ public class PhoneticsEngine {
 
         switch (phoneticExpectation) {
             case VowelStart:
-                return TurkishAlphabet.getInstance().getLetter(firstCharOfForm).isVowel();
+                return TurkishAlphabet.getLetter(firstCharOfForm).isVowel();
             case ConsonantStart:
-                return !TurkishAlphabet.getInstance().getLetter(firstCharOfForm).isVowel();
+                return !TurkishAlphabet.getLetter(firstCharOfForm).isVowel();
             default:
                 throw new IllegalArgumentException("Unknown phonetic expectation : " + phoneticExpectation);
         }
@@ -180,9 +180,9 @@ public class PhoneticsEngine {
             return true;
 
         else if (voicingAllowed && inputUnderlyingString.startsWith(appliedStringToCheck.substring(0, appliedStringToCheck.length() - 1))) {
-            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getInstance().getLetter(appliedStringToCheck.charAt(appliedStringToCheck.length() - 1));
+            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getLetter(appliedStringToCheck.charAt(appliedStringToCheck.length() - 1));
             final TurkishChar lastLetterOfInputPart = input.charAt(appliedStringToCheck.length() - 1);
-            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.getInstance().voice(lastLetterOfApplication));
+            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.voice(lastLetterOfApplication));
         }
 
         return false;

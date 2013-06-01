@@ -130,8 +130,8 @@ public class ImmutableRootGenerator {
         final EnumSet<PhoneticExpectation> modifiedPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
 
         if (CollectionUtils.containsAny(lexemeAttributes, Sets.immutableEnumSet(LexemeAttribute.Voicing, LexemeAttribute.VoicingOpt))) {
-            final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
-            final TurkicLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.getInstance().voice(lastLetter);
+            final TurkicLetter lastLetter = TurkishAlphabet.getLetter(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
+            final TurkicLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.voice(lastLetter);
             Validate.notNull(voicedLastLetter);
             modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.charValue();
 
@@ -213,7 +213,7 @@ public class ImmutableRootGenerator {
         return Iterables.any(Lists.newArrayList(ArrayUtils.toObject(str.toCharArray())), new Predicate<Character>() {
             @Override
             public boolean apply(Character input) {
-                return TurkishAlphabet.getInstance().getLetter(input).isVowel();
+                return TurkishAlphabet.getLetter(input).isVowel();
             }
         });
     }

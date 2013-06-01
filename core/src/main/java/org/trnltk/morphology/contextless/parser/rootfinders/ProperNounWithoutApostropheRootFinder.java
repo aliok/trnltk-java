@@ -31,7 +31,7 @@ import java.util.List;
 
 public class ProperNounWithoutApostropheRootFinder implements RootFinder {
     private static final char APOSTROPHE = '\'';
-    private static final TurkishChar TURKISH_CHAR_E_UPPERCASE = TurkishAlphabet.getInstance().getChar('E');
+    private static final TurkishChar TURKISH_CHAR_E_UPPERCASE = TurkishAlphabet.getChar('E');
 
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 

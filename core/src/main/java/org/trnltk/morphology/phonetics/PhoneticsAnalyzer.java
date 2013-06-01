@@ -107,7 +107,7 @@ public class PhoneticsAnalyzer {
     }
 
     public ImmutableSet<PhoneticAttribute> calculateNewPhoneticAttributes(Set<PhoneticAttribute> phoneticAttributes, char charToApply) {
-        final TurkishChar turkishChar = TurkishAlphabet.getInstance().getChar(charToApply);
+        final TurkishChar turkishChar = TurkishAlphabet.getChar(charToApply);
         final TurkicLetter letter = turkishChar.getLetter();
 
         final EnumSet<PhoneticAttribute> newAttributes = EnumSet.copyOf(phoneticAttributes);

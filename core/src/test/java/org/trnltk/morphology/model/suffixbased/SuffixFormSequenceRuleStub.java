@@ -20,7 +20,7 @@ import org.trnltk.morphology.model.structure.TurkishAlphabet;
 
 public class SuffixFormSequenceRuleStub extends SuffixFormSequence.SuffixFormSequenceRule {
     public SuffixFormSequenceRuleStub(char charToAdd, SuffixFormSequence.SuffixFormSequenceRuleType ruleType) {
-        super(TurkishAlphabet.getInstance().getChar(charToAdd), ruleType);
+        super(TurkishAlphabet.getChar(charToAdd), ruleType);
     }
 
     public SuffixFormSequenceRuleStub(SuffixFormSequence.SuffixFormSequenceRuleType ruleType) {

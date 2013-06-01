@@ -117,7 +117,7 @@ public class BruteForceNounRootFinder implements RootFinder {
                     @Override
                     public DynamicRoot apply(DynamicRoot input) {
                         final String lemmaRoot = input.getLexeme().getLemmaRoot();
-                        return createDoublingRoot(input, TurkishAlphabet.getInstance().getChar(lemmaRoot.charAt(lemmaRoot.length() - 1)));
+                        return createDoublingRoot(input, TurkishAlphabet.getChar(lemmaRoot.charAt(lemmaRoot.length() - 1)));
                     }
                 });
 
