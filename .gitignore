@@ -1,0 +1,15 @@
+# Maven target folder
+target/
+
+# Intellij files
+.idea/
+*.iml
+atlassian-ide-plugin.xml
+
+#
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
