@@ -238,7 +238,7 @@ public class ContextlessMorphologicParser implements MorphologicParser {
     }
 
     private LinkedList<MorphemeContainer> findInitialMorphemeContainers(final TurkishSequence input) {
-        final LinkedList<MorphemeContainer> candidates = new LinkedList<>();
+        final LinkedList<MorphemeContainer> candidates = new LinkedList<MorphemeContainer>();
 
         for (int i = 1; i < input.length() + 1; i++) {
             final TurkishSequence partialInput = input.subsequence(0, i);

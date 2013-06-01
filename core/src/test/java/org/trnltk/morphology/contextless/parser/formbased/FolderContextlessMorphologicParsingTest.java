@@ -94,7 +94,7 @@ public class FolderContextlessMorphologicParsingTest {
     public void shouldParse8MWords_withOfflineAnalysis() throws Exception {
         final File folder = new File("D:\\devl\\data\\1MSentences");
 
-        final List<File> files = new ArrayList<>();
+        final List<File> files = new ArrayList<File>();
 
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith("_tokenized.txt"))
@@ -130,7 +130,7 @@ public class FolderContextlessMorphologicParsingTest {
 
         final File folder = new File("D:\\devl\\data\\1MSentences");
 
-        final List<File> files = new ArrayList<>();
+        final List<File> files = new ArrayList<File>();
 
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith("_parsed.txt"))
@@ -185,7 +185,7 @@ public class FolderContextlessMorphologicParsingTest {
             BufferedWriter writer = null;
 
             try {
-                final List<String> words = new ArrayList<>();
+                final List<String> words = new ArrayList<String>();
                 final HashSet<String> uniqueWords = new HashSet<String>();
 
                 final List<String> lines = Files.readLines(sourceFile, Charsets.UTF_8);
@@ -205,7 +205,7 @@ public class FolderContextlessMorphologicParsingTest {
                     private ImmutableMap<String, List<MorphemeContainer>> cacheMap;
 
                     {
-                        final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<>();
+                        final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
                         final List<String> wordsToUseInCache = findWordsToUseInCache(words);
                         for (String word : wordsToUseInCache) {
                             builder.put(word, parser.parseStr(word));
@@ -282,7 +282,7 @@ public class FolderContextlessMorphologicParsingTest {
         private List<String> findWordsToUseInCache(List<String> words) {
             final Multiset<String> wordSet = HashMultiset.create(words);
             final ImmutableMultiset<String> orderedWordSet = Multisets.copyHighestCountFirst(wordSet);
-            final List<String> wordsWithMultipleOccurrence = new ArrayList<>();
+            final List<String> wordsWithMultipleOccurrence = new ArrayList<String>();
             long multipleOccurrenceCount = 0L;
             for (String word : orderedWordSet.elementSet()) {
                 final int count = orderedWordSet.count(word);
@@ -305,7 +305,7 @@ public class FolderContextlessMorphologicParsingTest {
 
             double ratio = 0.75;
 
-            final List<String> wordsToUse = new LinkedList<>();
+            final List<String> wordsToUse = new LinkedList<String>();
             int occurrencesSoFar = 0;
             for (int i = 0; i < wordsWithMultipleOccurrence.size(); i++) {
                 final String word = wordsWithMultipleOccurrence.get(i);

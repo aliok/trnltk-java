@@ -55,7 +55,7 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
         Validate.isTrue(this.stateMap instanceof ImmutableMap, "Suffix graph not initialized yet!");
         Validate.isTrue(this.suffixMap instanceof ImmutableMap, "Suffix graph not initialized yet!");
 
-        Collection<SuffixGraphState> states = new HashSet<>();
+        Collection<SuffixGraphState> states = new HashSet<SuffixGraphState>();
         states.addAll(this.doGetRootSuffixGraphStates());
         states.addAll(this.decorated.getRootSuffixGraphStates());
 

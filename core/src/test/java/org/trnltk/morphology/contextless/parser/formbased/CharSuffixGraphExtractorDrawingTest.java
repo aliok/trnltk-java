@@ -132,10 +132,10 @@ public class CharSuffixGraphExtractorDrawingTest {
 
         final ContextlessMorphologicParser contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, null, rootFinderChain, new SuffixApplier(new PhoneticsEngine(new SuffixFormSequenceApplier())));
 
-        final Set<MorphemeContainer> invalidatedPaths = new HashSet<>();
+        final Set<MorphemeContainer> invalidatedPaths = new HashSet<MorphemeContainer>();
 
         if (!drawOnlySuccessfulParses) {
-            final Set<String> strPaths = new HashSet<>();
+            final Set<String> strPaths = new HashSet<String>();
 
             contextlessMorphologicParser.setListener(new ContextlessMorphologicParserListener() {
                 @Override
@@ -253,7 +253,7 @@ public class CharSuffixGraphExtractorDrawingTest {
         public void dumpCharSuffixGraphInDotFormat(boolean drawOnlyProcessedPaths) {
             System.out.println("digraph charSuffixGraph {");
 
-            Set<String> printedNodeNames = new HashSet<>();
+            Set<String> printedNodeNames = new HashSet<String>();
 
             for (Map.Entry<SuffixFormGraphNodeKey, SuffixFormGraphNode> entry : charSuffixGraph.getMap().entrySet()) {
                 final SuffixFormGraphNodeKey sourceCharSuffixGraphNodeKey = entry.getKey();

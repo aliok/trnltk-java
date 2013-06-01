@@ -22,7 +22,7 @@ public class PhoneticAttributeSets {
 
     protected ImmutableMap<Long, Set<PhoneticAttribute>> findValidSets() {
 
-        final Set<Set<PhoneticAttribute>> phoneticAttributePowerSets = Sets.powerSet(new HashSet<>(Lists.newArrayList(PhoneticAttribute.values())));
+        final Set<Set<PhoneticAttribute>> phoneticAttributePowerSets = Sets.powerSet(new HashSet<PhoneticAttribute>(Lists.newArrayList(PhoneticAttribute.values())));
 
         final ImmutableMap.Builder<Long, Set<PhoneticAttribute>> validPhoneticAttributeSetsMapBuilder = new ImmutableMap.Builder<Long, Set<PhoneticAttribute>>();
         for (Set<PhoneticAttribute> set : phoneticAttributePowerSets) {

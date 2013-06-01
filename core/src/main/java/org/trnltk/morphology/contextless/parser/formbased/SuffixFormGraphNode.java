@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class SuffixFormGraphNode {
     private final SuffixFormGraphNodeKey suffixFormGraphNodeKey;
-    private final Set<SuffixFormGraphSuffixEdge> edges = new HashSet<>();
+    private final Set<SuffixFormGraphSuffixEdge> edges = new HashSet<SuffixFormGraphSuffixEdge>();
     private final ImmutableSet<PhoneticAttribute> currentPhonAttrSet;
     private final SuffixGraphStateType suffixGraphStateType;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WordParseResultEntry {
     private final String word;
-    private final List<ParseResult> parseResults = new ArrayList<>();
+    private final List<ParseResult> parseResults = new ArrayList<ParseResult>();
 
     public WordParseResultEntry(String word) {
         this.word = word;

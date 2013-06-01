@@ -35,7 +35,7 @@ public class ParseResultDiffTool {
 
         final RootDifference rootDifference = buildRootDifference(firstParseResult, secondParseResult);
 
-        final DataDiffUtil<ParseResultPart> diffUtil = new DataDiffUtil<>();
+        final DataDiffUtil<ParseResultPart> diffUtil = new DataDiffUtil<ParseResultPart>();
 
         final List<ParseResultPart> firstParseResultParts = CollectionUtils.isEmpty(firstParseResult.getParts()) ? ListUtils.EMPTY_LIST : firstParseResult.getParts();
         final List<ParseResultPart> secondParseResultParts = CollectionUtils.isEmpty(secondParseResult.getParts()) ? ListUtils.EMPTY_LIST : secondParseResult.getParts();

@@ -18,7 +18,7 @@ public class PhoneticsAnalyzerValidityBruteForceTest {
         char[] chars = "abçcdefghıijklmnoöpqrsştuüvwxyz".toCharArray();
         int len = 4;
 
-        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<>();
+        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
 
         final WordGenerator wordGenerator = new WordGenerator(chars, len);
         int i = 0;

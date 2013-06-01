@@ -20,7 +20,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList(ArrayUtils.toObject("abcd".toCharArray()));
         final ArrayList<Character> listB = Lists.newArrayList(ArrayUtils.toObject("abce".toCharArray()));
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a, b, c]\"), Diff(DELETE,\"[d]\"), Diff(INSERT,\"[e]\")]"));
@@ -31,7 +31,7 @@ public class DataDiffUtilTest {
         final ArrayList<Integer> listA = Lists.newArrayList(1, 2, 3);
         final ArrayList<Integer> listB = Lists.newArrayList(1, 2, 3, 4);
 
-        final DataDiffUtil<Integer> util = new DataDiffUtil<>();
+        final DataDiffUtil<Integer> util = new DataDiffUtil<Integer>();
         final LinkedList<DataDiffUtil.Diff<Integer>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[1, 2, 3]\"), Diff(INSERT,\"[4]\")]"));
@@ -42,7 +42,7 @@ public class DataDiffUtilTest {
         final ArrayList<String> listA = Lists.newArrayList("AA", "BB", "CC");
         final ArrayList<String> listB = Lists.newArrayList("AA", "BB");
 
-        final DataDiffUtil<String> util = new DataDiffUtil<>();
+        final DataDiffUtil<String> util = new DataDiffUtil<String>();
         final LinkedList<DataDiffUtil.Diff<String>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[AA, BB]\"), Diff(DELETE,\"[CC]\")]"));
@@ -53,7 +53,7 @@ public class DataDiffUtilTest {
         final ArrayList<Double> listA = Lists.newArrayList(1.1, 2.2, 3.3);
         final ArrayList<Double> listB = Lists.newArrayList(0.0, 2.2, 3.3);
 
-        final DataDiffUtil<Double> util = new DataDiffUtil<>();
+        final DataDiffUtil<Double> util = new DataDiffUtil<Double>();
         final LinkedList<DataDiffUtil.Diff<Double>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(DELETE,\"[1.1]\"), Diff(INSERT,\"[0.0]\"), Diff(EQUAL,\"[2.2, 3.3]\")]"));
@@ -64,7 +64,7 @@ public class DataDiffUtilTest {
         final ArrayList<Double> listA = Lists.newArrayList(1.1, 2.2, 3.3);
         final ArrayList<Double> listB = Lists.newArrayList(2.2, 3.3);
 
-        final DataDiffUtil<Double> util = new DataDiffUtil<>();
+        final DataDiffUtil<Double> util = new DataDiffUtil<Double>();
         final LinkedList<DataDiffUtil.Diff<Double>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(DELETE,\"[1.1]\"), Diff(EQUAL,\"[2.2, 3.3]\")]"));
@@ -75,7 +75,7 @@ public class DataDiffUtilTest {
         final ArrayList<Double> listA = Lists.newArrayList(2.2, 3.3);
         final ArrayList<Double> listB = Lists.newArrayList(1.1, 2.2, 3.3);
 
-        final DataDiffUtil<Double> util = new DataDiffUtil<>();
+        final DataDiffUtil<Double> util = new DataDiffUtil<Double>();
         final LinkedList<DataDiffUtil.Diff<Double>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(INSERT,\"[1.1]\"), Diff(EQUAL,\"[2.2, 3.3]\")]"));
@@ -86,7 +86,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'b', 'c');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'x', 'c');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a]\"), Diff(DELETE,\"[b]\"), Diff(INSERT,\"[x]\"), Diff(EQUAL,\"[c]\")]"));
@@ -97,7 +97,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'b', 'c');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'c');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a]\"), Diff(DELETE,\"[b]\"), Diff(EQUAL,\"[c]\")]"));
@@ -108,7 +108,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'c');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'x', 'c');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a]\"), Diff(INSERT,\"[x]\"), Diff(EQUAL,\"[c]\")]"));
@@ -119,7 +119,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'b', 'c', 'd');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'b', 'x', 'y');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a, b]\"), Diff(DELETE,\"[c, d]\"), Diff(INSERT,\"[x, y]\")]"));
@@ -130,7 +130,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'b', 'c', 'd');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'b');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a, b]\"), Diff(DELETE,\"[c, d]\")]"));
@@ -141,7 +141,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList('a', 'b');
         final ArrayList<Character> listB = Lists.newArrayList('a', 'b', 'x', 'y');
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         final LinkedList<DataDiffUtil.Diff<Character>> diffs = util.diff_main(listA, listB);
 
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a, b]\"), Diff(INSERT,\"[x, y]\")]"));
@@ -153,7 +153,7 @@ public class DataDiffUtilTest {
         final ArrayList<Character> listA = Lists.newArrayList(ArrayUtils.toObject("Does a substring of shorttext exisareithin longtext such that the".toCharArray()));
         final ArrayList<Character> listB = Lists.newArrayList(ArrayUtils.toObject("Does a substring of something exist within gogogogo such that the".toCharArray()));
 
-        final DataDiffUtil<Character> util = new DataDiffUtil<>();
+        final DataDiffUtil<Character> util = new DataDiffUtil<Character>();
         LinkedList<DataDiffUtil.Diff<Character>> diffs;
 
         diffs = util.diff_main(listA, listB);

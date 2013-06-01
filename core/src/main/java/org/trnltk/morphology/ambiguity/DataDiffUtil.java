@@ -348,7 +348,7 @@ public class DataDiffUtil<T> {
         }
         // Diff took too long and hit the deadline or
         // number of diffs equals number of characters, no commonality at all.
-        LinkedList<Diff<T>> diffs = new LinkedList<>();
+        LinkedList<Diff<T>> diffs = new LinkedList<Diff<T>>();
         diffs.add(new Diff(Operation.DELETE, list1));
         diffs.add(new Diff(Operation.INSERT, list2));
         return diffs;
@@ -532,9 +532,9 @@ public class DataDiffUtil<T> {
         // Start with a 1/4 length substring at position i as a seed.
         List<T> seed = longtext.subList(i, i + longtext.size() / 4);
         int j = -1;
-        List<T> best_common = new ArrayList<>();
-        List<T> best_longtext_a = new ArrayList<>(), best_longtext_b = new ArrayList<>();
-        List<T> best_shorttext_a = new ArrayList<>(), best_shorttext_b = new ArrayList<>();
+        List<T> best_common = new ArrayList<T>();
+        List<T> best_longtext_a = new ArrayList<T>(), best_longtext_b = new ArrayList<T>();
+        List<T> best_shorttext_a = new ArrayList<T>(), best_shorttext_b = new ArrayList<T>();
         while ((j = indexOf(shorttext, seed, j + 1)) != -1) {
             int prefixLength = diff_commonPrefix(longtext.subList(i, longtext.size()), shorttext.subList(j, shorttext.size()));
             int suffixLength = diff_commonSuffix(longtext.subList(0, i), shorttext.subList(0, j));
@@ -564,7 +564,7 @@ public class DataDiffUtil<T> {
             return;
         }
         boolean changes = false;
-        Stack<Diff<T>> equalities = new Stack<>();  // Stack of qualities.
+        Stack<Diff<T>> equalities = new Stack<Diff<T>>();  // Stack of qualities.
         List<T> lastequality = null; // Always equal to equalities.lastElement().text
         ListIterator<Diff<T>> pointer = diffs.listIterator();
         // Number of characters that changed prior to the equality.
@@ -962,8 +962,8 @@ public class DataDiffUtil<T> {
         ListIterator<Diff<T>> pointer = diffs.listIterator();
         int count_delete = 0;
         int count_insert = 0;
-        List<T> text_delete = new ArrayList<>();
-        List<T> text_insert = new ArrayList<>();
+        List<T> text_delete = new ArrayList<T>();
+        List<T> text_insert = new ArrayList<T>();
         Diff thisDiff = pointer.next();
         Diff prevEqual = null;
         int commonlength;
@@ -1037,8 +1037,8 @@ public class DataDiffUtil<T> {
                     }
                     count_insert = 0;
                     count_delete = 0;
-                    text_delete = new ArrayList<>();
-                    text_insert = new ArrayList<>();
+                    text_delete = new ArrayList<T>();
+                    text_insert = new ArrayList<T>();
                     prevEqual = thisDiff;
                     break;
             }

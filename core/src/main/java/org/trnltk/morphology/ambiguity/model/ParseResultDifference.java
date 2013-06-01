@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ParseResultDifference {
     private final RootDifference rootDifference;
-    private final List<ParseResultPartDifference> parseResultPartDifferences = new ArrayList<>();
+    private final List<ParseResultPartDifference> parseResultPartDifferences = new ArrayList<ParseResultPartDifference>();
 
     public ParseResultDifference(RootDifference rootDifference) {
         this.rootDifference = rootDifference;

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class SuffixFormGraph {
 
-    private final Map<SuffixFormGraphNodeKey, SuffixFormGraphNode> nodeMap = new HashMap<>();
+    private final Map<SuffixFormGraphNodeKey, SuffixFormGraphNode> nodeMap = new HashMap<SuffixFormGraphNodeKey, SuffixFormGraphNode>();
     private final SuffixGraph suffixGraph;
 
     public SuffixFormGraph(SuffixGraph suffixGraph) {

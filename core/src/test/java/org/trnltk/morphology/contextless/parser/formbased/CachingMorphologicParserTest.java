@@ -275,7 +275,7 @@ public class CachingMorphologicParserTest {
                 new File("D:\\devl\\data\\1MSentences\\milliyet-sondakika_tokenized.txt")
         );
 
-        final List<String> words = new ArrayList<>();
+        final List<String> words = new ArrayList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
 
         for (File tokenizedFile : files) {
@@ -296,7 +296,7 @@ public class CachingMorphologicParserTest {
             private ImmutableMap<String, List<MorphemeContainer>> cacheMap;
 
             {
-                final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<>();
+                final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
                 final List<String> wordsToUseInCache = findWordsToUseInCache(words);
                 for (String word : wordsToUseInCache) {
                     builder.put(word, contextlessMorphologicParser.parseStr(word));
@@ -359,7 +359,7 @@ public class CachingMorphologicParserTest {
     private List<String> findWordsToUseInCache(List<String> words) {
         final Multiset<String> wordSet = HashMultiset.create(words);
         final ImmutableMultiset<String> orderedWordSet = Multisets.copyHighestCountFirst(wordSet);
-        final List<String> wordsWithMultipleOccurrence = new ArrayList<>();
+        final List<String> wordsWithMultipleOccurrence = new ArrayList<String>();
         long multipleOccurrenceCount = 0L;
         for (String word : orderedWordSet.elementSet()) {
             final int count = orderedWordSet.count(word);
@@ -382,7 +382,7 @@ public class CachingMorphologicParserTest {
 
         double ratio = 0.75;
 
-        final List<String> wordsToUse = new LinkedList<>();
+        final List<String> wordsToUse = new LinkedList<String>();
         int occurrencesSoFar = 0;
         for (int i = 0; i < wordsWithMultipleOccurrence.size(); i++) {
             final String word = wordsWithMultipleOccurrence.get(i);

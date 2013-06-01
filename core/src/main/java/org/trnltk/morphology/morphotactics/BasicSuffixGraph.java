@@ -353,7 +353,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
     @Override
     protected Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates() {
-        final ArrayList<SuffixGraphState> states = new ArrayList<>();
+        final ArrayList<SuffixGraphState> states = new ArrayList<SuffixGraphState>();
         states.add(NOUN_COMPOUND_ROOT);
         states.addAll(this.rootStateMap.values());
         return states;

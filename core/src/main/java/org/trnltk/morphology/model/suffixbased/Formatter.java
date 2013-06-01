@@ -185,7 +185,7 @@ public class Formatter {
      */
     public static String formatMorphemeContainerDetailed(MorphemeContainer morphemeContainer) {
         try {
-            final List<JSONObject> parts = new ArrayList<>();
+            final List<JSONObject> parts = new ArrayList<JSONObject>();
             JSONObject currentPart = null;
 
             List<SuffixTransition> suffixTransitions = morphemeContainer.getSuffixTransitions();

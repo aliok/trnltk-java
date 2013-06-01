@@ -19,7 +19,7 @@ public class ParseResultReader {
 
         final BufferedReader bufferedReader = new BufferedReader(reader);
 
-        List<WordParseResultEntry> entries = new ArrayList<>();
+        List<WordParseResultEntry> entries = new ArrayList<WordParseResultEntry>();
         WordParseResultEntry currentEntry = null;
         while (bufferedReader.ready()) {
             final String line = bufferedReader.readLine();
@@ -45,13 +45,13 @@ public class ParseResultReader {
         List<ParseResultPart> parts = null;
         if (jsonObject.has("Parts")) {
             final JSONArray jsonParts = jsonObject.getJSONArray("Parts");
-            parts = new ArrayList<>(jsonParts.length());
+            parts = new ArrayList<ParseResultPart>(jsonParts.length());
             for (int i = 0; i < jsonParts.length(); i++) {
                 final JSONObject currentPart = jsonParts.getJSONObject(i);
                 final String pos = currentPart.getString("POS");
                 final String spos = currentPart.has("SPOS") ? currentPart.getString("SPOS") : null;
 
-                final List<String> suffixes = new ArrayList<>(2);       // in avg, we have 2 suffixes
+                final List<String> suffixes = new ArrayList<String>(2);       // in avg, we have 2 suffixes
                 if (currentPart.has("Suffixes")) {
                     final JSONArray jsonSuffixes = currentPart.getJSONArray("Suffixes");
 

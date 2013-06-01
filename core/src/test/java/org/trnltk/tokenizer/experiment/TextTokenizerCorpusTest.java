@@ -75,7 +75,7 @@ public class TextTokenizerCorpusTest {
         final File[] files = folder.listFiles();
         Validate.notNull(files);
 
-        final List<File> filesToTokenize = new ArrayList<>();
+        final List<File> filesToTokenize = new ArrayList<File>();
         for (File file : files) {
             if (!file.getName().endsWith(".txt"))
                 continue;

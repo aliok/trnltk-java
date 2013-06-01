@@ -25,7 +25,7 @@ public class PhoneticAttributeMetadata {
         final MustHaveOneOfSpecification mustHaveFirstLetterAttr = mustHaveOneOf(FirstLetterConsonant, FirstLetterVowel);
         final MustHaveOneOfSpecification mustHaveLastLetterAttr = mustHaveOneOf(LastLetterConsonant, LastLetterVowel);
 
-        final HashMap<PhoneticAttribute, Specification> map = new HashMap<>();
+        final HashMap<PhoneticAttribute, Specification> map = new HashMap<PhoneticAttribute, Specification>();
         map.put(LastLetterVowel,
                 Specifications.and(
                         cannotHave(LastLetterConsonant, HasNoVowel, LastLetterVoiceless, LastLetterVoicelessStop),
@@ -123,7 +123,7 @@ public class PhoneticAttributeMetadata {
                 mustHaveLastLetterAttr
         );
 
-        final ImmutableMap.Builder<PhoneticAttribute, Specification> builder = new ImmutableMap.Builder<>();
+        final ImmutableMap.Builder<PhoneticAttribute, Specification> builder = new ImmutableMap.Builder<PhoneticAttribute, Specification>();
         for (Map.Entry<PhoneticAttribute, Specification> phoneticAttributeSpecificationEntry : map.entrySet()) {
             final PhoneticAttribute key = phoneticAttributeSpecificationEntry.getKey();
             final Specification value = phoneticAttributeSpecificationEntry.getValue();

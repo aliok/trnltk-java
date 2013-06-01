@@ -57,7 +57,7 @@ public class PhoneticsAnalyzerDistinctionTest {
         final HashMultimap<String, ? extends Root> rootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
         final Collection<? extends Root> roots = rootMap.values();
 
-        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<>();
+        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
 
         for (Root root : roots) {
             distinctPhonAttrs.add(EnumSet.copyOf(root.getPhoneticAttributes()));
@@ -69,7 +69,7 @@ public class PhoneticsAnalyzerDistinctionTest {
         final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset999.txt"),
                 Charset.forName("utf-8"));
 
-        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<>();
+        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
 
         final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new ContextlessMorphologicParserSimpleParseSetCharacterTest.SimpleParseSetValidationLineProcessor());
 
@@ -84,9 +84,9 @@ public class PhoneticsAnalyzerDistinctionTest {
 
     @Test
     public void shouldTryEveryPossiblePhoneticAttributeSet() throws IOException {
-        final Set<Set<PhoneticAttribute>> powerSets = Sets.powerSet(new HashSet<>(Lists.newArrayList(PhoneticAttribute.values())));
+        final Set<Set<PhoneticAttribute>> powerSets = Sets.powerSet(new HashSet<PhoneticAttribute>(Lists.newArrayList(PhoneticAttribute.values())));
 
-        final Set<Set<PhoneticAttribute>> validPhonAttrSets = new HashSet<>();
+        final Set<Set<PhoneticAttribute>> validPhonAttrSets = new HashSet<Set<PhoneticAttribute>>();
 
         for (Set<PhoneticAttribute> set : powerSets) {
             if (PhoneticAttributeMetadata.isValid(set))
@@ -95,7 +95,7 @@ public class PhoneticsAnalyzerDistinctionTest {
 
         System.out.println("Valid phonetic attribute set count : " + validPhonAttrSets.size());
 
-        final Set<EnumSet<PhoneticAttribute>> discoveredPhonAttrSets = new HashSet<>();
+        final Set<EnumSet<PhoneticAttribute>> discoveredPhonAttrSets = new HashSet<EnumSet<PhoneticAttribute>>();
         discoveredPhonAttrSets.addAll(this.getDistinctPhoneticAttributeSetsFromMasterDictionary());
         discoveredPhonAttrSets.addAll(this.getDistinctPhoneticAttributeSetsFromSimpleParseset999());
 
