@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.model.suffixbased.*;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.*;
 

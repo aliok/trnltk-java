@@ -21,7 +21,7 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.LexemeAttribute;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.Set;

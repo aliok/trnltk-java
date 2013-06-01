@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.trnltk.morphology.model.DynamicRoot;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.Root;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.*;
 

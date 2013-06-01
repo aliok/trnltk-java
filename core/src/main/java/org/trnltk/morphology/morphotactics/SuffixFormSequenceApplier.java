@@ -19,7 +19,7 @@ package org.trnltk.morphology.morphotactics;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.Set;
 

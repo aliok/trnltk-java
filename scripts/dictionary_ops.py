@@ -3,7 +3,6 @@ import codecs
 import os
 import unittest
 
-Zemberek_Resources_Folder = "../../zemberek/src/main/resources/tr/"
 Trnltk_Resources_Folder = "../core/src/main/resources/"
 
 
@@ -69,54 +68,6 @@ class DictionaryOps(unittest.TestCase):
 
                     print word
 
-    def test_should_print_duplicate_lines_in_zemberek_master_and_secondary_dictionary(self):
-        master_dict_lines = None
-        secondary_dict_lines = None
-
-        with codecs.open(self._get_zemberek_resource("master-dictionary.dict"), encoding="utf-8") as master_dict:
-            master_dict_lines = set([line for line in master_dict])
-
-        with codecs.open(self._get_zemberek_resource("secondary-dictionary.dict"), encoding="utf-8") as secondary_dict:
-            secondary_dict_lines = set([line for line in secondary_dict])
-
-        intersection = list(master_dict_lines.intersection(secondary_dict_lines))
-
-        intersection = sorted(intersection)
-
-        for line in intersection:
-            print line.strip()
-
-    def test_should_print_duplicate_lines_in_trnltk_master_dict_and_zemberek_secondary_dictionary(self):
-        master_dict_lines = None
-        secondary_dict_lines = None
-
-        with codecs.open(self._get_trnltk_resource("master-dictionary.dict"), encoding="utf-8") as master_dict:
-            master_dict_lines = set([line for line in master_dict])
-
-        with codecs.open(self._get_zemberek_resource("secondary-dictionary.dict"), encoding="utf-8") as secondary_dict:
-            secondary_dict_lines = set([line for line in secondary_dict])
-
-        intersection = list(master_dict_lines.intersection(secondary_dict_lines))
-
-        intersection = sorted(intersection)
-
-        for line in intersection:
-            print line.strip()
-
-    def test_should_print_duplicate_lines_in_zemberek_master_dictionary(self):
-        master_dict_lines = set()
-        duplicates = []
-
-        with codecs.open(self._get_zemberek_resource("master-dictionary.dict"), encoding="utf-8") as master_dict:
-            for line in master_dict:
-                line = line.strip()
-                if line in master_dict_lines:
-                    duplicates.append(line)
-                else:
-                    master_dict_lines.add(line)
-        for line in duplicates:
-            print line
-
     def test_should_print_duplicate_lines_in_trnltk_master_dictionary(self):
         master_dict_lines = set()
         duplicates = []
@@ -130,34 +81,6 @@ class DictionaryOps(unittest.TestCase):
                     master_dict_lines.add(line)
         for line in duplicates:
             print line
-
-    def test_should_print_duplicate_lines_in_zemberek_secondary_dictionary(self):
-        master_dict_lines = set()
-        duplicates = []
-
-        with codecs.open(self._get_zemberek_resource("secondary-dictionary.dict"), encoding="utf-8") as master_dict:
-            for line in master_dict:
-                line = line.strip()
-                if line in master_dict_lines:
-                    duplicates.append(line)
-                else:
-                    master_dict_lines.add(line)
-        for line in duplicates:
-            print line
-
-    @unittest.skip("skipped")
-    def test_should_remove_lines_from_zemberek_master_dictionary(self):
-        lines_to_remove = u"""
-        çıkartmak
-        ürkütmek
-        """.strip().splitlines(False)
-
-        lines_to_remove = [l.strip() for l in lines_to_remove]
-
-        def in_lines(line):
-            return line in lines_to_remove
-
-        self._process_zemberek_master_dictionary(in_lines)
 
     @unittest.skip("skipped")
     def test_should_remove_lines_from_trnltk_master_dictionary(self):
@@ -325,138 +248,64 @@ class DictionaryOps(unittest.TestCase):
                         print stripped_line
 
     @unittest.skip("skipped")
-    def test_should_remove_proper_nouns_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(lambda line: line[0].isupper())
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_giller_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_giller)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_giller_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_giller)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_lerLar_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_lerLar)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_lerLar_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_lerLar)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_enAn_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_enAn)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_enAn_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_enAn)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_lanmakLenmek_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_lanmakLenmek)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_lanmakLenmek_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_lanmakLenmek)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_siSu_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_siSu)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_siSu_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_siSu)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_likLuk_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_likLuk)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_likLuk_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_likLuk)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_caCe_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_caCe)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_caCe_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_caCe)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_casinaCesine_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_casinaCesine)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_casinaCesine_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_casinaCesine)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_dirmakDirmek_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_dirmakDirmek)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_dirmakDirmek_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_dirmakDirmek)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_tmakTmek_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_tmakTmek)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_tmakTmek_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_tmakTmek)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_rmakRmek_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_rmakRmek)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_rmakRmek_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_rmakRmek)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_ilmakIlmek_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_ilmakIlmek)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_ilmakIlmek_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_ilmakIlmek)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_mazMez_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_mazMez)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_mazMez_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_mazMez)
-
-    @unittest.skip("skipped")
-    def test_should_remove_words_with_misMus_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_misMus)
 
     @unittest.skip("skipped")
     def test_should_remove_words_with_misMus_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_misMus)
 
     @unittest.skip("skipped")
-    def test_should_remove_words_with_ciCu_from_zemberek_master_dictionary(self):
-        self._process_zemberek_master_dictionary(ends_with_ciCu)
-
-    @unittest.skip("skipped")
     def test_should_remove_words_with_ciCu_from_trnltk_master_dictionary(self):
         self._process_trnltk_master_dictionary(ends_with_ciCu)
-
-    def _process_zemberek_master_dictionary(self, function):
-        with codecs.open(self._get_zemberek_resource("master-dictionary.dict"), encoding="utf-8") as dict_file:
-            with codecs.open(self._get_local_resource("new-master-dictionary.dict"), mode="w",
-                encoding="utf-8") as new_dict_file:
-                for line in dict_file:
-                    if function(line.strip()):
-                        print line.strip()
-                    else:
-                        new_dict_file.write(line)
 
     def _process_trnltk_master_dictionary(self, function):
         with codecs.open(self._get_trnltk_resource("master-dictionary.dict"), encoding="utf-8") as dict_file:
@@ -473,9 +322,6 @@ class DictionaryOps(unittest.TestCase):
 
     def _get_trnltk_resource(self, str):
         return os.path.join(os.path.dirname(__file__), Trnltk_Resources_Folder + str)
-
-    def _get_zemberek_resource(self, str):
-        return os.path.join(os.path.dirname(__file__), Zemberek_Resources_Folder + str)
 
     def split_dict_line(self, line):
         word, meta = (line[:line.find('[', 1)], line[line.find('[', 1):]) if '[' in line else (line, None)

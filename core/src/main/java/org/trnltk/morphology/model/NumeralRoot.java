@@ -2,9 +2,9 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 public class NumeralRoot implements Root {
 

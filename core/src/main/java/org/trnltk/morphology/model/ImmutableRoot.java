@@ -1,8 +1,8 @@
 package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 
 public final class ImmutableRoot implements Root {
     private final TurkishSequence sequence;

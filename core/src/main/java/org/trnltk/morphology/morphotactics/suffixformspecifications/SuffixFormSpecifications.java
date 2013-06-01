@@ -4,11 +4,11 @@ import com.google.common.collect.Sets;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixGroup;
-import zemberek3.shared.common.specification.Specification;
-import zemberek3.shared.common.specification.TrueSpecification;
+import org.trnltk.common.specification.Specification;
+import org.trnltk.common.specification.TrueSpecification;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 

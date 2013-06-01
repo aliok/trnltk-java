@@ -16,14 +16,15 @@
         <module>web</module>
     </modules>
 
+    <!--TODO: How about distributing thru github? there is a wagon extension for that-->
     <distributionManagement>
         <repository>
-            <id>zemberek-google-code-repo</id>
-            <url>svn:https://zemberek-repo.googlecode.com/svn/maven/repo</url>
+            <id>trnltk-google-code-repo</id>
+            <url>svn:https://trnltk-repo.googlecode.com/svn/maven/repo</url>
         </repository>
         <snapshotRepository>
-            <id>zemberek-snapshots-google-code-repo</id>
-            <url>svn:https://zemberek-repo.googlecode.com/svn/maven/snapshot-repo</url>
+            <id>trnltk-snapshots-google-code-repo</id>
+            <url>svn:https://trnltk-repo.googlecode.com/svn/maven/snapshot-repo</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>

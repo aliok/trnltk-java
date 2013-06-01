@@ -2,7 +2,7 @@ package org.trnltk.morphology.contextless.parser.formbased;
 
 import com.google.common.collect.ImmutableSet;
 import org.trnltk.morphology.model.suffixbased.SuffixFormApplication;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 
 public class SuffixFormGraphSuffixEdge {
 

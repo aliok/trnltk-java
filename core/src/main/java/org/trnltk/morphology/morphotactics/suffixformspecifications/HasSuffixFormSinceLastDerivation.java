@@ -6,7 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixTransition;
-import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 
 import java.util.Collection;

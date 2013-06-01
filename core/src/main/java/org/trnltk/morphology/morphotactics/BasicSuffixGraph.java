@@ -7,16 +7,16 @@ import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixGroup;
-import zemberek3.shared.common.specification.Specification;
-import zemberek3.shared.common.specification.Specifications;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.common.specification.Specification;
+import org.trnltk.common.specification.Specifications;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.*;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.*;
-import static zemberek3.shared.lexicon.PrimaryPos.*;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.*;
 
 public class BasicSuffixGraph extends BaseSuffixGraph {
     // states

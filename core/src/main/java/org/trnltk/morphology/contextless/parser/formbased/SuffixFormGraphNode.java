@@ -6,8 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.model.suffixbased.SuffixForm;
 import org.trnltk.morphology.model.suffixbased.SuffixFormApplication;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 
 import java.util.Collection;
 import java.util.HashSet;

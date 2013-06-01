@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.EnumSet;
 import java.util.Map;

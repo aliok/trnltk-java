@@ -18,15 +18,15 @@ package org.trnltk.morphology.phonetics;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
-public class TurkishAlphabet extends zemberek3.shared.structure.TurkishAlphabet {
+public class TurkishAlphabet extends org.trnltk.morphology.model.structure.TurkishAlphabet {
 
     //TODO-INTEGRATION: following lines are ugly and temporary
-    private static final zemberek3.shared.structure.TurkishAlphabet ZEMBEREK_ALPHABET_INSTANCE = new zemberek3.shared.structure.TurkishAlphabet();
+    private static final org.trnltk.morphology.model.structure.TurkishAlphabet OTHER_ALPHABET_INSTANCE = new org.trnltk.morphology.model.structure.TurkishAlphabet();
 
-    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(zemberek3.shared.structure.TurkishAlphabet.devoicingMap.keySet());
-    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(zemberek3.shared.structure.TurkishAlphabet.voicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.devoicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.voicingMap.keySet());
     public static final ImmutableSetMultimap<TurkicLetter, TurkicLetter> Inverse_Voicing_Map = new ImmutableSetMultimap.Builder<TurkicLetter, TurkicLetter>()
             .put(TurkishAlphabet.L_b, TurkishAlphabet.L_p)
             .put(TurkishAlphabet.L_c, TurkishAlphabet.L_cc)
@@ -39,18 +39,18 @@ public class TurkishAlphabet extends zemberek3.shared.structure.TurkishAlphabet 
     public static TurkicLetter getLetterForChar(char c) {
         c = Character.toLowerCase(c);
         try {
-            return ZEMBEREK_ALPHABET_INSTANCE.getLetter(c);
+            return OTHER_ALPHABET_INSTANCE.getLetter(c);
         } catch (IllegalArgumentException e) {     //TODO-INTEGRATION: this is ugly!
             return TurkicLetter.builder(c, 9999).build();
         }
     }
 
     public static TurkicLetter voiceLetter(TurkicLetter letter) {
-        return ZEMBEREK_ALPHABET_INSTANCE.voice(letter);
+        return OTHER_ALPHABET_INSTANCE.voice(letter);
     }
 
     public static TurkicLetter devoiceLetter(TurkicLetter letter) {
-        return ZEMBEREK_ALPHABET_INSTANCE.devoice(letter);
+        return OTHER_ALPHABET_INSTANCE.devoice(letter);
     }
 
     public static TurkishChar getChar(char c) {

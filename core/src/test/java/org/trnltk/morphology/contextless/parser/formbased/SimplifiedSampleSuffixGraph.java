@@ -6,7 +6,7 @@ import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixGroup;
 import org.trnltk.morphology.morphotactics.BaseSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Collection;
 
@@ -14,7 +14,7 @@ import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TERMINAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
-import static zemberek3.shared.lexicon.PrimaryPos.Verb;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.Verb;
 
 public class SimplifiedSampleSuffixGraph extends BaseSuffixGraph {
 

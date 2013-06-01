@@ -30,7 +30,7 @@ import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.ArrayList;
 import java.util.Arrays;

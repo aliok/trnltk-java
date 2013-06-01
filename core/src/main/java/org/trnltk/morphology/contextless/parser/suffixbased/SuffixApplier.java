@@ -10,9 +10,9 @@ import org.trnltk.morphology.model.suffixbased.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import zemberek3.shared.common.specification.Specification;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import org.trnltk.common.specification.Specification;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

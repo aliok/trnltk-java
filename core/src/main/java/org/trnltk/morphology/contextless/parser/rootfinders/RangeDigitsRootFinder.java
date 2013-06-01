@@ -8,7 +8,7 @@ import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.numeral.DigitsToTextConverter;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.Arrays;
 import java.util.List;

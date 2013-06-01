@@ -17,12 +17,12 @@
 package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.suffixbased.Suffix;
-import zemberek3.shared.common.specification.Specification;
-import zemberek3.shared.common.specification.Specifications;
+import org.trnltk.common.specification.Specification;
+import org.trnltk.common.specification.Specifications;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.suffixbased.SuffixGroup;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,7 +31,7 @@ import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIO
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
-import static zemberek3.shared.lexicon.PrimaryPos.*;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.*;
 
 public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, Noun);

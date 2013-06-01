@@ -1,8 +1,8 @@
 package org.trnltk.morphology.phonetics;
 
 import org.junit.Test;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticAttributeMetadata;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttributeMetadata;
 
 import java.util.EnumSet;
 import java.util.HashSet;

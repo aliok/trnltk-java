@@ -25,7 +25,7 @@ import org.trnltk.morphology.model.NumeralRoot;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.List;
 

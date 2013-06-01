@@ -1,7 +1,7 @@
 package org.trnltk.morphology.model;
 
 import org.apache.commons.collections.CollectionUtils;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.EnumSet;
 

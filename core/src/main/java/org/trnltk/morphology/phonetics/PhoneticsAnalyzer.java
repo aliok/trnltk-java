@@ -23,8 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.Collection;
 import java.util.EnumSet;

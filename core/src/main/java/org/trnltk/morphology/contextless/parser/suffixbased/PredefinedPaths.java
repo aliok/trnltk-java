@@ -10,7 +10,7 @@ import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -17,9 +17,9 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
-import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 public class RootHasPrimaryPos extends AbstractSpecification<MorphemeContainer> {
     private final PrimaryPos primaryPos;

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.suffixbased.Suffix;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 

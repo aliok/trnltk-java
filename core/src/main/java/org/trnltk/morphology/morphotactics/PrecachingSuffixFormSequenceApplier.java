@@ -22,7 +22,7 @@ import com.google.common.collect.Sets;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixForm;
 import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.Collection;
 import java.util.Set;

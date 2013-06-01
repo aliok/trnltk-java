@@ -25,7 +25,7 @@ import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.Set;

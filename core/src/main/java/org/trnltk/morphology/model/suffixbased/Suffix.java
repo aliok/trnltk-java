@@ -1,6 +1,6 @@
 package org.trnltk.morphology.model.suffixbased;
 
-import zemberek3.shared.common.specification.Specification;
+import org.trnltk.common.specification.Specification;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

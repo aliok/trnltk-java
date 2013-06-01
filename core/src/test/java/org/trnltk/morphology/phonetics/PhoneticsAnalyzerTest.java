@@ -20,7 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.EnumSet;
 import java.util.Set;

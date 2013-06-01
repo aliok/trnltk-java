@@ -33,7 +33,7 @@ import org.trnltk.morphology.contextless.parser.testmatchers.ParseResultsExistMa
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.suffixbased.Formatter;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.*;
 

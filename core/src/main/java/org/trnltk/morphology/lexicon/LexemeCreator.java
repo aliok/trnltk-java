@@ -27,9 +27,9 @@ import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.List;
@@ -87,7 +87,7 @@ class LexemeCreator {
                     metaPart = metaPart.substring("R:".length());
                     rootStr = metaPart;
                 } else if (metaPart.startsWith("S:")) {
-                    // skip, Z3 uses some special stuff!
+                    // TODO: skip, Z3 uses some special stuff!
                 } else {
                     throw new RuntimeException("Unable to parse line : " + line);
                 }

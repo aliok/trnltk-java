@@ -19,14 +19,14 @@ package org.trnltk.morphology.contextless.parser.suffixbased;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.trnltk.morphology.model.suffixbased.SuffixForm;
-import zemberek3.shared.common.specification.Specification;
-import zemberek3.shared.common.specification.Specifications;
+import org.trnltk.common.specification.Specification;
+import org.trnltk.common.specification.Specifications;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.LinkedList;
 import java.util.List;

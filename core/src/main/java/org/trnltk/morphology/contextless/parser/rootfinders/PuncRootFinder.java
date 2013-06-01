@@ -4,7 +4,7 @@ import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.TurkishSequence;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.List;

@@ -10,7 +10,7 @@ import org.trnltk.morphology.model.suffixbased.FreeTransitionSuffix;
 import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.suffixbased.SuffixTransition;
 import org.trnltk.morphology.model.suffixbased.ZeroTransitionSuffix;
-import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.*;
 
 import java.util.Collection;

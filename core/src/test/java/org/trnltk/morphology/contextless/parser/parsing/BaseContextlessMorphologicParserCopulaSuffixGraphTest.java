@@ -17,7 +17,7 @@
 package org.trnltk.morphology.contextless.parser.parsing;
 
 import org.junit.Test;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 public abstract class BaseContextlessMorphologicParserCopulaSuffixGraphTest extends BaseContextlessMorphologicParserTest {
 

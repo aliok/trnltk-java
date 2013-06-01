@@ -23,14 +23,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import zemberek3.shared.lexicon.PrimaryPos;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static zemberek3.shared.lexicon.tr.PhoneticAttribute.*;
+import static org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute.*;
 
 public class ProperNounFromApostropheRootFinderTest extends BaseRootFinderTest<DynamicRoot> {
     PhoneticsAnalyzer phoneticsAnalyzer;

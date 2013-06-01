@@ -6,7 +6,7 @@ package org.trnltk.morphology.ambiguity;
  * http://code.google.com/p/google-diff-match-patch/
  *
  * Derivative Work:
- * Zemberek Developers
+ * Ali Ok
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

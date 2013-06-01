@@ -3,8 +3,8 @@ package org.trnltk.morphology.contextless.parser.formbased;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticAttributeMetadata;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttributeMetadata;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -19,7 +19,7 @@ package org.trnltk.morphology.morphotactics;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.suffixbased.Suffix;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,7 +28,7 @@ import static org.trnltk.morphology.model.SecondaryPos.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
-import static zemberek3.shared.lexicon.PrimaryPos.Numeral;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.Numeral;
 
 public class NumeralSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, Numeral, Cardinal);

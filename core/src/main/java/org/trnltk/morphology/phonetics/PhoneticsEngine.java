@@ -26,9 +26,9 @@ import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.ArrayList;
 import java.util.Collection;

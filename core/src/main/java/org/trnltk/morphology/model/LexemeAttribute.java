@@ -2,8 +2,8 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import zemberek3.shared.structure.StringEnum;
-import zemberek3.shared.structure.StringEnumMap;
+import org.trnltk.morphology.model.structure.StringEnum;
+import org.trnltk.morphology.model.structure.StringEnumMap;
 
 public enum LexemeAttribute implements StringEnum<LexemeAttribute> {
 

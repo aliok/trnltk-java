@@ -29,10 +29,10 @@ import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import zemberek3.shared.lexicon.PrimaryPos;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
-import zemberek3.shared.lexicon.tr.PhoneticExpectation;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.Collection;
 import java.util.EnumSet;

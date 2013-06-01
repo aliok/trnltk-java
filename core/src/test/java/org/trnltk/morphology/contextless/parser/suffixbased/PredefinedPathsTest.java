@@ -32,7 +32,7 @@ import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -41,8 +41,8 @@ import java.util.Set;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import static org.trnltk.morphology.model.SecondaryPos.Personal;
-import static zemberek3.shared.lexicon.PrimaryPos.Noun;
-import static zemberek3.shared.lexicon.PrimaryPos.Pronoun;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.Noun;
+import static org.trnltk.morphology.model.lexicon.PrimaryPos.Pronoun;
 
 public class PredefinedPathsTest {
 

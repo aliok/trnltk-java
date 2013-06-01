@@ -23,8 +23,8 @@ import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.shared.lexicon.PrimaryPos;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.Arrays;
 import java.util.List;

@@ -5,7 +5,7 @@ import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -20,7 +20,7 @@ import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.shared.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.Arrays;
 

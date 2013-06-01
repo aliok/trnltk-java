@@ -2,7 +2,7 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
-import zemberek3.shared.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
 
 public class ImmutableLexeme implements Lexeme {
     private final String lemma;

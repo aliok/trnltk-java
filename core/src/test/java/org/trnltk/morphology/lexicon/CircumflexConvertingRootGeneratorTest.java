@@ -22,8 +22,8 @@ import org.junit.Test;
 import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
-import zemberek3.shared.lexicon.PrimaryPos;
-import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
 import java.util.HashSet;
 
