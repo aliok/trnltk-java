@@ -6,7 +6,7 @@ import org.trnltk.morphology.model.NumeralRoot;
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
 import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.numeral.DigitsToTextConverter;
+import org.trnltk.numeral.DigitsToTextConverter;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 

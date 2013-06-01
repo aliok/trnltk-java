@@ -1,6 +1,8 @@
 package org.trnltk.morphology.model.structure;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSetMultimap;
 
 import java.util.Arrays;
 
@@ -152,6 +154,17 @@ public class TurkishAlphabet {
         }
     }
 
+    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.devoicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(org.trnltk.morphology.model.structure.TurkishAlphabet.voicingMap.keySet());
+    public static final ImmutableSetMultimap<TurkicLetter, TurkicLetter> Inverse_Voicing_Map = new ImmutableSetMultimap.Builder<TurkicLetter, TurkicLetter>()
+            .put(TurkishAlphabet.L_b, TurkishAlphabet.L_p)
+            .put(TurkishAlphabet.L_c, TurkishAlphabet.L_cc)
+            .put(TurkishAlphabet.L_d, TurkishAlphabet.L_t)
+            .put(TurkishAlphabet.L_g, TurkishAlphabet.L_k)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_g)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_k)
+            .build();
+
     public boolean isVowel(char c) {
         return !(c >= MAX_CHAR_VALUE || !VALID_CHAR_TABLE[c]) && VOWEL_TABLE[c];
     }
@@ -174,12 +187,12 @@ public class TurkishAlphabet {
     }
 
     protected static final ImmutableMap<TurkicLetter, TurkicLetter> devoicingMap = new ImmutableMap.Builder<TurkicLetter, TurkicLetter>()
-        .put(L_b, L_p)
-        .put(L_c, L_cc)
-        .put(L_d, L_t)
-        .put(L_g, L_k)
-        .put(L_gg, L_k)
-        .build();
+            .put(L_b, L_p)
+            .put(L_c, L_cc)
+            .put(L_d, L_t)
+            .put(L_g, L_k)
+            .put(L_gg, L_k)
+            .build();
 
     public TurkicLetter devoice(TurkicLetter l) {
         return devoicingMap.get(l);
@@ -207,8 +220,13 @@ public class TurkishAlphabet {
      */
     public TurkicLetter getLetter(char c) {
         if (c >= MAX_CHAR_VALUE || !VALID_CHAR_TABLE[c])
-            throw new IllegalArgumentException("Unexpected char:" + c);
+            return TurkicLetter.builder(c, 9999).build();
         else return CHAR_TO_LETTER_LOOKUP[c];
+    }
+
+    public TurkishChar getChar(char c) {
+        final TurkicLetter letterForChar = getLetter(c);
+        return new TurkishChar(c, letterForChar);
     }
 
     /**
@@ -233,7 +251,7 @@ public class TurkishAlphabet {
      */
     public int getAlphabeticIndex(char c) {
         if (!isValid(c))
-            throw new IllegalArgumentException("unexpected char:" + c + " code:" + (int)c);
+            throw new IllegalArgumentException("unexpected char:" + c + " code:" + (int) c);
         return TURKISH_ALPHABET_INDEXES[c];
     }
 
@@ -248,58 +266,6 @@ public class TurkishAlphabet {
         if (alphabeticIndex < 1 || alphabeticIndex > ALPHABET_LETTER_COUNT)
             throw new IllegalArgumentException("Unexpected alphabetic index:" + alphabeticIndex);
         return TURKISH_ALPHABET_CHARS[alphabeticIndex - 1];
-    }
-
-    // ------------------------ ASCII equivalency ----------------------------------
-    // This lookup table maps each Turkish letter to its ASCII counterpart.
-    private static final TurkicLetter[] ASCII_EQUIVALENT_LETTER_LOOKUP = {
-            L_a, L_b, L_c, L_c, L_d, L_e, L_f, L_g,
-            L_g, L_h, L_i, L_i, L_j, L_k, L_l, L_m,
-            L_n, L_o, L_o, L_p, L_r, L_s, L_s, L_t,
-            L_u, L_u, L_v, L_y, L_z, L_q, L_w, L_x,
-            L_a, L_i, L_u};
-
-    private static char[] ASCII_EQUIVALENT_CHARS_LOOKUP = new char[MAX_CHAR_VALUE];
-
-    static {
-        Arrays.fill(ASCII_EQUIVALENT_CHARS_LOOKUP, (char) 0);
-        for (TurkicLetter turkicLetter : TURKISH_LETTERS) {
-            ASCII_EQUIVALENT_CHARS_LOOKUP[turkicLetter.charValue] = turkicLetter.englishEquivalentChar();
-        }
-    }
-
-    /**
-     * returns the English equivalnet letter. such as [a->a] and [c with cedil -> c]
-     *
-     * @param letter turkicletter
-     * @return english equivalent letter.
-     */
-    public TurkicLetter getAsciiEquivalentLetter(TurkicLetter letter) {
-        return ASCII_EQUIVALENT_LETTER_LOOKUP[letter.alphabeticIndex() - 1];
-    }
-
-    /**
-     * checks if two characters are enlish character equal.
-     *
-     * @param c1 first char
-     * @param c2 second char.
-     * @return true if equals or enlish equivalents are same.
-     */
-    public boolean asciiEqual(char c1, char c2) {
-        return (isValid(c1) && isValid(c2)) &&
-                (c1 == c2 || ASCII_EQUIVALENT_CHARS_LOOKUP[c1] == ASCII_EQUIVALENT_CHARS_LOOKUP[c2]);
-    }
-
-    public char getAsciiEquivalentChar(char c) {
-        if (!isValid(c))
-            throw new IllegalArgumentException("unexpected char:" + c);
-        return CHAR_TO_LETTER_LOOKUP[c].englishEquivalentChar();
-    }
-
-    public TurkicLetter getAsciEquivalentLetter(char c) {
-        if (!isValid(c))
-            throw new IllegalArgumentException("unexpected char:" + c);
-        return ASCII_EQUIVALENT_LETTER_LOOKUP[getAlphabeticIndex(c) - 1];
     }
 
     /**
@@ -318,5 +284,10 @@ public class TurkishAlphabet {
             indexes[i] = (byte) getAlphabeticIndex(s.charAt(i));
         }
         return indexes;
+    }
+
+    private static final TurkishAlphabet INSTANCE = new TurkishAlphabet();
+    public static final TurkishAlphabet getInstance(){
+        return INSTANCE;
     }
 }

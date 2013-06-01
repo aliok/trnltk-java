@@ -16,11 +16,11 @@
 
 package org.trnltk.morphology.model.suffixbased;
 
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
 
 public class SuffixFormSequenceRuleStub extends SuffixFormSequence.SuffixFormSequenceRule {
     public SuffixFormSequenceRuleStub(char charToAdd, SuffixFormSequence.SuffixFormSequenceRuleType ruleType) {
-        super(TurkishAlphabet.getChar(charToAdd), ruleType);
+        super(TurkishAlphabet.getInstance().getChar(charToAdd), ruleType);
     }
 
     public SuffixFormSequenceRuleStub(SuffixFormSequence.SuffixFormSequenceRuleType ruleType) {

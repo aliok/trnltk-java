@@ -27,12 +27,12 @@ import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.model.lexicon.PrimaryPos;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.model.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -130,8 +130,8 @@ public class ImmutableRootGenerator {
         final EnumSet<PhoneticExpectation> modifiedPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
 
         if (CollectionUtils.containsAny(lexemeAttributes, Sets.immutableEnumSet(LexemeAttribute.Voicing, LexemeAttribute.VoicingOpt))) {
-            final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
-            final TurkicLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.voiceLetter(lastLetter);
+            final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(modifiedRootStr.charAt(modifiedRootStr.length() - 1));
+            final TurkicLetter voicedLastLetter = lemmaRoot.endsWith("nk") ? TurkishAlphabet.L_g : TurkishAlphabet.getInstance().voice(lastLetter);
             Validate.notNull(voicedLastLetter);
             modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.charValue();
 
@@ -213,7 +213,7 @@ public class ImmutableRootGenerator {
         return Iterables.any(Lists.newArrayList(ArrayUtils.toObject(str.toCharArray())), new Predicate<Character>() {
             @Override
             public boolean apply(Character input) {
-                return TurkishAlphabet.getLetterForChar(input).isVowel();
+                return TurkishAlphabet.getInstance().getLetter(input).isVowel();
             }
         });
     }

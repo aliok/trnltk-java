@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.trnltk.morphology.numeral;
+package org.trnltk.numeral;
 
 import org.junit.Before;
 import org.junit.Test;

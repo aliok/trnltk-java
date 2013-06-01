@@ -20,9 +20,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishChar;
+import org.trnltk.morphology.model.structure.TurkishChar;
 import org.trnltk.morphology.model.lexicon.PrimaryPos;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class ProperNounWithoutApostropheRootFinder implements RootFinder {
     private static final char APOSTROPHE = '\'';
-    private static final TurkishChar TURKISH_CHAR_E_UPPERCASE = TurkishAlphabet.getChar('E');
+    private static final TurkishChar TURKISH_CHAR_E_UPPERCASE = TurkishAlphabet.getInstance().getChar('E');
 
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 

@@ -3,8 +3,8 @@ package org.trnltk.morphology.contextless.parser.rootfinders;
 import org.trnltk.morphology.model.DynamicRoot;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishChar;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishChar;
 import org.trnltk.morphology.model.structure.TurkicLetter;
 
 import java.util.ArrayList;

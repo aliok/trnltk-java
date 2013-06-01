@@ -19,8 +19,8 @@ package org.trnltk.morphology.lexicon;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishChar;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishChar;
 
 import java.util.HashSet;
 import java.util.LinkedList;

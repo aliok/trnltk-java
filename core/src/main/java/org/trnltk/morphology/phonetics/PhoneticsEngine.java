@@ -24,11 +24,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
-import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
-import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.model.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishChar;
+import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
+import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -103,7 +105,7 @@ public class PhoneticsEngine {
     private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final String suffixFormToApply, final Collection<LexemeAttribute> lexemeAttributes) {
         TurkishSequence newSurface = _surface;
 
-        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getLetterForChar(suffixFormToApply.charAt(0));
+        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getInstance().getLetter(suffixFormToApply.charAt(0));
 
         // first try voicing
         if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && letterForFirstCharOfSuffixFormToApply.isVowel()) {
@@ -141,9 +143,9 @@ public class PhoneticsEngine {
 
         switch (phoneticExpectation) {
             case VowelStart:
-                return TurkishAlphabet.getLetterForChar(firstCharOfForm).isVowel();
+                return TurkishAlphabet.getInstance().getLetter(firstCharOfForm).isVowel();
             case ConsonantStart:
-                return !TurkishAlphabet.getLetterForChar(firstCharOfForm).isVowel();
+                return !TurkishAlphabet.getInstance().getLetter(firstCharOfForm).isVowel();
             default:
                 throw new IllegalArgumentException("Unknown phonetic expectation : " + phoneticExpectation);
         }
@@ -178,9 +180,9 @@ public class PhoneticsEngine {
             return true;
 
         else if (voicingAllowed && inputUnderlyingString.startsWith(appliedStringToCheck.substring(0, appliedStringToCheck.length() - 1))) {
-            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getLetterForChar(appliedStringToCheck.charAt(appliedStringToCheck.length() - 1));
+            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getInstance().getLetter(appliedStringToCheck.charAt(appliedStringToCheck.length() - 1));
             final TurkishChar lastLetterOfInputPart = input.charAt(appliedStringToCheck.length() - 1);
-            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.voiceLetter(lastLetterOfApplication));
+            return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.getInstance().voice(lastLetterOfApplication));
         }
 
         return false;

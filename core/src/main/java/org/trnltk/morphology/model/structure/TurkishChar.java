@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package org.trnltk.morphology.phonetics;
-
-import org.trnltk.morphology.model.structure.TurkicLetter;
+package org.trnltk.morphology.model.structure;
 
 public class TurkishChar {
 

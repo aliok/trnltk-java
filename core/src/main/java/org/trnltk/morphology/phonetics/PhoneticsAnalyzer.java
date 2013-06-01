@@ -25,6 +25,8 @@ import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishChar;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -105,7 +107,7 @@ public class PhoneticsAnalyzer {
     }
 
     public ImmutableSet<PhoneticAttribute> calculateNewPhoneticAttributes(Set<PhoneticAttribute> phoneticAttributes, char charToApply) {
-        final TurkishChar turkishChar = TurkishAlphabet.getChar(charToApply);
+        final TurkishChar turkishChar = TurkishAlphabet.getInstance().getChar(charToApply);
         final TurkicLetter letter = turkishChar.getLetter();
 
         final EnumSet<PhoneticAttribute> newAttributes = EnumSet.copyOf(phoneticAttributes);

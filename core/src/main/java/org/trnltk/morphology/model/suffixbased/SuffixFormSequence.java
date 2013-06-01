@@ -22,10 +22,10 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishChar;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
+import org.trnltk.morphology.model.structure.TurkishChar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class SuffixFormSequence {
             final boolean previousCharIsExclamation = previousChar != null && previousChar == EXCLAMATION;
 
             final boolean currentLetterIsUpperCase = Character.isUpperCase(currentChar);
-            final TurkishChar currentTurkishChar = TurkishAlphabet.getChar(currentChar);
+            final TurkishChar currentTurkishChar = TurkishAlphabet.getInstance().getChar(currentChar);
             final TurkicLetter currentLetter = currentTurkishChar.getLetter();
 
             if (rulesBuilder.allRulesOptional() && TurkishAlphabet.Devoicable_Letters.contains(currentLetter)) {
@@ -134,15 +134,15 @@ public class SuffixFormSequence {
         if (!this.isNotBlank())
             return false;
 
-        if (TurkishAlphabet.getLetterForChar(this.suffixFormStr.charAt(0)).isVowel())
+        if (TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(0)).isVowel())
             return true;
 
         if (this.suffixFormStr.charAt(0) == PLUS) {
             if (this.suffixFormStr.length() >= 3)
-                return TurkishAlphabet.getLetterForChar(this.suffixFormStr.charAt(1)).isVowel()
-                        || TurkishAlphabet.getLetterForChar(this.suffixFormStr.charAt(2)).isVowel();
+                return TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(1)).isVowel()
+                        || TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(2)).isVowel();
             if (this.suffixFormStr.length() >= 2)
-                return TurkishAlphabet.getLetterForChar(this.suffixFormStr.charAt(1)).isVowel();
+                return TurkishAlphabet.getInstance().getLetter(this.suffixFormStr.charAt(1)).isVowel();
         }
 
 
@@ -183,7 +183,7 @@ public class SuffixFormSequence {
         if (charBeforeLastChar == EXCLAMATION)
             return false;
 
-        final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
+        final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(lastChar);
         return TurkishAlphabet.Voicable_Letters.contains(lastLetter);
     }
 
@@ -333,7 +333,7 @@ public class SuffixFormSequence {
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
                 final boolean lastLetterVoiceless = phoneticAttributesOfSurface.contains(PhoneticAttribute.LastLetterVoiceless);
                 if (lastLetterVoiceless)
-                    return TurkishAlphabet.devoiceLetter(charToAdd.getLetter()).charValue();
+                    return TurkishAlphabet.getInstance().devoice(charToAdd.getLetter()).charValue();
                 else
                     return charToAdd.getCharValue();
             }

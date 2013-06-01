@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.trnltk.morphology.numeral;
+package org.trnltk.numeral;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;

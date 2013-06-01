@@ -3,6 +3,7 @@ package org.trnltk.morphology.contextless.parser.formbased;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
 import org.trnltk.morphology.model.suffixbased.Suffix;
 import org.trnltk.morphology.model.suffixbased.SuffixForm;
 import org.trnltk.morphology.model.suffixbased.SuffixFormApplication;
@@ -12,7 +13,6 @@ import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.model.structure.TurkicLetter;
@@ -81,9 +81,9 @@ public class SuffixFormGraphExtractor {
             addSuffixFormEdge(suffixFormGraph, sourceSuffixFormGraphNode, targetState, suffixForm, appliedSuffixForm, appliedSuffixForm);
 
             if (StringUtils.isNotBlank(appliedSuffixForm) && suffixFormSequence.lastLetterCanBeVoiced()) {
-                final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(appliedSuffixForm.charAt(appliedSuffixForm.length() - 1));
+                final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(appliedSuffixForm.charAt(appliedSuffixForm.length() - 1));
                 Validate.notNull(lastLetter);
-                final TurkicLetter voicedLastLetter = TurkishAlphabet.voiceLetter(lastLetter);
+                final TurkicLetter voicedLastLetter = TurkishAlphabet.getInstance().voice(lastLetter);
                 if (voicedLastLetter != null) {
                     final String voicedSuffixForm = appliedSuffixForm.substring(0, appliedSuffixForm.length() - 1) + voicedLastLetter.charValue;
                     addSuffixFormEdge(suffixFormGraph, sourceSuffixFormGraphNode, targetState, suffixForm, voicedSuffixForm, appliedSuffixForm, Arrays.asList(PhoneticExpectation.VowelStart));

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
-import org.trnltk.morphology.numeral.DigitsToTextConverter;
+import org.trnltk.numeral.DigitsToTextConverter;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;

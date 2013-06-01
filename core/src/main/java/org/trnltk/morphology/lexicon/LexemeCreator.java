@@ -27,9 +27,9 @@ import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.structure.TurkicLetter;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.model.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.structure.TurkicLetter;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
 
 import java.util.HashSet;
 import java.util.List;
@@ -124,7 +124,7 @@ class LexemeCreator {
     private int vowelCount(String str) {
         int count = 0;
         for (char c : str.toCharArray()) {
-            if (TurkishAlphabet.getLetterForChar(c).isVowel())
+            if (TurkishAlphabet.getInstance().getLetter(c).isVowel())
                 count++;
         }
         return count;
@@ -132,7 +132,7 @@ class LexemeCreator {
 
     Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
-        final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
+        final TurkicLetter lastLetter = TurkishAlphabet.getInstance().getLetter(lastChar);
         final int vowelCount = this.vowelCount(lemmaRoot);
 
         final HashSet<LexemeAttribute> lexemeAttributes = new HashSet<LexemeAttribute>(_lexemeAttributes);

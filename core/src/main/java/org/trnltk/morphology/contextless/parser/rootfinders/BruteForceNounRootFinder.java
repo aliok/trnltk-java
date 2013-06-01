@@ -4,9 +4,9 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.Lists;
 import org.trnltk.morphology.model.*;
+import org.trnltk.morphology.model.structure.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
-import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import org.trnltk.morphology.phonetics.TurkishChar;
+import org.trnltk.morphology.model.structure.TurkishChar;
 import org.trnltk.morphology.model.lexicon.PrimaryPos;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.model.lexicon.tr.PhoneticExpectation;
@@ -117,7 +117,7 @@ public class BruteForceNounRootFinder implements RootFinder {
                     @Override
                     public DynamicRoot apply(DynamicRoot input) {
                         final String lemmaRoot = input.getLexeme().getLemmaRoot();
-                        return createDoublingRoot(input, TurkishAlphabet.getChar(lemmaRoot.charAt(lemmaRoot.length() - 1)));
+                        return createDoublingRoot(input, TurkishAlphabet.getInstance().getChar(lemmaRoot.charAt(lemmaRoot.length() - 1)));
                     }
                 });
 
