@@ -37,12 +37,12 @@ public class DictionaryLoader {
     private static final String COMMENT_SYMBOL = "#";
 
     public static HashSet<Lexeme> loadDefaultMasterDictionary() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master_dictionary.txt"), Charset.forName("utf-8"));
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-dictionary.dict"), Charset.forName("utf-8"));
         return new DictionaryLoader().load(supplier);
     }
 
     public static HashSet<Lexeme> loadDefaultNumeralMasterDictionary() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master_numeral_dictionary.txt"), Charset.forName("utf-8"));
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-numeral-dictionary.txt"), Charset.forName("utf-8"));
         return new DictionaryLoader().load(supplier);
     }
 

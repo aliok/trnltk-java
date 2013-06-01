@@ -6,7 +6,11 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.common.specification.AbstractSpecification;
+import org.trnltk.morphology.model.suffixbased.FreeTransitionSuffix;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.morphology.model.suffixbased.SuffixTransition;
+import org.trnltk.morphology.model.suffixbased.ZeroTransitionSuffix;
+import zemberek3.shared.common.specification.AbstractSpecification;
 import org.trnltk.morphology.model.*;
 
 import java.util.Collection;
@@ -28,20 +32,20 @@ public class DoesntHaveLexemeAttributes extends AbstractSpecification<MorphemeCo
     public boolean isSatisfiedBy(MorphemeContainer morphemeContainer) {
         Validate.notNull(morphemeContainer);
 
-        Collection<Transition> transitions = morphemeContainer.getTransitions();
+        Collection<SuffixTransition> suffixTransitions = morphemeContainer.getSuffixTransitions();
 
-        // filter out free transitions, zero transitions and transitions with empty suffix forms
+        // filter out free suffixTransitions, zero suffixTransitions and suffixTransitions with empty suffix forms
         // since all those three don't change the phonetic attributes of a string
-        transitions = Collections2.filter(transitions, new Predicate<Transition>() {
+        suffixTransitions = Collections2.filter(suffixTransitions, new Predicate<SuffixTransition>() {
             @Override
-            public boolean apply(Transition input) {
+            public boolean apply(SuffixTransition input) {
                 return !(input.getSuffixFormApplication().getSuffixForm().getSuffix() instanceof FreeTransitionSuffix) &&
                         !(input.getSuffixFormApplication().getSuffixForm().getSuffix() instanceof ZeroTransitionSuffix) &&
                         StringUtils.isNotEmpty(input.getSuffixFormApplication().getActualSuffixForm()); // The str " " would change the phonetics!
             }
         });
 
-        if (CollectionUtils.isNotEmpty(transitions))
+        if (CollectionUtils.isNotEmpty(suffixTransitions))
             return true;
 
         final Set<LexemeAttribute> morphemeContainerLexemeAttributes = morphemeContainer.getRoot().getLexeme().getAttributes();

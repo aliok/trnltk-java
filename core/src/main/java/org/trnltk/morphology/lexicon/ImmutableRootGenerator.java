@@ -23,15 +23,16 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
+import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
-import zemberek3.lexicon.tr.PhoneticExpectation;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import zemberek3.lexicon.PrimaryPos;
-import zemberek3.lexicon.tr.PhonAttr;
-import zemberek3.structure.TurkicLetter;
+import zemberek3.shared.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import zemberek3.shared.structure.TurkicLetter;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -39,13 +40,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ImmutableRootGenerator {
-    private static final ImmutableSet<LexemeAttribute> modifiersToWatch = Sets.immutableEnumSet(LexemeAttribute.Doubling,
+    private static final ImmutableSet<LexemeAttribute> MODIFIERS_TO_WATCH = Sets.immutableEnumSet(LexemeAttribute.Doubling,
             LexemeAttribute.LastVowelDrop,
             LexemeAttribute.ProgressiveVowelDrop,
             LexemeAttribute.InverseHarmony,
             LexemeAttribute.Voicing,
             LexemeAttribute.VoicingOpt,
-            LexemeAttribute.RootChange);
+            LexemeAttribute.Special,
+            LexemeAttribute.EndsWithAyn);
 
     private static final ImmutableMap<Pair<String, PrimaryPos>, String> rootChanges = new ImmutableMap.Builder<Pair<String, PrimaryPos>, String>()
             .put(Pair.of("ben", PrimaryPos.Pronoun), "ban")
@@ -73,25 +75,56 @@ public class ImmutableRootGenerator {
     }
 
     public HashSet<ImmutableRoot> generate(final Lexeme lexeme) {
-        if (CollectionUtils.containsAny(lexeme.getAttributes(), modifiersToWatch)) {
+        if (CollectionUtils.containsAny(lexeme.getAttributes(), MODIFIERS_TO_WATCH)) {
             return this.generateModifiedRootNodes(lexeme);
         } else {
-            Set<PhonAttr> phonAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), lexeme.getAttributes());
-            final ImmutableRoot root = new ImmutableRoot(lexeme.getLemmaRoot(), lexeme, Sets.immutableEnumSet(phonAttrs), null);
+            Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), lexeme.getAttributes());
+            final ImmutableRoot root = new ImmutableRoot(lexeme.getLemmaRoot(), lexeme, Sets.immutableEnumSet(phoneticAttributes), null);
             return Sets.newHashSet(root);
         }
     }
 
     private HashSet<ImmutableRoot> generateModifiedRootNodes(final Lexeme lexeme) {
-        final ImmutableSet<LexemeAttribute> lexemeAttributes = lexeme.getAttributes();
-        if (lexemeAttributes.contains(LexemeAttribute.RootChange))
+        final Set<LexemeAttribute> lexemeAttributes = lexeme.getAttributes();
+        if (lexemeAttributes.contains(LexemeAttribute.Special))
             return this.handleSpecialRoots(lexeme);
+
+        if (lexemeAttributes.contains(LexemeAttribute.EndsWithAyn)) {       //kind of hack, didn't like it :(
+            // if the word ends with Ayn
+            // create roots with that attribute, and without that attribute
+            // when creating with that attribute, add a VowelStart expectation
+
+            final HashSet<ImmutableRoot> immutableRoots = new HashSet<ImmutableRoot>();
+
+            final EnumSet<LexemeAttribute> lexemeAttributesWithoutAyn = EnumSet.copyOf(lexemeAttributes);
+            lexemeAttributesWithoutAyn.remove(LexemeAttribute.EndsWithAyn);
+            final Lexeme lexemeWithoutAttrEndsWithAyn = new ImmutableLexeme(lexeme.getLemma(), lexeme.getLemmaRoot(), lexeme.getPrimaryPos(), lexeme.getSecondaryPos(), Sets.immutableEnumSet(lexemeAttributesWithoutAyn));
+            final HashSet<ImmutableRoot> rootsWithoutAynApplied = this.generateModifiedRootNodes(lexemeWithoutAttrEndsWithAyn);
+            immutableRoots.addAll(rootsWithoutAynApplied);
+
+            for (ImmutableRoot immutableRoot : rootsWithoutAynApplied) {
+                final ImmutableSet<PhoneticAttribute> phoneticAttributesWithoutAynApplied = immutableRoot.getPhoneticAttributes();
+                final HashSet<PhoneticAttribute> phoneticAttributesWithAynApplied = Sets.newHashSet(phoneticAttributesWithoutAynApplied);
+                phoneticAttributesWithAynApplied.remove(PhoneticAttribute.LastLetterVowel);
+                phoneticAttributesWithAynApplied.add(PhoneticAttribute.LastLetterConsonant);
+                final ImmutableRoot immutableRootWithAynApplied = new ImmutableRoot(immutableRoot.getSequence(), immutableRoot.getLexeme(), Sets.immutableEnumSet(phoneticAttributesWithAynApplied), Sets.immutableEnumSet(PhoneticExpectation.VowelStart));
+                immutableRoots.add(immutableRootWithAynApplied);
+            }
+
+            // just before returning, set correct lexeme again
+            final HashSet<ImmutableRoot> immutableRootsWithCorrectLexemeAttr = new HashSet<ImmutableRoot>();
+            for (ImmutableRoot immutableRoot : immutableRoots) {
+                immutableRootsWithCorrectLexemeAttr.add(new ImmutableRoot(immutableRoot.getSequence(), lexeme, immutableRoot.getPhoneticAttributes(), immutableRoot.getPhoneticExpectations()));
+            }
+
+            return immutableRootsWithCorrectLexemeAttr;
+        }
 
         final String lemmaRoot = lexeme.getLemmaRoot();
         String modifiedRootStr = lexeme.getLemmaRoot();
 
-        final EnumSet<PhonAttr> originalPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
-        final EnumSet<PhonAttr> modifiedPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
+        final EnumSet<PhoneticAttribute> originalPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
+        final EnumSet<PhoneticAttribute> modifiedPhoneticAttrs = phoneticsAnalyzer.calculatePhoneticAttributes(lexeme.getLemmaRoot(), null);
 
         final EnumSet<PhoneticExpectation> originalPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
         final EnumSet<PhoneticExpectation> modifiedPhoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
@@ -102,7 +135,7 @@ public class ImmutableRootGenerator {
             Validate.notNull(voicedLastLetter);
             modifiedRootStr = modifiedRootStr.substring(0, modifiedRootStr.length() - 1) + voicedLastLetter.charValue();
 
-            modifiedPhoneticAttrs.remove(PhonAttr.LastLetterVoicelessStop);
+            modifiedPhoneticAttrs.remove(PhoneticAttribute.LastLetterVoicelessStop);
 
             if (!lexemeAttributes.contains(LexemeAttribute.VoicingOpt)) {
                 originalPhoneticExpectations.add(PhoneticExpectation.ConsonantStart);
@@ -126,10 +159,10 @@ public class ImmutableRootGenerator {
         }
 
         if (lexemeAttributes.contains(LexemeAttribute.InverseHarmony)) {
-            originalPhoneticAttrs.add(PhonAttr.LastVowelFrontal);
-            originalPhoneticAttrs.remove(PhonAttr.LastVowelBack);
-            modifiedPhoneticAttrs.add(PhonAttr.LastVowelFrontal);
-            modifiedPhoneticAttrs.remove(PhonAttr.LastVowelBack);
+            originalPhoneticAttrs.add(PhoneticAttribute.LastVowelFrontal);
+            originalPhoneticAttrs.remove(PhoneticAttribute.LastVowelBack);
+            modifiedPhoneticAttrs.add(PhoneticAttribute.LastVowelFrontal);
+            modifiedPhoneticAttrs.remove(PhoneticAttribute.LastVowelBack);
         }
 
         if (lexemeAttributes.contains(LexemeAttribute.ProgressiveVowelDrop)) {
@@ -157,10 +190,10 @@ public class ImmutableRootGenerator {
 
         Validate.notNull(changedRootStr, "Unhandled root change : " + originalLexeme);
 
-        final ImmutableSet<LexemeAttribute> attributes = originalLexeme.getAttributes();
+        final Set<LexemeAttribute> attributes = originalLexeme.getAttributes();
         final EnumSet<LexemeAttribute> newAttributes = EnumSet.copyOf(attributes);
-        newAttributes.remove(LexemeAttribute.RootChange);
-        final Lexeme modifiedLexeme = new Lexeme(originalLexeme.getLemma(), originalLexeme.getLemmaRoot(), originalLexeme.getPrimaryPos(),
+        newAttributes.remove(LexemeAttribute.Special);
+        final Lexeme modifiedLexeme = new ImmutableLexeme(originalLexeme.getLemma(), originalLexeme.getLemmaRoot(), originalLexeme.getPrimaryPos(),
                 originalLexeme.getSecondaryPos(), Sets.immutableEnumSet(newAttributes));
 
 

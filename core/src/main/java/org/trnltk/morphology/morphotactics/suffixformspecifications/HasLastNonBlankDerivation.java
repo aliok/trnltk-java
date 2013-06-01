@@ -1,11 +1,11 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
-import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.MorphemeContainer;
-import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SuffixForm;
-import org.trnltk.morphology.model.Transition;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.morphology.model.suffixbased.SuffixForm;
+import org.trnltk.morphology.model.suffixbased.SuffixTransition;
 
 public class HasLastNonBlankDerivation extends AbstractSpecification<MorphemeContainer> {
     private final Suffix suffix;
@@ -28,7 +28,7 @@ public class HasLastNonBlankDerivation extends AbstractSpecification<MorphemeCon
     public boolean isSatisfiedBy(MorphemeContainer morphemeContainer) {
         Validate.notNull(morphemeContainer);
 
-        Transition lastNonBlankDerivation = morphemeContainer.getLastNonBlankDerivation();
+        SuffixTransition lastNonBlankDerivation = morphemeContainer.getLastNonBlankDerivation();
 
         if (lastNonBlankDerivation == null)
             return false;

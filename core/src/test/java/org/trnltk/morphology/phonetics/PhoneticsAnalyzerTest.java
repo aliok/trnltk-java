@@ -18,10 +18,12 @@ package org.trnltk.morphology.phonetics;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.TurkishSequence;
-import zemberek3.lexicon.tr.PhonAttr;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,6 +32,21 @@ public class PhoneticsAnalyzerTest {
 
     PhoneticsAnalyzer phoneticsAnalyzer;
 
+    PhoneticAttribute LLV = PhoneticAttribute.LastLetterVowel;
+    PhoneticAttribute LLC = PhoneticAttribute.LastLetterConsonant;
+
+    PhoneticAttribute LVR = PhoneticAttribute.LastVowelRounded;
+    PhoneticAttribute LVU = PhoneticAttribute.LastVowelUnrounded;
+    PhoneticAttribute LVF = PhoneticAttribute.LastVowelFrontal;
+    PhoneticAttribute LVB = PhoneticAttribute.LastVowelBack;
+
+    PhoneticAttribute LLVless = PhoneticAttribute.LastLetterVoiceless;
+    PhoneticAttribute LLVlessStop = PhoneticAttribute.LastLetterVoicelessStop;
+    PhoneticAttribute LLNotVless = PhoneticAttribute.LastLetterNotVoiceless;
+
+    PhoneticAttribute FLC = PhoneticAttribute.FirstLetterConsonant;
+    PhoneticAttribute FLV = PhoneticAttribute.FirstLetterVowel;
+
     @Before
     public void setUp() throws Exception {
         this.phoneticsAnalyzer = new PhoneticsAnalyzer();
@@ -37,25 +54,69 @@ public class PhoneticsAnalyzerTest {
 
     @Test
     public void shouldCalculatePhoneticAttributes() {
-        PhonAttr LLV = PhonAttr.LastLetterVowel;
-        PhonAttr LLC = PhonAttr.LastLetterConsonant;
+        assertThat(EnumSet.of(FLV, LLV, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("e"))));
+        assertThat(EnumSet.of(FLC, LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("kel"))));
+        assertThat(EnumSet.of(FLV, LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("ek"))));
+        assertThat(EnumSet.of(FLC, LLC, LVU, LVF, LLVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("seh"))));
+        assertThat(EnumSet.of(FLV, LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elm"))));
+        assertThat(EnumSet.of(FLV, LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elk"))));
+        assertThat(EnumSet.of(FLC, LLV, LVU, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("belma"))));
+        assertThat(EnumSet.of(FLV, LLV, LVR, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elmo"))));
+        assertThat(EnumSet.of(FLC, LLC, LVU, LVB, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("kapak"))));
+    }
 
-        PhonAttr LVR = PhonAttr.LastVowelRounded;
-        PhonAttr LVU = PhonAttr.LastVowelUnrounded;
-        PhonAttr LVF = PhonAttr.LastVowelFrontal;
-        PhonAttr LVB = PhonAttr.LastVowelBack;
+    @Test
+    public void shouldCalculatePhoneticAttributesForWordsEndingWithArabicAyn() {
+        assertThat(EnumSet.of(FLC, LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributes(new TurkishSequence("cami"), EnumSet.of(LexemeAttribute.EndsWithAyn))));
+        assertThat(EnumSet.of(FLC, LLC, LVR, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributes(new TurkishSequence("mevzu"), EnumSet.of(LexemeAttribute.EndsWithAyn))));
+    }
 
-        PhonAttr LLVless = PhonAttr.LastLetterVoiceless;
-        PhonAttr LLVlessStop = PhonAttr.LastLetterVoicelessStop;
-        PhonAttr LLNotVless = PhonAttr.LastLetterNotVoiceless;
-
-        assertThat(EnumSet.of(LLV, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("e"))));
-        assertThat(EnumSet.of(LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("el"))));
-        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("ek"))));
-        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("eh"))));
-        assertThat(EnumSet.of(LLC, LVU, LVF, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elm"))));
-        assertThat(EnumSet.of(LLC, LVU, LVF, LLVless, LLVlessStop), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elk"))));
-        assertThat(EnumSet.of(LLV, LVU, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elma"))));
-        assertThat(EnumSet.of(LLV, LVR, LVB, LLNotVless), equalTo(phoneticsAnalyzer.calculatePhoneticAttributesOfPlainSequence(new TurkishSequence("elmo"))));
+    @Test
+    public void shouldCalculateNewPhoneticAttributes() {
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("elma", null), 'm');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("elmam", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("kapak", null), 'm');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("kapakm", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("dana", null), 'a');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("danaa", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("schwyz", null), 's');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("schwyzs", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("aabb", null), 'a');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("aabba", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("ap", null), 'a');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("apa", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("aba", null), 'p');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("abap", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("caba", null), 'l');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("cabal", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
+        {
+            final Set<PhoneticAttribute> newAttrs = phoneticsAnalyzer.calculateNewPhoneticAttributes(phoneticsAnalyzer.calculatePhoneticAttributes("jarz", null), 'g');
+            final Set<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes("jarzg", null);
+            assertThat(phoneticAttributes, equalTo(newAttrs));
+        }
     }
 }

@@ -23,12 +23,13 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
-import zemberek3.structure.TurkicLetter;
+import zemberek3.shared.structure.TurkicLetter;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.List;
@@ -93,31 +94,31 @@ class LexemeCreator {
             }
         }
 
-        final PrimaryPos primaryPos = PrimaryPos.converter().enumExists(primaryPosStr) ? PrimaryPos.converter().getEnum(primaryPosStr) : null;
-        final SecondaryPos secondaryPos = SecondaryPos.converter().enumExists(secondaryPosStr) ? SecondaryPos.converter().getEnum(secondaryPosStr) : null;
+        final PrimaryPos primaryPos = StringUtils.isNotBlank(primaryPosStr) ? PrimaryPos.converter().getEnum(primaryPosStr) : null;
+        final SecondaryPos secondaryPos = StringUtils.isNotBlank(secondaryPosStr) ? SecondaryPos.converter().getEnum(secondaryPosStr) : null;
 
         return this.createLexeme(lemma, rootStr,
                 primaryPos,
                 secondaryPos,
-                LexemeAttribute.lookupMultiple(lexemeAttributeStrs));
+                Sets.newEnumSet(LexemeAttribute.converter().getEnums(lexemeAttributeStrs), LexemeAttribute.class));
     }
 
-    private Lexeme createLexeme(String lemma, String rootStr, zemberek3.lexicon.PrimaryPos primaryPos, SecondaryPos secondaryPos,
+    private Lexeme createLexeme(String lemma, String rootStr, PrimaryPos primaryPos, SecondaryPos secondaryPos,
                                 Set<LexemeAttribute> lexemeAttributes) {
         String lemmaRoot = rootStr;
 
         if (primaryPos == null) {
             if (rootStr.endsWith("mek") || rootStr.endsWith("mak")) {
-                primaryPos = zemberek3.lexicon.PrimaryPos.Verb;
+                primaryPos = PrimaryPos.Verb;
                 lemmaRoot = rootStr.substring(0, rootStr.length() - 3);
             } else {
-                primaryPos = zemberek3.lexicon.PrimaryPos.Noun;
+                primaryPos = PrimaryPos.Noun;
             }
         }
 
         lexemeAttributes = this.inferMorphemicAttributes(lemmaRoot, primaryPos, lexemeAttributes);
 
-        return new Lexeme(lemma, lemmaRoot, primaryPos, secondaryPos, Sets.immutableEnumSet(lexemeAttributes));
+        return new ImmutableLexeme(lemma, lemmaRoot, primaryPos, secondaryPos, Sets.immutableEnumSet(lexemeAttributes));
     }
 
     private int vowelCount(String str) {
@@ -129,7 +130,7 @@ class LexemeCreator {
         return count;
     }
 
-    Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final zemberek3.lexicon.PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
+    Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
         final TurkicLetter lastLetter = TurkishAlphabet.getLetterForChar(lastChar);
         final int vowelCount = this.vowelCount(lemmaRoot);

@@ -17,12 +17,12 @@
 package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableSet;
-import org.trnltk.morphology.model.SuffixFormSequence;
-import zemberek3.lexicon.tr.PhonAttr;
+import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 
 public class SuffixFormSequenceRuleApplier {
 
-    public Character apply(SuffixFormSequence.SuffixFormSequenceRule rule, ImmutableSet<PhonAttr> phoneticAttributesOfSurface) {
+    public Character apply(SuffixFormSequence.SuffixFormSequenceRule rule, ImmutableSet<PhoneticAttribute> phoneticAttributesOfSurface) {
         return rule.apply(phoneticAttributesOfSurface);
     }
 }

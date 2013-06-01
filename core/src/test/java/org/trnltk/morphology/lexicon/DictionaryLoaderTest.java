@@ -21,11 +21,11 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
+import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.Lexeme;
 import org.trnltk.morphology.model.LexemeAttribute;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.SecondaryPos;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.PrimaryPos;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -77,44 +77,44 @@ public class DictionaryLoaderTest {
         final Set<Lexeme> lexemes = loader.createLexemesFromLines(Splitter.on(CharMatcher.anyOf("\n\r")).split(lines));
         assertThat(lexemes, hasSize(lineCount));
 
-        assertThat(lexemes, hasItem(new Lexeme("a", "a", PrimaryPos.Interjection, null, null)));
-        assertThat(lexemes, hasItem(new Lexeme("aba", "aba", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abadî", "abadî", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abat", "abat", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abdest", "abdest", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abes", "abes", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abes", "abes", PrimaryPos.Adverb, null, null)));
-        assertThat(lexemes, hasItem(new Lexeme("ablak", "ablak", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("abuk", "abuk", PrimaryPos.Adjective, SecondaryPos.DUPLICATOR, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("acemborusu", "acemboru", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.CompoundP3sg, LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("acembuselik", "acembuselik", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
-        assertThat(lexemes, hasItem(new Lexeme("aciz", "aciz", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.LastVowelDrop, LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("âciz", "âciz", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("açık", "açık", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.Voicing))));
-        assertThat(lexemes, hasItem(new Lexeme("ad", "ad", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("ad", "ad", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Doubling, LexemeAttribute.InverseHarmony, LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("addetmek", "addet", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.Voicing))));
-        assertThat(lexemes, hasItem(new Lexeme("addolmak", "addol", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In))));
-        assertThat(lexemes, hasItem(new Lexeme("ahlat", "ahlat", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Plural))));
-        assertThat(lexemes, hasItem(new Lexeme("akşam", "akşam", PrimaryPos.Noun, SecondaryPos.Time, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("atamak", "ata", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
-        assertThat(lexemes, hasItem(new Lexeme("sürtmek", "sürt", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir, LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new Lexeme("yemek", "yemek", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
-        assertThat(lexemes, hasItem(new Lexeme("yemek", "ye", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
-        assertThat(lexemes, hasItem(new Lexeme("ürkmek", "ürk", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("a", "a", PrimaryPos.Interjection, null, null)));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("aba", "aba", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abadî", "abadî", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abat", "abat", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abdest", "abdest", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abes", "abes", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abes", "abes", PrimaryPos.Adverb, null, null)));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("ablak", "ablak", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("abuk", "abuk", PrimaryPos.Adjective, SecondaryPos.DUPLICATOR, ImmutableSet.of(LexemeAttribute.NoSuffix, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("acemborusu", "acemboru", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.CompoundP3sg, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("acembuselik", "acembuselik", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("aciz", "aciz", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.LastVowelDrop, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("âciz", "âciz", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("açık", "açık", PrimaryPos.Adjective, null, ImmutableSet.of(LexemeAttribute.Voicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("ad", "ad", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("ad", "ad", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Doubling, LexemeAttribute.InverseHarmony, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("addetmek", "addet", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.Voicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("addolmak", "addol", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("ahlat", "ahlat", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Plural))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("akşam", "akşam", PrimaryPos.Noun, SecondaryPos.Time, ImmutableSet.of(LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("atamak", "ata", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("sürtmek", "sürt", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir, LexemeAttribute.NoVoicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("yemek", "yemek", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("yemek", "ye", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("ürkmek", "ürk", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing))));
     }
 
     @Test
     public void shouldCreateLexemesFromMasterDictionary() {
         final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultMasterDictionary();
         assertThat(lexemes.size() > 1, equalTo(true));
-        for (Lexeme lexeme : lexemes) {
-            assertThat(lexeme.getLemma(), not(isEmptyOrNullString()));
-            assertThat(lexeme.getLemmaRoot(), not(isEmptyOrNullString()));
-            assertThat(lexeme.getPrimaryPos(), notNullValue());
-            assertThat(lexeme.getPrimaryPos(), not(equalTo(PrimaryPos.Numeral)));
-            assertThat(lexeme.getSecondaryPos(), not(isIn(SecondaryPos.NUMERAL_APPLICABLE)));
-            assertThat(lexeme.getAttributes(), notNullValue());
+        for (Lexeme immutableLexeme : lexemes) {
+            assertThat(immutableLexeme.getLemma(), not(isEmptyOrNullString()));
+            assertThat(immutableLexeme.getLemmaRoot(), not(isEmptyOrNullString()));
+            assertThat(immutableLexeme.getPrimaryPos(), notNullValue());
+            assertThat(immutableLexeme.getPrimaryPos(), not(equalTo(PrimaryPos.Numeral)));
+            assertThat(immutableLexeme.getSecondaryPos(), not(isIn(SecondaryPos.NUMERAL_APPLICABLE)));
+            assertThat(immutableLexeme.getAttributes(), notNullValue());
         }
     }
 
@@ -122,12 +122,12 @@ public class DictionaryLoaderTest {
     public void shouldCreateLexemesFromNumeralMasterDictionary() {
         final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultNumeralMasterDictionary();
         assertThat(lexemes.size() > 1, equalTo(true));
-        for (Lexeme lexeme : lexemes) {
-            assertThat(lexeme.getLemma(), not(isEmptyOrNullString()));
-            assertThat(lexeme.getLemmaRoot(), not(isEmptyOrNullString()));
-            assertThat(lexeme.getPrimaryPos(), equalTo(PrimaryPos.Numeral));
-            assertThat(lexeme.getSecondaryPos(), isIn(SecondaryPos.NUMERAL_APPLICABLE));
-            assertThat(lexeme.getAttributes(), notNullValue());
+        for (Lexeme immutableLexeme : lexemes) {
+            assertThat(immutableLexeme.getLemma(), not(isEmptyOrNullString()));
+            assertThat(immutableLexeme.getLemmaRoot(), not(isEmptyOrNullString()));
+            assertThat(immutableLexeme.getPrimaryPos(), equalTo(PrimaryPos.Numeral));
+            assertThat(immutableLexeme.getSecondaryPos(), isIn(SecondaryPos.NUMERAL_APPLICABLE));
+            assertThat(immutableLexeme.getAttributes(), notNullValue());
         }
     }
 }

@@ -19,16 +19,14 @@ package org.trnltk.morphology.contextless.parser.rootfinders;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
-import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.*;
-import zemberek3.lexicon.tr.PhonAttr;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ProperNounWithoutApostropheRootFinder implements RootFinder {
@@ -38,33 +36,38 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 
     @Override
-    public List<? extends Root> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence input) {
+    public boolean handles(TurkishSequence partialInput, TurkishSequence wholeSurface) {
         if (partialInput == null || partialInput.isBlank())
-            //noinspection unchecked
-            return Collections.EMPTY_LIST;
+            return false;
+
+        if (wholeSurface == null || wholeSurface.isBlank())
+            return false;
 
         // the case with apostrophe is handled by ProperNounFromApostropheRootFinder
-        final String inputUnderlyingString = input.getUnderlyingString();
-        if (!Character.isUpperCase(input.charAt(0).getCharValue()) || inputUnderlyingString.contains(String.valueOf(APOSTROPHE))) {
-            //noinspection unchecked
-            return Collections.EMPTY_LIST;
+        final String wholeSurfaceUnderlyingString = wholeSurface.getUnderlyingString();
+        if (!Character.isUpperCase(wholeSurface.charAt(0).getCharValue()) || wholeSurfaceUnderlyingString.contains(String.valueOf(APOSTROPHE))) {
+            return false;
         }
 
+        return true;
+    }
+
+    @Override
+    public List<? extends Root> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence input) {
         final String partialInputUnderlyingString = partialInput.getUnderlyingString();
 
         if (partialInput.equals(input) && StringUtils.isAllUpperCase(partialInputUnderlyingString)) {
-            final Lexeme abbreviationLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
+            final Lexeme abbreviationLexeme = new ImmutableLexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
             if (!partialInput.getLastChar().getLetter().isVowel()) {
                 // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
-                final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput.append(TURKISH_CHAR_E_UPPERCASE), null));
-                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phonAttrs, null));
+                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput.append(TURKISH_CHAR_E_UPPERCASE), null));
+                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phoneticAttributes, null));
 
             } else {
-                final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
-                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phonAttrs, null));
+                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
+                return Arrays.asList(new ImmutableRoot(partialInput, abbreviationLexeme, phoneticAttributes, null));
             }
-        }
-        {
+        } else {
             ///XXX : REALLY SMALL SUPPORT!
 
             // XXX: might be a known proper noun like "Turkce" or "Istanbul". no support for them yet
@@ -75,10 +78,10 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
             // 2: P3sg doesn't apply to these words: onun Kusadasi, onun Eminonu
             // 3. Possessions are applied to 'root' : benim Kusadam etc. SKIP this case!
 
-            final Lexeme properNounLexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
+            final Lexeme properNounLexeme = new ImmutableLexeme(partialInputUnderlyingString, partialInputUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
 
-            final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
-            final ImmutableRoot properNounRoot = new ImmutableRoot(partialInput, properNounLexeme, phonAttrs, null);
+            final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, null));
+            final ImmutableRoot properNounRoot = new ImmutableRoot(partialInput, properNounLexeme, phoneticAttributes, null);
             return Arrays.asList(properNounRoot);
         }
     }

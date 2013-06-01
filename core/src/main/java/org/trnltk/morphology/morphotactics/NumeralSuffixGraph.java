@@ -18,21 +18,29 @@ package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.Suffix;
-import zemberek3.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import zemberek3.shared.lexicon.PrimaryPos;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.trnltk.morphology.model.SecondaryPos.*;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
-import static zemberek3.lexicon.PrimaryPos.Numeral;
+import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
+import static zemberek3.shared.lexicon.PrimaryPos.Numeral;
 
 public class NumeralSuffixGraph extends BaseSuffixGraph {
-    private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, Numeral);
-    private final SuffixGraphState NUMERAL_CARDINAL_DERIV = registerState("NUMERAL_CARDINAL_DERIV", DERIVATIONAL, Numeral);
+    private final SuffixGraphState NUMERAL_CARDINAL_ROOT = registerState("NUMERAL_CARDINAL_ROOT", TRANSFER, Numeral, Cardinal);
+    private final SuffixGraphState NUMERAL_CARDINAL_DERIV = registerState("NUMERAL_CARDINAL_DERIV", DERIVATIONAL, Numeral, Cardinal);
 
-    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, Numeral);
+    private final SuffixGraphState NUMERAL_DIGIT_CARDINAL_ROOT = registerState("NUMERAL_DIGIT_CARDINAL_ROOT", TRANSFER, Numeral, CARDINAL_DIGITS);
+    private final SuffixGraphState NUMERAL_DIGIT_ORDINAL_ROOT = registerState("NUMERAL_DIGIT_ORDINAL_ROOT", TRANSFER, Numeral, ORDINAL_DIGITS);
+    private final SuffixGraphState NUMERAL_DIGIT_RANGE_ROOT = registerState("NUMERAL_DIGIT_RANGE_ROOT", TRANSFER, Numeral, Range);
 
-    private final SuffixGraphState NUMERAL_ORDINAL_ROOT = registerState("NUMERAL_ORDINAL_ROOT", TRANSFER, Numeral);
-    private final SuffixGraphState NUMERAL_ORDINAL_DERIV = registerState("NUMERAL_ORDINAL_DERIV", DERIVATIONAL, Numeral);
+    private final SuffixGraphState NUMERAL_ORDINAL_ROOT = registerState("NUMERAL_ORDINAL_ROOT", TRANSFER, Numeral, Ordinal);
+    private final SuffixGraphState NUMERAL_ORDINAL_DERIV = registerState("NUMERAL_ORDINAL_DERIV", DERIVATIONAL, Numeral, Ordinal);
+    private final SuffixGraphState NUMERAL_RANGE_DERIV = registerState("NUMERAL_RANGE_DERIV", DERIVATIONAL, Numeral, Range);
 
     private final SuffixGraphState DECORATED_ADJECTIVE_ROOT = getSuffixGraphState("ADJECTIVE_ROOT");
 
@@ -44,6 +52,12 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
 
     /////////////// Cardinal digits suffixes
     private final Suffix Apos_Digit = registerSuffix("Apos_Digit", "Apos");
+
+    /////////////// Cardinal to Ordinal Derivation
+    private final Suffix Ordinal_Text = registerSuffix("Ordinal_Text", null, "OrdT");
+
+    ////////////// Range to Ordinal Derivation
+    private final Suffix Ordinal_Dot = registerSuffix("Ordinal_Dot", null, "OrdDot");
 
     public NumeralSuffixGraph() {
         super();
@@ -59,16 +73,28 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
         final SecondaryPos secondaryPos = root.getLexeme().getSecondaryPos();
         if (Numeral.equals(primaryPos)) {
             switch (secondaryPos) {
-                case DIGITS:
+                case CARDINAL_DIGITS:
                     return NUMERAL_DIGIT_CARDINAL_ROOT;
+                case ORDINAL_DIGITS:
+                    return NUMERAL_DIGIT_ORDINAL_ROOT;
                 case Cardinal:
                     return NUMERAL_CARDINAL_ROOT;
                 case Ordinal:
                     return NUMERAL_ORDINAL_ROOT;
+                case Range:
+                    return NUMERAL_DIGIT_RANGE_ROOT;
             }
         }
 
         return null;
+    }
+
+    @Override
+    protected Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates() {
+        return Arrays.asList(
+                NUMERAL_CARDINAL_ROOT,
+                NUMERAL_DIGIT_CARDINAL_ROOT, NUMERAL_DIGIT_ORDINAL_ROOT, NUMERAL_DIGIT_RANGE_ROOT,
+                NUMERAL_ORDINAL_ROOT);
     }
 
     @Override
@@ -82,10 +108,13 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
         NUMERAL_CARDINAL_ROOT.addOutSuffix(registerFreeTransitionSuffix("Numeral_Free_Transition_1"), NUMERAL_CARDINAL_DERIV);
         NUMERAL_ORDINAL_ROOT.addOutSuffix(registerFreeTransitionSuffix("Numeral_Free_Transition_2"), NUMERAL_ORDINAL_DERIV);
 
-        NUMERAL_DIGIT_CARDINAL_ROOT.addOutSuffix(registerFreeTransitionSuffix("Digits_Free_Transition_1"), NUMERAL_CARDINAL_DERIV);
+        NUMERAL_DIGIT_CARDINAL_ROOT.addOutSuffix(registerFreeTransitionSuffix("DigitsC_Free_Transition_1"), NUMERAL_CARDINAL_DERIV);
+        NUMERAL_DIGIT_ORDINAL_ROOT.addOutSuffix(registerFreeTransitionSuffix("DigitsO_Free_Transition_1"), NUMERAL_ORDINAL_DERIV);
+        NUMERAL_DIGIT_RANGE_ROOT.addOutSuffix(registerFreeTransitionSuffix("Range_Free_Transition_1"), NUMERAL_RANGE_DERIV);
 
         NUMERAL_CARDINAL_DERIV.addOutSuffix(registerZeroTransitionSuffix("Numeral_Zero_Transition_1"), DECORATED_ADJECTIVE_ROOT);
         NUMERAL_ORDINAL_DERIV.addOutSuffix(registerZeroTransitionSuffix("Numeral_Zero_Transition_2"), DECORATED_ADJECTIVE_ROOT);
+        NUMERAL_RANGE_DERIV.addOutSuffix(registerZeroTransitionSuffix("Numeral_Zero_Transition_3"), DECORATED_ADJECTIVE_ROOT);
     }
 
     private void createSuffixEdges() {
@@ -107,6 +136,15 @@ public class NumeralSuffixGraph extends BaseSuffixGraph {
 
     private void registerDigitsSuffixes() {
         NUMERAL_DIGIT_CARDINAL_ROOT.addOutSuffix(Apos_Digit, NUMERAL_CARDINAL_DERIV);
+        NUMERAL_DIGIT_ORDINAL_ROOT.addOutSuffix(Apos_Digit, NUMERAL_ORDINAL_DERIV);
+        NUMERAL_DIGIT_RANGE_ROOT.addOutSuffix(Apos_Digit, NUMERAL_CARDINAL_DERIV);
         Apos_Digit.addSuffixForm("'");
+
+        NUMERAL_CARDINAL_DERIV.addOutSuffix(Ordinal_Text, NUMERAL_ORDINAL_ROOT);
+        // applies only to digits. 'birinci' is marked as ordinal already in the numeral master dictionary
+        Ordinal_Text.addSuffixForm("+IncI", comesAfter(Apos_Digit));
+
+        NUMERAL_RANGE_DERIV.addOutSuffix(Ordinal_Dot, NUMERAL_DIGIT_ORDINAL_ROOT);
+        Ordinal_Dot.addSuffixForm(".");
     }
 }

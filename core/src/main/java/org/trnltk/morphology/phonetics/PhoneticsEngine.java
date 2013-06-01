@@ -23,20 +23,22 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.morphology.model.LexemeAttribute;
-import org.trnltk.morphology.model.SuffixFormSequence;
 import org.trnltk.morphology.model.TurkishSequence;
+import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
-import zemberek3.lexicon.tr.PhonAttr;
-import zemberek3.lexicon.tr.PhoneticExpectation;
-import zemberek3.structure.TurkicLetter;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import zemberek3.shared.structure.TurkicLetter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Set;
 
 public class PhoneticsEngine {
 
     private static final char PLUS = '+';
+    private static final Locale TURKISH_LOCALE = new Locale("tr");
 
     private final SuffixFormSequenceApplier suffixFormSequenceApplier;
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
@@ -45,21 +47,34 @@ public class PhoneticsEngine {
         this.suffixFormSequenceApplier = suffixFormSequenceApplier;
     }
 
-    public boolean isSuffixFormApplicable(final Set<PhonAttr> phonAttrs, final SuffixFormSequence suffixFormSequence) {
+    public boolean isSuffixFormApplicable(final Set<PhoneticAttribute> phoneticAttributes, final SuffixFormSequence suffixFormSequence) {
         if (!suffixFormSequence.isNotBlank())
             return true;
 
-        if (CollectionUtils.isEmpty(phonAttrs))
+        if (CollectionUtils.isEmpty(phoneticAttributes))
             return false;
 
-        return this.suffixFormSequenceApplier.isApplicable(suffixFormSequence, phonAttrs);
+        return this.suffixFormSequenceApplier.isApplicable(suffixFormSequence, phoneticAttributes);
     }
 
     public Pair<TurkishSequence, String> apply(TurkishSequence surface, SuffixFormSequence form, Collection<LexemeAttribute> lexemeAttributes) {
         return this.apply(surface, phoneticsAnalyzer.calculatePhoneticAttributes(surface, lexemeAttributes), form, lexemeAttributes);
     }
 
-    public Pair<TurkishSequence, String> apply(final TurkishSequence surface, final Set<PhonAttr> _phonAttrs, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> _lexemeAttributes) {
+    public Pair<TurkishSequence, String> apply(TurkishSequence surface, ImmutableSet<PhoneticAttribute> _phoneticAttributes, String suffixFormToApply, ImmutableSet<LexemeAttribute> _lexemeAttributes) {
+        if (surface == null || surface.isBlank())
+            return Pair.of(null, null);
+
+        if (StringUtils.isBlank(suffixFormToApply))
+            return Pair.of(surface, StringUtils.EMPTY);
+
+        final Collection<LexemeAttribute> lexemeAttributes = _lexemeAttributes == null ? new ArrayList<LexemeAttribute>() : _lexemeAttributes;
+        final Set<PhoneticAttribute> phoneticAttributes = _phoneticAttributes == null ? ImmutableSet.<PhoneticAttribute>of() : _phoneticAttributes;
+
+        return this.handlePhonetics(surface, phoneticAttributes, suffixFormToApply, lexemeAttributes);
+    }
+
+    public Pair<TurkishSequence, String> apply(final TurkishSequence surface, final Set<PhoneticAttribute> _phoneticAttributes, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> _lexemeAttributes) {
         if (surface == null || surface.isBlank())
             return Pair.of(null, null);
 
@@ -67,22 +82,35 @@ public class PhoneticsEngine {
             return Pair.of(surface, StringUtils.EMPTY);
 
         final Collection<LexemeAttribute> lexemeAttributes = _lexemeAttributes == null ? new ArrayList<LexemeAttribute>() : _lexemeAttributes;
-        final Set<PhonAttr> phonAttrs = _phonAttrs == null ? ImmutableSet.<PhonAttr>of() : _phonAttrs;
+        final Set<PhoneticAttribute> phoneticAttributes = _phoneticAttributes == null ? ImmutableSet.<PhoneticAttribute>of() : _phoneticAttributes;
 
-        return this.handlePhonetics(surface, phonAttrs, suffixFormSequence, lexemeAttributes);
+        return this.handlePhonetics(surface, phoneticAttributes, suffixFormSequence, lexemeAttributes);
     }
 
-    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhonAttr> phonAttrs, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> lexemeAttributes) {
+    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> lexemeAttributes) {
         TurkishSequence newSurface = _surface;
 
         // first try voicing
-        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phonAttrs.contains(PhonAttr.LastLetterVoicelessStop) && suffixFormSequence.isFirstLetterVowel()) {
+        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && suffixFormSequence.isFirstLetterVowel()) {
             newSurface = _surface.voiceLastLetterIfPossible();
         }
 
-        final String appliedSuffixForm = suffixFormSequenceApplier.apply(suffixFormSequence, phonAttrs);
+        final String appliedSuffixForm = suffixFormSequenceApplier.apply(suffixFormSequence, phoneticAttributes);
 
         return Pair.of(newSurface, appliedSuffixForm);
+    }
+
+    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final String suffixFormToApply, final Collection<LexemeAttribute> lexemeAttributes) {
+        TurkishSequence newSurface = _surface;
+
+        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getLetterForChar(suffixFormToApply.charAt(0));
+
+        // first try voicing
+        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && letterForFirstCharOfSuffixFormToApply.isVowel()) {
+            newSurface = _surface.voiceLastLetterIfPossible();
+        }
+
+        return Pair.of(newSurface, suffixFormToApply);
     }
 
     public boolean expectationsSatisfied(final Collection<PhoneticExpectation> phoneticExpectations, final SuffixFormSequence _form) {
@@ -138,19 +166,20 @@ public class PhoneticsEngine {
      * @param voicingAllowed voicingAllowed
      * @return whether application matches
      */
-    public boolean applicationMatches(final TurkishSequence input, final String appliedStr, final boolean voicingAllowed) {      //TODO: voicingAllowed is very ugly!
+    public boolean applicationMatches(final TurkishSequence input, final String appliedStr, final boolean voicingAllowed) {
         if (StringUtils.isBlank(appliedStr) || appliedStr.length() > input.length())
             return false;
 
-        final String inputUnderlyingString = input.getUnderlyingString();
+        final String inputUnderlyingString = input.getUnderlyingString().toLowerCase(TURKISH_LOCALE);
+        final String appliedStringToCheck = appliedStr.toLowerCase(TURKISH_LOCALE);
 
 
-        if (inputUnderlyingString.equals(appliedStr) || inputUnderlyingString.startsWith(appliedStr))
+        if (inputUnderlyingString.equals(appliedStringToCheck) || inputUnderlyingString.startsWith(appliedStringToCheck))
             return true;
 
-        else if (voicingAllowed && inputUnderlyingString.startsWith(appliedStr.substring(0, appliedStr.length() - 1))) {
-            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getLetterForChar(appliedStr.charAt(appliedStr.length() - 1));
-            final TurkishChar lastLetterOfInputPart = input.charAt(appliedStr.length() - 1);
+        else if (voicingAllowed && inputUnderlyingString.startsWith(appliedStringToCheck.substring(0, appliedStringToCheck.length() - 1))) {
+            final TurkicLetter lastLetterOfApplication = TurkishAlphabet.getLetterForChar(appliedStringToCheck.charAt(appliedStringToCheck.length() - 1));
+            final TurkishChar lastLetterOfInputPart = input.charAt(appliedStringToCheck.length() - 1);
             return lastLetterOfInputPart.getLetter().equals(TurkishAlphabet.voiceLetter(lastLetterOfApplication));
         }
 

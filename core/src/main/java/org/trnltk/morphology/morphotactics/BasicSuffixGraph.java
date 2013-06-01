@@ -1,14 +1,22 @@
 package org.trnltk.morphology.morphotactics;
 
 import com.google.common.collect.ImmutableMap;
-import org.trnltk.common.specification.Specification;
-import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.*;
-import zemberek3.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.LexemeAttribute;
+import org.trnltk.morphology.model.Root;
+import org.trnltk.morphology.model.SecondaryPos;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.morphology.model.suffixbased.SuffixGroup;
+import zemberek3.shared.common.specification.Specification;
+import zemberek3.shared.common.specification.Specifications;
+import zemberek3.shared.lexicon.PrimaryPos;
 
-import static zemberek3.lexicon.PrimaryPos.*;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.*;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.*;
+import static zemberek3.shared.lexicon.PrimaryPos.*;
 
 public class BasicSuffixGraph extends BaseSuffixGraph {
     // states
@@ -29,6 +37,8 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState VERB_ROOT = registerState("VERB_ROOT", TRANSFER, Verb);
     private final SuffixGraphState VERB_WITH_POLARITY = registerState("VERB_WITH_POLARITY", TRANSFER, Verb);
     private final SuffixGraphState VERB_WITH_TENSE = registerState("VERB_WITH_TENSE", TRANSFER, Verb);
+    private final SuffixGraphState VERB_WITH_SWAPPED_A3PL = registerState("VERB_WITH_SWAPPED_A3PL", TRANSFER, Verb);
+    private final SuffixGraphState VERB_WITH_SWAPPED_PAST_COND = registerState("VERB_WITH_SWAPPED_PAST_COND", TRANSFER, Verb);
     private final SuffixGraphState VERB_TERMINAL = registerState("VERB_TERMINAL", TERMINAL, Verb);
     private final SuffixGraphState VERB_TERMINAL_TRANSFER = registerState("VERB_TERMINAL_TRANSFER", TRANSFER, Verb);
     private final SuffixGraphState VERB_PLAIN_DERIV = registerState("VERB_PLAIN_DERIV", DERIVATIONAL, Verb);
@@ -68,9 +78,11 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState QUESTION_WITH_AGREEMENT = registerState("QUESTION_WITH_AGREEMENT", TRANSFER, Question);
     private final SuffixGraphState QUESTION_TERMINAL = registerState("QUESTION_TERMINAL", TERMINAL, Question);
 
+    private final SuffixGraphState DUP_ROOT_TERMINAL = registerState("DUP_ROOT_TERMINAL", TERMINAL, Duplicator);
+
     private final SuffixGraphState PUNC_ROOT_TERMINAL = registerState("PUNC_ROOT_TERMINAL", TERMINAL, Punctuation);
 
-    private final SuffixGraphState PART_ROOT_TERMINAL = registerState("PART_ROOT_TERMINAL", TERMINAL, PostPositive);
+    private final SuffixGraphState POSTP_ROOT_TERMINAL = registerState("POSTP_ROOT_TERMINAL", TERMINAL, PostPositive);
 
 
     private final ImmutableMap<PrimaryPos, SuffixGraphState> rootStateMap = new ImmutableMap.Builder<PrimaryPos, SuffixGraphState>()
@@ -83,7 +95,8 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
             .put(Interjection, INTERJECTION_ROOT_TERMINAL)
             .put(Conjunction, CONJUNCTION_ROOT_TERMINAL)
             .put(Punctuation, PUNC_ROOT_TERMINAL)
-            .put(PostPositive, PART_ROOT_TERMINAL)          //TODO-INTEGRATION: particle or postpositive?
+            .put(Duplicator, DUP_ROOT_TERMINAL)
+            .put(PostPositive, POSTP_ROOT_TERMINAL)          //TODO-INTEGRATION: particle or postpositive?
             .put(Question, QUESTION_ROOT)
             .build();
 
@@ -126,11 +139,13 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
     /////////////// Noun to Verb derivations
     private final Suffix Acquire = registerSuffix("Acquire");
+    private final Suffix Become_Noun = registerSuffix("Become_Noun", "Become");
 
     /////////////// Noun to Adjective derivations
     private final Suffix Agt_Noun_to_Adj = registerSuffix("Agt_Noun_to_Adj", "Agt");
     private final Suffix With = registerSuffix("With");
     private final Suffix Without = registerSuffix("Without");
+    private final Suffix Related = registerSuffix("Related");
 
     private final Suffix PointQual_Noun = registerSuffix("PointQual_Noun", "PointQual");     //was marked as relative pronoun in other projects, but that is "Alininki"
     private final Suffix JustLike_Noun = registerSuffix("JustLike_Noun", "JustLike");
@@ -168,6 +183,13 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final Suffix A2Pl_Verb = registerSuffix("A2Pl_Verb", Verb_Agreements_Group, "A2pl");
     private final Suffix A3Pl_Verb = registerSuffix("A3Pl_Verb", Verb_Agreements_Group, "A3pl");
 
+    ////////////// Swapped verb agreements
+    private final SuffixGroup Verb_Agreements_Swapped_Group = new SuffixGroup("Verb_Agreements_Swapped_Group");
+    private final Suffix A1Sg_Verb_Swapped = registerSuffix("A1Sg_Verb_Swapped", Verb_Agreements_Swapped_Group, "A1sg");
+    private final Suffix A2Sg_Verb_Swapped = registerSuffix("A2Sg_Verb_Swapped", Verb_Agreements_Swapped_Group, "A2sg");
+    private final Suffix A1Pl_Verb_Swapped = registerSuffix("A1Pl_Verb_Swapped", Verb_Agreements_Swapped_Group, "A1pl");
+    private final Suffix A2Pl_Verb_Swapped = registerSuffix("A2Pl_Verb_Swapped", Verb_Agreements_Swapped_Group, "A2pl");
+
     /////////////// Verb conditions
     private final SuffixGroup Verb_Polarity_Group = new SuffixGroup("Verb_Conditions_Group");
     private final Suffix Negative = registerSuffix("Neg", Verb_Polarity_Group);
@@ -199,7 +221,14 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final Suffix Pass = registerSuffix("Pass");
     private final Suffix Recip = registerSuffix("Recip");
     private final Suffix Caus = registerSuffix("Caus", null, "Caus", true);
+
     private final Suffix Hastily = registerSuffix("Hastily");
+    private final Suffix EverSince = registerSuffix("EverSince");
+    private final Suffix Stay = registerSuffix("Stay");
+    private final Suffix Almost = registerSuffix("Almost");
+    private final Suffix Once = registerSuffix("Once");
+    private final Suffix Gone = registerSuffix("Gone");
+    private final Suffix Start = registerSuffix("Start");
 
     /////////////// Verb to Adverb derivations
     private final Suffix AfterDoingSo = registerSuffix("AfterDoingSo");
@@ -207,6 +236,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final Suffix AsLongAs = registerSuffix("AsLongAs");
     private final Suffix ByDoingSo = registerSuffix("ByDoingSo");
     private final Suffix When = registerSuffix("When");
+    private final Suffix Until = registerSuffix("Until");
     private final Suffix SinceDoingSo = registerSuffix("SinceDoingSo");
     private final Suffix While = registerSuffix("While");        // A3pl can come before
     private final Suffix AsIf = registerSuffix("AsIf");       // A3pl can come before
@@ -233,7 +263,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private final Suffix Ness = registerSuffix("Ness");
 
     /////////////// Adjective to Verb derivations
-    private final Suffix Become = registerSuffix("Become");
+    private final Suffix Become_Adj = registerSuffix("Become_Adj", "Become");
 
     /////////////// Adjective possessions
     private final SuffixGroup Adjective_Possessions_Group = new SuffixGroup("Adjective_Possessions_Group");
@@ -322,6 +352,14 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     }
 
     @Override
+    protected Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates() {
+        final ArrayList<SuffixGraphState> states = new ArrayList<>();
+        states.add(NOUN_COMPOUND_ROOT);
+        states.addAll(this.rootStateMap.values());
+        return states;
+    }
+
+    @Override
     protected void registerEverything() {
         this.registerFreeTransitions();
         this.createSuffixEdges();
@@ -383,7 +421,9 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         registerVerbAgreements();
         registerVerbPolarisations();
         registerVerbTenses();
+        registerSwappedPastCond();
         registerModalVerbs();
+        registerSwappedA3PlVerbs();
         registerVerbToVerbDerivations();
         registerVerbToNounDerivations();
         registerVerbToAdverbDerivations();
@@ -536,6 +576,9 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     private void registerNounToVerbDerivations() {
         NOUN_NOM_DERIV.addOutSuffix(Acquire, VERB_ROOT);
         Acquire.addSuffixForm("lAn");
+
+        NOUN_NOM_DERIV.addOutSuffix(Become_Noun, VERB_ROOT);
+        Become_Noun.addSuffixForm("lAş");
     }
 
     private void registerNounToAdjectiveDerivations() {
@@ -547,6 +590,9 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
         NOUN_NOM_DERIV.addOutSuffix(Without, ADJECTIVE_ROOT);
         Without.addSuffixForm("sIz", doesntComeAfter(A3Pl_Noun));
+
+        NOUN_NOM_DERIV.addOutSuffix(Related, ADJECTIVE_ROOT);
+        Related.addSuffixForm("sAl", doesntComeAfter(A3Pl_Noun));
 
         NOUN_NOM_DERIV.addOutSuffix(JustLike_Noun, ADJECTIVE_ROOT);
         JustLike_Noun.addSuffixForm("+ImsI");
@@ -620,6 +666,9 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         VERB_ROOT.addOutSuffix(Negative, VERB_WITH_POLARITY);
         Negative.addSuffixForm("m", null, doesnt(followedBySuffixGoesTo(SuffixGraphStateType.DERIVATIONAL)));
         Negative.addSuffixForm("mA");
+        Negative.addSuffixForm("", comesAfterDerivation(Able, "+yA"),
+                Specifications.and(doesnt(followedBy(Imp)), doesnt(followedBy(Past)), doesnt(followedBy(Narr))),
+                followedByDerivation(WithoutHavingDoneSo, "mAdAn")); // very special
 
         VERB_ROOT.addOutSuffix(Positive, VERB_WITH_POLARITY);
         Positive.addSuffixForm("");
@@ -665,6 +714,24 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         VERB_WITH_TENSE.addOutSuffix(Past, VERB_WITH_TENSE);
     }
 
+    private void registerSwappedPastCond() {
+        final Specification<MorphemeContainer> comesAfterPast_dI = comesAfter(Past, "dI");
+
+        VERB_WITH_TENSE.addOutSuffix(A1Sg_Verb_Swapped, VERB_WITH_SWAPPED_PAST_COND);
+        A1Sg_Verb_Swapped.addSuffixForm("m", comesAfterPast_dI);
+
+        VERB_WITH_TENSE.addOutSuffix(A2Sg_Verb_Swapped, VERB_WITH_SWAPPED_PAST_COND);
+        A2Sg_Verb_Swapped.addSuffixForm("n", comesAfterPast_dI);
+
+        VERB_WITH_TENSE.addOutSuffix(A1Pl_Verb_Swapped, VERB_WITH_SWAPPED_PAST_COND);
+        A1Pl_Verb_Swapped.addSuffixForm("!k", comesAfterPast_dI);
+
+        VERB_WITH_TENSE.addOutSuffix(A2Pl_Verb_Swapped, VERB_WITH_SWAPPED_PAST_COND);
+        A2Pl_Verb_Swapped.addSuffixForm("nIz", comesAfterPast_dI);
+
+        VERB_WITH_SWAPPED_PAST_COND.addOutSuffix(Cond, VERB_TERMINAL);
+    }
+
     private void registerVerbAgreements() {
         final Specification<MorphemeContainer> comesAfterImperative = comesAfter(Imp);
         final Specification<MorphemeContainer> doesntComeAfterImperative = doesnt(comesAfterImperative);
@@ -686,7 +753,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
         VERB_WITH_TENSE.addOutSuffix(A1Pl_Verb, VERB_TERMINAL_TRANSFER);
         A1Pl_Verb.addSuffixForm("+Iz", doesntComeAfter(Opt));
-        A1Pl_Verb.addSuffixForm("k", Specifications.or(comesAfter(Past), comesAfter(Past_Ques)));   // only for "gel-di-k" or "gelmis mi-ydi-k"
+        A1Pl_Verb.addSuffixForm("!k", Specifications.or(comesAfter(Past), comesAfter(Past_Ques), comesAfter(Cond), comesAfter(Desr)));   // only for "gel-di-k", "gelmis mi-ydi-k" or "gelsek"
         A1Pl_Verb.addSuffixForm("yIz", doesntComeAfter(Opt));   // "yap-makta-yız" OR "gel-me-yiz"
         A1Pl_Verb.addSuffixForm("lIm", comesAfter(Opt));    // only for "gel-e-lim"
 
@@ -714,20 +781,80 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         VERB_WITH_POLARITY.addOutSuffix(Opt, VERB_WITH_TENSE);
         Opt.addSuffixForm("Ay");
         Opt.addSuffixForm("A", doesntComeAfter(Negative), followed_by_modal_followers);
-        Opt.addSuffixForm("yAy");
         Opt.addSuffixForm("yA", null, followed_by_modal_followers);
 
         VERB_WITH_POLARITY.addOutSuffix(Desr, VERB_WITH_TENSE);
         Desr.addSuffixForm("sA");
     }
 
+    private final void registerSwappedA3PlVerbs() {
+        VERB_WITH_TENSE.addOutSuffix(A3Pl_Verb, VERB_WITH_SWAPPED_A3PL);
+
+        VERB_WITH_SWAPPED_A3PL.addOutSuffix(Cond, VERB_TERMINAL_TRANSFER);
+        VERB_WITH_SWAPPED_A3PL.addOutSuffix(Narr, VERB_TERMINAL_TRANSFER);
+        VERB_WITH_SWAPPED_A3PL.addOutSuffix(Past, VERB_TERMINAL_TRANSFER);
+    }
+
     private void registerVerbToVerbDerivations() {
+        /*
+        |----------------------------------------------------------------------------------------------------------|
+        |Name      |  Exists   |  Pos+Pos         |  Pos+Neg         |  Neg+Pos         |  Neg+Neg                 |
+        |          | in Oflazer|  Applicable      |  Applicable      |  Applicable      |  Applicable              |
+        |----------------------------------------------------------------------------------------------------------|
+        |Ability   |   1      |   yapabilir       |  yapamaz         |  yapmayabilir    |  yapmayamaz              |
+        |          |          |   1               |      1           |      1           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Hastily   |   1      |   bakiver         |  bakiverme       |  bakmayiver(sin) |  bakmayiverme(sin)       |
+        |          |          |   1               |      0           |      1           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |EverSince |   1      |   olageldi        |  olagelmedi      |  olmayageldi     |  olmayagelmedi           |
+        |          |          |   1               |      1           |      0           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Stay      |   1      |   bakakaldi       |  bakakalmadi     |  bakmayakaldi    |  bakmayakalmadi          |
+        |          |          |   1               |      0           |      0           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Almost    |   1      |   duseyazdi       |  duzeyazmadi     |  dusmeyeyazdi    |  dusmeyeyazmadi          |
+        |          |          |   1               |      0           |      0           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Once      |   0      |   yapagorsun      |  yapagormesin    |  yapmayagorsun   |  yapmayagormesin         |
+        |          |          |   0               |      0           |      1           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Gone      |   0      |   atilagidecektir |atilagitmeyecektir|atilmayagidecektir|atilmayagitmeyecektir     |
+        |          |          |   1               |      0           |      0           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+        |Start     |   1      |   calisakoy       |  calisakoyma     |  calismayakoy    |  calismayakoyma          |
+        |          |          |   1               |      0           |      0           |      0                   |
+        |----------|----------|-------------------|------------------|------------------|--------------------------|
+         */
+
+        // not applicable cases are not explicitly prevented by the suffix graph. the focus is parsing anyway...
+
         VERB_PLAIN_DERIV.addOutSuffix(Able, VERB_ROOT);
         Able.addSuffixForm("+yAbil", null, doesnt(followedBy(Negative)));
         Able.addSuffixForm("+yA", null, followedBy(Negative));
 
         VERB_POLARITY_DERIV.addOutSuffix(Hastily, VERB_ROOT);
         Hastily.addSuffixForm("+yIver");
+
+        VERB_POLARITY_DERIV.addOutSuffix(EverSince, VERB_ROOT);
+        EverSince.addSuffixForm("+yAgel");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Stay, VERB_ROOT);
+        Stay.addSuffixForm("+yAkal");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Almost, VERB_ROOT);
+        Almost.addSuffixForm("+yAyaz");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Once, VERB_ROOT);
+        Once.addSuffixForm("+yAgör");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Gone, VERB_ROOT);
+        Gone.addSuffixForm("+yAgi!t");
+        Gone.addSuffixForm("+yAgid");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Start, VERB_ROOT);
+        Start.addSuffixForm("+yAkoy");
+
 
         final Specification<MorphemeContainer> passive_Il = Specifications.or(
                 hasLexemeAttributes(LexemeAttribute.Passive_Il),
@@ -744,9 +871,9 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         Recip.addSuffixForm("+Iş", null, null, doesnt(followedByDerivation(Caus)).or(followedByDerivation(Caus, "dIr")));
 
         VERB_PLAIN_DERIV.addOutSuffix(Caus, VERB_ROOT);
-        Caus.addSuffixForm("t", hasLexemeAttributes(LexemeAttribute.Causative_t).and(doesntComeAfterDerivation(Caus, "t").and(doesntComeAfterDerivation(Caus, "It"))));
+        Caus.addSuffixForm("!t", hasLexemeAttributes(LexemeAttribute.Causative_t).and(doesntComeAfterDerivation(Caus, "!t").and(doesntComeAfterDerivation(Caus, "I!t"))));
         Caus.addSuffixForm("Ir", hasLexemeAttributes(LexemeAttribute.Causative_Ir).and(doesntComeAfterDerivation(Able)));
-        Caus.addSuffixForm("It", hasLexemeAttributes(LexemeAttribute.Causative_It).and(doesntComeAfterDerivation(Able)));
+        Caus.addSuffixForm("I!t", hasLexemeAttributes(LexemeAttribute.Causative_It).and(doesntComeAfterDerivation(Able)));
         Caus.addSuffixForm("Ar", hasLexemeAttributes(LexemeAttribute.Causative_Ar).and(doesntComeAfterDerivation(Able)));
         Caus.addSuffixForm("dIr", hasLexemeAttributes(LexemeAttribute.Causative_dIr));
 
@@ -768,7 +895,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
     private void registerVerbToAdverbDerivations() {
         VERB_POLARITY_DERIV.addOutSuffix(AfterDoingSo, ADVERB_ROOT);
-        AfterDoingSo.addSuffixForm("+yIp");
+        AfterDoingSo.addSuffixForm("+yI!p");
 
         VERB_POLARITY_DERIV.addOutSuffix(WithoutHavingDoneSo, ADVERB_ROOT);
         WithoutHavingDoneSo.addSuffixForm("mAdAn");
@@ -778,10 +905,13 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         AsLongAs.addSuffixForm("dIkçA");
 
         VERB_POLARITY_DERIV.addOutSuffix(ByDoingSo, ADVERB_ROOT);
-        ByDoingSo.addSuffixForm("+yArAk");
+        ByDoingSo.addSuffixForm("+yArA!k");
 
         VERB_POLARITY_DERIV.addOutSuffix(When, ADVERB_ROOT);
         When.addSuffixForm("+yIncA");
+
+        VERB_POLARITY_DERIV.addOutSuffix(Until, ADVERB_ROOT);
+        Until.addSuffixForm("+yIncAyA");
 
         VERB_POLARITY_DERIV.addOutSuffix(SinceDoingSo, ADVERB_ROOT);
         SinceDoingSo.addSuffixForm("+yAl!I");
@@ -794,7 +924,6 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
 
         VERB_TENSE_DERIV.addOutSuffix(AsIf, ADVERB_ROOT);
         AsIf.addSuffixForm("cAs!InA", Specifications.or(comesAfter(Aorist), comesAfter(Progressive), comesAfter(Future), comesAfter(Narr)));
-
     }
 
     private void registerVerbToAdjectiveDerivations() {
@@ -850,9 +979,8 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     }
 
     private void registerAdjectiveToVerbDerivations() {
-        ADJECTIVE_DERIV.addOutSuffix(Become, VERB_ROOT);
-        Become.addSuffixForm("lAş");
-
+        ADJECTIVE_DERIV.addOutSuffix(Become_Adj, VERB_ROOT);
+        Become_Adj.addSuffixForm("lAş");
     }
 
     private void registerAdjectivePossessions() {

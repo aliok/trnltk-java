@@ -1,14 +1,16 @@
 package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SuffixForm;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.morphology.model.suffixbased.SuffixForm;
 
 import java.util.Collection;
 
 public interface SuffixGraph {
 
-    public SuffixGraphState getDefaultStateForRoot(Root root);
+    SuffixGraphState getDefaultStateForRoot(Root root);
+
+    Collection<SuffixGraphState> getRootSuffixGraphStates();
 
     void initialize();
 

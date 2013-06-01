@@ -25,12 +25,12 @@ import java.util.Collection;
 
 public abstract class BaseParseResultsMatcher extends TypeSafeMatcher<Collection<String>> {
 
-    static final Ordering<String> byLengthOrdering = new Ordering<String>() {
+    public static final Ordering<String> byLengthOrdering = new Ordering<String>() {
         public int compare(String left, String right) {
             return Ints.compare(left.length(), right.length());
         }
     };
 
-    static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
+    public static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
 
 }

@@ -20,13 +20,14 @@ import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.structure.TurkicLetter;
+import zemberek3.shared.structure.TurkicLetter;
 
 import java.util.Arrays;
 
 public class TurkishSequence {
     private final String underlyingString;
     private final TurkishChar[] chars;
+    private TurkishChar firstVowel;
     private TurkishChar lastVowel;
     private int count;
 
@@ -38,8 +39,11 @@ public class TurkishSequence {
             char c = underlyingString.charAt(i);
             TurkishChar turkishChar = TurkishAlphabet.getChar(c);
             this.chars[i] = turkishChar;
-            if (turkishChar.getLetter().isVowel())
+            if (turkishChar.getLetter().isVowel()) {
+                if (this.firstVowel == null)
+                    this.firstVowel = turkishChar;
                 this.lastVowel = turkishChar;
+            }
         }
     }
 
@@ -48,15 +52,19 @@ public class TurkishSequence {
         final TurkishChar[] charsFirst = first.chars;
         this.underlyingString = strFirst + strSecond;
         this.count = this.underlyingString.length();
+        this.firstVowel = first.firstVowel;
         this.lastVowel = first.lastVowel;
         this.chars = new TurkishChar[charsFirst.length + strSecond.length()];
         System.arraycopy(charsFirst, 0, this.chars, 0, charsFirst.length);
         for (int i = 0; i < strSecond.length(); i++) {
-            char c = strSecond.charAt(i);
-            TurkishChar turkishChar = TurkishAlphabet.getChar(c);
-            this.chars[i + charsFirst.length] = turkishChar;
-            if (turkishChar.getLetter().isVowel())
-                this.lastVowel = turkishChar;
+            char charOfSecondStr = strSecond.charAt(i);
+            TurkishChar turkishCharOfSecondStr = TurkishAlphabet.getChar(charOfSecondStr);
+            this.chars[i + charsFirst.length] = turkishCharOfSecondStr;
+            if (turkishCharOfSecondStr.getLetter().isVowel()) {
+                if (this.firstVowel == null)
+                    this.firstVowel = turkishCharOfSecondStr;
+                this.lastVowel = turkishCharOfSecondStr;
+            }
         }
     }
 
@@ -67,8 +75,11 @@ public class TurkishSequence {
         for (int i = 0; i < this.count; i++) {
             TurkishChar turkishChar = turkishChars[i];
             this.chars[i] = turkishChar;
-            if (turkishChar.getLetter().isVowel())
+            if (turkishChar.getLetter().isVowel()) {
+                if (this.firstVowel == null)
+                    this.firstVowel = turkishChar;
                 this.lastVowel = turkishChar;
+            }
 
             underlyingStringBuilder.append(turkishChar.getCharValue());
         }
@@ -161,6 +172,10 @@ public class TurkishSequence {
 
     public TurkishChar getLastVowel() {
         return this.lastVowel;
+    }
+
+    public TurkishChar getFirstVowel() {
+        return this.firstVowel;
     }
 
     @Override

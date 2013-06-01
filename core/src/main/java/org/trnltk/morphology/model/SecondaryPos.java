@@ -2,8 +2,8 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import zemberek3.structure.StringEnum;
-import zemberek3.structure.StringEnumMap;
+import zemberek3.shared.structure.StringEnum;
+import zemberek3.shared.structure.StringEnumMap;
 
 public enum SecondaryPos implements StringEnum<SecondaryPos> {
     Demonstrative("Demons"),
@@ -27,13 +27,14 @@ public enum SecondaryPos implements StringEnum<SecondaryPos> {
 
     // used only in trnltk
     ABBREVIATION("Abbr"),
-    DIGITS("Digits"),
+    CARDINAL_DIGITS("DigitsC"),
+    ORDINAL_DIGITS("DigitsO"),
 
     // not used in Trnltk too
     DUPLICATOR("Dup"),
     POST_POSITIVE("Postp");
 
-    public static final ImmutableSet<SecondaryPos> NUMERAL_APPLICABLE = Sets.immutableEnumSet(Cardinal, Ordinal, DIGITS); //TODO-INTEGRATION: more stuff above
+    public static final ImmutableSet<SecondaryPos> NUMERAL_APPLICABLE = Sets.immutableEnumSet(Cardinal, Ordinal, Range, CARDINAL_DIGITS, ORDINAL_DIGITS); //TODO-INTEGRATION: more stuff above
 
     private final static StringEnumMap<SecondaryPos> shortFormToPosMap = StringEnumMap.get(SecondaryPos.class);
 

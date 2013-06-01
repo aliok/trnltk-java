@@ -5,17 +5,16 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.morphology.model.*;
-import zemberek3.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.suffixbased.*;
+import zemberek3.shared.lexicon.PrimaryPos;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public abstract class BaseSuffixGraph implements SuffixGraph {
-    private Map<String, SuffixGraphState> stateMap;
-    private Map<String, Suffix> suffixMap;
+    Map<String, SuffixGraphState> stateMap;
+    Map<String, Suffix> suffixMap;
 
-    private SuffixGraph decorated;
+    SuffixGraph decorated;
 
 
     protected BaseSuffixGraph() {
@@ -51,8 +50,24 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
             return suffixGraphState;
     }
 
+    @Override
+    public Collection<SuffixGraphState> getRootSuffixGraphStates() {
+        Validate.isTrue(this.stateMap instanceof ImmutableMap, "Suffix graph not initialized yet!");
+        Validate.isTrue(this.suffixMap instanceof ImmutableMap, "Suffix graph not initialized yet!");
+
+        Collection<SuffixGraphState> states = new HashSet<>();
+        states.addAll(this.doGetRootSuffixGraphStates());
+        states.addAll(this.decorated.getRootSuffixGraphStates());
+
+        return states;
+    }
+
     protected SuffixGraphState registerState(String name, SuffixGraphStateType suffixGraphStateType, PrimaryPos primaryPos) {
-        final SuffixGraphState suffixGraphState = new SuffixGraphState(name, suffixGraphStateType, primaryPos);
+        return registerState(name, suffixGraphStateType, primaryPos, null);
+    }
+
+    protected SuffixGraphState registerState(String name, SuffixGraphStateType suffixGraphStateType, PrimaryPos primaryPos, SecondaryPos secondaryPos) {
+        final SuffixGraphState suffixGraphState = new SuffixGraphState(name, suffixGraphStateType, primaryPos, secondaryPos);
         Validate.isTrue(!this.stateMap.containsKey(name));
         Validate.isTrue(!this.stateMap.containsValue(suffixGraphState));
         Validate.isTrue(this.decorated.getSuffixGraphState(name) == null);
@@ -144,6 +159,8 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
             Validate.isTrue(this.decorated.getSuffix(suffixName) == null, "Suffix " + suffixName + " also exists in decorated graph!");
         }
     }
+
+    protected abstract Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates();
 
     protected abstract void registerEverything();
 

@@ -17,21 +17,30 @@
 package org.trnltk.morphology.phonetics;
 
 import com.google.common.collect.ImmutableSet;
-import zemberek3.structure.TurkicLetter;
+import com.google.common.collect.ImmutableSetMultimap;
+import zemberek3.shared.structure.TurkicLetter;
 
-public class TurkishAlphabet extends zemberek3.structure.TurkishAlphabet {
+public class TurkishAlphabet extends zemberek3.shared.structure.TurkishAlphabet {
 
-    //TODO-INTEGRATION: following is ugly and temporary
-    private static final zemberek3.structure.TurkishAlphabet ZEMBEREK_ALPHABET_INSTANCE = new zemberek3.structure.TurkishAlphabet();
+    //TODO-INTEGRATION: following lines are ugly and temporary
+    private static final zemberek3.shared.structure.TurkishAlphabet ZEMBEREK_ALPHABET_INSTANCE = new zemberek3.shared.structure.TurkishAlphabet();
 
-    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(zemberek3.structure.TurkishAlphabet.devoicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Devoicable_Letters = ImmutableSet.copyOf(zemberek3.shared.structure.TurkishAlphabet.devoicingMap.keySet());
+    public static final ImmutableSet<TurkicLetter> Voicable_Letters = ImmutableSet.copyOf(zemberek3.shared.structure.TurkishAlphabet.voicingMap.keySet());
+    public static final ImmutableSetMultimap<TurkicLetter, TurkicLetter> Inverse_Voicing_Map = new ImmutableSetMultimap.Builder<TurkicLetter, TurkicLetter>()
+            .put(TurkishAlphabet.L_b, TurkishAlphabet.L_p)
+            .put(TurkishAlphabet.L_c, TurkishAlphabet.L_cc)
+            .put(TurkishAlphabet.L_d, TurkishAlphabet.L_t)
+            .put(TurkishAlphabet.L_g, TurkishAlphabet.L_k)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_g)
+            .put(TurkishAlphabet.L_gg, TurkishAlphabet.L_k)
+            .build();
 
     public static TurkicLetter getLetterForChar(char c) {
         c = Character.toLowerCase(c);
         try {
             return ZEMBEREK_ALPHABET_INSTANCE.getLetter(c);
-        }
-        catch (IllegalArgumentException e){     //TODO-INTEGRATION: this is ugly!
+        } catch (IllegalArgumentException e) {     //TODO-INTEGRATION: this is ugly!
             return TurkicLetter.builder(c, 9999).build();
         }
     }

@@ -2,9 +2,9 @@ package org.trnltk.morphology.model;
 
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
-import zemberek3.lexicon.tr.PhonAttr;
-import zemberek3.lexicon.tr.PhoneticExpectation;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+import zemberek3.shared.lexicon.PrimaryPos;
 
 public class NumeralRoot implements Root {
 
@@ -12,7 +12,7 @@ public class NumeralRoot implements Root {
     private final String underlyingNumeralText;
 
     public NumeralRoot(final TurkishSequence partialInput, final String underlyingNumeralText, final SecondaryPos secondaryPos,
-                       final ImmutableSet<PhonAttr> phonAttrs) {
+                       final ImmutableSet<PhoneticAttribute> phoneticAttributes) {
         Validate.notNull(partialInput);
 
         final String partialInputUnderlyingString = partialInput.getUnderlyingString();
@@ -25,11 +25,11 @@ public class NumeralRoot implements Root {
         final PrimaryPos primaryPos = PrimaryPos.Numeral;
         final ImmutableSet<LexemeAttribute> lexemeAttributes = ImmutableSet.of();
 
-        final Lexeme lexeme = new Lexeme(partialInputUnderlyingString, partialInputUnderlyingString, primaryPos,
+        final Lexeme lexeme = new ImmutableLexeme(partialInputUnderlyingString, partialInputUnderlyingString, primaryPos,
                 secondaryPos, lexemeAttributes);
 
         final ImmutableSet<PhoneticExpectation> phoneticExpectations = null;
-        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phonAttrs, phoneticExpectations);
+        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phoneticAttributes, phoneticExpectations);
 
         this.underlyingNumeralText = underlyingNumeralText;
     }
@@ -45,8 +45,8 @@ public class NumeralRoot implements Root {
     }
 
     @Override
-    public ImmutableSet<PhonAttr> getPhonAttrs() {
-        return immutableRoot.getPhonAttrs();
+    public ImmutableSet<PhoneticAttribute> getPhoneticAttributes() {
+        return immutableRoot.getPhoneticAttributes();
     }
 
     @Override

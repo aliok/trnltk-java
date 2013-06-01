@@ -4,10 +4,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.MorphemeContainer;
-import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.Transition;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.morphology.model.suffixbased.SuffixTransition;
+import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 
 import java.util.Collection;
 import java.util.Set;
@@ -39,12 +39,12 @@ class HasSuffixFormSinceLastDerivation extends AbstractSpecification<MorphemeCon
             return false;
 
         if (suffixFormStr != null) {    // can be blank
-            Set<Transition> transitionsSinceDerivationSuffix = morphemeContainer.getTransitionsSinceDerivationSuffix();
-            return Iterables.any(transitionsSinceDerivationSuffix, new Predicate<Transition>() {
+            Set<SuffixTransition> transitionsSinceDerivationSuffix = morphemeContainer.getTransitionsSinceDerivationSuffix();
+            return Iterables.any(transitionsSinceDerivationSuffix, new Predicate<SuffixTransition>() {
                 @Override
-                public boolean apply(Transition transition) {
-                    return transition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(suffix) &&
-                            transition.getSuffixFormApplication().getSuffixForm().getForm().getSuffixFormStr().equals(suffixFormStr);
+                public boolean apply(SuffixTransition suffixTransition) {
+                    return suffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(suffix) &&
+                            suffixTransition.getSuffixFormApplication().getSuffixForm().getForm().getSuffixFormStr().equals(suffixFormStr);
                 }
             });
         } else {

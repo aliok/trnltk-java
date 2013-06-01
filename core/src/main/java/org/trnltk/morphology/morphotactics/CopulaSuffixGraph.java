@@ -16,19 +16,22 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.trnltk.common.specification.Specification;
-import org.trnltk.common.specification.Specifications;
-import org.trnltk.morphology.model.MorphemeContainer;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import zemberek3.shared.common.specification.Specification;
+import zemberek3.shared.common.specification.Specifications;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.Root;
-import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.SuffixGroup;
-import zemberek3.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.suffixbased.SuffixGroup;
+import zemberek3.shared.lexicon.PrimaryPos;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.comesAfter;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
-import static zemberek3.lexicon.PrimaryPos.*;
+import static zemberek3.shared.lexicon.PrimaryPos.*;
 
 public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, Noun);
@@ -41,6 +44,9 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE = registerState("VERB_COPULA_WITHOUT_TENSE", TRANSFER, Verb);
     private final SuffixGraphState VERB_COPULA_WITHOUT_TENSE_DERIV = registerState("VERB_COPULA_WITHOUT_TENSE_DERIV", DERIVATIONAL, Verb);
     private final SuffixGraphState VERB_COPULA_WITH_TENSE = registerState("VERB_COPULA_WITH_TENSE", TRANSFER, Verb);
+    private final SuffixGraphState VERB_COPULA_WITH_TENSE_DERIV = registerState("VERB_COPULA_WITH_TENSE_DERIV", DERIVATIONAL, Verb);
+    private final SuffixGraphState VERB_COPULA_WITH_SWAPPED_A3PL = registerState("VERB_COPULA_WITH_SWAPPED_A3PL", TRANSFER, Verb);
+    private final SuffixGraphState VERB_COPULA_FROM_OTHERS_WITH_SWAPPED_A3PL = registerState("VERB_COPULA_FROM_OTHERS_WITH_SWAPPED_A3PL", DERIVATIONAL, Verb);
 
     /// from decorated
     private final SuffixGraphState DECORATED_ADJECTIVE_DERIV = getSuffixGraphState("ADJECTIVE_DERIV");
@@ -51,6 +57,9 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState DECORATED_ADVERB_TERMINAL_TRANSFER = getSuffixGraphState("ADVERB_TERMINAL_TRANSFER");
     private final SuffixGraphState DECORATED_PRONOUN_TERMINAL_TRANSFER = getSuffixGraphState("PRONOUN_TERMINAL_TRANSFER");
     private final SuffixGraphState DECORATED_VERB_TERMINAL_TRANSFER = getSuffixGraphState("VERB_TERMINAL_TRANSFER");
+
+    private final SuffixGraphState DECORATED_VERB_WITH_TENSE = getSuffixGraphState("VERB_WITH_TENSE");
+    private final SuffixGraphState DECORATED_VERB_TERMINAL = getSuffixGraphState("VERB_TERMINAL");
 
     private final SuffixGraphState DECORATED_QUESTION_WITH_AGREEMENT = getSuffixGraphState("QUESTION_WITH_AGREEMENT");
 
@@ -73,14 +82,21 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
 
     ///////////// Copula tenses to Adverb
     private final Suffix While_Cop = registerSuffix("While_Cop", null, "While");
+    private final Suffix AsIf_Cop = registerSuffix("AsIf_Cop", null, "AsIf");
 
     ///////////// Explicit Copula
     private final Suffix Cop_Verb = registerSuffix("Cop_Verb", null, "Cop");
+    private final Suffix Cop_Verb_Swapped = registerSuffix("Cop_Verb_Swapped", null, "Cop");
+    private final Suffix Cop_Others_Swapped = registerSuffix("Cop_Others_Swapped", null, "Cop");
     private final Suffix Cop_Ques = registerSuffix("Cop_Ques", null, "Cop");
 
     ///////////// from decorated
     private final Suffix Decorated_Aorist = getSuffix("Aor");
     private final Suffix Decorated_Past = getSuffix("Past");
+    private final Suffix Decorated_Narr = getSuffix("Narr");
+    private final Suffix Decorated_Fut = getSuffix("Fut");
+    private final Suffix Decorated_Prog = getSuffix("Prog");
+    private final Suffix Decorated_Neces = getSuffix("Neces");
     private final Suffix Decorated_Cond = getSuffix("Cond");
     private final Suffix Decorated_Narr_Ques = getSuffix("Narr_Ques");
     private final Suffix Decorated_Pres_Ques = getSuffix("Pres_Ques");
@@ -109,6 +125,11 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     }
 
     @Override
+    protected Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates() {
+        return Arrays.asList(VERB_DEGIL_ROOT);
+    }
+
+    @Override
     protected void registerEverything() {
         this.registerFreeTransitions();
         this.createSuffixEdges();
@@ -121,7 +142,8 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
         DECORATED_ADVERB_TERMINAL_TRANSFER.addOutSuffix(registerFreeTransitionSuffix("Adverb_Cop_Free_Transition"), ADVERB_COPULA);
         DECORATED_PRONOUN_TERMINAL_TRANSFER.addOutSuffix(registerFreeTransitionSuffix("Pronoun_Cop_Free_Transition"), PRONOUN_COPULA);
         VERB_DEGIL_ROOT.addOutSuffix(registerFreeTransitionSuffix("Verb_Degil_Free_Transition"), VERB_COPULA_WITHOUT_TENSE);
-        VERB_COPULA_WITHOUT_TENSE.addOutSuffix(registerFreeTransitionSuffix("Copula_Deriv_Free_Transition"), VERB_COPULA_WITHOUT_TENSE_DERIV);
+        VERB_COPULA_WITHOUT_TENSE.addOutSuffix(registerFreeTransitionSuffix("Copula_Deriv_Free_Transition_1"), VERB_COPULA_WITHOUT_TENSE_DERIV);
+        VERB_COPULA_WITH_TENSE.addOutSuffix(registerFreeTransitionSuffix("Copula_Deriv_Free_Transition_2"), VERB_COPULA_WITH_TENSE_DERIV);
 
         NOUN_COPULA.addOutSuffix(registerZeroTransitionSuffix("Noun_Copula_Zero_Transition"), VERB_COPULA_WITHOUT_TENSE);
         ADJECTIVE_COPULA.addOutSuffix(registerZeroTransitionSuffix("Adjective_Copula_Zero_Transition"), VERB_COPULA_WITHOUT_TENSE);
@@ -133,6 +155,7 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
 
     private void createSuffixEdges() {
         this.registerCopulaTenses();
+        this.registerSwappedA3PlVerbs();
         this.registerCopulaAgreements();
         this.registerCopulaTensesToOtherCategories();
         this.registerVerbExplicitCopula();
@@ -156,6 +179,24 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
         Cond_Cop_Secondary.addSuffixForm("+ysA", doesntComeAfter(Pres_Cop));
     }
 
+    private void registerSwappedA3PlVerbs() {
+        final Specification<MorphemeContainer> swappedVerbCopulaPrecondition = Specifications.or(
+                comesAfter(Decorated_Neces),
+                comesAfter(Decorated_Aorist),
+                comesAfter(Decorated_Prog),
+                comesAfter(Decorated_Fut),
+                comesAfter(Decorated_Narr));
+
+        DECORATED_VERB_WITH_TENSE.addOutSuffix(Cop_Verb_Swapped, VERB_COPULA_WITH_SWAPPED_A3PL);
+        Cop_Verb_Swapped.addSuffixForm("dIr", swappedVerbCopulaPrecondition);
+
+        VERB_COPULA_WITH_SWAPPED_A3PL.addOutSuffix(A3Pl_Cop, DECORATED_VERB_TERMINAL);
+
+        VERB_COPULA_WITHOUT_TENSE.addOutSuffix(Cop_Others_Swapped, VERB_COPULA_FROM_OTHERS_WITH_SWAPPED_A3PL);
+        Cop_Others_Swapped.addSuffixForm("dIr");
+        VERB_COPULA_FROM_OTHERS_WITH_SWAPPED_A3PL.addOutSuffix(A3Pl_Cop, DECORATED_VERB_TERMINAL);
+    }
+
     public void registerCopulaAgreements() {
         final Specification<MorphemeContainer> comesAfterCondOrPast = Specifications.or(
                 comesAfter(Cond_Cop),
@@ -175,7 +216,7 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
 
         VERB_COPULA_WITH_TENSE.addOutSuffix(A1Pl_Cop, DECORATED_VERB_TERMINAL_TRANSFER);
         A1Pl_Cop.addSuffixForm("+yIz");                          // (biz) elma-yiz, (biz) armud-uz, elma-ymis-iz
-        A1Pl_Cop.addSuffixForm("k", comesAfterCondOrPast);   // elma-ydi-k, elma-ysa-k
+        A1Pl_Cop.addSuffixForm("!k", comesAfterCondOrPast);   // elma-ydi-k, elma-ysa-k
 
         VERB_COPULA_WITH_TENSE.addOutSuffix(A2Pl_Cop, DECORATED_VERB_TERMINAL_TRANSFER);
         A2Pl_Cop.addSuffixForm("sInIz");                        // (siz) elma-siniz, (siz) armut-sunuz, elma-ymis-siniz
@@ -188,6 +229,9 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     public void registerCopulaTensesToOtherCategories() {
         VERB_COPULA_WITHOUT_TENSE_DERIV.addOutSuffix(While_Cop, DECORATED_ADVERB_ROOT);
         While_Cop.addSuffixForm("+yken");
+
+        VERB_COPULA_WITH_TENSE_DERIV.addOutSuffix(AsIf_Cop, DECORATED_ADVERB_ROOT);
+        AsIf_Cop.addSuffixForm("cAs!InA", Specifications.or(comesAfter(Pres_Cop), comesAfter(Narr_Cop)));
     }
 
     public void registerVerbExplicitCopula() {

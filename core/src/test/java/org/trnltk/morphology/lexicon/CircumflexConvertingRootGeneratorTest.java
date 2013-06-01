@@ -19,10 +19,11 @@ package org.trnltk.morphology.lexicon;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
+import org.trnltk.morphology.model.ImmutableLexeme;
 import org.trnltk.morphology.model.ImmutableRoot;
 import org.trnltk.morphology.model.Lexeme;
-import zemberek3.lexicon.tr.PhonAttr;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 
 import java.util.HashSet;
 
@@ -34,17 +35,20 @@ public class CircumflexConvertingRootGeneratorTest {
 
     CircumflexConvertingRootGenerator generator;
 
-    PhonAttr LLV = PhonAttr.LastLetterVowel;
-    PhonAttr LLC = PhonAttr.LastLetterConsonant;
+    PhoneticAttribute LLV = PhoneticAttribute.LastLetterVowel;
+    PhoneticAttribute LLC = PhoneticAttribute.LastLetterConsonant;
 
-    PhonAttr LVR = PhonAttr.LastVowelRounded;
-    PhonAttr LVU = PhonAttr.LastVowelUnrounded;
-    PhonAttr LVF = PhonAttr.LastVowelFrontal;
-    PhonAttr LVB = PhonAttr.LastVowelBack;
+    PhoneticAttribute LVR = PhoneticAttribute.LastVowelRounded;
+    PhoneticAttribute LVU = PhoneticAttribute.LastVowelUnrounded;
+    PhoneticAttribute LVF = PhoneticAttribute.LastVowelFrontal;
+    PhoneticAttribute LVB = PhoneticAttribute.LastVowelBack;
 
-    PhonAttr LLVless = PhonAttr.LastLetterVoiceless;
-    PhonAttr LLVlessStop = PhonAttr.LastLetterVoicelessStop;
-    PhonAttr LLNotVless = PhonAttr.LastLetterNotVoiceless;
+    PhoneticAttribute LLVless = PhoneticAttribute.LastLetterVoiceless;
+    PhoneticAttribute LLVlessStop = PhoneticAttribute.LastLetterVoicelessStop;
+    PhoneticAttribute LLNotVless = PhoneticAttribute.LastLetterNotVoiceless;
+
+    PhoneticAttribute FLC = PhoneticAttribute.FirstLetterConsonant;
+    PhoneticAttribute FLV = PhoneticAttribute.FirstLetterVowel;
 
     @Before
     public void setUp() throws Exception {
@@ -54,35 +58,35 @@ public class CircumflexConvertingRootGeneratorTest {
     @Test
     public void shouldDoNothingSpecialWhenThereIsNoCircumflexChars() {
         {
-            Lexeme lexeme = new Lexeme("hala", "hala", PrimaryPos.Noun, null, null);
+            Lexeme lexeme = new ImmutableLexeme("hala", "hala", PrimaryPos.Noun, null, null);
             HashSet<ImmutableRoot> generatedRoots = generator.generate(lexeme);
             assertThat(generatedRoots, hasSize(1));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("hala", lexeme, ImmutableSet.of(LVB, LLV, LLNotVless, LVU), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("hala", lexeme, ImmutableSet.of(FLC, LVB, LLV, LLNotVless, LVU), null)));
         }
     }
 
     @Test
     public void shouldGenerateConvertingCircumflexes() {
         {
-            Lexeme lexeme = new Lexeme("rüzgâr", "rüzgâr", PrimaryPos.Noun, null, null);
+            Lexeme lexeme = new ImmutableLexeme("rüzgâr", "rüzgâr", PrimaryPos.Noun, null, null);
             HashSet<ImmutableRoot> generatedRoots = generator.generate(lexeme);
             assertThat(generatedRoots, hasSize(2));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("rüzgar", lexeme, ImmutableSet.of(LVB, LLC, LLNotVless, LVU), null)));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("rüzgâr", lexeme, ImmutableSet.of(LVB, LLC, LLNotVless, LVU), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("rüzgar", lexeme, ImmutableSet.of(FLC, LVB, LLC, LLNotVless, LVU), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("rüzgâr", lexeme, ImmutableSet.of(FLC, LVB, LLC, LLNotVless, LVU), null)));
         }
         {
-            Lexeme lexeme = new Lexeme("alenî", "alenî", PrimaryPos.Adjective, null, null);
+            Lexeme lexeme = new ImmutableLexeme("alenî", "alenî", PrimaryPos.Adjective, null, null);
             HashSet<ImmutableRoot> generatedRoots = generator.generate(lexeme);
             assertThat(generatedRoots, hasSize(2));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("aleni", lexeme, ImmutableSet.of(LVF, LLV, LLNotVless, LVU), null)));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("alenî", lexeme, ImmutableSet.of(LVF, LLV, LLNotVless, LVU), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("aleni", lexeme, ImmutableSet.of(FLV, LVF, LLV, LLNotVless, LVU), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("alenî", lexeme, ImmutableSet.of(FLV, LVF, LLV, LLNotVless, LVU), null)));
         }
         {
-            Lexeme lexeme = new Lexeme("cülûs", "cülûs", PrimaryPos.Noun, null, null);
+            Lexeme lexeme = new ImmutableLexeme("cülûs", "cülûs", PrimaryPos.Noun, null, null);
             HashSet<ImmutableRoot> generatedRoots = generator.generate(lexeme);
             assertThat(generatedRoots, hasSize(2));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("cülus", lexeme, ImmutableSet.of(LVF, LLC, LLVless, LVR), null)));
-            assertThat(generatedRoots, hasItem(new ImmutableRoot("cülûs", lexeme, ImmutableSet.of(LVF, LLC, LLVless, LVR), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("cülus", lexeme, ImmutableSet.of(FLC, LVF, LLC, LLVless, LVR), null)));
+            assertThat(generatedRoots, hasItem(new ImmutableRoot("cülûs", lexeme, ImmutableSet.of(FLC, LVF, LLC, LLVless, LVR), null)));
         }
     }
 

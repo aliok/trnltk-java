@@ -21,10 +21,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
 import org.apache.log4j.Logger;
-import org.primefaces.context.RequestContext;
-import org.trnltk.morphology.contextless.parser.*;
-import org.trnltk.morphology.model.Formatter;
-import org.trnltk.morphology.model.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
+import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.rootfinders.RootFinderChain;
+import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.model.suffixbased.Formatter;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
@@ -75,14 +77,9 @@ public class ParserBean implements Serializable {
             final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, rootMapData.getRootMap(), suffixApplier);
             predefinedPaths.initialize();
 
-            final RootFinder[] rootFinders = this.rootFinderSelectionData.getSelectedRootFinders();
+            final RootFinderChain rootFinderChain = this.rootFinderSelectionData.getRootFinderChain();
 
-            final ContextlessMorphologicParser morphologicParser = new ContextlessMorphologicParserFactory()
-                    .suffixGraph(suffixGraph)
-                    .rootFinder(rootFinders)
-                    .predefinedPaths(predefinedPaths)
-                    .suffixApplier(suffixApplier)
-                    .build();
+            final ContextlessMorphologicParser morphologicParser = new ContextlessMorphologicParser(suffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
 
             //TODO: add formatting option!
             this.parseResults = Lists.transform(morphologicParser.parse(new TurkishSequence(this.surface)), new Function<MorphemeContainer, String>() {

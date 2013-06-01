@@ -18,10 +18,8 @@ package org.trnltk.morphology.contextless.parser.rootfinders;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.Root;
+import org.trnltk.morphology.model.*;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.TurkishSequence;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 
 import java.util.List;
@@ -30,38 +28,42 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
-public class ProperNounWithoutApostropheRootFinderTest {
-    ProperNounWithoutApostropheRootFinder rootFinder;
+public class ProperNounWithoutApostropheRootFinderTest extends BaseRootFinderTest<DynamicRoot> {
     PhoneticsAnalyzer phoneticsAnalyzer;
 
     @Before
     public void setUp() throws Exception {
-        this.rootFinder = new ProperNounWithoutApostropheRootFinder();
+        super.setUp();
         this.phoneticsAnalyzer = new PhoneticsAnalyzer();
+    }
+
+    @Override
+    protected RootFinder createRootFinder() {
+        return new ProperNounWithoutApostropheRootFinder();
     }
 
     @Test
     public void shouldRecognizeProperNouns() {
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("A"), new TurkishSequence("Ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("A", "Ali");
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("A"));
             assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Al"), new TurkishSequence("Ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("Al", "Ali");
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Al"));
             assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali"), new TurkishSequence("Ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("Ali", "Ali");
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Ali"));
             assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali8"), new TurkishSequence("Ali8192"));
+            final List<? extends Root> roots = findRootsForPartialInput("Ali8", "Ali8192");
             assertThat(roots, hasSize(1));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("Ali8"));
             assertThat(roots.get(0).getLexeme().getSecondaryPos(), equalTo(SecondaryPos.ProperNoun));
@@ -71,23 +73,23 @@ public class ProperNounWithoutApostropheRootFinderTest {
     @Test
     public void shouldNotRecognizeProperNouns_whenInputHasApostrophe() {
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("A"), new TurkishSequence("Ali'ye"));
+            final List<? extends Root> roots = findRootsForPartialInput("A", "Ali'ye");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Al"), new TurkishSequence("Ali'ye"));
+            final List<? extends Root> roots = findRootsForPartialInput("Al", "Ali'ye");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali"), new TurkishSequence("Ali'ye"));
+            final List<? extends Root> roots = findRootsForPartialInput("Ali", "Ali'ye");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali'"), new TurkishSequence("Ali'ye"));
+            final List<? extends Root> roots = findRootsForPartialInput("Ali'", "Ali'ye");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("Ali'y"), new TurkishSequence("Ali'ye"));
+            final List<? extends Root> roots = findRootsForPartialInput("Ali'y", "Ali'ye");
             assertThat(roots, hasSize(0));
         }
     }
@@ -95,19 +97,19 @@ public class ProperNounWithoutApostropheRootFinderTest {
     @Test
     public void shouldNotRecognizeProperNouns_whenInputDoesntStartWithUppercase() {
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("a"), new TurkishSequence("ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("a", "ali");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("al"), new TurkishSequence("ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("al", "ali");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("ali"), new TurkishSequence("ali"));
+            final List<? extends Root> roots = findRootsForPartialInput("ali", "ali");
             assertThat(roots, hasSize(0));
         }
         {
-            final List<? extends Root> roots = rootFinder.findRootsForPartialInput(new TurkishSequence("123A"), new TurkishSequence("123A"));
+            final List<? extends Root> roots = findRootsForPartialInput("123A", "123A");
             assertThat(roots, hasSize(0));
         }
     }

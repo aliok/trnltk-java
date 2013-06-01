@@ -1,9 +1,9 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
-import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.MorphemeContainer;
-import org.trnltk.morphology.model.Transition;
+import org.trnltk.morphology.model.suffixbased.SuffixTransition;
+import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 
 public class LastSuffixGoesToStateWithType extends AbstractSpecification<MorphemeContainer> {
@@ -22,10 +22,10 @@ public class LastSuffixGoesToStateWithType extends AbstractSpecification<Morphem
     public boolean isSatisfiedBy(MorphemeContainer morphemeContainer) {
         Validate.notNull(morphemeContainer);
 
-        Transition lastTransition = morphemeContainer.getLastTransition();
-        if (lastTransition == null)
+        SuffixTransition lastSuffixTransition = morphemeContainer.getLastSuffixTransition();
+        if (lastSuffixTransition == null)
             return false;
 
-        return lastTransition.getTargetState().getType().equals(this.suffixGraphStateType);
+        return lastSuffixTransition.getTargetState().getType().equals(this.suffixGraphStateType);
     }
 }

@@ -526,11 +526,11 @@ içine=(1,"iç+Noun+A3sg+P3sg+Dat")
 girdiğiniz=(1,"gir+Verb+Pos")(2,"Adj+PastPart+P2pl")
 an=(1,"an+Adv")
 ,=(1,",+Punc")
-tutsaksınız=(1,"tutsak+Noun+A3sg+Pnon+Nom")(2,"Verb+Zero+Pres+A2pl")
+tutsaksınız=(1,"tutsak+Adj")(2,"Verb+Zero+Pres+A2pl")
 .=(1,".+Punc")
 #END#OF#SENTENCE#
 Onun=(1,"o+Pron+Pers+A3sg+Pnon+Gen")
-tutsağı=(1,"tutsak+Noun+A3sg+P3sg+Nom")
+tutsağı=(1,"tutsak+Adj")(2,"Noun+Zero+A3sg+P3sg+Nom")
 .=(1,".+Punc")
 #END#OF#SENTENCE#
 Bırakmaz=(1,"bırak+Verb+Neg+Aor+A3sg")

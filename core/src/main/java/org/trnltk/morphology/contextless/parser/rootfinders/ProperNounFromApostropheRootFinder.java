@@ -19,16 +19,14 @@ package org.trnltk.morphology.contextless.parser.rootfinders;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
-import org.trnltk.morphology.contextless.parser.RootFinder;
 import org.trnltk.morphology.model.*;
-import zemberek3.lexicon.tr.PhonAttr;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.TurkishAlphabet;
 import org.trnltk.morphology.phonetics.TurkishChar;
-import zemberek3.lexicon.PrimaryPos;
+import zemberek3.shared.lexicon.PrimaryPos;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ProperNounFromApostropheRootFinder implements RootFinder {
@@ -38,38 +36,42 @@ public class ProperNounFromApostropheRootFinder implements RootFinder {
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 
     @Override
-    public List<? extends Root> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence input) {
+    public boolean handles(TurkishSequence partialInput, TurkishSequence input) {
         if (partialInput == null || partialInput.isBlank())
-            return Arrays.asList();
+            return false;
 
-        if (partialInput.getLastChar().getCharValue() == APOSTROPHE) {
-            final TurkishSequence properNounCandidate = partialInput.subsequence(0, partialInput.length() - 1);
-            if (!properNounCandidate.isBlank()) {
+        if (partialInput.length() < 2)
+            return false;
 
-                final String properNounCandidateUnderlyingString = properNounCandidate.getUnderlyingString();
+        if (Character.isUpperCase(partialInput.charAt(0).getCharValue()) && partialInput.getLastChar().getCharValue() == APOSTROPHE)
+            return true;
 
-                if (StringUtils.isAllUpperCase(properNounCandidateUnderlyingString)) {
-                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
+        return false;
+    }
 
-                    if (!properNounCandidate.getLastChar().getLetter().isVowel()) {
-                        // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
-                        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate.append(TURKISH_CHAR_E_UPPERCASE), null));
-                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
+    @Override
+    public List<? extends Root> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence input) {
+        final TurkishSequence properNounCandidate = partialInput.subsequence(0, partialInput.length() - 1);
 
-                    } else {
-                        final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
-                        return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
-                    }
-                } else if (Character.isUpperCase(properNounCandidate.charAt(0).getCharValue())) {
-                    final Lexeme lexeme = new Lexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
+        final String properNounCandidateUnderlyingString = properNounCandidate.getUnderlyingString();
 
-                    final ImmutableSet<PhonAttr> phonAttrs = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
-                    return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phonAttrs, null));
-                }
+        if (StringUtils.isAllUpperCase(properNounCandidateUnderlyingString)) {
+            final Lexeme lexeme = new ImmutableLexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ABBREVIATION, null);
+
+            if (!properNounCandidate.getLastChar().getLetter().isVowel()) {
+                // if last letter is not vowel (such as PTT, THY), then add char 'E' to the end and then calculate the phonetics
+                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate.append(TURKISH_CHAR_E_UPPERCASE), null));
+                return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
+
+            } else {
+                final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
+                return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
             }
-        }
+        } else {
+            final Lexeme lexeme = new ImmutableLexeme(properNounCandidateUnderlyingString, properNounCandidateUnderlyingString, PrimaryPos.Noun, SecondaryPos.ProperNoun, null);
 
-        //noinspection unchecked
-        return Collections.EMPTY_LIST;
+            final ImmutableSet<PhoneticAttribute> phoneticAttributes = Sets.immutableEnumSet(phoneticsAnalyzer.calculatePhoneticAttributes(properNounCandidate, null));
+            return Arrays.asList(new ImmutableRoot(properNounCandidate, lexeme, phoneticAttributes, null));
+        }
     }
 }

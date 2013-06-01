@@ -18,13 +18,15 @@ package org.trnltk.morphology.morphotactics;
 
 import org.trnltk.morphology.model.Root;
 import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.SecondaryPos;
-import org.trnltk.morphology.model.Suffix;
-import zemberek3.lexicon.PrimaryPos;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import zemberek3.shared.lexicon.PrimaryPos;
 
-import static zemberek3.lexicon.PrimaryPos.Noun;
+import java.util.Arrays;
+import java.util.Collection;
+
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TERMINAL;
 import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
+import static zemberek3.shared.lexicon.PrimaryPos.Noun;
 
 public class ProperNounSuffixGraph extends BaseSuffixGraph {
 
@@ -66,6 +68,11 @@ public class ProperNounSuffixGraph extends BaseSuffixGraph {
             return PROPER_NOUN_ROOT;
 
         return null;
+    }
+
+    @Override
+    protected Collection<? extends SuffixGraphState> doGetRootSuffixGraphStates() {
+        return Arrays.asList(PROPER_NOUN_ROOT);
     }
 
     @Override

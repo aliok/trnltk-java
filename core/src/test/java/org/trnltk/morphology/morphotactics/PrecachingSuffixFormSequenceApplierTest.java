@@ -19,8 +19,8 @@ package org.trnltk.morphology.morphotactics;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.model.SuffixFormSequence;
-import zemberek3.lexicon.tr.PhonAttr;
+import org.trnltk.morphology.model.suffixbased.SuffixFormSequence;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -40,11 +40,11 @@ public class PrecachingSuffixFormSequenceApplierTest {
     public void shouldHaveValue() throws Exception {
         // check only once, cannot test all!
         {
-            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhonAttr.LastLetterVowel));
+            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhoneticAttribute.LastLetterVowel));
             assertThat(str, equalTo("m"));
         }
         {
-            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhonAttr.LastLetterVowel, PhonAttr.FirstLetterVowel));
+            final String str = applier.apply(new SuffixFormSequence("+Im"), ImmutableSet.of(PhoneticAttribute.LastLetterVowel, PhoneticAttribute.FirstLetterVowel));
             assertThat(str, equalTo("m"));
         }
     }

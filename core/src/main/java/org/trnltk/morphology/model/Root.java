@@ -1,15 +1,16 @@
 package org.trnltk.morphology.model;
 
-import com.google.common.collect.ImmutableSet;
-import zemberek3.lexicon.tr.PhonAttr;
-import zemberek3.lexicon.tr.PhoneticExpectation;
+import zemberek3.shared.lexicon.tr.PhoneticAttribute;
+import zemberek3.shared.lexicon.tr.PhoneticExpectation;
+
+import java.util.Set;
 
 public interface Root {
     public TurkishSequence getSequence();
 
     public Lexeme getLexeme();
 
-    public ImmutableSet<PhonAttr> getPhonAttrs();
+    public Set<PhoneticAttribute> getPhoneticAttributes();
 
-    public ImmutableSet<PhoneticExpectation> getPhoneticExpectations();
+    public Set<PhoneticExpectation> getPhoneticExpectations();
 }

@@ -16,7 +16,7 @@
 
 package org.trnltk.morphology.phonetics;
 
-import zemberek3.structure.TurkicLetter;
+import zemberek3.shared.structure.TurkicLetter;
 
 public class TurkishChar {
 

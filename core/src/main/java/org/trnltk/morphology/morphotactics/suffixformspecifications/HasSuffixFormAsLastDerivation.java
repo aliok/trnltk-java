@@ -1,10 +1,10 @@
 package org.trnltk.morphology.morphotactics.suffixformspecifications;
 
 import org.apache.commons.lang3.Validate;
-import org.trnltk.common.specification.AbstractSpecification;
-import org.trnltk.morphology.model.MorphemeContainer;
-import org.trnltk.morphology.model.Suffix;
-import org.trnltk.morphology.model.Transition;
+import zemberek3.shared.common.specification.AbstractSpecification;
+import org.trnltk.morphology.model.suffixbased.MorphemeContainer;
+import org.trnltk.morphology.model.suffixbased.Suffix;
+import org.trnltk.morphology.model.suffixbased.SuffixTransition;
 
 public class HasSuffixFormAsLastDerivation extends AbstractSpecification<MorphemeContainer> {
     private final Suffix suffix;
@@ -28,15 +28,15 @@ public class HasSuffixFormAsLastDerivation extends AbstractSpecification<Morphem
     public boolean isSatisfiedBy(MorphemeContainer morphemeContainer) {
         Validate.notNull(morphemeContainer);
 
-        Transition lastDerivationTransition = morphemeContainer.getLastDerivationTransition();
-        if (lastDerivationTransition == null)
+        SuffixTransition lastDerivationSuffixTransition = morphemeContainer.getLastDerivationSuffixTransition();
+        if (lastDerivationSuffixTransition == null)
             return false;
 
         if (this.suffixFormStr != null) {       //can be blank
-            return lastDerivationTransition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(this.suffix)
-                    && lastDerivationTransition.getSuffixFormApplication().getSuffixForm().getForm().getSuffixFormStr().equals(this.suffixFormStr);
+            return lastDerivationSuffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(this.suffix)
+                    && lastDerivationSuffixTransition.getSuffixFormApplication().getSuffixForm().getForm().getSuffixFormStr().equals(this.suffixFormStr);
         } else {
-            return lastDerivationTransition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(this.suffix);
+            return lastDerivationSuffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix().equals(this.suffix);
         }
     }
 }
