@@ -22,25 +22,24 @@ import com.google.common.collect.Iterables;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.trnltk.model.lexicon.LexemeAttribute;
-import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.model.lexicon.PhoneticAttribute;
-import org.trnltk.model.lexicon.PhoneticExpectation;
 import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.model.letter.TurkishChar;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticExpectation;
 import org.trnltk.model.suffix.SuffixFormSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
+import org.trnltk.util.Constants;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Locale;
 import java.util.Set;
 
 public class PhoneticsEngine {
 
     private static final char PLUS = '+';
-    private static final Locale TURKISH_LOCALE = new Locale("tr");
 
     private final SuffixFormSequenceApplier suffixFormSequenceApplier;
     private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
@@ -172,8 +171,8 @@ public class PhoneticsEngine {
         if (StringUtils.isBlank(appliedStr) || appliedStr.length() > input.length())
             return false;
 
-        final String inputUnderlyingString = input.getUnderlyingString().toLowerCase(TURKISH_LOCALE);
-        final String appliedStringToCheck = appliedStr.toLowerCase(TURKISH_LOCALE);
+        final String inputUnderlyingString = input.getUnderlyingString().toLowerCase(Constants.TURKISH_LOCALE);
+        final String appliedStringToCheck = appliedStr.toLowerCase(Constants.TURKISH_LOCALE);
 
 
         if (inputUnderlyingString.equals(appliedStringToCheck) || inputUnderlyingString.startsWith(appliedStringToCheck))

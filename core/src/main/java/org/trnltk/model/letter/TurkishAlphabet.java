@@ -19,6 +19,8 @@ package org.trnltk.model.letter;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSetMultimap;
+import org.apache.commons.lang3.StringUtils;
+import org.trnltk.util.Constants;
 
 import java.util.Arrays;
 
@@ -154,8 +156,16 @@ public class TurkishAlphabet {
         Arrays.fill(CHAR_TO_LETTER_LOOKUP, TurkicLetter.UNDEFINED);
         Arrays.fill(VALID_CHAR_TABLE, false);
         for (TurkicLetter turkicLetter : TURKISH_LETTERS) {
-            CHAR_TO_LETTER_LOOKUP[turkicLetter.charValue()] = turkicLetter;
-            VALID_CHAR_TABLE[turkicLetter.charValue()] = true;
+            final char c = turkicLetter.charValue();
+            CHAR_TO_LETTER_LOOKUP[c] = turkicLetter;
+            VALID_CHAR_TABLE[c] = true;
+
+            char upperCase = StringUtils.upperCase(String.valueOf(c), Constants.TURKISH_LOCALE).charAt(0);
+            if (upperCase != c) {
+                CHAR_TO_LETTER_LOOKUP[upperCase] = turkicLetter;
+                VALID_CHAR_TABLE[upperCase] = true;
+            }
+
         }
     }
 
@@ -208,7 +218,8 @@ public class TurkishAlphabet {
     public static TurkicLetter getLetter(char c) {
         if (c >= MAX_CHAR_VALUE || !VALID_CHAR_TABLE[c])
             return TurkicLetter.builder(c, 9999).build();
-        else return CHAR_TO_LETTER_LOOKUP[c];
+        else
+            return CHAR_TO_LETTER_LOOKUP[c];
     }
 
     public static TurkishChar getChar(char c) {
