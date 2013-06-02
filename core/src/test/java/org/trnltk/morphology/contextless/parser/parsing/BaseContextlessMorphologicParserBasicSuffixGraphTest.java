@@ -32,11 +32,6 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrect("kapıda", "kapı(kapı)+Noun+A3sg+Pnon+Loc(dA[da])");
         assertParseCorrect("kapıdan", "kapı(kapı)+Noun+A3sg+Pnon+Abl(dAn[dan])");
         assertParseCorrect("dayının", "dayı(dayı)+Noun+A3sg+Pnon+Gen(+nIn[nın])", "dayı(dayı)+Noun+A3sg+P2sg(+In[n])+Gen(+nIn[ın])", "dayı(dayı)+Adj+Noun+Zero+A3sg+Pnon+Gen(+nIn[nın])", "dayı(dayı)+Adj+Noun+Zero+A3sg+P2sg(+In[n])+Gen(+nIn[ın])");
-
-
-        removeRoots("sok", "s");
-        turnParserLoggingOn();
-        turnSuffixApplierLoggingOn();
         assertParseCorrect("sokağın", "sokağ(sokak)+Noun+A3sg+Pnon+Gen(+nIn[ın])", "sokağ(sokak)+Noun+A3sg+P2sg(+In[ın])+Nom");
         assertParseCorrect("sokakla", "sokak(sokak)+Noun+A3sg+Pnon+Ins(+ylA[la])");
 
