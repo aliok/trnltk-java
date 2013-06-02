@@ -24,7 +24,9 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.Validate;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.trnltk.app.App;
+import org.trnltk.app.AppRunner;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@RunWith(AppRunner.class)
 public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
     TextTokenizer relaxedTokenizer;
     TextTokenizer fastRelaxedTokenizer;
@@ -53,24 +56,21 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
                 .build();
     }
 
-    //Creates tokenized file, so you can check that the difference of files manually with your IDE
-    @Test
+    @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeTbmmJournal_b0241h_onSource() throws IOException {
         final File sentencesFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_lines.txt");
         final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
     }
 
-    //Creates tokenized file, so you can check that the difference of files manually with your IDE
-    @Test
+    @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeTbmm_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\tbmm.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\tbmm_tokenized.txt");
         createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
     }
 
-    //Creates tokenized files
-    @Test
+    @App("Creates tokenized files")
     public void tokenize1M_files_onSource() throws IOException {
         final File folder = new File("D:\\devl\\data\\1MSentences");
         final File[] files = folder.listFiles();
@@ -93,23 +93,21 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         }
     }
 
-    //Creates tokenized file, so you can check that the difference of files manually with your IDE
-    @Test
+    @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeNtvmsnbc_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\ntvmsnbc.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\ntvmsnbc_tokenized.txt");
         createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
     }
 
-    //Creates tokenized file, so you can check that the difference of files manually with your IDE
-    @Test
+    @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeKadinlarKulubu_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\kadinlar-klubu.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\kadinlar-klubu_tokenized.txt");
         createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
     }
 
-    @Test
+    @App("Creates tokenized file for TBMM corpus and checks if only difference between tokenized and plain corpus is the whitespace")
     public void tokenizedFileForTbmm_1M_file_shouldNotHaveDifferenceOtherThanWhiteSpace() throws IOException {
         // tokenize file every time
         // otherwise, we need to introduce test method ordering, which is not good
@@ -120,8 +118,7 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         shouldHaveNoDifferenceOtherThanWhiteSpace(sentencesFile, tokenizedFile);
     }
 
-    //One time task!
-    @Test
+    @App("One time task to create sentences file")
     public void createSentencesFile() throws IOException {
         // stupid impl!
         final File sampleFile = new File(Resources.getResource("tokenizer/tbmm_b0241h.txt").getFile());

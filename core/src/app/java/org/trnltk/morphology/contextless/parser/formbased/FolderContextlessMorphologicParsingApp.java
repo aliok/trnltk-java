@@ -26,6 +26,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.trnltk.app.App;
+import org.trnltk.app.AppRunner;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.suffixbased.CachingMorphologicParser;
@@ -50,6 +53,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Doesn't produce real YAML. Needs escaping etc.
  */
+@RunWith(AppRunner.class)
 public class FolderContextlessMorphologicParsingApp {
 
     private static final int NUMBER_OF_THREADS = 8;
@@ -104,7 +108,7 @@ public class FolderContextlessMorphologicParsingApp {
     }
 
 
-    @Test
+    @App
     public void parse8MWords_withOfflineAnalysis() throws Exception {
         final File folder = new File("D:\\devl\\data\\1MSentences");
 
@@ -137,7 +141,7 @@ public class FolderContextlessMorphologicParsingApp {
         System.out.println("Total time :" + stopWatch.toString());
     }
 
-    @Test
+    @App
     public void splitResultFiles() throws IOException {
         // ignore IOExceptions
 

@@ -28,7 +28,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.trnltk.app.App;
+import org.trnltk.app.AppRunner;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.LexemeAttribute;
 import org.trnltk.model.lexicon.PhoneticAttribute;
@@ -48,6 +50,7 @@ import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.*;
 
+@RunWith(AppRunner.class)
 public class CharSuffixGraphExtractorDrawingApp {
 
     private final PhoneticAttributeSets phoneticAttributeSets;
@@ -66,7 +69,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         this.charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
     }
 
-    @Test
+    @App
     public void dumpCharSuffixGraphForBigSuffixGraphInDotFormat() throws Exception {
         final CopulaSuffixGraph suffixGraph = new CopulaSuffixGraph(new ProperNounSuffixGraph(new NumeralSuffixGraph(new BasicSuffixGraph())));
         suffixGraph.initialize();
@@ -82,7 +85,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         plotter.dumpCharSuffixGraphInDotFormat(false);
     }
 
-    @Test
+    @App
     public void dumpCharSuffixGraphForSimplifiedSuffixGraphInDotFormat() throws Exception {
         final SimplifiedSampleSuffixGraph suffixGraph = new SimplifiedSampleSuffixGraph();
         suffixGraph.initialize();
@@ -94,7 +97,7 @@ public class CharSuffixGraphExtractorDrawingApp {
     }
 
 
-    @Test
+    @App
     public void dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface_gazelcigim() {
         final HashMultimap<String, ? extends Root> rootMap = RootMapFactory.createSimpleConvertCircumflexes();
         final List<String> rootsToRemove = Arrays.asList("gaz", "gazell", "gazelle", "ke", "kel", "kele");
@@ -106,7 +109,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         this.dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface(rootMap, "gazelciğim", true);
     }
 
-    @Test
+    @App
     public void dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface_gazellercik() {
         final HashMultimap<String, ? extends Root> rootMap = RootMapFactory.createSimpleConvertCircumflexes();
         final List<String> rootsToRemove = Arrays.asList("gaz", "gazell", "gazelle", "ke", "kel", "kele");
@@ -118,7 +121,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         this.dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface(rootMap, "gazellerciğim", false);
     }
 
-    @Test
+    @App
     public void dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface_geliyor() {
         final HashMultimap<String, ? extends Root> rootMap = RootMapFactory.createSimpleConvertCircumflexes();
         final List<String> rootsToRemove = Arrays.asList("ge", "gelir");
@@ -130,7 +133,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         this.dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface(rootMap, "geliyor", false);
     }
 
-    public void dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface(HashMultimap<String, ? extends Root> rootMap, String surface, boolean drawOnlySuccessfulParses) {
+    private void dumpCharSuffixGraphForSampleSuffixGraphInDotFormat_forSurface(HashMultimap<String, ? extends Root> rootMap, String surface, boolean drawOnlySuccessfulParses) {
         final SampleSuffixGraph sampleSuffixGraph = new SampleSuffixGraph();
         sampleSuffixGraph.initialize();
 
@@ -178,7 +181,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         plotter.dumpCharSuffixGraphInDotFormat(true);
     }
 
-    class CharSuffixGraphExtractorPlotter {
+    private class CharSuffixGraphExtractorPlotter {
 
         SuffixFormGraph charSuffixGraph;
         PhoneticAttributeSets phoneticAttributeSets;

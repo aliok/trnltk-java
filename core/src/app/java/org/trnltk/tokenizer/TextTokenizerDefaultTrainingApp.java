@@ -22,20 +22,23 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.trnltk.app.App;
+import org.trnltk.app.AppRunner;
 
 import java.util.Map;
 
+@RunWith(AppRunner.class)
 public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainingTest {
 
-    @Test
+    @App
     public void dumpBigTokenizationGraphInDotFormat() {
         final TextTokenizer tokenizer = TextTokenizer.createDefaultTextTokenizer(true);
         dumpTokenizationGraph(tokenizer.graph, Predicates.<TokenizationGraphNode>alwaysTrue(),
                 Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Test
+    @App
     public void dumpSomePortionOfBigTokenizationGraphInDotFormat() {
         final TextTokenizer tokenizer = TextTokenizer.createDefaultTextTokenizer(true);
         final Predicate<TokenizationGraphNode> Type_Word_Matcher = new Predicate<TokenizationGraphNode>() {
@@ -52,7 +55,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
         dumpTokenizationGraph(tokenizer.graph, Type_Word_Matcher, Type_Word_Matcher, Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Test
+    @App
     public void dumpSmallTokenizationGraphInDotFormat() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali veli.", "ali veli .");
@@ -61,7 +64,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
                 Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Test
+    @App
     public void dumpSmallTokenizationGraphInDotFormatWithoutInference() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali geldi.", "ali geldi .");
@@ -75,7 +78,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
         dumpTokenizationGraph(localTokenizer.build(), Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphNode>alwaysTrue(), directEdgePredicate);
     }
 
-    @Test
+    @App
     public void dumpSmallTokenizationGraph_onlyForWordsAndDot_InDotFormat() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali veli.", "ali veli .");
