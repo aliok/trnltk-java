@@ -37,6 +37,9 @@ import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 
 import java.util.*;
 
+/**
+ * @deprecated
+ */
 public class ContextlessMorphologicParser implements MorphologicParser {
     static Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);    //could be used in other places too!
     private final MandatoryTransitionApplier mandatoryTransitionApplier;

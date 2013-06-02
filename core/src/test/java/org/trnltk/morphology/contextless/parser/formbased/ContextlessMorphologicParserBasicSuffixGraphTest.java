@@ -19,6 +19,7 @@ package org.trnltk.morphology.contextless.parser.formbased;
 
 import com.google.common.collect.HashMultimap;
 import org.junit.Before;
+import org.junit.Test;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserBasicSuffixGraphTest;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
@@ -78,5 +79,11 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     @Override
     protected List<MorphemeContainer> parse(String surfaceToParse) {
         return this.parser.parse(new TurkishSequence(surfaceToParse));
+    }
+
+    @Override
+    @Test
+    public void shouldParseNounCases() {
+        super.shouldParseNounCases();
     }
 }

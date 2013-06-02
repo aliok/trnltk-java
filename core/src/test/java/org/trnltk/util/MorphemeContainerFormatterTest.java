@@ -20,10 +20,9 @@ import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserFactory;
 import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

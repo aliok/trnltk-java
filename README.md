@@ -4,6 +4,8 @@ This project is a port of [TRNLTK Python](https://github.com/aliok/trnltk)
 
 TRNLTK is rewritten in Java.
 
+[![Build Status](https://drone.io/github.com/aliok/trnltk-java/status.png)](https://drone.io/github.com/aliok/trnltk-java/latest)
+
 News:
 -----
   * TRNLTK (https://github.com/aliok/trnltk-java) code is moved under Zemberek.

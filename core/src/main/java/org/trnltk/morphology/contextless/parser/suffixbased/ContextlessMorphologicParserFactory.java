@@ -31,6 +31,9 @@ import org.trnltk.morphology.phonetics.PhoneticsEngine;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * @deprecated
+ */
 public class ContextlessMorphologicParserFactory {
 
     private SuffixGraph suffixGraph;
