@@ -28,33 +28,34 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixFormApplication;
+import org.trnltk.model.suffix.SuffixTransition;
+import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.model.lexicon.LexemeAttribute;
-import org.trnltk.model.lexicon.Root;
-import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.util.MorphemeContainerFormatter;
-import org.trnltk.model.suffix.*;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.*;
 
-public class CharSuffixGraphExtractorDrawingTest {
+public class CharSuffixGraphExtractorDrawingApp {
 
     private final PhoneticAttributeSets phoneticAttributeSets;
     private final SuffixFormSequenceApplier suffixFormSequenceApplier;
 
     private SuffixFormGraphExtractor charSuffixGraphExtractor;
 
-    public CharSuffixGraphExtractorDrawingTest() {
+    public CharSuffixGraphExtractorDrawingApp() {
         this.phoneticAttributeSets = new MockPhoneticAttributeSets();
         this.suffixFormSequenceApplier = new SuffixFormSequenceApplier();
     }
@@ -65,7 +66,6 @@ public class CharSuffixGraphExtractorDrawingTest {
         this.charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
     }
 
-    @Ignore
     @Test
     public void dumpCharSuffixGraphForBigSuffixGraphInDotFormat() throws Exception {
         final CopulaSuffixGraph suffixGraph = new CopulaSuffixGraph(new ProperNounSuffixGraph(new NumeralSuffixGraph(new BasicSuffixGraph())));

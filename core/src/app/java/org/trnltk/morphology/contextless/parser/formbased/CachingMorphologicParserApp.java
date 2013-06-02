@@ -23,9 +23,9 @@ import com.google.common.collect.*;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.rootfinder.*;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.suffixbased.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
@@ -33,9 +33,8 @@ import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.LRUMorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.TwoLevelMorphologicParserCache;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.model.lexicon.Root;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -53,7 +52,7 @@ import java.util.concurrent.TimeUnit;
  * <p/>
  * I used -Xms3512M -Xmx6072M and worked good with max L1 cache size of 200000
  */
-public class CachingMorphologicParserTest {
+public class CachingMorphologicParserApp {
 
     private static final int BULK_SIZE = 1500;
     private static final int NUMBER_OF_THREADS = 8;
@@ -64,7 +63,7 @@ public class CachingMorphologicParserTest {
     private MorphologicParser contextlessMorphologicParser;
     private HashMultimap<String, ? extends Root> originalRootMap;
 
-    public CachingMorphologicParserTest() {
+    public CachingMorphologicParserApp() {
         this.originalRootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
     }
 
@@ -110,8 +109,7 @@ public class CachingMorphologicParserTest {
     }
 
     @Test
-    @Ignore("Requires a lot of RAM")
-    public void shouldParseTbmmJournal_b0241h_noBulkParse() throws Exception {
+    public void parseTbmmJournal_b0241h_noBulkParse() throws Exception {
         final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
@@ -161,8 +159,7 @@ public class CachingMorphologicParserTest {
     }
 
     @Test
-    @Ignore("Requires a lot of RAM")
-    public void shouldParseTbmmJournal_b0241h_withBulkParse() throws Exception {
+    public void parseTbmmJournal_b0241h_withBulkParse() throws Exception {
         final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
@@ -214,8 +211,7 @@ public class CachingMorphologicParserTest {
     }
 
     @Test
-    @Ignore("Requires a lot of RAM and references local missing resources")
-    public void shouldParse8MWords() throws Exception {
+    public void parse8MWords() throws Exception {
         final List<File> files = Arrays.asList(
                 new File("D:\\devl\\data\\1MSentences\\tbmm_tokenized.txt"),
                 new File("D:\\devl\\data\\1MSentences\\ntvmsnbc_tokenized.txt"),
@@ -281,8 +277,7 @@ public class CachingMorphologicParserTest {
     }
 
     @Test
-    @Ignore("Requires a lot of RAM and references local missing resources")
-    public void shouldParse8MWords_withOfflineAnalysis() throws Exception {
+    public void parse8MWords_withOfflineAnalysis() throws Exception {
         final List<File> files = Arrays.asList(
                 new File("D:\\devl\\data\\1MSentences\\tbmm_tokenized.txt"),
                 new File("D:\\devl\\data\\1MSentences\\ntvmsnbc_tokenized.txt"),

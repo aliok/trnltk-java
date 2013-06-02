@@ -115,6 +115,7 @@ public class ContextlessMorphologicParserSimpleParseSetCharacterTest extends Bas
     @Test
     @Ignore
     public void shouldParseParseSet999() throws IOException {
+
         this.shouldParseParseSetN("999", false);
     }
 

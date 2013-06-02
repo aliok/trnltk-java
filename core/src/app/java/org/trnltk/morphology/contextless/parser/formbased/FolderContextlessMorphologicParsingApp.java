@@ -25,22 +25,21 @@ import com.google.common.io.Files;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.rootfinder.*;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.suffixbased.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
-import org.trnltk.testutil.testmatchers.BaseParseResultsMatcher;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.model.lexicon.Root;
-import org.trnltk.util.MorphemeContainerFormatter;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import org.trnltk.testutil.testmatchers.BaseParseResultsMatcher;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.io.*;
 import java.util.*;
@@ -51,7 +50,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Doesn't produce real YAML. Needs escaping etc.
  */
-public class FolderContextlessMorphologicParsingTest {
+public class FolderContextlessMorphologicParsingApp {
 
     private static final int NUMBER_OF_THREADS = 8;
 
@@ -59,7 +58,7 @@ public class FolderContextlessMorphologicParsingTest {
     private MorphologicParser contextlessMorphologicParser;
     private HashMultimap<String, ? extends Root> originalRootMap;
 
-    public FolderContextlessMorphologicParsingTest() {
+    public FolderContextlessMorphologicParsingApp() {
         this.originalRootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
     }
 
@@ -106,8 +105,7 @@ public class FolderContextlessMorphologicParsingTest {
 
 
     @Test
-    @Ignore("Requires a lot of RAM and references local missing resources")
-    public void shouldParse8MWords_withOfflineAnalysis() throws Exception {
+    public void parse8MWords_withOfflineAnalysis() throws Exception {
         final File folder = new File("D:\\devl\\data\\1MSentences");
 
         final List<File> files = new ArrayList<File>();
@@ -140,8 +138,7 @@ public class FolderContextlessMorphologicParsingTest {
     }
 
     @Test
-    @Ignore
-    public void shouldSplitResultFiles() throws IOException {
+    public void splitResultFiles() throws IOException {
         // ignore IOExceptions
 
         final File folder = new File("D:\\devl\\data\\1MSentences");

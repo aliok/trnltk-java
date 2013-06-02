@@ -22,85 +22,21 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.tokenizer.*;
-import org.trnltk.tokenizer.data.TokenizerTrainingData;
-import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Map;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
-public class TextTokenizerDefaultTraining {
-
-    @Before
-    public void setUp() throws Exception {
-        // set the appender every time!
-        final Enumeration currentLoggers = Logger.getLogger("org.trnltk").getLoggerRepository().getCurrentLoggers();
-        while (currentLoggers.hasMoreElements()) {
-            final Logger logger = (Logger) currentLoggers.nextElement();
-            logger.setLevel(Level.WARN);
-        }
-    }
-
-    // useful while running tests individually
-    protected void turnTokenizerLoggingOn() {
-        Logger.getLogger(TextTokenizer.class).setLevel(Level.DEBUG);
-    }
-
-    // useful while running tests individually
-    protected void turnTrainerLoggingOn() {
-        // set the appender every time!
-        Logger.getLogger(TextTokenizerTrainer.class).setLevel(Level.DEBUG);
-        Logger.getLogger(TokenizationGraph.class).setLevel(Level.DEBUG);
-        Logger.getLogger(TokenizationGraphNode.class).setLevel(Level.DEBUG);
-    }
+public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainingTest {
 
     @Test
-    public void shouldValidateDefaultRuleEntries() throws FileNotFoundException {
-        final TokenizationGraph tokenizationGraph = TextTokenizerTrainer.buildDefaultTokenizationGraph(true);
-
-        final TextTokenizer tokenizer = TextTokenizer.newBuilder()
-                .blockSize(2)
-                .recordStats()
-                .strict()
-                .graph(tokenizationGraph).build();
-
-
-        final TokenizerTrainingData defaultTrainingData = TokenizerTrainingData.createDefaultTrainingData();
-        for (TokenizerTrainingEntry tokenizerTrainingEntry : defaultTrainingData.getEntries()) {
-            final String text = tokenizerTrainingEntry.getText();
-            final String tknz = tokenizerTrainingEntry.getTknz();
-
-            final List<String> tokens = tokenizer.tokenize(text);
-            final String join = Joiner.on(" ").join(tokens);
-            assertThat(tknz.trim(), equalTo(join.trim()));
-        }
-
-        final TextTokenizer.TextTokenizerStats stats = tokenizer.getStats();
-        final LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Set<MissingTokenizationRuleException>> failMap = stats.buildSortedFailMap();
-
-        assertThat(failMap.isEmpty(), equalTo(true));
-    }
-
-    @Ignore
-    @Test
-    public void shouldDumpBigTokenizationGraphInDotFormat() {
+    public void dumpBigTokenizationGraphInDotFormat() {
         final TextTokenizer tokenizer = TextTokenizer.createDefaultTextTokenizer(true);
         dumpTokenizationGraph(tokenizer.graph, Predicates.<TokenizationGraphNode>alwaysTrue(),
                 Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Ignore
     @Test
-    public void shouldDumpSomePortionOfBigTokenizationGraphInDotFormat() {
+    public void dumpSomePortionOfBigTokenizationGraphInDotFormat() {
         final TextTokenizer tokenizer = TextTokenizer.createDefaultTextTokenizer(true);
         final Predicate<TokenizationGraphNode> Type_Word_Matcher = new Predicate<TokenizationGraphNode>() {
             @Override
@@ -116,9 +52,8 @@ public class TextTokenizerDefaultTraining {
         dumpTokenizationGraph(tokenizer.graph, Type_Word_Matcher, Type_Word_Matcher, Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Ignore
     @Test
-    public void shouldDumpSmallTokenizationGraphInDotFormat() {
+    public void dumpSmallTokenizationGraphInDotFormat() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali veli.", "ali veli .");
 
@@ -126,9 +61,8 @@ public class TextTokenizerDefaultTraining {
                 Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
-    @Ignore
     @Test
-    public void shouldDumpSmallTokenizationGraphInDotFormatWithoutInference() {
+    public void dumpSmallTokenizationGraphInDotFormatWithoutInference() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali geldi.", "ali geldi .");
 
@@ -141,9 +75,8 @@ public class TextTokenizerDefaultTraining {
         dumpTokenizationGraph(localTokenizer.build(), Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphNode>alwaysTrue(), directEdgePredicate);
     }
 
-    @Ignore
     @Test
-    public void shouldDumpSmallTokenizationGraph_onlyForWordsAndDot_InDotFormat() {
+    public void dumpSmallTokenizationGraph_onlyForWordsAndDot_InDotFormat() {
         final TextTokenizerTrainer localTokenizer = new TextTokenizerTrainer(2, true);
         localTokenizer.train("ali veli.", "ali veli .");
 
@@ -176,8 +109,8 @@ public class TextTokenizerDefaultTraining {
     }
 
     //see http://en.wikipedia.org/wiki/DOT_language
-    private void dumpTokenizationGraph(TokenizationGraph graph, Predicate<TokenizationGraphNode> sourceNodePredicate,
-                                       Predicate<TokenizationGraphNode> targetNodePredicate, Predicate<TokenizationGraphEdge> edgePredicate) {
+    protected void dumpTokenizationGraph(TokenizationGraph graph, Predicate<TokenizationGraphNode> sourceNodePredicate,
+                                         Predicate<TokenizationGraphNode> targetNodePredicate, Predicate<TokenizationGraphEdge> edgePredicate) {
         final Map<TextBlockTypeGroup, TokenizationGraphNode> nodeMap = graph.nodeMap;
 
         int instructedEdgeCount = 0;
@@ -237,7 +170,7 @@ public class TextTokenizerDefaultTraining {
         System.out.println("}");
     }
 
-    private String getNodeName(TokenizationGraphNode node) {
+    protected String getNodeName(TokenizationGraphNode node) {
         final String str = Joiner.on('+').join(Lists.transform(node.getData().getTextBlockTypes(), new Function<TextBlockType, String>() {
             @Override
             public String apply(TextBlockType input) {
