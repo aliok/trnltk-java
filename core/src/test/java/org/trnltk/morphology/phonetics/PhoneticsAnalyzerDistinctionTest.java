@@ -23,13 +23,16 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.InputSupplier;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserSimpleParseSetCharacterTest;
-import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.lexicon.PhoneticAttribute;
 import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserSimpleParseSetCharacterTest;
+import org.trnltk.morphology.lexicon.RootMapFactory;
+import org.trnltk.testutil.TestEnvironment;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,8 +51,21 @@ public class PhoneticsAnalyzerDistinctionTest {
     }
 
     @Test
+    public void shouldFindDistinctPhoneticAttributesInSimpleParseset005() throws Exception {
+        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = getDistinctPhoneticAttributeSetsFromSimpleParseset("005");
+
+        System.out.println("Distinct phonetic attributes count : " + distinctPhonAttrs.size());
+
+        for (EnumSet<PhoneticAttribute> distinctPhonAttr : distinctPhonAttrs) {
+            System.out.println(distinctPhonAttr);
+        }
+    }
+
+    @Test
     public void shouldFindDistinctPhoneticAttributesInSimpleParseset999() throws Exception {
-        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = getDistinctPhoneticAttributeSetsFromSimpleParseset999();
+        Assume.assumeTrue(TestEnvironment.hasBigParseSets());
+
+        final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = getDistinctPhoneticAttributeSetsFromSimpleParseset("999");
 
         System.out.println("Distinct phonetic attributes count : " + distinctPhonAttrs.size());
 
@@ -81,8 +97,8 @@ public class PhoneticsAnalyzerDistinctionTest {
         return distinctPhonAttrs;
     }
 
-    private Set<EnumSet<PhoneticAttribute>> getDistinctPhoneticAttributeSetsFromSimpleParseset999() throws IOException {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset999.txt"),
+    private Set<EnumSet<PhoneticAttribute>> getDistinctPhoneticAttributeSetsFromSimpleParseset(String number) throws IOException {
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset" + number + ".txt"),
                 Charset.forName("utf-8"));
 
         final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
@@ -100,6 +116,8 @@ public class PhoneticsAnalyzerDistinctionTest {
 
     @Test
     public void shouldTryEveryPossiblePhoneticAttributeSet() throws IOException {
+        Assume.assumeTrue(TestEnvironment.hasBigParseSets());
+
         final Set<Set<PhoneticAttribute>> powerSets = Sets.powerSet(new HashSet<PhoneticAttribute>(Lists.newArrayList(PhoneticAttribute.values())));
 
         final Set<Set<PhoneticAttribute>> validPhonAttrSets = new HashSet<Set<PhoneticAttribute>>();
@@ -113,7 +131,7 @@ public class PhoneticsAnalyzerDistinctionTest {
 
         final Set<EnumSet<PhoneticAttribute>> discoveredPhonAttrSets = new HashSet<EnumSet<PhoneticAttribute>>();
         discoveredPhonAttrSets.addAll(this.getDistinctPhoneticAttributeSetsFromMasterDictionary());
-        discoveredPhonAttrSets.addAll(this.getDistinctPhoneticAttributeSetsFromSimpleParseset999());
+        discoveredPhonAttrSets.addAll(this.getDistinctPhoneticAttributeSetsFromSimpleParseset("999"));
 
         System.out.println("Discovered phonetic attribute set count : " + discoveredPhonAttrSets.size());
         System.out.println("Undiscovered valid phonetic attribute set count : " + (validPhonAttrSets.size() - discoveredPhonAttrSets.size()));

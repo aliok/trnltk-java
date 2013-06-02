@@ -21,8 +21,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.trnltk.tokenizer.TextTokenizer;
-import org.trnltk.util.RegexMatcher;
+import org.trnltk.testutil.RegexMatcher;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;

@@ -71,6 +71,16 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <hasBigParseSets>${hasBigParseSets}</hasBigParseSets>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
         <extensions>
             <extension>
@@ -80,6 +90,15 @@
             </extension>
         </extensions>
     </build>
+
+    <profiles>
+        <profile>
+            <id>bigParseSets</id>
+            <properties>
+                <hasBigParseSets>true</hasBigParseSets>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -146,6 +165,7 @@
         <trnltk-version>1.0.2-SNAPSHOT</trnltk-version>
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <hasBigParseSets>false</hasBigParseSets>
     </properties>
 
 </project>

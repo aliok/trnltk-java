@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.testmatchers;
+package org.trnltk.testutil.testmatchers;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.Validate;

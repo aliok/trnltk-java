@@ -33,7 +33,7 @@ import org.trnltk.morphology.contextless.parser.suffixbased.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
-import org.trnltk.morphology.contextless.parser.testmatchers.BaseParseResultsMatcher;
+import org.trnltk.testutil.testmatchers.BaseParseResultsMatcher;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.util.MorphemeContainerFormatter;

@@ -163,7 +163,6 @@ public class DataDiffUtilTest {
         assertThat(diffs.toString(), equalTo("[Diff(EQUAL,\"[a, b]\"), Diff(INSERT,\"[x, y]\")]"));
     }
 
-    @Ignore
     @Test
     public void shouldComputeDiff_withCleanup() {
         final ArrayList<Character> listA = Lists.newArrayList(ArrayUtils.toObject("Does a substring of shorttext exisareithin longtext such that the".toCharArray()));

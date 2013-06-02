@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.testmatchers;
+package org.trnltk.testutil.testmatchers;
 
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;

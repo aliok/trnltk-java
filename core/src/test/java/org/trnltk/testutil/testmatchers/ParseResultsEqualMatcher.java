@@ -14,8 +14,10 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.testmatchers;
+package org.trnltk.testutil.testmatchers;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
@@ -26,29 +28,34 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class ParseResultsDontExistMatcher extends BaseParseResultsMatcher {
-    private final List<String> expectedParseResults;
+public class ParseResultsEqualMatcher extends BaseParseResultsMatcher {
 
-    public ParseResultsDontExistMatcher(String... expectedParseResults) {
-        Validate.notNull(expectedParseResults);
+    private final List<String> expectedParseResults;
+    private final boolean ignoreVerbPresA3Sg;
+
+    public ParseResultsEqualMatcher(boolean ignoreVerbPresA3Sg, final String... expectedParseResults) {
+        this.ignoreVerbPresA3Sg = ignoreVerbPresA3Sg;
         this.expectedParseResults = Arrays.asList(expectedParseResults);
+        Validate.notNull(expectedParseResults);
     }
 
     @Override
     public boolean matchesSafely(Collection<String> item) {
-        return CollectionUtils.isNotEmpty(item) && !CollectionUtils.containsAny(item, expectedParseResults);
+        if (ignoreVerbPresA3Sg)      // filter out some verb results to make the test have less results
+            item = Collections2.filter(item, Predicates.not(Predicates.containsPattern("\\Zero\\+Pres\\+")));
+        return CollectionUtils.isEqualCollection(expectedParseResults, item);
     }
 
     @Override
     public void describeTo(Description description) {
         Collections.sort(this.expectedParseResults, BaseParseResultsMatcher.parseResultOrdering);
-        description.appendValueList("parse results not containing any of <", ",", ">", this.expectedParseResults);
+        description.appendValueList("    <", ",", ">", this.expectedParseResults);
     }
 
     @Override
     protected void describeMismatchSafely(Collection<String> item, Description mismatchDescription) {
         List<String> itemList = Lists.newArrayList(item);
         Collections.sort(itemList, BaseParseResultsMatcher.parseResultOrdering);
-        mismatchDescription.appendValueList("was                                 <", ",", ">", itemList);
+        mismatchDescription.appendValueList("was <", ",", ">", itemList);
     }
 }

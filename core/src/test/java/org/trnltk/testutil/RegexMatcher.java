@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.util;
+package org.trnltk.testutil;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
