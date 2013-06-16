@@ -4,13 +4,13 @@ This project is a port of [TRNLTK Python](https://github.com/aliok/trnltk)
 
 TRNLTK is rewritten in Java.
 
-See documentation here : https://github.com/aliok/trnltk-java/blob/master/docs/
+See documentation [here](docs/README.md)
 
 [![Build Status](https://drone.io/github.com/aliok/trnltk-java/status.png)](https://drone.io/github.com/aliok/trnltk-java/latest)
 
 News:
 -----
-  * TRNLTK 1.0.2 is released : https://github.com/aliok/trnltk-java/blob/master/docs/102.md
+  * TRNLTK 1.0.2 is released : [Release notes](docs/102.md)
 
 
 Some definitions
