@@ -181,7 +181,7 @@
     </repositories>
 
     <properties>
-        <trnltk-version>1.0.2-SNAPSHOT</trnltk-version>
+        <trnltk-version>1.0.2</trnltk-version>
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <hasBigParseSets>false</hasBigParseSets>
