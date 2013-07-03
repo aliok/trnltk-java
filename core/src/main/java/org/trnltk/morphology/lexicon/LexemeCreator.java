@@ -17,9 +17,12 @@
 package org.trnltk.morphology.lexicon;
 
 import com.google.common.base.CharMatcher;
+import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -94,10 +97,17 @@ class LexemeCreator {
         final PrimaryPos primaryPos = StringUtils.isNotBlank(primaryPosStr) ? PrimaryPos.converter().getEnum(primaryPosStr) : null;
         final SecondaryPos secondaryPos = StringUtils.isNotBlank(secondaryPosStr) ? SecondaryPos.converter().getEnum(secondaryPosStr) : null;
 
-        return this.createLexeme(lemma, rootStr,
+
+        final Lexeme lexeme = this.createLexeme(lemma, rootStr,
                 primaryPos,
                 secondaryPos,
                 Sets.newEnumSet(LexemeAttribute.converter().getEnums(lexemeAttributeStrs), LexemeAttribute.class));
+
+        for (LexemeAttribute lexemeAttribute : lexeme.getAttributes()) {
+            Validate.isTrue(lexemeAttribute.isApplicable(lexeme), "LexemeAttribute " + lexemeAttribute.name() + " is not applicable to " + lexeme.toString());
+        }
+
+        return lexeme;
     }
 
     private Lexeme createLexeme(String lemma, String rootStr, PrimaryPos primaryPos, SecondaryPos secondaryPos,

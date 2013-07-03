@@ -18,6 +18,15 @@ package org.trnltk.model.lexicon;
 
 import java.util.Set;
 
+/**
+ * A lexeme is an entry in lexicon. It has lemma (e.g yapmak),
+ * lemmaRoot(e.g. yap), primaryPos(e.g. VERB), secondaryPos and attributes.
+ * <p/>
+ * Lexeme = lemma + POS
+ * <p/>
+ * It is important to know that there can be multiple lexemes for a lemmaRoot.
+ * For example : yüz+VERB (denizde yüzmek), yüz+NUMERAL (yüz kişi)
+ */
 public interface Lexeme {
     String getLemma();
 

@@ -13915,8 +13915,8 @@ köpekayası [A:CompoundP3sg; R:köpekaya]
 köpekkuyruğu [A:CompoundP3sg, Voicing; R:köpekkuyruk]
 köpeklemek
 köpekmemesi
-köpekoğlu [P:Interj; A:CompoundP3sg, LastVowelDrop; R:köpekoğul]
-köpoğlu [P:Interj; A:CompoundP3sg, LastVowelDrop; R:köpoğul]
+köpekoğlu [P:Interj; A:LastVowelDrop]
+köpoğlu [P:Interj; A:LastVowelDrop]
 köprü
 köpük
 köpülemek
@@ -14250,7 +14250,7 @@ kuşburnu
 kuşçubaşı [A:CompoundP3sg; R:kuşçubaş]
 kuşdili
 kuşe
-kuşekmeği [A:CompoundP3sg, Voicing; R:kuşekmek]
+# TODO: compound root is marked as verb kuşekmeği [A:CompoundP3sg, Voicing; R:kuşekmek]
 kuşet [A:NoVoicing]
 kuşgömü [A:CompoundP3sg; R:kuşgöm]
 kuşgözü [A:CompoundP3sg; R:kuşgöz]

@@ -19,6 +19,12 @@ package org.trnltk.model.lexicon;
 import com.google.common.collect.ImmutableSet;
 import org.trnltk.model.letter.TurkishSequence;
 
+/**
+ * An immutable root implementation. One big use case is creating immutable roots from a
+ * dictionary, since dictionary items are not going to change.
+ *
+ * @see Root
+ */
 public final class ImmutableRoot implements Root {
     private final TurkishSequence sequence;
     private final Lexeme lexeme;

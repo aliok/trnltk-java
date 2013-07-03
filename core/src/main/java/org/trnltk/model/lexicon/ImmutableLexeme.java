@@ -19,6 +19,11 @@ package org.trnltk.model.lexicon;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
 
+/**
+ * An immutable lexeme implementation. This should be used for lexemes from dictionaries.
+ *
+ * @see Lexeme
+ */
 public class ImmutableLexeme implements Lexeme {
     private final String lemma;
     private final String lemmaRoot;

@@ -20,6 +20,12 @@ import org.apache.commons.collections.CollectionUtils;
 
 import java.util.EnumSet;
 
+/**
+ * A mutable lexeme implementation. One example use case is brute force parsing where
+ * the lexemes are guessed and created on the fly.
+ *
+ * @see Lexeme
+ */
 public class DynamicLexeme implements Lexeme {
     private String lemma;
     private String lemmaRoot;

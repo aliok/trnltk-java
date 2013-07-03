@@ -20,6 +20,11 @@ import org.trnltk.model.letter.TurkishSequence;
 
 import java.util.EnumSet;
 
+/**
+ * A mutable root implementation.
+ *
+ * One example usage is, creating roots on the fly when doing a brute force morphologic parsing.
+ */
 public class DynamicRoot implements Root {
     private TurkishSequence sequence;
     private DynamicLexeme lexeme;
