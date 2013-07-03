@@ -16,7 +16,10 @@
 
 package org.trnltk.common.specification;
 
-// http://en.wikipedia.org/wiki/Specification_pattern
+/**
+ * Contract for specifications. See http://en.wikipedia.org/wiki/Specification_pattern for details
+ * @param <T> Class which the specifications will be checked against its instances
+ */
 public interface Specification<T> {
 
     boolean isSatisfiedBy(T object);

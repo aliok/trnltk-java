@@ -16,10 +16,15 @@
 
 package org.trnltk.common.specification;
 
+/**
+ * Provides helper functions for specifications.
+ * <p/>
+ * <code>Specifications.or(spec1, spec2, spec3)</code> is more readable than <code>spec1.or(spec2).or(spec3)</code>
+ */
 @SuppressWarnings("unchecked")
 public abstract class Specifications {
     public static <T> Specification<T> or(Specification<T>... specifications) {
-        Specification<T> returnValue = (Specification<T>)FalseSpecification.INSTANCE;
+        Specification<T> returnValue = (Specification<T>) FalseSpecification.INSTANCE;
         for (Specification specification : specifications) {
             returnValue = returnValue.or(specification);
         }
@@ -27,7 +32,7 @@ public abstract class Specifications {
     }
 
     public static <T> Specification<T> and(Specification<T>... specifications) {
-        Specification<T> returnValue = (Specification<T>)TrueSpecification.INSTANCE;
+        Specification<T> returnValue = (Specification<T>) TrueSpecification.INSTANCE;
         for (Specification<T> specification : specifications) {
             returnValue = returnValue.and(specification);
         }

@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Holds a word (surface) and parse results for it.
+ */
 public class WordParseResultEntry {
     private final String word;
     private final List<ParseResult> parseResults = new ArrayList<ParseResult>();

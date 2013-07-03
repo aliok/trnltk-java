@@ -16,6 +16,11 @@
 
 package org.trnltk.model.letter;
 
+/**
+ * Container to hold {@link TurkicLetter} and the actual char value.
+ *
+ * Actual char value can be different because of the upper-lower cases.
+ */
 public class TurkishChar {
 
     private final char charValue;

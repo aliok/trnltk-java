@@ -200,16 +200,45 @@ public class TurkishAlphabet {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Devoices a turkish letter.
+     * <ul>
+     *     <li>b -> p (*)</li>
+     *     <li>c -> ç</li>
+     *     <li>d -> t</li>
+     *     <li>g -> k (*)</li>
+     *     <li>ğ -> k (*)</li>
+     *     <li>Otherwise -> null</li>
+     * </ul>
+     *
+     * * = not really applicable, since there is no suffix starting with b, g or ğ
+     *
+     * @param l Letter to devoice
+     * @return Devoiced letter or null if letter is not devoicable
+     */
     public static TurkicLetter devoice(TurkicLetter l) {
         return devoicingMap.get(l);
     }
 
+    /**
+     * Voices a turkish letter.
+     * <ul>
+     *     <li>p -> b</li>
+     *     <li>k -> ğ</li>
+     *     <li>ç -> c</li>
+     *     <li>t -> d</li>
+     *     <li>g -> ğ</li>
+     *     <li>Otherwise -> null</li>
+     * </ul>
+     * @param l Letter to voice
+     * @return Voiced letter or null if letter is not voicable
+     */
     public static TurkicLetter voice(TurkicLetter l) {
         return voicingMap.get(l);
     }
 
     /**
-     * returns the TurkicLetter equivalent of character c.
+     * Returns the TurkicLetter equivalent of character c.
      *
      * @param c input character
      * @return TurkishLetter equivalent.
@@ -228,7 +257,7 @@ public class TurkishAlphabet {
     }
 
     /**
-     * checks if a character is part of TurkishAlphabet.
+     * Checks if a character is part of TurkishAlphabet.
      *
      * @param c character to check
      * @return true if it is part of the Turkish alphabet. false otherwise

@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Holds the diff of 2 parse results.
+ */
 public class ParseResultDifference {
     private final RootDifference rootDifference;
     private final List<ParseResultPartDifference> parseResultPartDifferences = new ArrayList<ParseResultPartDifference>();

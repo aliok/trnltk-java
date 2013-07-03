@@ -20,6 +20,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
+/**
+ * Holds the difference of parse result parts.
+ */
 public class ParseResultPartDifference {
     private final Pair<List<ParseResultPart>, List<ParseResultPart>> parts;
 

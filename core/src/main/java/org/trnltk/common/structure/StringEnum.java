@@ -16,6 +16,12 @@
 
 package org.trnltk.common.structure;
 
+/**
+ * Enums which can be represented as strings need to implement this interface.
+ *
+ * Then, while reading textual data, {@link StringEnumMap} could be used.
+ * @param <T>
+ */
 public interface StringEnum<T extends Enum> {
 
     String getStringForm();

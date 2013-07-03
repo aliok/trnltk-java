@@ -18,6 +18,9 @@ package org.trnltk.model.ambiguity.morphology;
 
 import java.util.List;
 
+/**
+ * Holds the parts of a morphologic parse result.
+ */
 public class ParseResult {
     private final String str;
     private final String root;

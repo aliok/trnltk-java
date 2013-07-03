@@ -16,11 +16,11 @@
 
 package org.trnltk.morphology.lexicon;
 
-import org.trnltk.model.lexicon.ImmutableRoot;
-import org.trnltk.model.lexicon.Lexeme;
-import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.model.letter.TurkishChar;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.ImmutableRoot;
+import org.trnltk.model.lexicon.Lexeme;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -73,19 +73,18 @@ public class CircumflexConvertingRootGenerator extends ImmutableRootGenerator {
 
             for (ImmutableRoot rootWithCircumflexes : rootsWithCircumflexes) {
                 final TurkishChar[] underlyingRootChars = rootWithCircumflexes.getSequence().getChars();
-                final TurkishChar[] newRootChars = underlyingRootChars.clone();
 
                 for (Integer circumflexed_A_index : circumflexed_A_indices) {
-                    newRootChars[circumflexed_A_index] = new TurkishChar(PLAIN_A, TurkishAlphabet.L_a);
+                    underlyingRootChars[circumflexed_A_index] = new TurkishChar(PLAIN_A, TurkishAlphabet.L_a);
                 }
                 for (Integer circumflexed_I_index : circumflexed_I_indices) {
-                    newRootChars[circumflexed_I_index] = new TurkishChar(PLAIN_I, TurkishAlphabet.L_i);
+                    underlyingRootChars[circumflexed_I_index] = new TurkishChar(PLAIN_I, TurkishAlphabet.L_i);
                 }
                 for (Integer circumflexed_U_index : circumflexed_U_indices) {
-                    newRootChars[circumflexed_U_index] = new TurkishChar(PLAIN_U, TurkishAlphabet.L_u);
+                    underlyingRootChars[circumflexed_U_index] = new TurkishChar(PLAIN_U, TurkishAlphabet.L_u);
                 }
 
-                final ImmutableRoot rootWithoutCircumflexes = new ImmutableRoot(new TurkishSequence(newRootChars),
+                final ImmutableRoot rootWithoutCircumflexes = new ImmutableRoot(new TurkishSequence(underlyingRootChars),
                         lexeme, rootWithCircumflexes.getPhoneticAttributes(), rootWithCircumflexes.getPhoneticExpectations());
 
                 roots.add(rootWithoutCircumflexes);
