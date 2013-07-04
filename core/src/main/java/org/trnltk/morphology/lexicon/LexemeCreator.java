@@ -17,19 +17,15 @@
 package org.trnltk.morphology.lexicon;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.sun.istack.internal.Nullable;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.model.lexicon.*;
-
 import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
+import org.trnltk.model.lexicon.*;
 
 import java.util.HashSet;
 import java.util.List;
