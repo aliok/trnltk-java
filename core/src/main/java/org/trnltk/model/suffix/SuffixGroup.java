@@ -19,6 +19,12 @@ package org.trnltk.model.suffix;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Groups multiple {@link Suffix}es.
+ * <p/>
+ * This is useful when parsing (e.g. 2 suffixes from the same group cannot exist in a inflection group) and also
+ * in graphical representation (e.g. suffixes from the same group are drawn with the same color).
+ */
 public class SuffixGroup {
     private final String name;
     private final Set<Suffix> suffixes = new LinkedHashSet<Suffix>();
@@ -27,10 +33,16 @@ public class SuffixGroup {
         this.name = name;
     }
 
+    /**
+     * @return Unique name of the group
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Suffixes that belong to this group
+     */
     public Set<Suffix> getSuffixes() {
         return suffixes;
     }

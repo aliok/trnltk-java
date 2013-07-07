@@ -16,6 +16,16 @@
 
 package org.trnltk.model.suffix;
 
+/**
+ * A shorthand for having a {@link Suffix} which changes the POS and
+ * has a default {@link SuffixForm} that has no conditions and has a
+ * suffix form of empty string.
+ * <p/>
+ * That means, it is an <a href="http://en.wikipedia.org/wiki/Epsilon-transitions">epsilon transition</a> in the FSM
+ * which goes to a state with a different POS. Going to another POS is the difference from {@link FreeTransitionSuffix}.
+ * <p/>
+ * <code>ZeroTransitionSuffix</code>es are <b>put</b> in the string representation of a parse result.
+ */
 public class ZeroTransitionSuffix extends Suffix {
     private static final String PRETTY_NAME = "Zero";
 

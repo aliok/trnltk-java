@@ -19,6 +19,18 @@ package org.trnltk.model.suffix;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.model.morpheme.MorphemeContainer;
 
+/**
+ * A form of a {@link Suffix} which is applied to a surface.
+ * <p/>
+ * For example, <code>SuffixForm</code>s for the suffix <i>Causative</i> could be <i>t</i>, <i>dIr</i>, <i>Ar</i>, ...
+ * <p/>
+ * A <code>SuffixForm</code> holds the conditions for a transition:
+ * <ul>
+ * <li>precondition : Condition to permit transition of <code>Suffix</code> with the {@link SuffixForm}
+ * <li>postCondition: Condition to permit transitions after <code>Suffix</code> with the {@link SuffixForm}.</li>
+ * <li>postDerivativeCondition Condition to permit derivational transitions after <code>Suffix</code> with the {@link SuffixForm}</li>
+ * </ul>
+ */
 public class SuffixForm {
 
     private final Suffix suffix;
@@ -36,22 +48,40 @@ public class SuffixForm {
         this.postDerivativeCondition = postDerivativeCondition;
     }
 
+    /**
+     * @return {@link Suffix} which current <code>SuffixForm</code> belongs to.
+     */
     public Suffix getSuffix() {
         return suffix;
     }
 
+    /**
+     * @return Suffix form sequence which is created from string representation of the SuffixForm.
+     */
     public SuffixFormSequence getForm() {
         return form;
     }
 
+    /**
+     * @return some condition
+     * @see SuffixForm
+     */
     public Specification<MorphemeContainer> getPostCondition() {
         return postCondition;
     }
 
+    /**
+     * @return some condition
+     * @see SuffixForm
+     */
     public Specification<MorphemeContainer> getPrecondition() {
         return precondition;
     }
 
+    /**
+     * @return some condition
+     * @see SuffixForm
+     */
     public Specification<MorphemeContainer> getPostDerivativeCondition() {
         return postDerivativeCondition;
     }

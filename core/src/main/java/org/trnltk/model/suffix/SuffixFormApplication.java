@@ -16,6 +16,51 @@
 
 package org.trnltk.model.suffix;
 
+/**
+ * An application of a {@link SuffixForm} on a surface.
+ * <p/>
+ * For example, for suffix <i>Future_Adj</i>, a SuffixForm is "+yAcAk".
+ * When this SuffixForm is applied to a surface, it gets different variations.
+ * <table border="1">
+ * <tr>
+ * <th>Surface</th>
+ * <th>Suffix</th>
+ * <th>SuffixForm</th>
+ * <th>SuffixFormApplication.actualSuffixForm</th>
+ * <th>SuffixFormApplication.fittingSuffixForm</th>
+ * </tr>
+ * <tr>
+ * <td>gelecek</td>
+ * <td>Future_Adj</td>
+ * <td>+yAcAk</td>
+ * <td>ecek</td>
+ * <td>ecek</td>
+ * </tr>
+ * <tr>
+ * <td>geleceği</td>
+ * <td>Future_Adj</td>
+ * <td>+yAcAk</td>
+ * <td>eceğ</td>
+ * <td>ecek</td>
+ * </tr>
+ * <tr>
+ * <td>atayacakları</td>
+ * <td>Future_Adj</td>
+ * <td>+yAcAk</td>
+ * <td>yacak</td>
+ * <td>yacak</td>
+ * </tr>
+ * <tr>
+ * <td>atayacağım</td>
+ * <td>Future_Adj</td>
+ * <td>+yAcAk</td>
+ * <td>yacağ</td>
+ * <td>yacak</td>
+ * </tr>
+ * </table>
+ * <p/>
+ * A <code>SuffixFormApplication</code> holds the actual and fitting string forms of a {@link SuffixForm}.
+ */
 public class SuffixFormApplication {
     private final SuffixForm suffixForm;
     private final String actualSuffixForm;      //e.g "acağ"
@@ -27,14 +72,25 @@ public class SuffixFormApplication {
         this.fittingSuffixForm = fittingSuffixForm;
     }
 
+    /**
+     * @return SuffixForm that is applied in a surface
+     */
     public SuffixForm getSuffixForm() {
         return suffixForm;
     }
 
+    /**
+     * @return some str
+     * @see SuffixFormApplication
+     */
     public String getActualSuffixForm() {
         return actualSuffixForm;
     }
 
+    /**
+     * @return some str
+     * @see SuffixFormApplication
+     */
     public String getFittingSuffixForm() {
         return fittingSuffixForm;
     }

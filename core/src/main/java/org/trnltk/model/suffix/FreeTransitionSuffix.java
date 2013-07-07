@@ -22,7 +22,7 @@ package org.trnltk.model.suffix;
  * <p/>
  * That means, it is an <a href="http://en.wikipedia.org/wiki/Epsilon-transitions">epsilon transition</a> in the FSM.
  * <p/>
- * <code>FreeTransitionSuffix</code>es are not put in the string representation of a parse result.
+ * <code>FreeTransitionSuffix</code>es are <b>not</b> put in the string representation of a parse result.
  */
 public class FreeTransitionSuffix extends Suffix {
 
