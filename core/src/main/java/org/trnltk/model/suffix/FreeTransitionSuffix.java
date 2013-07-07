@@ -16,6 +16,14 @@
 
 package org.trnltk.model.suffix;
 
+/**
+ * A shorthand for having a {@link Suffix} that has a default {@link SuffixForm} that has no conditions and has a
+ * suffix form of empty string.
+ * <p/>
+ * That means, it is an <a href="http://en.wikipedia.org/wiki/Epsilon-transitions">epsilon transition</a> in the FSM.
+ * <p/>
+ * <code>FreeTransitionSuffix</code>es are not put in the string representation of a parse result.
+ */
 public class FreeTransitionSuffix extends Suffix {
 
     public FreeTransitionSuffix(String name) {

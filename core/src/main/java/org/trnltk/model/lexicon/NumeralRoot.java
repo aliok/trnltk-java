@@ -20,6 +20,13 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.model.letter.TurkishSequence;
 
+/**
+ * A {@link Root} implementation special for numerals which holds the text presentation for a numeral.
+ * <p/>
+ * The text representation is not computed by this class. It is passed.
+ *
+ * @see {@link org.trnltk.numeral.DigitsToTextConverter}
+ */
 public class NumeralRoot implements Root {
 
     private final ImmutableRoot immutableRoot;
@@ -68,6 +75,9 @@ public class NumeralRoot implements Root {
         return immutableRoot.getPhoneticExpectations();
     }
 
+    /**
+     * @return Underlying text which is i.e. "yirmisekiz" for numeral "28"
+     */
     public String getUnderlyingNumeralText() {
         return underlyingNumeralText;
     }

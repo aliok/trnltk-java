@@ -26,6 +26,15 @@ import java.util.*;
 
 import static org.trnltk.model.lexicon.PhoneticAttribute.*;
 
+/**
+ * Specifications for {@link PhoneticAttribute}s.
+ * <p/>
+ * Defines what {@link PhoneticAttribute}s can co-exist or cannot co-exist or is required for each other.
+ * <p/>
+ * These rules are especially important when computing the possible valid {@link org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets}
+ *
+ * @see org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets
+ */
 public class PhoneticAttributeMetadata {
 
     private static final ImmutableMap<PhoneticAttribute, Specification> SPECIFICATION_MAP = buildSpecificationMap();
@@ -42,6 +51,14 @@ public class PhoneticAttributeMetadata {
         final MustHaveOneOfSpecification mustHaveLastLetterAttr = mustHaveOneOf(LastLetterConsonant, LastLetterVowel);
 
         final HashMap<PhoneticAttribute, Specification> map = new HashMap<PhoneticAttribute, Specification>();
+
+        // define specs for all attributes
+
+        // following means:
+        // when a sequence/root/lexeme/etc. has LastLetterVowel attribute, then the sequence/root/lexeme/etc.
+        // -> cannot have any one of LastLetterConsonant, HasNoVowel, LastLetterVoiceless, LastLetterVoicelessStop attributes
+        // -> must have LastLetterNotVoiceless attribute
+        // -> ... so forth
         map.put(LastLetterVowel,
                 Specifications.and(
                         cannotHave(LastLetterConsonant, HasNoVowel, LastLetterVoiceless, LastLetterVoicelessStop),
@@ -144,6 +161,8 @@ public class PhoneticAttributeMetadata {
             final PhoneticAttribute key = phoneticAttributeSpecificationEntry.getKey();
             final Specification value = phoneticAttributeSpecificationEntry.getValue();
 
+            // all attributes' specs must also include the common spec which is always valid
+
             builder.put(key, Specifications.and(commonSpec, value));
         }
 
@@ -151,6 +170,12 @@ public class PhoneticAttributeMetadata {
 
     }
 
+    /**
+     * Checks a the given collections in terms of attributes' specs.
+     *
+     * @param phoneticAttributes A collection of attributes
+     * @return true/false
+     */
     public static boolean isValid(Collection<PhoneticAttribute> phoneticAttributes) {
         if (CollectionUtils.isEmpty(phoneticAttributes))
             return false;

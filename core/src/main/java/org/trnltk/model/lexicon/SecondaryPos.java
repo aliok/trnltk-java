@@ -21,6 +21,16 @@ import com.google.common.collect.Sets;
 import org.trnltk.common.structure.StringEnum;
 import org.trnltk.common.structure.StringEnumMap;
 
+/**
+ * A secondary part of speech is a tag used for tagging the lexemes/roots/etc. with an additional information.
+ * <p/>
+ * A {@code SecondaryPos} is not meaningful alone, it is only valid with a {@link PrimaryPos}.
+ * For example a {@link Lexeme} having {@link PrimaryPos#Adjective} and {@link SecondaryPos#Demonstrative} is a
+ * <i>Demonstrative Adjective</i> whereas a {@link Lexeme} having {@link PrimaryPos#Pronoun} and {@link SecondaryPos#Demonstrative} is a
+ * <i>Demonstrative Pronoun</i>.
+ *
+ * @see PrimaryPos
+ */
 public enum SecondaryPos implements StringEnum<SecondaryPos> {
     Demonstrative("Demons"),
     Time("Time"),

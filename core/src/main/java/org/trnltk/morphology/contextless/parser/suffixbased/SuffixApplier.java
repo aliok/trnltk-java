@@ -20,16 +20,19 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
-import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.common.specification.Specification;
 import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.lexicon.PhoneticAttribute;
+import org.trnltk.model.lexicon.PhoneticExpectation;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.model.suffix.*;
+import org.trnltk.model.suffix.Suffix;
+import org.trnltk.model.suffix.SuffixForm;
+import org.trnltk.model.suffix.SuffixFormApplication;
+import org.trnltk.model.suffix.SuffixTransition;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.common.specification.Specification;
-import org.trnltk.model.lexicon.PhoneticAttribute;
-import org.trnltk.model.lexicon.PhoneticExpectation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -194,9 +197,9 @@ public class SuffixApplier {
                 }
             }
 
-            //TODO:
+            // since transition's target could have some phoneticExpectations, set them
             if (CollectionUtils.isNotEmpty(phoneticExpectations)) {
-                cloneMorphemeContainer.setPhoneticExpectations(phoneticExpectations);
+                cloneMorphemeContainer.overwritePhoneticExpectations(phoneticExpectations);
             }
 
             return cloneMorphemeContainer;

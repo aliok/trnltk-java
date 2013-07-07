@@ -279,8 +279,8 @@ public class ContextlessMorphologicParser implements MorphologicParser {
                             if (input.startsWith(predefinedMorphemeContainer.getSurfaceSoFar())) {
                                 if (logger.isDebugEnabled())
                                     logger.debug("Predefined morpheme_container is applicable " + predefinedMorphemeContainer);
-                                MorphemeContainer clone = new MorphemeContainer(predefinedMorphemeContainer);
-                                clone.setRemainingSurface(input.subsequence(predefinedMorphemeContainer.getSurfaceSoFar().getUnderlyingString().length()).getUnderlyingString());
+                                //entry is cloned and since the remaining surface can be different, it is set.
+                                MorphemeContainer clone = new MorphemeContainer(predefinedMorphemeContainer, input);
                                 candidates.add(clone);
                             } else {
                                 if (logger.isDebugEnabled())

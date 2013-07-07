@@ -19,6 +19,12 @@ package org.trnltk.model.lexicon;
 import org.trnltk.common.structure.StringEnum;
 import org.trnltk.common.structure.StringEnumMap;
 
+/**
+ * Primary part of speech tags.
+ * <p/>
+ * See <a href="http://en.wikipedia.org/wiki/Part_of_speech"> this Wikipedia article </a>
+ * for definition of the part of speech.
+ */
 public enum PrimaryPos implements StringEnum<PrimaryPos> {
     Noun("Noun"),
     Adjective("Adj"),

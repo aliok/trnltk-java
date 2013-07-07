@@ -151,6 +151,16 @@ public enum LexemeAttribute implements StringEnum<LexemeAttribute> {
         this.lexemePredicate = lexemePredicate;
     }
 
+    /**
+     * Checks if a {@code LexemeAttribute} is applicable for a {@link Lexeme}.
+     * <p/>
+     * For example, {@link LexemeAttribute#Causative_Ar} is only applicable to Verbs.
+     * <p/>
+     * See docs of possible {@code LexemeAttribute} values for more explanation.
+     *
+     * @param lexeme Lexeme to check if attr is applicable
+     * @return true/false
+     */
     public boolean isApplicable(Lexeme lexeme) {
         return this.lexemePredicate.apply(lexeme);
     }
