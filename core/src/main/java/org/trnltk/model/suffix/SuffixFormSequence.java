@@ -22,15 +22,73 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.model.lexicon.PhoneticAttribute;
 import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.model.letter.TurkishChar;
+import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A sequence of rules which define how one form of suffix is applied to surfaces.
+ * <p/>
+ * <table border="1">
+ * <tr>
+ * <th>Symbol</th>
+ * <th>Meaning</th>
+ * <th>Example</th>
+ * </tr>
+ * <tr>
+ * <td>
+ * +
+ * </td>
+ * <td>Marks following letter as an optional letter to be added if applicable. Can only exist as a first letter of a suffix form string.
+ * Applicability is as following:
+ * <ul>
+ * <li>if optional letter is vowel, add it if surface ends with a consonant.</li>
+ * <li>if optional letter is consonant, add it if surface ends with a vowel.</li>
+ * </ul>
+ * </td>
+ * <td><ul>
+ * <li>+Iyor : add letter <code>I</code> (actually one of <code>i,ı, u, ü</code>) if last letter of surface is consonant.</li>
+ * <li>+yA : add letter <code>y</code> if last letter of surface is vowel.</li>
+ * </ul></td>
+ * </tr>
+ * <tr>
+ * <td>!</td>
+ * <td>Marks following letter as not obeying common rules.
+ * </td>
+ * <td>
+ * <ul>
+ * <li>
+ * "!I" means no rounding. That is, do not result in "u" and "ü" but only result in "ı" and "i".
+ * </li>
+ * <li>
+ * "!t" means do not voice "t" to "d".
+ * </li>
+ * </ul>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td>Upper case vowel</td>
+ * <td>Adds vowel according to harmony rules.</td>
+ * <td>
+ * <ul>
+ * <li>A : converted to "a" (ie. ara-ma) or "e" (i.e gel-me)</li>
+ * <li>I : converted to "i" (i.e. gece-yi), ı (i.e. akşam-ı), u (i.e. kutu-yu) or ü (i.e. göz-ü). If "!" comes
+ * just before, rounding is ignored thus conversion to "u" and "ü" is not made.</li>
+ * </ul>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td>Others</td>
+ * <td>Letter is added how it is</td>
+ * <td/>
+ * </tr>
+ * </table>
+ */
 public class SuffixFormSequence {
     private static final char EXCLAMATION = '!';
     private static final Character PLUS = '+';
@@ -44,7 +102,8 @@ public class SuffixFormSequence {
         this.suffixFormStr = suffixFormStr;
 
         // optional letter can only exist as a first char
-        Validate.isTrue(suffixFormStr.lastIndexOf(PLUS) == -1 || suffixFormStr.lastIndexOf(PLUS) == 0);
+        Validate.isTrue(suffixFormStr.lastIndexOf(PLUS) == -1 || suffixFormStr.lastIndexOf(PLUS) == 0,
+                "'+' character cannot be in other place than the beginning");
 
         final SuffixFormSequenceBuilder rulesBuilder = new SuffixFormSequenceBuilder();
 
@@ -187,6 +246,9 @@ public class SuffixFormSequence {
         return TurkishAlphabet.Voicable_Letters.contains(lastLetter);
     }
 
+    /**
+     * A rule in suffix form sequence to add one letter to a surface.
+     */
     public static class SuffixFormSequenceRule {
 
         private final SuffixFormSequenceRuleType ruleType;
@@ -215,6 +277,9 @@ public class SuffixFormSequence {
     }
 
     public static enum SuffixFormSequenceRuleType {
+        /**
+         * Insert a letter which is not a vowel, such as consonants, numbers, punctuation chars, ..
+         */
         INSERT_NONVOWEL_LETTER {
             @Override
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -222,6 +287,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert a vowel directly.
+         */
         INSERT_VOWEL_WITHOUT_HARMONY {
             @Override
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -229,6 +297,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert vowel "a" or "e" depending on the harmony.
+         */
         INSERT_VOWEL_A_WITH_HARMONY {
             @Override
             public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -242,6 +313,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert one of "ı", "i", "u", "ü" depending on the harmony and the rounding.
+         */
         INSERT_VOWEL_I_WITH_HARMONY {
             @Override
             public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -264,6 +338,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert one of "ı", "i" depending on the harmony but not and the rounding.
+         */
         INSERT_VOWEL_I_WITH_HARMONY_AND_NO_ROUNDING {
             @Override
             public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -277,6 +354,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert optional vowel if last letter of the surface is consonant.
+         */
         INSERT_OPTIONAL_VOWEL {
             @Override
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -290,6 +370,9 @@ public class SuffixFormSequence {
             }
         },        //TODO: better naming for kaynastirma?
 
+        /**
+         * Insert optional consonant if last letter of the surface is vowel.
+         */
         INSERT_OPTIONAL_CONSONANT {
             @Override
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -303,6 +386,9 @@ public class SuffixFormSequence {
             }
         },    //TODO: better naming for kaynastirma?
 
+        /**
+         * If last letter of the surface is consonant, insert vowel "a" or "e" depending on the harmony.
+         */
         INSERT_OPTIONAL_VOWEL_A_WITH_HARMONY {
             @Override
             public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -316,6 +402,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * If last letter of the surface is consonant, insert one of "ı", "i", "u", "ü" depending on the harmony and the rounding.
+         */
         INSERT_OPTIONAL_VOWEL_I_WITH_HARMONY {
             @Override
             public Character apply(TurkishChar _notUsed, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -328,6 +417,9 @@ public class SuffixFormSequence {
             }
         },
 
+        /**
+         * Insert devoiced form of given letter, if the surface ends with a voiceless consonant.
+         */
         INSERT_DEVOICABLE_LETTER {
             @Override
             public Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface) {
@@ -339,6 +431,11 @@ public class SuffixFormSequence {
             }
         };
 
+        /**
+         * @param charToAdd                   c
+         * @param phoneticAttributesOfSurface set
+         * @return the corresponding char based on charToAdd and phonetic attributes of the surface.
+         */
         public abstract Character apply(TurkishChar charToAdd, Set<PhoneticAttribute> phoneticAttributesOfSurface);
 
     }

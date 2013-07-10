@@ -30,6 +30,8 @@ import org.trnltk.model.morpheme.MorphemeContainer;
  * <li>postCondition: Condition to permit transitions after <code>Suffix</code> with the {@link SuffixForm}.</li>
  * <li>postDerivativeCondition Condition to permit derivational transitions after <code>Suffix</code> with the {@link SuffixForm}</li>
  * </ul>
+ *
+ * @see SuffixFormSequence
  */
 public class SuffixForm {
 

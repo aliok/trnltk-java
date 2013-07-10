@@ -19,29 +19,51 @@ package org.trnltk.model.suffix;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 
+/**
+ * A transition in the suffix graph finite state machine with a {@link SuffixFormApplication}.
+ */
 public class SuffixTransition {
     private final SuffixGraphState sourceState;
     private final SuffixFormApplication suffixFormApplication;
     private final SuffixGraphState targetState;
 
+    /**
+     * Create a new <code>SuffixTransition</code>.
+     *
+     * @param sourceState           Source state in the FSM
+     * @param suffixFormApplication Application of a {@link SuffixForm}, {@link SuffixFormApplication}
+     * @param targetState           Target state in the FSM
+     */
     public SuffixTransition(SuffixGraphState sourceState, SuffixFormApplication suffixFormApplication, SuffixGraphState targetState) {
         this.sourceState = sourceState;
         this.suffixFormApplication = suffixFormApplication;
         this.targetState = targetState;
     }
 
+    /**
+     * @return true if source state is derivational; false otherwise.
+     */
     public boolean isDerivational() {
         return SuffixGraphStateType.DERIVATIONAL.equals(this.sourceState.getType());
     }
 
+    /**
+     * @return source state in the FSM
+     */
     public SuffixGraphState getSourceState() {
         return sourceState;
     }
 
+    /**
+     * @return the application which transition makes
+     */
     public SuffixFormApplication getSuffixFormApplication() {
         return suffixFormApplication;
     }
 
+    /**
+     * @return target state in the FSM
+     */
     public SuffixGraphState getTargetState() {
         return targetState;
     }
