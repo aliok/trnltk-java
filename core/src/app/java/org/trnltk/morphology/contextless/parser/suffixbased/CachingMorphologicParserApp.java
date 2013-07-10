@@ -30,9 +30,11 @@ import org.trnltk.app.AppRunner;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.morphology.contextless.parser.suffixbased.cache.LRUMorphologicParserCache;
-import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
-import org.trnltk.morphology.contextless.parser.suffixbased.cache.TwoLevelMorphologicParserCache;
+import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
+import org.trnltk.morphology.contextless.parser.cache.LRUMorphologicParserCache;
+import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
+import org.trnltk.morphology.contextless.parser.cache.TwoLevelMorphologicParserCache;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 
 import java.io.File;

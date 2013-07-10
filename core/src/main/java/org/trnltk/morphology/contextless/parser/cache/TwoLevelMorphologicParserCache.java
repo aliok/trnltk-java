@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased.cache;
+package org.trnltk.morphology.contextless.parser.cache;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
 

@@ -29,6 +29,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+//DOCME
 public class ParseResultReader {
 
     public List<WordParseResultEntry> getParseResultEntries(Reader reader) throws IOException, JSONException {

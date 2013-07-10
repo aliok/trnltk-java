@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.cache.MorphologicParserCache;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.morphology.morphotactics.SuffixGraph;
+import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
 
 import java.util.*;
 
@@ -36,21 +34,6 @@ public class CachingMorphologicParser implements MorphologicParser {
     public CachingMorphologicParser(MorphologicParserCache cache, MorphologicParser delegate, boolean useLocalCache) {
         this.cache = cache;
         this.delegate = delegate;
-        this.useLocalCache = useLocalCache;
-    }
-
-    /**
-     * Uses a new {@link ContextlessMorphologicParser} as a delegate.
-     *
-     * @param cache           The cache
-     * @param suffixGraph     suffixGraph
-     * @param predefinedPaths predefinedPaths
-     * @param rootFinderChain rootFinderChain
-     * @param suffixApplier   suffixApplier
-     */
-    public CachingMorphologicParser(final MorphologicParserCache cache, final SuffixGraph suffixGraph, final boolean useLocalCache, final PredefinedPaths predefinedPaths, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
-        this.delegate = new ContextlessMorphologicParser(suffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
-        this.cache = cache;
         this.useLocalCache = useLocalCache;
     }
 

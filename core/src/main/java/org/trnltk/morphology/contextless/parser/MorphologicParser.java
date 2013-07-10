@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.letter.TurkishSequence;

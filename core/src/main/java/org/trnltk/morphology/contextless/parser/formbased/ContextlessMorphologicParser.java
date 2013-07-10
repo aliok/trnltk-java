@@ -26,7 +26,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.parser.suffixbased.MandatoryTransitionApplier;
-import org.trnltk.morphology.contextless.parser.suffixbased.MorphologicParser;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
 import org.trnltk.model.lexicon.Root;

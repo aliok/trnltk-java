@@ -23,6 +23,7 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
