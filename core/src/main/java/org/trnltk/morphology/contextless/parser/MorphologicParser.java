@@ -23,14 +23,29 @@ import java.util.List;
 
 /**
  * The contract for the morphologic parser implementations.
- *
+ * <p/>
  * A morphologic parser takes the input and fragments it into smaller parts. These smaller parts are root, suffixes, etc.
  * These parts are contained within a {@link MorphemeContainer}.
  */
 public interface MorphologicParser {
+
+    /**
+     * Parses the given string and returns all of the possible morphologic parse results for it.
+     */
     public List<MorphemeContainer> parseStr(final String input);
+
+    /**
+     * Parses the given {@link TurkishSequence} and returns all of the possible morphologic parse results for it.
+     */
     public List<MorphemeContainer> parse(final TurkishSequence input);
 
+    /**
+     * Parses all of the given strings and returns all possible results for each. Returned results are in inputs' order.
+     */
     public List<List<MorphemeContainer>> parseAllStr(final List<String> input);
+
+    /**
+     * Parses all of the given {@link TurkishSequence}s and returns all possible results for each. Returned results are in inputs' order.
+     */
     public List<List<MorphemeContainer>> parseAll(final List<TurkishSequence> input);
 }

@@ -31,12 +31,23 @@ public class CachingMorphologicParser implements MorphologicParser {
     private final MorphologicParserCache cache;
     private final boolean useLocalCache;
 
+    /**
+     * Create a new caching parser.
+     *
+     * @param cache         Cache implementation instance
+     * @param delegate      Morphologic parser to delegate parsing if results are absent
+     * @param useLocalCache if true, a method-local cache is used while doing a batch parse
+     */
     public CachingMorphologicParser(MorphologicParserCache cache, MorphologicParser delegate, boolean useLocalCache) {
         this.cache = cache;
         this.delegate = delegate;
         this.useLocalCache = useLocalCache;
     }
 
+    /**
+     * @see CachingMorphologicParser#parse(org.trnltk.model.letter.TurkishSequence)
+     * @deprecated Throws {@link UnsupportedOperationException}
+     */
     @Override
     public List<List<MorphemeContainer>> parseAll(List<TurkishSequence> inputs) {
         throw new UnsupportedOperationException();
@@ -91,6 +102,17 @@ public class CachingMorphologicParser implements MorphologicParser {
         }
     }
 
+    /**
+     * Parsing a {@link TurkishSequence} is not supported since {@link MorphologicParserCache} is only using strings
+     * as cache keys.
+     * <p/>
+     * This method could just convert the {@link TurkishSequence} to string and use it, but in this case client of this method
+     * wouldn't notice that he/she is doing an expensive operation (creating {@link TurkishSequence}s) without need.
+     * <p/>
+     * * = in case of caching
+     *
+     * @deprecated Throws {@link UnsupportedOperationException}
+     */
     @Override
     public List<MorphemeContainer> parse(TurkishSequence input) {
         throw new UnsupportedOperationException();

@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * A L2 cache which also uses a L1 cache. When a value is not found in L2 cache (self), value from L1 cache is returned.
- * Likewise, when a new value is put on the cache, it will be put on the L1 cache after a number of items ({@code l2MaxSize}).
+ * Likewise, when a new value is put on the cache, it will be put on the L1 cache after a number of items (<code>l2MaxSize</code>).
  * <p/>
  * L2 cache is cleared when {@code l2MaxSize} is reached.
  * <p/>
