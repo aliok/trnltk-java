@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
@@ -27,15 +27,13 @@ import org.trnltk.model.lexicon.PrimaryPos;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.lexicon.SecondaryPos;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.morphology.contextless.parser.PredefinedPaths;
-import org.trnltk.morphology.contextless.parser.SuffixApplier;
-import org.trnltk.testutil.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.ImmutableRootGenerator;
 import org.trnltk.morphology.lexicon.RootMapGenerator;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import org.trnltk.testutil.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.Collection;
