@@ -21,6 +21,12 @@ import org.trnltk.model.morpheme.MorphemeContainer;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Contract for a cache that can be used by a {@link org.trnltk.morphology.contextless.parser.CachingMorphologicParser}
+ * <p/>
+ * A <code>MorphologicParserCache</code> helps remembering parse results for inputs. Different implementations can exist:
+ * offline, online with LRU, online with MFU ...
+ */
 public interface MorphologicParserCache {
     List<MorphemeContainer> get(String input);
 

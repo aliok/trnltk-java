@@ -25,15 +25,16 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.trnltk.model.lexicon.PrimaryPos;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.MandatoryTransitionApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.testutil.testmatchers.ParseResultsDontExistMatcher;
 import org.trnltk.testutil.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.testutil.testmatchers.ParseResultsExistMatcher;
-import org.trnltk.model.lexicon.Root;
 import org.trnltk.util.MorphemeContainerFormatter;
-import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.*;
 
@@ -67,6 +68,13 @@ public abstract class BaseContextlessMorphologicParserTest {
     protected void turnSuffixApplierLoggingOn() {
         // set the appender every time!
         Logger.getLogger(SuffixApplier.class).setLevel(Level.DEBUG);
+    }
+
+    // useful while running tests individually
+    // since parser and other things are really verbose, we cannot enable logging by default
+    protected void turnMandatoryTransitionApplierLoggingOn() {
+        // set the appender every time!
+        Logger.getLogger(MandatoryTransitionApplier.class).setLevel(Level.DEBUG);
     }
 
     protected abstract HashMultimap<String, Root> createRootMap();

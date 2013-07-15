@@ -2,8 +2,8 @@ package org.trnltk.morphology.contextless.parser.formbased;
 
 import com.google.common.collect.HashMultimap;
 import org.trnltk.model.lexicon.Root;
-import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.lexicon.RootMapFactory;

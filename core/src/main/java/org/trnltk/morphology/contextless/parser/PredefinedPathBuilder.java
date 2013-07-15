@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import com.google.common.collect.HashMultimap;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +29,11 @@ import org.trnltk.morphology.morphotactics.SuffixEdge;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 
+/**
+ * Helper class that makes easy and readable to build a predefined path for an irregular word.
+ *
+ * @see PredefinedPaths
+ */
 public class PredefinedPathBuilder {
     private final SuffixGraph suffixGraph;
     private final SuffixApplier suffixApplier;
@@ -51,18 +56,30 @@ public class PredefinedPathBuilder {
         return this;
     }
 
+    /**
+     * Finds the suffix for the given unique suffix name and adds it to current path with an empty suffix form application.
+     */
     public PredefinedPathBuilder s(String suffixName) {
         return this.s(this.suffixGraph.getSuffix(suffixName));
     }
 
+    /**
+     * Adds given suffix to current path with an empty suffix form application.
+     */
     public PredefinedPathBuilder s(Suffix suffix) {
         return this.s(suffix, StringUtils.EMPTY);
     }
 
+    /**
+     * Finds the suffix for the given unique suffix name and adds it to current path with the given suffix form application.
+     */
     public PredefinedPathBuilder s(String suffixName, String suffixFormStr) {
         return this.s(this.suffixGraph.getSuffix(suffixName), suffixFormStr);
     }
 
+    /**
+     * Adds given suffix to current path with the given suffix form application.
+     */
     public PredefinedPathBuilder s(Suffix suffix, String suffixFormStr) {
         Validate.notNull(suffix);
         if (StringUtils.isNotEmpty(suffixFormStr))
@@ -76,6 +93,26 @@ public class PredefinedPathBuilder {
     }
 
     private void followPath(final Suffix suffix, final String strSuffixFormApplication) {
+        // go through the SuffixGraph with the given suffix and the suffix form application
+
+        // search for a transition from current state to target state of suffix form of suffix and apply it
+
+        // if given suffix is not applicable to current state, then try to find the states:
+        // --> that the system could go from current state
+        // --> that the given suffix and the form is applicable
+        // --> that is one level beyond
+        // then current state is actually an intermediate state
+        // this is helpful to skip defining epsilon transitions
+        // e.g. say
+        // * current state is A.
+        // * we can go to B with an epsilon transition
+        // * we can go to C from B with suffix "S" and form "f"
+        // then, when a suffix is added like 'builder.s("S", "f")',
+        // * first a transition of A->B with "S(f)" is searched
+        // * since not found, an epsilon transition of A->B is searched
+        // * it is found, and now a transition of B->C with "S(f)" is searched
+        // * since it is found, both epsilon transition and the "S(f)" transition is added
+
         final SuffixGraphState currentState = this.morphemeContainerInProgress.getLastState();
 
         final TurkishSequence surfaceSoFar = morphemeContainerInProgress.getSurfaceSoFar();

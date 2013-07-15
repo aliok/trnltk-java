@@ -18,6 +18,9 @@ package org.trnltk.morphology.contextless.parser.formbased;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
 
+/**
+ * Contract for a listener that is notified when something happens on {@link MorphemeContainer}s that are being traversed.
+ */
 public interface ContextlessMorphologicParserListener {
 
     public void onMorphemeContainerInvalidated(MorphemeContainer morphemeContainer);

@@ -29,6 +29,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A node in the {@link SuffixFormGraph} where states to go are stored with for each suffix and for each distinct
+ * possible phonetic attribute combination.
+ */
 public class SuffixFormGraphNode {
     private final SuffixFormGraphNodeKey suffixFormGraphNodeKey;
     private final Set<SuffixFormGraphSuffixEdge> edges = new HashSet<SuffixFormGraphSuffixEdge>();

@@ -24,18 +24,18 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.MandatoryTransitionApplier;
-import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.parser.suffixbased.PredefinedPaths;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
-import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.SuffixFormApplication;
+import org.trnltk.morphology.contextless.parser.MandatoryTransitionApplier;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.*;
 
@@ -43,7 +43,7 @@ import java.util.*;
  * A form-based morphologic parser implementation which does not the context of the input.
  */
 public class ContextlessMorphologicParser implements MorphologicParser {
-    static Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);    //could be used in other places too!
+    protected final Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);
 
     private final MandatoryTransitionApplier mandatoryTransitionApplier;
     private ContextlessMorphologicParserListener listener;
@@ -88,6 +88,10 @@ public class ContextlessMorphologicParser implements MorphologicParser {
 
     @Override
     public LinkedList<MorphemeContainer> parse(final TurkishSequence input) {
+        // * find initial containers --> find possible roots and create containers around them
+        // * apply mandatory transitions
+        // * traverse until there are no candidates --> find all results
+
         if (logger.isDebugEnabled())
             logger.debug("Parsing input " + input);
 
@@ -114,6 +118,8 @@ public class ContextlessMorphologicParser implements MorphologicParser {
     }
 
     private LinkedList<MorphemeContainer> traverseCandidates(final List<MorphemeContainer> candidates, final List<MorphemeContainer> results, final TurkishSequence input) {
+        // * traverse all containers recursively --> go through the suffix graph for all containers, apply transitions and traverse the new containers
+
         if (logger.isDebugEnabled()) {
             logger.debug("Gonna traverse " + candidates.size() + " candidates:");
             for (MorphemeContainer candidate : candidates) {
@@ -165,6 +171,9 @@ public class ContextlessMorphologicParser implements MorphologicParser {
     }
 
     private LinkedList<MorphemeContainer> traverseCandidate(final MorphemeContainer initialContainer, final TurkishSequence input) {
+        // * traverse one container --> try all possible suffix transitions for the container and find the new containers
+        //  >>> where the transitions are applied
+
         if (SuffixGraphStateType.TERMINAL.equals(initialContainer.getLastState().getType()))
             return Lists.newLinkedList(Arrays.asList(initialContainer));
 
@@ -238,6 +247,8 @@ public class ContextlessMorphologicParser implements MorphologicParser {
     }
 
     private LinkedList<MorphemeContainer> findInitialMorphemeContainers(final TurkishSequence input) {
+        // find roots for input and create containers around them
+
         final LinkedList<MorphemeContainer> candidates = new LinkedList<MorphemeContainer>();
 
         for (int i = 1; i < input.length() + 1; i++) {

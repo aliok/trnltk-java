@@ -17,6 +17,8 @@
 package org.trnltk.morphology.contextless.parser.suffixbased;
 
 import com.google.common.collect.Multimap;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.RootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.*;
@@ -32,7 +34,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * @deprecated
+ * @deprecated Use {@link org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserFactory}
  */
 public class ContextlessMorphologicParserFactory {
 

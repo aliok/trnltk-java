@@ -23,26 +23,29 @@ import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.util.MorphemeContainerFormatter;
+import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.Suffix;
 import org.trnltk.model.suffix.SuffixGroup;
+import org.trnltk.morphology.contextless.parser.MandatoryTransitionApplier;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.morphotactics.SuffixEdge;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.*;
 
 /**
- * @deprecated
+ * @deprecated Use {@link org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser}
  */
 public class ContextlessMorphologicParser implements MorphologicParser {
-    static Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);    //could be used in other places too!
+    protected final Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);
     private final MandatoryTransitionApplier mandatoryTransitionApplier;
 
     private SuffixGraph suffixGraph;

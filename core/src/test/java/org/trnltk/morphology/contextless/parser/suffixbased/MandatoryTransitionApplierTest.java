@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.*;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MandatoryTransitionApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;

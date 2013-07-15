@@ -17,9 +17,20 @@
 package org.trnltk.morphology.contextless.parser.formbased;
 
 import com.google.common.collect.ImmutableSet;
-import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.model.lexicon.PhoneticExpectation;
+import org.trnltk.model.suffix.SuffixFormApplication;
 
+/**
+ * Defines a transition from a {@link SuffixFormGraphNode} to another one.
+ * <p/>
+ * This is pre computed when a {@link ContextlessMorphologicParser} is created.
+ * <p/>
+ * An edge defines source node in the {@link SuffixFormGraph}, a phonetic attributes combination that is applicable,
+ * a target node in the {@link SuffixFormGraph} and what would be the new
+ * phonetic attributes combination when the transition is applied.
+ * <p/>
+ * An edge and a suffix form application results in a transition in {@link SuffixFormGraph}.
+ */
 public class SuffixFormGraphSuffixEdge {
 
     private final SuffixFormGraphNode targetSuffixFormGraphNode;

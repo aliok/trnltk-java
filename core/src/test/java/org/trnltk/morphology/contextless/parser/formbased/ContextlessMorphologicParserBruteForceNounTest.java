@@ -21,7 +21,7 @@ import org.junit.Before;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserBruteForceNounTest;
 import org.trnltk.morphology.contextless.rootfinder.BruteForceNounRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;

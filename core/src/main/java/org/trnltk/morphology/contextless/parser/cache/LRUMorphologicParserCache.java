@@ -23,10 +23,27 @@ import org.trnltk.model.morpheme.MorphemeContainer;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A LRU cache for a {@link org.trnltk.morphology.contextless.parser.CachingMorphologicParser}.
+ * <p/>
+ * Discards least recently used items first. Maximum size must be wisely selected, since a big size
+ * can cause a {@link java.lang.OutOfMemoryError}.
+ * <p/>
+ * An entry in the cache is consisted of a key (surface string) and a list of {@link MorphemeContainer}. It is worth
+ * noting a {@link MorphemeContainer} is a heavy weight object.
+ */
 public class LRUMorphologicParserCache implements MorphologicParserCache {
 
     private final Cache<String, List<MorphemeContainer>> cache;
 
+    /**
+     * @param concurrencyLevel Guides underlying cache mechanism to permit concurrency. Ideally, value should be
+     *                         number of threads that access the
+     *                         {@link org.trnltk.morphology.contextless.parser.CachingMorphologicParser}
+     * @param initialCapacity  Initial capacity of the cache to reserve memory. Since it is expensive to allocate memory
+     *                         dynamically, use this parameter and reserve some memory for the cache.
+     * @param maximumSize      Maximum number of entries in the cache.
+     */
     public LRUMorphologicParserCache(int concurrencyLevel, int initialCapacity, long maximumSize) {
         cache = CacheBuilder.newBuilder()
                 .concurrencyLevel(concurrencyLevel)
@@ -35,6 +52,11 @@ public class LRUMorphologicParserCache implements MorphologicParserCache {
                 .build();
     }
 
+    /**
+     * Builds the cache from an existing Guava {@link Cache}
+     *
+     * @param cache The Guava cache
+     */
     public LRUMorphologicParserCache(Cache<String, List<MorphemeContainer>> cache) {
         this.cache = cache;
     }

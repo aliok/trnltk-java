@@ -27,6 +27,8 @@ import org.trnltk.model.lexicon.PrimaryPos;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.lexicon.SecondaryPos;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.testutil.testmatchers.ParseResultsEqualMatcher;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.ImmutableRootGenerator;

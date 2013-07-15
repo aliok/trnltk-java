@@ -26,6 +26,24 @@ import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Stores all possible phonetic attributes combinations.
+ * <p/>
+ * This is to be pre-computed.
+ * <p/>
+ * Finding possible phonetic attributes are done as the following way:
+ * <ol>
+ * <li>Compute power set of all {@link PhoneticAttribute}s</li>
+ * <li>Discard sets that are not valid</li>
+ * </ol>
+ * <p/>
+ * Validity of a combination is checked using the {@link PhoneticAttributeMetadata} where rules are defined for each
+ * {@link PhoneticAttribute} in terms of what other {@link PhoneticAttribute}s could make sense with an attribute.
+ * <p/>
+ * Quality of the metadata rules are regularly checked in the build system.
+ * That means, valid {@link PhoneticAttribute} combinations are checked against found natural combinations from a big
+ * corpus. There must be no possible combination found with the metadata which does not exist in the corpus.
+ */
 public class PhoneticAttributeSets {
 
     private final ImmutableMap<Long, Set<PhoneticAttribute>> validPhoneticAttributeSetsMap;

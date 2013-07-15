@@ -39,7 +39,7 @@ import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.Suffix;
 import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.model.suffix.SuffixTransition;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.lexicon.RootMapFactory;

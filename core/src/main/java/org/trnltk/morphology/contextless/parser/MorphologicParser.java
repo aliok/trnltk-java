@@ -24,8 +24,9 @@ import java.util.List;
 /**
  * The contract for the morphologic parser implementations.
  * <p/>
- * A morphologic parser takes the input and fragments it into smaller parts. These smaller parts are root, suffixes, etc.
- * These parts are contained within a {@link MorphemeContainer}.
+ * A morphologic parser takes the input and fragments it into smaller parts, namely morphemes.
+ * These smaller parts are root, suffixes, etc.
+ * Morphemes are contained within a {@link MorphemeContainer}.
  */
 public interface MorphologicParser {
 

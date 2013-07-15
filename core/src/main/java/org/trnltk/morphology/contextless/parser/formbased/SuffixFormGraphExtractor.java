@@ -37,6 +37,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * Extracts a {@link SuffixFormGraph} from a {@link SuffixGraph}.
+ * <p/>
+ * Computes all possible applicable suffix forms for combinations of suffixes, phonetic attribute combinations and
+ * suffix graph states.
+ */
 public class SuffixFormGraphExtractor {
 
     private final PhoneticAttributeSets phoneticAttributeSets;

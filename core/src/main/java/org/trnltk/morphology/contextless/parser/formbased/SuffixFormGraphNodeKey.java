@@ -23,6 +23,11 @@ import org.trnltk.model.lexicon.PhoneticAttribute;
 
 import java.util.Set;
 
+/**
+ * A unique key for a {@link SuffixFormGraphNode}.
+ * <p/>
+ * The key consists of a state and a phonetic attributes combination.
+ */
 public class SuffixFormGraphNodeKey {
 
     private final ImmutableSet<PhoneticAttribute> phonAttrSet;

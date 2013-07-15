@@ -24,8 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A L2 cache which also uses a L1 cache. When a value is not found in L2 cache (self), value from L1 cache is returned.
+ * An L2 cache and an L1 cache. When a value is not found in L2 cache (self), value from L1 cache is returned.
  * Likewise, when a new value is put on the cache, it will be put on the L1 cache after a number of items (<code>l2MaxSize</code>).
+ * <p/>
+ * Putting entries from L2 to L1 is done in a batch manner. That helps having an efficient cache considering the locality
+ * of the inputs; ie. an input that is being parsed is likely to be parsed very soon again.
  * <p/>
  * L2 cache is cleared when {@code l2MaxSize} is reached.
  * <p/>
@@ -43,6 +46,12 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
     private int l2Size;
     private Map<String, List<MorphemeContainer>> l2Cache;
 
+    /**
+     * See documentation of <code>TwoLevelMorphologicParserCache</code>
+     *
+     * @param l2MaxSize Max size of cache level 2
+     * @param l1Cache   L1 cache to use
+     */
     public TwoLevelMorphologicParserCache(int l2MaxSize, MorphologicParserCache l1Cache) {
         this.l2MaxSize = l2MaxSize;
         this.l1Cache = l1Cache;

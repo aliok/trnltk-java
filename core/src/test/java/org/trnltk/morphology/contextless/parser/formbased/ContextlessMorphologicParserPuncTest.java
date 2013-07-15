@@ -23,7 +23,7 @@ import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorpholog
 import org.trnltk.morphology.contextless.rootfinder.PuncRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;

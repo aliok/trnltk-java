@@ -28,6 +28,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A graph where not only the suffixes but also the applicable forms of
+ * that suffixes are stored for different {@link PhoneticAttributeSets}.
+ * <p/>
+ * This way, a graph is created in advance for all suffixes and suffix forms for all possible
+ * phonetic attribute combinations. Thus, applicable forms are not computed dynamically based on input,
+ * phonetic attributes of the morpheme container and the surface; but are computed in advance for all possible distinct
+ * scenarios.
+ */
 public class SuffixFormGraph {
 
     private final Map<SuffixFormGraphNodeKey, SuffixFormGraphNode> nodeMap = new HashMap<SuffixFormGraphNodeKey, SuffixFormGraphNode>();

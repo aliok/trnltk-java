@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections.CollectionUtils;
@@ -38,8 +38,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Morphotactics engine.
+ * <p/>
+ * Checks if a {@link Suffix}, a {@link SuffixForm} or a {@link SuffixFormApplication} is applicable for a given {@link MorphemeContainer} and applies these.
+ */
 public class SuffixApplier {
-    private static Logger logger = Logger.getLogger(SuffixApplier.class);
+    protected final Logger logger = Logger.getLogger(SuffixApplier.class);
 
     private final PhoneticsEngine phoneticsEngine;
 
@@ -47,6 +52,14 @@ public class SuffixApplier {
         this.phoneticsEngine = phoneticsEngine;
     }
 
+    /**
+     * Checks if the suffix is applicable and applies it.
+     * <p/>
+     * Tries all {@link SuffixForm}s of the given suffix.
+     *
+     * @return Morpheme containers where the transitions for the suffix are applied. Passed container is immutable thus untouched.
+     * @see SuffixApplier#transitionAllowedForSuffix(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.Suffix)
+     */
     public List<MorphemeContainer> trySuffix(MorphemeContainer morphemeContainer, Suffix suffix, SuffixGraphState targetState, TurkishSequence input) {
         if (!this.transitionAllowedForSuffix(morphemeContainer, suffix))
             return new ArrayList<MorphemeContainer>();
@@ -67,6 +80,19 @@ public class SuffixApplier {
         return newMorphemeContainers;
     }
 
+    /**
+     * Checks if the suffix is applicable to given container.
+     * <p/>
+     * Given suffix is applicable <i>iff</i>
+     * <ul>
+     * <li>{@link org.trnltk.model.suffix.SuffixGroup}s of suffixes in last inflection group (suffixes since last derivation)
+     * do not contain the group of given {@link Suffix} --> A {@link Suffix} from one {@link org.trnltk.model.suffix.SuffixGroup}
+     * cannot exist in an inflection group.</li>
+     * <li>Suffixes in last inflection group (suffixes since last derivation)
+     * do not contain the given {@link Suffix} and suffix does not allow repetition -->
+     * Given {@link Suffix} does not allow repetition, then it cannot exist twice in an inflection group.</li>
+     * </ul>
+     */
     public boolean transitionAllowedForSuffix(MorphemeContainer morphemeContainer, Suffix suffix) {
         if (suffix.getSuffixGroup() != null && morphemeContainer.getSuffixGroupsSinceLastDerivationSuffix().contains(suffix.getSuffixGroup())) {
             if (logger.isDebugEnabled()) {
@@ -84,6 +110,20 @@ public class SuffixApplier {
     }
 
 
+    /**
+     * Checks if the given suffix form is applicable and applies it. Checks done are (in order):
+     * <ul>
+     * <li>Is precondition of the suffix form satisfied with the given container?</li>
+     * <li>If suffixForm is not blank, is the phonetic expectations of container is satisfied with the suffix form?</li>
+     * <li>If suffix form is phonetically applicable to container? see {@link PhoneticsEngine#isSuffixFormApplicable(java.util.Set, org.trnltk.model.suffix.SuffixFormSequence)}</li>
+     * <li>Does computed suffix form application based on phonetic attributes match the remaining part of the surface?</li>
+     * <li>Are the post conditions of the suffix forms in the last inflection group satisfied when suffix form is applied?</li>
+     * <li>If the current state of the container is derivational, is the post derivation condition of the container satisfied with suffix form?</li>
+     * </ul>
+     *
+     * @return Morpheme container where the transition for the given suffix form is applied. Passed container is immutable thus untouched.
+     * @see SuffixApplier#transitionAllowedForSuffixForm(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.SuffixForm)
+     */
     public MorphemeContainer trySuffixForm(MorphemeContainer morphemeContainer, SuffixForm suffixForm, SuffixGraphState targetState, TurkishSequence input) {
         if (!this.transitionAllowedForSuffixForm(morphemeContainer, suffixForm))
             return null;
@@ -99,6 +139,8 @@ public class SuffixApplier {
         final String fittingSuffixForm = appliedPhonetics.getRight();
         final String appliedStr = modifiedWord.getUnderlyingString() + fittingSuffixForm;
 
+
+        // Does computed suffix form application based on phonetic attributes match the remaining part of the surface?
         if (this.phoneticsEngine.applicationMatches(input, appliedStr, !targetState.getName().equals("VERB_ROOT"))) {  //TODO: magic string
             final String actualSuffixForm = input.getUnderlyingString().substring(soFar.length(), appliedStr.length());
             if (logger.isDebugEnabled())
@@ -106,6 +148,7 @@ public class SuffixApplier {
             final MorphemeContainer cloneMorphemeContainer = new MorphemeContainer(morphemeContainer);
             cloneMorphemeContainer.addTransition(new SuffixFormApplication(suffixForm, actualSuffixForm, fittingSuffixForm), targetState);
 
+            // Are the post conditions of the suffix forms in the last inflection group satisfied when suffix form is applied?
             if (morphemeContainer.hasTransitions()) {
                 final Specification<MorphemeContainer> postCondition = morphemeContainer.getLastSuffixTransition().getSuffixFormApplication().getSuffixForm().getPostCondition();
                 if (postCondition != null) {
@@ -120,6 +163,7 @@ public class SuffixApplier {
 
                 }
 
+                // If the current state of the container is derivational, is the post derivation condition of the container satisfied with suffix form?
                 if (SuffixGraphStateType.DERIVATIONAL.equals(stateBeforeSuffixFormApplication.getType())) {
                     logger.debug("      Suffix is derivative, checking the post derivation conditions of suffixes from previous derivation.");
                     for (SuffixTransition suffixTransition : morphemeContainer.getTransitionsFromDerivationSuffix()) {
@@ -141,13 +185,34 @@ public class SuffixApplier {
         return null;
     }
 
+    /**
+     * Checks if the given suffix form application is applicable and applies it.
+     * <p/>
+     * Difference with trying a suffix form ({@link SuffixApplier#trySuffixForm(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.SuffixForm, org.trnltk.morphology.morphotactics.SuffixGraphState, org.trnltk.model.letter.TurkishSequence)})
+     * is, the application already given. It is not computed.
+     * <p/>
+     * Checks done are (in order):
+     * <ul>
+     * <li>Is suffix of the application's form allowed? see {@link SuffixApplier#transitionAllowedForSuffix(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.Suffix)}</li>
+     * <li>Is suffix form of the application allowed? see {@link SuffixApplier#transitionAllowedForSuffixForm(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.SuffixForm)}</li>
+     * <li>Does given suffix form application match the remaining part of the surface?</li>
+     * <li>Are the post conditions of the suffix forms in the last inflection group satisfied when suffix form application is applied?</li>
+     * <li>If the current state of the container is derivational, is the post derivation condition of the container satisfied with suffix form application?</li>
+     * </ul>
+     *
+     * @return Morpheme container where the transition for the given suffix form application is applied. Passed container is immutable thus untouched.
+     * @see SuffixApplier#transitionAllowedForSuffix(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.Suffix)
+     * @see SuffixApplier#transitionAllowedForSuffixForm(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.SuffixForm)
+     */
     public MorphemeContainer trySuffixFormApplication(MorphemeContainer morphemeContainer, SuffixFormApplication suffixFormApplication, SuffixGraphState targetState, ImmutableSet<PhoneticExpectation> phoneticExpectations, TurkishSequence input) {
         final SuffixForm suffixForm = suffixFormApplication.getSuffixForm();
         final Suffix suffix = suffixForm.getSuffix();
 
+        // Is suffix of the application's form allowed?
         if (!this.transitionAllowedForSuffix(morphemeContainer, suffix))
             return null;
 
+        // Is suffix form of the application allowed?
         if (!this.transitionAllowedForSuffixForm(morphemeContainer, suffixForm))
             return null;
 
@@ -162,6 +227,7 @@ public class SuffixApplier {
         final String fittingSuffixForm = suffixFormApplication.getFittingSuffixForm();
         final String appliedStr = soFar.getUnderlyingString() + actualSuffixForm;
 
+        // Does given suffix form application match the remaining part of the surface?
         if (phoneticsEngine.applicationMatches(input, appliedStr, false)) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("      Word '%s' starts with applied str '%s' (%s), adding to current morpheme container", input, appliedStr, actualSuffixForm));
@@ -169,6 +235,7 @@ public class SuffixApplier {
             final MorphemeContainer cloneMorphemeContainer = new MorphemeContainer(morphemeContainer);
             cloneMorphemeContainer.addTransition(new SuffixFormApplication(suffixForm, actualSuffixForm, fittingSuffixForm), targetState);
 
+            // Are the post conditions of the suffix forms in the last inflection group satisfied when suffix form application is applied?
             if (morphemeContainer.hasTransitions()) {
                 final Specification<MorphemeContainer> postCondition = morphemeContainer.getLastSuffixTransition().getSuffixFormApplication().getSuffixForm().getPostCondition();
                 if (postCondition != null) {
@@ -183,6 +250,7 @@ public class SuffixApplier {
 
                 }
 
+                // If the current state of the container is derivational, is the post derivation condition of the container satisfied with suffix form application?
                 if (SuffixGraphStateType.DERIVATIONAL.equals(stateBeforeSuffixFormApplication.getType())) {
                     logger.debug("      Suffix is derivative, checking the post derivation conditions of suffixes from previous derivation.");
                     for (SuffixTransition suffixTransition : morphemeContainer.getTransitionsFromDerivationSuffix()) {
@@ -212,12 +280,14 @@ public class SuffixApplier {
     }
 
     private boolean transitionAllowedForSuffixForm(MorphemeContainer morphemeContainer, SuffixForm suffixForm) {
+        // Is precondition of the suffix form satisfied with the given container?
         if (suffixForm.getPrecondition() != null && !suffixForm.getPrecondition().isSatisfiedBy(morphemeContainer)) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("      Precondition '%s' of suffix form '%s' is not satisfied with transitions %s, skipping.", suffixForm.getForm(), suffixForm.getPrecondition(), morphemeContainer));
             return false;
         }
 
+        // If suffixForm is not blank, is the phonetic expectations of container is satisfied with the suffix form?
         if (suffixForm.getForm().isNotBlank() && !this.phoneticsEngine.expectationsSatisfied(morphemeContainer.getPhoneticExpectations(), suffixForm.getForm())) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("      Suffix form '%s' does not satisfy phonetic expectations %s, skipping.", suffixForm.getForm(), morphemeContainer.getPhoneticExpectations()));
@@ -225,6 +295,7 @@ public class SuffixApplier {
             return false;
         }
 
+        // Does computed suffix form application based on phonetic attributes match the remaining part of the surface?
         if (!phoneticsEngine.isSuffixFormApplicable(morphemeContainer.getPhoneticAttributes(), suffixForm.getForm())) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("      Suffix form '%s' is not phonetically applicable to '%s', skipping.", suffixForm.getForm(), morphemeContainer.getSurfaceSoFar()));

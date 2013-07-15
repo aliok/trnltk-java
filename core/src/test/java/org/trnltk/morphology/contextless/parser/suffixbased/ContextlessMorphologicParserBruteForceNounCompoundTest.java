@@ -18,6 +18,7 @@ package org.trnltk.morphology.contextless.parser.suffixbased;
 
 import com.google.common.collect.HashMultimap;
 import org.junit.Before;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserBruteForceNounCompoundTest;
 import org.trnltk.morphology.contextless.rootfinder.BruteForceCompoundNounRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;

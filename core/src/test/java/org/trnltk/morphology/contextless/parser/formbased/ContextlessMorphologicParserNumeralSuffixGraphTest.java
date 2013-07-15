@@ -20,7 +20,7 @@ import com.google.common.collect.HashMultimap;
 import org.junit.Before;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserNumeralSuffixGraphTest;
 import org.trnltk.morphology.contextless.rootfinder.*;
-import org.trnltk.morphology.contextless.parser.suffixbased.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.model.lexicon.Lexeme;

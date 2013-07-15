@@ -14,31 +14,39 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
-import org.trnltk.model.suffix.SuffixForm;
 import org.trnltk.common.specification.Specification;
 import org.trnltk.common.specification.Specifications;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.PrimaryPos;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.Suffix;
-import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.suffix.SuffixForm;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasProgressiveVowelDrop;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasPrimaryPos;
+import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.rootHasProgressiveVowelDrop;
 
+/**
+ * Applies mandatory transitions for a {@link MorphemeContainer}.
+ * <p/>
+ * Mandatory transitions are transitions which need to be applied when a root for a word is found and it is a valid root
+ * if following suffix and suffix form are specified ones.
+ * <p/>
+ * One example is progressive suffix for some verbs. For example, root "at" of dictionary entry "atamak" is only valid
+ * if suffixForm "Iyor" of suffix "Progressive" follows. That results in a partial surface of "atıyor".
+ * Root "at" is not valid for other suffixes (e.g. "atacak" -> not valid, "atayacak" -> valid).
+ */
 public class MandatoryTransitionApplier {
 
-    // not good to use other classes' loggers
-    // however, it is good to have less things to turn on and off during debugging
-    private Logger logger = ContextlessMorphologicParser.logger;
+    protected final Logger logger = Logger.getLogger(MandatoryTransitionApplier.class);
 
     private final SuffixGraph suffixGraph;
     private final SuffixApplier suffixApplier;
@@ -81,7 +89,7 @@ public class MandatoryTransitionApplier {
 
     private void createRules() {
         // English translation to following code fragment:
-        // if root has syn cat Verb and root has progressive vowel drop
+        // if root has PrimaryPos Verb and root has progressive vowel drop
         // and its state is VERB_ROOT
         // add positive suffix, and then progressive suffix
 
@@ -97,7 +105,7 @@ public class MandatoryTransitionApplier {
                 .step("Prog", "Iyor", "VERB_WITH_TENSE")
                 .build();
 
-        // more rule can be added
+        // more rules can be added
 
         this.mandatoryTransitionRules.add(progressiveVowelDropRule);
     }

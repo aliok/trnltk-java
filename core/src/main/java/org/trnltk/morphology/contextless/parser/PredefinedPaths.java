@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -33,6 +33,33 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * Defines paths for special words / roots.
+ * <p/>
+ * There are phonetic and morphotactic exceptions for some special words in Turkish.
+ * For these words, special suffixes or suffix forms are applied within this class. These exceptions are
+ * separated from suffixes and forms defined in a {@link SuffixGraph} since they require a lot of new rules
+ * to be created which are only applicable for these special words.
+ * <p/>
+ * One example is word "ben" whose one usage is <i>1st person <b>singular</b> personal pronoun</i>. Since there is another word
+ * for <i>1st person <b>plural</b> personal pronoun</i>, "biz", this word should not accept the suffix <i>plural agreement</i>;
+ * ie. "benler" is not valid. However, <i>plural agreement</i> suffix is normally applicable to all pronouns : "kimler", "neler", etc.
+ * Thus, all possible paths that could be gone using this root is predefined in the system.
+ * <p/>
+ * Another example is word "onlar" which is <i>3rd person plural personal pronoun</i>. "onlar" is actually composed of
+ * <i>3rd person singular personal pronoun</i>, "o", and the <i>plural agreement</i> "lar". However, suffix form "lar"
+ * becomes "nlar" in this particular case. It doesn't make sense to add this as a new morphotactic rule in the
+ * {@link SuffixGraph} since we have to define what is applicable (word "o") and what is not applicable (lots of words).
+ * Thus, all possible paths in the {@link SuffixGraph} are build in advance for this root.
+ * <p/>
+ * Paths defined here must be checked when a new root is found for a surface. If found, predefined paths
+ * ({@link MorphemeContainer}s) must be used as the starting point of the traversal in the {@link SuffixGraph}.
+ * <p/>
+ * There is a balance and trade off to define phonetic and morphotactic rules for these kind of words in here and defining
+ * the rules in the {@link SuffixGraph}. More added here results in a more hardcoded system. More added in the
+ * {@link SuffixGraph} results in a hard-to-maintain graph. Current approach is to define rules here if the exception is
+ * for less than 3 roots and these roots are frequent ones in Turkish.
+ */
 public class PredefinedPaths {
 
     private final SuffixGraph suffixGraph;
@@ -109,13 +136,23 @@ public class PredefinedPaths {
     }
 
     void createPredefinedPathOf_di() {
+        // the only documented one. you get the idea for the others ;)
+
         final Root root_di = this.findRoot("di", PrimaryPos.Verb, null);
 
         final Suffix Positive = this.suffixGraph.getSuffix("Pos");
         final Suffix Negative = this.suffixGraph.getSuffix("Neg");
 
+        // all possible routes in the SuffixGraph for root "di" of dictionary item "demek"
+        // since root "de" for the same item is not irregular, we don't define paths for it
+        // --> it is traversed within the regular Turkish suffix graph with regular morhpotactics and phonetics
+
+        //one path is di+Positive(EMPTY_STR)+Future("yecek") -> diyecek.
+        // it is irregular since the regular form, demek+Future->"deyecek", is not valid
         this.pathBuilder(root_di).s(Positive).s("Fut", "yecek").add();
+        //one path is di+Positive(EMPTY_STR)+Future("yeceğ") -> diyeceğ
         this.pathBuilder(root_di).s(Positive).s("Fut", "yeceğ").add();
+        //..
         this.pathBuilder(root_di).s(Positive).s("Future_to_Adj", "yecek").add();
         this.pathBuilder(root_di).s(Positive).s("Future_to_Adj", "yeceğ").add();
         this.pathBuilder(root_di).s(Positive).s("FutPart_Noun", "yecek").add();
@@ -123,16 +160,23 @@ public class PredefinedPaths {
         this.pathBuilder(root_di).s(Positive).s("FutPart_Adj", "yecek").add();
         this.pathBuilder(root_di).s(Positive).s("FutPart_Adj", "yeceğ").add();
 
+        //one path is di+Positive(EMPTY_STR)+Progressive("yor") -> diyor
         this.pathBuilder(root_di).s(Positive).s("Prog", "yor").add();
 
+        //one path is di+Positive(EMPTY_STR)+PresentParticle("yen") -> diyen
         this.pathBuilder(root_di).s(Positive).s("PresPart", "yen").add();
 
+        //one path is di+Positive(EMPTY_STR)+Ability("yebil") -> diyebil
         this.pathBuilder(root_di).s("Able", "yebil").s(Positive).add();
+        //one path is di+Ability(ye)+Negative("me") -> diyeme
         this.pathBuilder(root_di).s("Able", "ye").s(Negative, "me").add();
+        //one path is di+Ability(ye)+WithoutHavingDoneSo("meden") -> diyemeden
         this.pathBuilder(root_di).s("Able", "ye").s(Negative, "").s("WithoutHavingDoneSo", "meden").add();
 
+        //..
         this.pathBuilder(root_di).s(Positive).s("Opt", "ye").add();
 
+        //..
         this.pathBuilder(root_di).s(Positive).s("ByDoingSo", "yerek").add();
 
     }
