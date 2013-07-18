@@ -44,7 +44,8 @@ public class RootValidator {
         if (root.getLexeme().getAttributes().contains(LexemeAttribute.CompoundP3sg))
             return true;
 
-        return partialSurface.getUnderlyingString().toLowerCase().startsWith(rootSequence.getUnderlyingString());
+        return partialSurface.startsWith(rootSequence) ||
+                partialSurface.getUnderlyingString().toLowerCase().startsWith(rootSequence.getUnderlyingString());
 
     }
 
