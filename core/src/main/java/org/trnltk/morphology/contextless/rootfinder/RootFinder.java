@@ -21,6 +21,9 @@ import org.trnltk.model.letter.TurkishSequence;
 
 import java.util.Collection;
 
+/**
+ * Contract for finding roots from a part of a surface.
+ */
 public interface RootFinder {
 
     /**
@@ -38,5 +41,10 @@ public interface RootFinder {
      */
     public boolean handles(TurkishSequence partialInput, TurkishSequence wholeSurface);
 
+    /**
+     * Returns all roots find from the partial surface. Whole surface could be used for doing some look-ahead checks.
+     * <p/>
+     * Returned roots must pass the check defined in {@link RootValidator}
+     */
     public Collection<? extends Root> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence wholeSurface);
 }

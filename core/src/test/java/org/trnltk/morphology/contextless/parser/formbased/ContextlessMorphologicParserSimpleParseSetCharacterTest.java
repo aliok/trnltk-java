@@ -74,7 +74,7 @@ public class ContextlessMorphologicParserSimpleParseSetCharacterTest extends Bas
         final PuncRootFinder puncRootFinder = new PuncRootFinder();
 
 
-        final RootFinderChain rootFinderChain = new RootFinderChain()
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(puncRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(rangeDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(ordinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)

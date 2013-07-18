@@ -6,6 +6,7 @@ import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
@@ -34,7 +35,7 @@ public class ContextlessMorphologicParserFactory {
         HashMultimap<String, ? extends Root> rootMap = RootMapFactory.createSimple();
 
         // create chained root finders
-        RootFinderChain rootFinderChain = new RootFinderChain();
+        RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
         rootFinderChain.offer(new DictionaryRootFinder(rootMap), RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED);
 
         // create predefined paths

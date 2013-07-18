@@ -75,7 +75,7 @@ public class ContextlessMorphologicParserCopulaSuffixGraphTest extends BaseConte
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
         final SuffixFormGraph charSuffixGraph = charSuffixGraphExtractor.extract(copulaSuffixGraph);
 
-        final RootFinderChain rootFinderChain = new RootFinderChain();
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
         rootFinderChain
                 .offer(puncRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(rangeDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)

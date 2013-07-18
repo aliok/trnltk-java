@@ -27,7 +27,12 @@ import java.util.List;
 
 public class RootFinderChain {
 
+    private RootValidator rootValidator;
     private LinkedList<RootFinderChainItem> rootFinderChainItems = new LinkedList<RootFinderChainItem>();
+
+    public RootFinderChain(RootValidator rootValidator) {
+        this.rootValidator = rootValidator;
+    }
 
     public RootFinderChain offer(RootFinder rootFinder, RootFinderPolicy rootFinderPolicy) {
         if (RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED.equals(rootFinderPolicy)) {
@@ -50,8 +55,13 @@ public class RootFinderChain {
             if (!rootFinder.handles(partialInput, input))
                 continue;
             final Collection<? extends Root> rootsForPartialInput = rootFinder.findRootsForPartialInput(partialInput, input);
-            if (CollectionUtils.isNotEmpty(rootsForPartialInput))
+            if (CollectionUtils.isNotEmpty(rootsForPartialInput)) {
+                //roots must be beginning of the partial input
+                for (Root rootForPartialInput : rootsForPartialInput) {
+                    Validate.isTrue(rootValidator.isValid(rootForPartialInput, partialInput), "Invalid root " + rootForPartialInput.toString() + " for partial input " + partialInput);
+                }
                 roots.addAll(rootsForPartialInput);
+            }
 
             if (RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED.equals(rootFinderPolicy))
                 break;

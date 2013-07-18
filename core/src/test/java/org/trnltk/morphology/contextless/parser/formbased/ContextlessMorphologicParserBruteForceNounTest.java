@@ -25,6 +25,7 @@ import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
@@ -66,7 +67,7 @@ public class ContextlessMorphologicParserBruteForceNounTest extends BaseContextl
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
         final SuffixFormGraph charSuffixGraph = charSuffixGraphExtractor.extract(basicSuffixGraph);
 
-        final RootFinderChain rootFinderChain = new RootFinderChain()
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(bruteForceNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
         this.parser = new ContextlessMorphologicParser(charSuffixGraph, null, rootFinderChain, suffixApplier);

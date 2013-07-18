@@ -71,7 +71,7 @@ public class ContextlessMorphologicParserNumeralSuffixGraphTest extends BaseCont
         final RootFinder ordinalDigitsRootFinder = new OrdinalDigitsRootFinder();
         final RootFinder cardinalDigitsRootFinder = new CardinalDigitsRootFinder();
 
-        final RootFinderChain rootFinderChain = new RootFinderChain()
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(rangeDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(ordinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(cardinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)

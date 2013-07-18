@@ -25,6 +25,7 @@ import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
+import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
@@ -67,7 +68,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, new PhoneticsAnalyzer(), phoneticAttributeSets);
         final SuffixFormGraph charSuffixGraph = charSuffixGraphExtractor.extract(suffixGraph);
 
-        final RootFinderChain rootFinderChain = new RootFinderChain();
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
         rootFinderChain.offer(new DictionaryRootFinder(clonedRootMap), RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
         final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));

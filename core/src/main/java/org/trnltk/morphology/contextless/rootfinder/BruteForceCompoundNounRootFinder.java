@@ -113,6 +113,11 @@ public class BruteForceCompoundNounRootFinder implements RootFinder {
         // results_with_partial_input_one_char_missing : <'suborus','suborus'>
         // partial_input = bacakkalemi, whole_surface = bacakkalemini
         // results_with_partial_input_one_char_missing : <'bacakkalem','bacakkalem'>
+        // partial_input = atkuyrugu, whole_surface=atkuyruguna
+        // results_with_partial_input_one_char_missing : <'atkuyruk', 'atkuyrug', 'atkuyrugh'>
+
+        // these are all roots of noun compound. so the lexeme can be derived from any of
+        // atkuyruk+u, atkuyrug+u, atkuyrugh+u
 
         for (DynamicRoot normalNounResult : resultsWithPartialInputOneCharMissing) {
             final DynamicRoot cloneResult = new DynamicRoot(normalNounResult);

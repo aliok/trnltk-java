@@ -29,6 +29,7 @@ import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
@@ -68,7 +69,7 @@ public class ContextlessMorphologicParserSimpleParseSetSpeedTest extends BaseCon
 
         predefinedPaths.initialize();
 
-        final RootFinderChain rootFinderChain = new RootFinderChain()
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(new DictionaryRootFinder(clonedRootMap), RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
         final PhoneticAttributeSets phoneticAttributeSets = new PhoneticAttributeSets();

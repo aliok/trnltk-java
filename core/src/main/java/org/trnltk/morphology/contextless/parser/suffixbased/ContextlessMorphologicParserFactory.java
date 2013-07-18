@@ -39,7 +39,7 @@ import java.util.HashSet;
 public class ContextlessMorphologicParserFactory {
 
     private SuffixGraph suffixGraph;
-    private RootFinderChain rootFinderChain = new RootFinderChain();
+    private RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
     private PredefinedPaths predefinedPaths;
     private SuffixApplier suffixApplier;
 

@@ -19,10 +19,7 @@ package org.trnltk.morphology.contextless.parser.formbased;
 import com.google.common.collect.HashMultimap;
 import org.junit.Before;
 import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserProperNounSuffixGraphTest;
-import org.trnltk.morphology.contextless.rootfinder.ProperNounFromApostropheRootFinder;
-import org.trnltk.morphology.contextless.rootfinder.ProperNounWithoutApostropheRootFinder;
-import org.trnltk.morphology.contextless.rootfinder.RootFinder;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
@@ -61,7 +58,7 @@ public class ContextlessMorphologicParserProperNounSuffixGraphTest extends BaseC
         final RootFinder properNounFromApostropheRootFinder = new ProperNounFromApostropheRootFinder();
         final ProperNounWithoutApostropheRootFinder properNounWithoutApostropheRootFinder = new ProperNounWithoutApostropheRootFinder();
 
-        final RootFinderChain rootFinderChain = new RootFinderChain()
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(properNounFromApostropheRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(properNounWithoutApostropheRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 

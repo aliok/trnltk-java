@@ -18,8 +18,6 @@ package org.trnltk.web.morphology.parser;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import org.trnltk.morphology.contextless.rootfinder.RootFinder;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.*;
 
 import javax.annotation.PostConstruct;
@@ -114,7 +112,7 @@ public class RootFinderSelectionData implements Serializable {
             }
         });
 
-        final RootFinderChain rootFinderChain = new RootFinderChain();
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
 
         for (RootFinderOption option : rootFinderOptionsToUse) {
             if (this.convertCircumflexes)
