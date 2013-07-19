@@ -23,15 +23,70 @@ The morphologic parser we are talking here finds all possible parse results for 
 *contextless*.
 
 ## Creating a Parser ##
+Default parser implementation has many parts and dependencies.
+For simple cases, please use `ContextlessMorphologicalParserFactory`:
 
+```java
+// create a morphologic parser with simplest suffix graph, roots from bundled dictionary,
+// no roots from bundled numeral dictionary
+ContextlessMorphologicParser parser = ContextlessMorphologicParserFactory.createSimple();
+```
 
+This code snippet gives you a parser which uses
+* a basic suffix graph : simplest suffix graph for Turkish morphotactics
+* a dictionary root finder : a root finder which only tries finding roots in the non-numeral dictionary
+
+For most of the cases, this is not sufficient since it does not include
+* punctuation morphotactics (ie. punctuation suffix graph)
+* numeral morphotactics (ie. numeral suffix graph)
+* proper noun morphotactics (ie. proper noun suffix graph)
+* copula morphotactics (ie. copula suffix graph)
+* numeral dictionary roots
+* brute force root finders
+* ...
+
+However, it is still very good since it is able to parse 80% of words in Turkish.
+
+Then you can use the parser as shown following:
+```java
+// parse surface
+List<MorphemeContainer> morphemeContainers = parser.parseStr("eti");
+```
+
+All possible parse results are returned.
+
+Let's print results:
+```java
+// print results
+for (MorphemeContainer morphemeContainer : morphemeContainers) {
+    // printing format is the simplest one : no suffix form applications, no grouping
+    System.out.println(MorphemeContainerFormatter.formatMorphemeContainer(morphemeContainer));
+}
+```
+This produces the following output:
+```
+et+Noun+A3sg+P3sg+Nom
+et+Noun+A3sg+Pnon+Acc
+```
+
+Since the parser is contextless (it doesn't know the context), it returns all possible parse results for all scenarios.
+* et+Noun+A3sg+P3sg+Nom : *onun eti*
+* et+Noun+A3sg+Pnon+Acc : *bu eti*
+
+You may find the example [here](/core/src/doc/org/trnltk/doc/simpleparsing/SimpleParsing.java).
 
 ## Formatting Options ##
 
-Oflazer
-with forms
-Sabanci metu corpus
-etc.
+You might want to compare results with other parsers or other corpus. TRNLTK offers different formatting options to
+make this comparison or integration easy. For the word *kitaba* and the parse result 'kitap+Noun+A3sg+Pnon+Dat', here
+are the illustrations:
+
+* Oflazer format : MorphemeContainerFormatter.formatMorphemeContainer(result) = `kitap+Noun+A3sg+Pnon+Dat`
+* TRNLTK detailed format : MorphemeContainerFormatter.formatMorphemeContainerDetailed(result) = `{"Parts":[{"POS":"Noun","Suffixes":["A3sg","Pnon","Dat"]}],"LemmaRoot":"kitap","RootPos":"Noun","Root":"kitab"}`
+* Metu-Sabanci corpus format : MorphemeContainerFormatter.formatMorphemeContainerWithDerivationGrouping(result) = `(1,"kitap+Noun+A3sg+Pnon+Dat")`
+* TRNLTK format : MorphemeContainerFormatter.formatMorphemeContainerWithForms(result) = `kitab(kitap)+Noun+A3sg+Pnon+Dat(+yA[a])`
+
+You may find the example [here](/core/src/doc/org/trnltk/doc/formattingoptions/FormattingOptions.java).
 
 ## Advanced Usage ##
 

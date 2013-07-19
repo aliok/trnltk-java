@@ -14,6 +14,10 @@ import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
 public class ContextlessMorphologicParserFactory {
+    /**
+     * Creates a morphologic parser with simplest suffix graph, roots from bundled dictionary,
+     * no roots from bundled numeral dictionary
+     */
     public static ContextlessMorphologicParser createSimple() {
         // create common phonetic and morphotactic parts
         PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
