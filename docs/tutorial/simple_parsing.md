@@ -23,7 +23,9 @@ The morphologic parser we are talking here finds all possible parse results for 
 *contextless*.
 
 ## Creating a Parser ##
-Default parser implementation has many parts and dependencies.
+Default parser implementation has many parts and dependencies. To simplify creation of a parser there is a factory
+which creates some predefined parsers.
+
 For simple cases, please use `ContextlessMorphologicalParserFactory`:
 
 ```java
