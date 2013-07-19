@@ -42,6 +42,7 @@ import org.trnltk.model.suffix.SuffixTransition;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
@@ -147,7 +148,7 @@ public class CharSuffixGraphExtractorDrawingApp {
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(new SuffixFormSequenceApplier(), new PhoneticsAnalyzer(), new MockPhoneticAttributeSets());
         charSuffixGraphExtractor.extract(suffixGraph);
 
-        final RootFinderChain rootFinderChain = new RootFinderChain();
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
         rootFinderChain.offer(new DictionaryRootFinder(rootMap), RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
         final ContextlessMorphologicParser contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, null, rootFinderChain, new SuffixApplier(new PhoneticsEngine(new SuffixFormSequenceApplier())));
