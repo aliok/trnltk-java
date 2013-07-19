@@ -1,47 +1,44 @@
+""" Copyright 2012-2013 Ali Ok (aliokATapacheDOTorg)
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. """
+
 Turkish Natural Language Toolkit
-=============
-This project is a port of [TRNLTK Python](https://github.com/aliok/trnltk)
+================================
+This project provides a toolkit for computer linguistic work for Turkish.
 
-TRNLTK is rewritten in Java.
+Currently a morphologic parser and a tokenizer is provided. Biggest challenge is providing an ambiguity resolver.
 
-See documentation [here](docs/README.md)
+Project first implemented in Python, [TRNLTK Python](https://github.com/aliok/trnltk), then Java.
+Python project is obsolete.
 
 [![Build Status](https://drone.io/github.com/aliok/trnltk-java/status.png)](https://drone.io/github.com/aliok/trnltk-java/latest)
+
+*See [documentation, tutorial and cookbook](docs/README.md)*
 
 News:
 -----
   * TRNLTK 1.0.2 is released : [Release notes](docs/102.md)
 
 
-Some definitions
-----------------
-<!---
-Example Term
-gideceğini Surface
-gideceğini+Noun Surface+SurfacePos
-gidecek Body
-gidecek+Noun Body+BodyPos
-gideceğ BodySurface
-gitmek Lemma
-gitmek+Verb Lemma+LemmaPos=Lexeme
-git Root
-gid RootSurface
-(y)AcAk SuffixForm
-ecek SuffixFormBody
-eceğ SuffixFormSurface
+Motivation
+========================
+Why another parsing tool and why FSM?
 
-Term Value Value Value
-WordSurface kitapçılığı
-Stems kitap kitapçı kitapçılık
-StemSurfaces kitap kitapçı kitapçılığ
-Body kitapçılık
-BodySurface kitapçılığ
+I've inspected other other approaches and I saw that tracking the problems are very hard with them.
+For example, one approach is creating a suffix graph by defining what suffix can come after other suffix.
+But with that approach it is impossible to have an overview of the graph, since there would be thousands of nodes and edges.
 
--->
-<!---
-Tables below are generated using http://www.sensefulsolutions.com/2010/10/format-text-as-table.html
--->
-<table><tbody><tr><th>Example</th><th>Term</th></tr><tr><td>gideceğini</td><td>Surface</td></tr><tr><td>gideceğini+Noun</td><td>Surface+SurfacePos</td></tr><tr><td>gidecek</td><td>Body</td></tr><tr><td>gidecek+Noun</td><td>Body+BodyPos</td></tr><tr><td>gideceğ</td><td>BodySurface</td></tr><tr><td>gitmek</td><td>Lemma</td></tr><tr><td>gitmek+Verb</td><td>Lemma+LemmaPos=Lexeme</td></tr><tr><td>git</td><td>Root</td></tr><tr><td>gid</td><td>RootSurface</td></tr><tr><td>(y)AcAk</td><td>SuffixForm</td></tr><tr><td>ecek</td><td>SuffixFormBody</td></tr><tr><td>eceğ</td><td>SuffixFormSurface</td></tr></tbody></table>
+*See [documentation](docs/README.md) for more information.*
 
-<table><tbody><tr><th>Term</th><th>Value</th><th>Value</th><th>Value</th></tr><tr><td>WordSurface</td><td>kitapçılığı</td><td> </td><td> </td></tr><tr><td>Stems</td><td>kitap</td><td>kitapçı</td><td>kitapçılık</td></tr><tr><td>StemSurfaces</td><td>kitap</td><td>kitapçı</td><td>kitapçılığ</td></tr><tr><td>Body</td><td>kitapçılık</td><td> </td><td> </td></tr><tr><td>BodySurface</td><td>kitapçılığ</td><td> </td><td> </td></tr></tbody></table>
 
+Phonetic rules and implementation is similar to from open-source java library Zemberek3.
+
+How it is tested?
+=================
+There are thousands of parsing unit tests. Plus, I use the treebank from METU-Sabanci, but is closed-source.
+Unfortunately, its license doesn't allow anyone to publish any portion of the treebank,
+thus I only test the parser against it in my local environment.
