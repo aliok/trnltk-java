@@ -81,13 +81,21 @@ You might want to compare results with other parsers or other corpus. TRNLTK off
 make this comparison or integration easy. For the word *kitaba* and the parse result 'kitap+Noun+A3sg+Pnon+Dat', here
 are the illustrations:
 
-* Oflazer format : MorphemeContainerFormatter.formatMorphemeContainer(result) = `kitap+Noun+A3sg+Pnon+Dat`
-* TRNLTK detailed format : MorphemeContainerFormatter.formatMorphemeContainerDetailed(result) = `{"Parts":[{"POS":"Noun","Suffixes":["A3sg","Pnon","Dat"]}],"LemmaRoot":"kitap","RootPos":"Noun","Root":"kitab"}`
-* Metu-Sabanci corpus format : MorphemeContainerFormatter.formatMorphemeContainerWithDerivationGrouping(result) = `(1,"kitap+Noun+A3sg+Pnon+Dat")`
-* TRNLTK format : MorphemeContainerFormatter.formatMorphemeContainerWithForms(result) = `kitab(kitap)+Noun+A3sg+Pnon+Dat(+yA[a])`
+* Oflazer format
+  MorphemeContainerFormatter.formatMorphemeContainer(result)
+  `kitap+Noun+A3sg+Pnon+Dat`
+* TRNLTK detailed format
+  MorphemeContainerFormatter.formatMorphemeContainerDetailed(result)
+  `{"Parts":[{"POS":"Noun","Suffixes":["A3sg","Pnon","Dat"]}],"LemmaRoot":"kitap","RootPos":"Noun","Root":"kitab"}`
+* Metu-Sabanci corpus format
+  MorphemeContainerFormatter.formatMorphemeContainerWithDerivationGrouping(result)
+  `(1,"kitap+Noun+A3sg+Pnon+Dat")`
+* TRNLTK format
+  MorphemeContainerFormatter.formatMorphemeContainerWithForms(result)
+  `kitab(kitap)+Noun+A3sg+Pnon+Dat(+yA[a])`
 
 You may find the example [here](/core/src/doc/org/trnltk/doc/formattingoptions/FormattingOptions.java).
 
 ## Advanced Usage ##
 
-See advanced_parsing.md
+See [advanced_parsing.md](advanced_parsing.md)
