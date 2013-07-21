@@ -17,7 +17,7 @@ Python project is obsolete.
 
 [![Build Status](https://drone.io/github.com/aliok/trnltk-java/status.png)](https://drone.io/github.com/aliok/trnltk-java/latest)
 
-*See [documentation, tutorial and cookbook](docs/README.md)*
+**See [documentation, tutorial and cookbook](docs/README.md)**
 
 News:
 -----
@@ -32,7 +32,7 @@ I've inspected other other approaches and I saw that tracking the problems are v
 For example, one approach is creating a suffix graph by defining what suffix can come after other suffix.
 But with that approach it is impossible to have an overview of the graph, since there would be thousands of nodes and edges.
 
-*See [documentation](docs/README.md) for more information.*
+**See [documentation](docs/README.md) for more information.**
 
 
 Phonetic rules and implementation is similar to from open-source java library Zemberek3.

@@ -9,6 +9,7 @@
   * [Tokenization](tutorial/tokenization.md)
   * [Caching](tutorial/caching.md)
   * [Brute force](tutorial/brute_force.md)
+  * [Logging](logging.md)
 
 ## Cookbook ##
   * [Spell check](cookbook/spell_check.md)
