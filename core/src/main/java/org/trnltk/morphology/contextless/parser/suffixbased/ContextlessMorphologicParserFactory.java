@@ -34,7 +34,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * @deprecated Use {@link org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserFactory}
+ * @deprecated Use {@link org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder}
  */
 public class ContextlessMorphologicParserFactory {
 

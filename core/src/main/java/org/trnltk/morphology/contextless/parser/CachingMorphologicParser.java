@@ -42,6 +42,7 @@ public class CachingMorphologicParser implements MorphologicParser {
         this.cache = cache;
         this.delegate = delegate;
         this.useLocalCache = useLocalCache;
+        this.cache.build(delegate);
     }
 
     /**

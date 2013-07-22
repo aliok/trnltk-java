@@ -19,6 +19,7 @@ package org.trnltk.morphology.contextless.parser.cache;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 
 import java.util.List;
 import java.util.Map;
@@ -78,5 +79,10 @@ public class LRUMorphologicParserCache implements MorphologicParserCache {
         synchronized (this.cache) {
             this.cache.putAll(map);
         }
+    }
+
+    @Override
+    public void build(MorphologicParser parser) {
+        // od nothing since it is an online cache
     }
 }

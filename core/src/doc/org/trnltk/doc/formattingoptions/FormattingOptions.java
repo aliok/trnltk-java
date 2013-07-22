@@ -1,15 +1,16 @@
 package org.trnltk.doc.formattingoptions;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserFactory;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder;
 import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.List;
 
 public class FormattingOptions {
     public static void main(String[] args) {
-        final ContextlessMorphologicParser parser = ContextlessMorphologicParserFactory.createSimple();
+        final MorphologicParser parser = ContextlessMorphologicParserBuilder.createSimple();
         final List<MorphemeContainer> morphemeContainers = parser.parseStr("kitaba");
 
         // there should be only one, get it

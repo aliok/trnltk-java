@@ -19,21 +19,21 @@ package org.trnltk.util;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserFactory;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class MorphemeContainerFormatterTest {
 
-    private ContextlessMorphologicParser parser;
+    private MorphologicParser parser;
 
     @Before
     public void setUp() throws Exception {
-        this.parser = ContextlessMorphologicParserFactory.createSimple();
+        this.parser = ContextlessMorphologicParserBuilder.createSimple();
     }
 
 

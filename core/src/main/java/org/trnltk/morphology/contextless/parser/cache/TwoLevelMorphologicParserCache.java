@@ -17,6 +17,7 @@
 package org.trnltk.morphology.contextless.parser.cache;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -104,4 +105,11 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
         }
     }
 
+    @Override
+    public void build(MorphologicParser parser) {
+        // cannot build self, since it is online.
+        // but l1Cache might need building
+        l1Cache.build(parser);
+
+    }
 }

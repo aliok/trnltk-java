@@ -17,6 +17,7 @@
 package org.trnltk.morphology.contextless.parser.cache;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.MorphologicParser;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,9 @@ public interface MorphologicParserCache {
     void put(String input, List<MorphemeContainer> morphemeContainers);
 
     void putAll(Map<String, List<MorphemeContainer>> map);
+
+    /**
+     * Build the cache, ie. parse the values to be stored in the cache.
+     */
+    void build(MorphologicParser parser);
 }

@@ -73,6 +73,10 @@ public class RootFinderChain {
         return roots;
     }
 
+    public boolean hasRootFinders() {
+        return !rootFinderChainItems.isEmpty();
+    }
+
     public enum RootFinderPolicy {
         STOP_CHAIN_WHEN_INPUT_IS_HANDLED,
         CONTINUE_ON_CHAIN

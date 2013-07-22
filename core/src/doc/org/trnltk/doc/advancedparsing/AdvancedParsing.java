@@ -18,29 +18,29 @@ import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
 public class AdvancedParsing {
 
-    public static void main(String[] args) {
-        MorphologicParser parser1 = buildParser1();
-
-
-    }
-
-    private static MorphologicParser buildParser1() {
-        final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
-        final PhoneticAttributeSets phoneticAttributeSets = new PhoneticAttributeSets();
-
-        final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
-        final PhoneticsEngine phoneticsEngine = new PhoneticsEngine(suffixFormSequenceApplier);
-        final SuffixApplier suffixApplier = new SuffixApplier(phoneticsEngine);
-
-        final SuffixFormGraphExtractor suffixFormGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
-
-        final SuffixGraph suffixGraph = new NumeralSuffixGraph(new BasicSuffixGraph());
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap);
-
-        final RootFinderChain rootFinderChain;
-        final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
-
-        return new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
-    }
+//    public static void main(String[] args) {
+//        MorphologicParser parser1 = buildParser1();
+//
+//
+//    }
+//
+//    private static MorphologicParser buildParser1() {
+//        final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+//        final PhoneticAttributeSets phoneticAttributeSets = new PhoneticAttributeSets();
+//
+//        final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
+//        final PhoneticsEngine phoneticsEngine = new PhoneticsEngine(suffixFormSequenceApplier);
+//        final SuffixApplier suffixApplier = new SuffixApplier(phoneticsEngine);
+//
+//        final SuffixFormGraphExtractor suffixFormGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
+//
+//        final SuffixGraph suffixGraph = new NumeralSuffixGraph(new BasicSuffixGraph());
+//        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap);
+//
+//        final RootFinderChain rootFinderChain;
+//        final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
+//
+//        return new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+//    }
 
 }

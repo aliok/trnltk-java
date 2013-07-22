@@ -70,5 +70,4 @@ and by limited graph and roots it is quite fast.
 
 
 ## Summary ##
-Builder and factory for ContextlessMorphologicParser
-https://github.com/aliok/trnltk-java/issues/5
+...
