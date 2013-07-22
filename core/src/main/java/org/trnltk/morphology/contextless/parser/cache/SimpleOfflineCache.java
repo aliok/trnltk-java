@@ -36,7 +36,7 @@ public class SimpleOfflineCache implements MorphologicParserCache {
      * Builds a cache with values from bundled list of most frequent 20K words in Turkish.
      */
     public SimpleOfflineCache() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-dictionary.dict"), Charset.forName("utf-8"));
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("top20kwords.txt"), Charset.forName("utf-8"));
         final List<String> lines;
         try {
             lines = CharStreams.readLines(supplier);

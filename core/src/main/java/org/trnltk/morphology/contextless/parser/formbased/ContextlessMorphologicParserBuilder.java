@@ -9,7 +9,6 @@ import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.cache.SimpleOfflineCache;
-import org.trnltk.morphology.contextless.parser.cache.TwoLevelMorphologicParserCache;
 import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.*;
@@ -72,7 +71,7 @@ public class ContextlessMorphologicParserBuilder {
             if (this.suffixGraph == null)
                 this.includeAllBundledSuffixGraphs();
             if (!this.rootFinderChain.hasRootFinders())
-                this.addAllBundledNoBruteForceRootFinders();
+                this.addAllBundledNoBruteForceRootFinders(true);
         } else {
             Validate.notNull(suffixGraph, "No suffix graph included!");
             Validate.notNull(rootFinderChain.hasRootFinders(), "No root finders added!");
@@ -108,7 +107,7 @@ public class ContextlessMorphologicParserBuilder {
             return parser;
     }
 
-    public ContextlessMorphologicParserBuilder addAllBundledNoBruteForceRootFinders() {
+    public ContextlessMorphologicParserBuilder addAllBundledNoBruteForceRootFinders(boolean includeProperNounRootFinders) {
         final DictionaryRootFinder dictionaryRootFinder = new DictionaryRootFinder(_dictionaryRootMap);
         final RangeDigitsRootFinder rangeDigitsRootFinder = new RangeDigitsRootFinder();
         final OrdinalDigitsRootFinder ordinalDigitsRootFinder = new OrdinalDigitsRootFinder();
@@ -122,10 +121,13 @@ public class ContextlessMorphologicParserBuilder {
                 .offer(puncRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(rangeDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
                 .offer(ordinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
-                .offer(cardinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
-                .offer(properNounFromApostropheRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
-                .offer(properNounWithoutApostropheRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
-                .offer(dictionaryRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
+                .offer(cardinalDigitsRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED);
+        if (includeProperNounRootFinders)
+            rootFinderChain
+                    .offer(properNounFromApostropheRootFinder, RootFinderChain.RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED)
+                    .offer(properNounWithoutApostropheRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
+
+        rootFinderChain.offer(dictionaryRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
         return this;
     }
@@ -147,7 +149,7 @@ public class ContextlessMorphologicParserBuilder {
      * Adds all bundled root finders : brute force and no brute force
      */
     public ContextlessMorphologicParserBuilder addAllBundledRootFinders() {
-        this.addAllBundledNoBruteForceRootFinders();
+        this.addAllBundledNoBruteForceRootFinders(true);
         this.addAllBundledBruteForceRootFinders();
 
         return this;
@@ -240,7 +242,7 @@ public class ContextlessMorphologicParserBuilder {
     public static MorphologicParser createSimple() {
         return newBuilderWithoutCircumflexConversion()
                 .includeBundledBasicSuffixGraph()
-                .addAllBundledNoBruteForceRootFinders()
+                .addAllBundledNoBruteForceRootFinders(false)
                 .build(true);
     }
 
