@@ -1,3 +1,7 @@
+**NOTICE** : Please make use of project being open. If you don't understand what a part is doing, please check its
+ tests. We believe that is the best way of learning how to extend things. Naming convention for the tests is very easy.
+   Just search for a class named "NameOfTheMysteryClass" + "Test" : e.g. "PhoneticsAnalyzer" -> "PhoneticsAnalyzerTest"
+
 ## Glossary ##
   * [Glossary](tutorial/glossary.md)
 
