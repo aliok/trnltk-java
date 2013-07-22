@@ -16,7 +16,7 @@ the number of parse results for surfaces; it is great for reducing ambiguity. If
 such as proper nouns, punctuations or numerals, you can just skip adding the root finders and suffix graphes for them. That
 way everything is faster.
 
-Another example is excluding copula suffix graph. That way, parser does not know about the case in Turkish where
+Another example is excluding copula suffix graph. That way, parser is not aware about the case in Turkish where
 all words can also be used as verbs.
 
 ## Suffix Graphs ##
@@ -34,7 +34,7 @@ See the following example for surface `Yedi`:
 * ProperNounGraph -> `Yedi+Noun+Prop+A3sg+Pnon+Nom` ('Yedi' as proper noun)
 * BasicSuffixGraph + NumeralSuffixGraph -> `ye+Verb+Pos+Past+A3sg` (yemek yedi) and `yedi+Num` (yedi masa)
 * ...
-* All three suffix graph -> all 3 parse results
+* All three suffix graphes -> all 3 parse results
 
 
 See *[Suffix Graphs Explained](suffix_graphs_explained.md)* for details.
@@ -46,7 +46,7 @@ Some bundled `RootFinder`s are:
 * `DictionaryRootFinder` finds roots defined in a dictionary. For example `at(mak)` and `ata(mak)` for surface `atamadım`
 * `CardinalDigitsRootFinder` extracts cardinal number roots from a surface. For example `32` for surface `32'yi`
 * `OrdinalDigitsRootFinder` extracts ordinal number roots from a surface. For example `32.` for surface `32.'yi`
-...
+* ...
 
 Any number of `RootFinder`s can be injected to a parser. That way you can limit or improve the matching of roots.
 

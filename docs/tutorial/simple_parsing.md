@@ -110,4 +110,4 @@ You may find the example [here](/core/src/doc/org/trnltk/doc/formattingoptions/F
 
 ## Advanced Usage ##
 
-See [advanced_parsing.md](advanced_parsing.md)
+*See [Advanced Parsing](advanced_parsing.md) for a more detailed tutorial.*
