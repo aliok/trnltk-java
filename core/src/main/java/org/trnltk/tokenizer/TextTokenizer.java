@@ -20,9 +20,8 @@ import com.google.common.collect.*;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
-import org.trnltk.tokenizer.*;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Set;
@@ -140,7 +139,7 @@ public class TextTokenizer {
                     .blockSize(2)
                     .graph(graph)
                     .build();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

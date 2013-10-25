@@ -27,6 +27,7 @@ import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 import org.trnltk.util.DiffUtil;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -148,7 +149,7 @@ public class TextTokenizerTrainer {
         return graph;
     }
 
-    public static TokenizationGraph buildDefaultTokenizationGraph(boolean recordExamples) throws FileNotFoundException {
+    public static TokenizationGraph buildDefaultTokenizationGraph(boolean recordExamples) throws IOException {
         final Splitter lineSplitter = Splitter.on(CharMatcher.anyOf("\n\r")).trimResults().omitEmptyStrings();
 
         final TokenizerTrainingData defaultTrainingData = TokenizerTrainingData.createDefaultTrainingData();

@@ -1,0 +1,99 @@
+<!--
+  ~ Copyright  2013  Ali Ok (aliokATapacheDOTorg)
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<ui:composition template="basetemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h:form prependId="false" styleClass="form-horizontal">
+            <fieldset>
+                <legend>Create training file / Append to training file</legend>
+
+                <div class="control-group">
+                    <h:outputLabel styleClass="control-label" value="File name"
+                                   for="fileName"/>
+
+                    <div class="controls">
+                        <h:inputText id="fileName" value="#{trainingFileData.fileName}" required="true"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h:outputLabel styleClass="control-label" value="Content"
+                                   for="content"/>
+
+                    <div class="controls">
+                        <h:inputTextarea id="content" value="#{trainingFileData.content}" required="true"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h:outputLabel styleClass="control-label" value="Strict tokenization"
+                                   for="strictTokenization"/>
+
+                    <div class="controls">
+                        <h:selectBooleanCheckbox id="strictTokenization"
+                                                 value="#{trainingFileData.strictTokenization}"/>
+                    </div>
+                </div>
+
+                <button id="createButton" type="button" class="btn btn-large btn-primary">
+                    Tokenize and create
+                </button>
+                <h:graphicImage id="loadingImg" style="display: none;" library="img" name="ajaxloading.gif"
+                                alt="Loading..."/>
+
+            </fieldset>
+
+            <h:messages showDetail="true"/>
+
+            <p:remoteCommand id="createTrainingFile" name="createTrainingFile" action="#{trainingFileCreator.create}"
+                             process="@form"
+                             global="true" onstart="jQuery('#loadingImg').show();"
+                             oncomplete="handleCreateComplete(xhr, status, args);"
+                             update="@form"/>
+        </h:form>
+
+        <script>
+            function handleCreateComplete(xhr, status, args) {
+                jQuery('#loadingImg').hide();
+
+                var xmlDoc = xhr.responseXML;
+                var errorNodes = xmlDoc.getElementsByTagName('error-name');
+                if (errorNodes.length != 0) {
+                    var errorName = errorNodes[0].childNodes[0].nodeValue;
+                    if (errorName) {
+                        alert('Error occurred ' + errorName);
+                        return;
+                    }
+                }
+            }
+
+            $(document).ready(function () {
+                jQuery('#createButton').live('click', function (e) {
+                    jQuery('#loadingImg').show();
+                    createTrainingFile();
+                });
+
+            });
+        </script>
+    </ui:define>
+
+</ui:composition>

@@ -30,7 +30,6 @@ import org.trnltk.app.AppRunner;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +40,7 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
     TextTokenizer relaxedTokenizer;
     TextTokenizer fastRelaxedTokenizer;
 
-    public TextTokenizerCorpusApp() throws FileNotFoundException {
+    public TextTokenizerCorpusApp() throws IOException {
         super();
 
         relaxedTokenizer = TextTokenizer.newBuilder()

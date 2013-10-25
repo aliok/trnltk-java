@@ -16,15 +16,13 @@
 
 package org.trnltk.tokenizer.data;
 
+import com.google.common.io.InputSupplier;
 import com.google.common.io.Resources;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 public class TokenizerTrainingData {
@@ -38,8 +36,9 @@ public class TokenizerTrainingData {
         this.entries = entries;
     }
 
-    public static TokenizerTrainingData createDefaultTrainingData() throws FileNotFoundException {
-        return createFromYamlFile(new File(Resources.getResource("tokenizer/training-data.yaml").getFile()));
+    public static TokenizerTrainingData createDefaultTrainingData() throws IOException {
+        final InputSupplier<InputStream> inputStreamInputSupplier = Resources.newInputStreamSupplier(Resources.getResource("tokenizer/training-data.yaml"));
+        return createFromYamlInputStream(inputStreamInputSupplier.getInput());
     }
 
     public static TokenizerTrainingData createFromYamlFile(File file) throws FileNotFoundException {

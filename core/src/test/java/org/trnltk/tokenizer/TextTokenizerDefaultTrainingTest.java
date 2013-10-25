@@ -26,6 +26,7 @@ import org.trnltk.tokenizer.data.TokenizerTrainingData;
 import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,7 +61,7 @@ public class TextTokenizerDefaultTrainingTest {
     }
 
     @Test
-    public void shouldValidateDefaultRuleEntries() throws FileNotFoundException {
+    public void shouldValidateDefaultRuleEntries() throws IOException {
         final TokenizationGraph tokenizationGraph = TextTokenizerTrainer.buildDefaultTokenizationGraph(true);
 
         final TextTokenizer tokenizer = TextTokenizer.newBuilder()

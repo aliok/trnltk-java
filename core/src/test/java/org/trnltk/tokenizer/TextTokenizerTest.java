@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.trnltk.testutil.RegexMatcher;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,7 +34,7 @@ public class TextTokenizerTest {
     static TextTokenizer tokenizer;
 
     @BeforeClass
-    public static void beforeClass() throws FileNotFoundException {
+    public static void beforeClass() throws IOException {
         final TokenizationGraph graph = TextTokenizerTrainer.buildDefaultTokenizationGraph(true);
         tokenizer = TextTokenizer.newBuilder()
                 .blockSize(2)

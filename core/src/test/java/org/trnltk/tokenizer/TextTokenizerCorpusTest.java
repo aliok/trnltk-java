@@ -27,7 +27,6 @@ import org.trnltk.util.DiffUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -40,7 +39,7 @@ public class TextTokenizerCorpusTest {
 
     TextTokenizer strictTokenizer;
 
-    public TextTokenizerCorpusTest() throws FileNotFoundException {
+    public TextTokenizerCorpusTest() throws IOException {
         graph = TextTokenizerTrainer.buildDefaultTokenizationGraph(true);
 
         strictTokenizer = TextTokenizer.newBuilder()
