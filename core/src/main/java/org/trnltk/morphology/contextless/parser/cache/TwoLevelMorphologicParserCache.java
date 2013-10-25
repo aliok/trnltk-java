@@ -41,6 +41,8 @@ import java.util.Map;
  */
 public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
 
+    private boolean built = false;
+
     private int l2MaxSize;
     private final MorphologicParserCache l1Cache;
 
@@ -109,7 +111,14 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
     public void build(MorphologicParser parser) {
         // cannot build self, since it is online.
         // but l1Cache might need building
-        l1Cache.build(parser);
+        if(!l1Cache.isBuilt())
+            l1Cache.build(parser);
 
+        built = true;
+    }
+
+    @Override
+    public boolean isBuilt() {
+        return this.built;
     }
 }

@@ -39,4 +39,10 @@ public interface MorphologicParserCache {
      * Build the cache, ie. parse the values to be stored in the cache.
      */
     void build(MorphologicParser parser);
+
+    /**
+     * Check if cache is already built.
+     * @see MorphologicParserCache#build(org.trnltk.morphology.contextless.parser.MorphologicParser)
+     */
+    boolean isBuilt();
 }

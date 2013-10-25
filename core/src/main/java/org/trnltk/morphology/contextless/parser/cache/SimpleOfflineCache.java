@@ -10,6 +10,7 @@ import org.trnltk.morphology.contextless.parser.MorphologicParser;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,12 +32,26 @@ import java.util.Map;
 public class SimpleOfflineCache implements MorphologicParserCache {
     private Map<String, List<MorphemeContainer>> map;
     private Collection<String> cacheKeys;
+    private boolean built;
 
     /**
      * Builds a cache with values from bundled list of most frequent 20K words in Turkish.
      */
-    public SimpleOfflineCache() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("top20kwords.txt"), Charset.forName("utf-8"));
+    public static SimpleOfflineCache forTop20kWords() {
+        final URL resource = Resources.getResource("top20kwords.txt");
+        return fromFile(resource);
+    }
+
+    /**
+     * Builds a cache with values from bundled list of most frequent 2000 words in Turkish.
+     */
+    public static SimpleOfflineCache forTop2kWords() {
+        final URL resource = Resources.getResource("top2kwords.txt");
+        return fromFile(resource);
+    }
+
+    private static SimpleOfflineCache fromFile(URL resource) {
+        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(resource, Charset.forName("utf-8"));
         final List<String> lines;
         try {
             lines = CharStreams.readLines(supplier);
@@ -44,7 +59,8 @@ public class SimpleOfflineCache implements MorphologicParserCache {
             throw new IllegalStateException("Cannot find bundled most frequent word list!", e);
         }
         // read eagerly
-        this.cacheKeys = Lists.newArrayList(lines);
+        final List<String> cacheKeys = Lists.newArrayList(lines);
+        return new SimpleOfflineCache(cacheKeys);
     }
 
     /**
@@ -65,6 +81,13 @@ public class SimpleOfflineCache implements MorphologicParserCache {
 
         //remove reference as we don't need it anymore. help GC
         this.cacheKeys = null;
+
+        this.built = true;
+    }
+
+    @Override
+    public boolean isBuilt() {
+        return this.built;
     }
 
     @Override

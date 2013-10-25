@@ -205,11 +205,11 @@ public class ContextlessMorphologicParserBuilder {
      * If true, resulting parser will use a {@link SimpleOfflineCache} with most frequent Turkish words.
      * Parser will also use local caching.
      *
-     * @see org.trnltk.morphology.contextless.parser.cache.SimpleOfflineCache#SimpleOfflineCache()
+     * @see org.trnltk.morphology.contextless.parser.cache.SimpleOfflineCache#forTop20kWords()
      * @see ContextlessMorphologicParserBuilder#cache(org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache)
      */
     public ContextlessMorphologicParserBuilder bundledSimpleOfflineCache() {
-        return this.cache(new SimpleOfflineCache());
+        return this.cache(SimpleOfflineCache.forTop20kWords());
     }
 
     /**

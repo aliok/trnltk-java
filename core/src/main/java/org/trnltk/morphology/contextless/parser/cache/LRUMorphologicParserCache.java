@@ -83,6 +83,12 @@ public class LRUMorphologicParserCache implements MorphologicParserCache {
 
     @Override
     public void build(MorphologicParser parser) {
-        // od nothing since it is an online cache
+        // do nothing since it is an online cache
+    }
+
+    @Override
+    public boolean isBuilt() {
+        // do nothing since it is an online cache
+        return true;
     }
 }

@@ -219,15 +219,7 @@ public class FolderContextlessMorphologicParsingApp {
                 final MorphologicParserCache staticCache = new MorphologicParserCache() {
 
                     private ImmutableMap<String, List<MorphemeContainer>> cacheMap;
-
-                    {
-                        final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
-                        final List<String> wordsToUseInCache = findWordsToUseInCache(words);
-                        for (String word : wordsToUseInCache) {
-                            builder.put(word, parser.parseStr(word));
-                        }
-                        this.cacheMap = builder.build();
-                    }
+                    private boolean built;
 
                     @Override
                     public List<MorphemeContainer> get(String input) {
@@ -241,6 +233,22 @@ public class FolderContextlessMorphologicParsingApp {
                     @Override
                     public void putAll(Map<String, List<MorphemeContainer>> map) {
                         // do nothing
+                    }
+
+                    @Override
+                    public void build(MorphologicParser parser) {
+                        final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
+                        final List<String> wordsToUseInCache = findWordsToUseInCache(words);
+                        for (String word : wordsToUseInCache) {
+                            builder.put(word, parser.parseStr(word));
+                        }
+                        this.cacheMap = builder.build();
+                        this.built = true;
+                    }
+
+                    @Override
+                    public boolean isBuilt() {
+                        return this.built;
                     }
                 };
 
