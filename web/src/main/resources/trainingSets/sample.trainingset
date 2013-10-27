@@ -1,3 +1,4 @@
-elma WORD elma+Noun+Pnon+Nom
-zirtirdim WORD SKIP
-1 NUMBER 1+Noun+Adj
+T elma WORD elma+Noun+Pnon+Nom
+T zirtirdim WORD SKIP
+T 1 NUMBER 1+Noun+Adj
+2.'ye NUMBER+APOS+PERIOD+WORD

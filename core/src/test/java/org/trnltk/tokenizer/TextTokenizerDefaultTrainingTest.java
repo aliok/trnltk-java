@@ -16,7 +16,9 @@
 
 package org.trnltk.tokenizer;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -25,7 +27,6 @@ import org.junit.Test;
 import org.trnltk.tokenizer.data.TokenizerTrainingData;
 import org.trnltk.tokenizer.data.TokenizerTrainingEntry;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -76,8 +77,13 @@ public class TextTokenizerDefaultTrainingTest {
             final String text = tokenizerTrainingEntry.getText();
             final String tknz = tokenizerTrainingEntry.getTknz();
 
-            final List<String> tokens = tokenizer.tokenize(text);
-            final String join = Joiner.on(" ").join(tokens);
+            final List<Token> tokens = tokenizer.tokenize(text);
+            final String join = Joiner.on(" ").join(Iterables.transform(tokens, new Function<Token, String>() {
+                @Override
+                public String apply(org.trnltk.tokenizer.Token input) {
+                    return input.getSurface();
+                }
+            }));
             assertThat(tknz.trim(), equalTo(join.trim()));
         }
 

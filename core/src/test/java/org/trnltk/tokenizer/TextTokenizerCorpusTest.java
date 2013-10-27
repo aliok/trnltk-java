@@ -77,12 +77,12 @@ public class TextTokenizerCorpusTest {
                 if (index % 10000 == 0)
                     System.out.println("Tokenizing sentence #" + index);
                 stopWatch.resume();
-                final Iterable<String> tokens = tokenizer.tokenize(sentence);
+                final Iterable<Token> tokens = tokenizer.tokenize(sentence);
                 stopWatch.suspend();
-                final Iterator<String> tokensIterator = tokens.iterator();
+                final Iterator<Token> tokensIterator = tokens.iterator();
                 while (tokensIterator.hasNext()) {
-                    final String token = tokensIterator.next();
-                    tokensWriter.write(token);
+                    final Token token = tokensIterator.next();
+                    tokensWriter.write(token.getSurface());
                     tokenCount++;
                     if (tokensIterator.hasNext())
                         tokensWriter.write(" ");

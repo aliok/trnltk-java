@@ -68,8 +68,8 @@ public class MorphemeContainerFormatterTest {
             assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Verb\"},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\"]},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\",\"Pos\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Inf\",\"A3sg\",\"Pnon\",\"Acc\"]}],\"LemmaRoot\":\"yap\",\"RootPos\":\"Verb\",\"Root\":\"yap\"}"));
         }
         {
-            final MorphemeContainer result = getFirstParseResult("dördüncülükteki");
-            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Nom\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"Agt\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Ness\",\"A3sg\",\"Pnon\",\"Loc\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"PointQual\"]}],\"LemmaRoot\":\"dördün\",\"RootPos\":\"Noun\",\"Root\":\"dördün\"}"));
+            final MorphemeContainer result = getFirstParseResult("üzümcülükteki");
+            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Nom\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"Agt\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Ness\",\"A3sg\",\"Pnon\",\"Loc\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"PointQual\"]}],\"LemmaRoot\":\"üzüm\",\"RootPos\":\"Noun\",\"Root\":\"üzüm\"}"));
         }
         {
             final MorphemeContainer result = getFirstParseResult("bu");

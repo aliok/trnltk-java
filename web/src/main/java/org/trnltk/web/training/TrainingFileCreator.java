@@ -1,10 +1,12 @@
 package org.trnltk.web.training;
 
+import com.google.common.base.Joiner;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.tokenizer.TextTokenizer;
 import org.trnltk.tokenizer.TextTokenizerTrainer;
+import org.trnltk.tokenizer.Token;
 import org.trnltk.tokenizer.TokenizationGraph;
 import org.trnltk.web.common.Constants;
 
@@ -55,7 +57,7 @@ public class TrainingFileCreator implements Serializable {
                 .strict()
                 .build();
 
-        final LinkedList<String> tokens = tokenizer.tokenize(content);
+        final LinkedList<Token> tokens = tokenizer.tokenize(content);
 
         final File trainingSetsFolder = new File(Constants.TRAINING_FILES_FOLDER_PATH);
 
@@ -65,8 +67,11 @@ public class TrainingFileCreator implements Serializable {
         BufferedWriter bufferedWriter = null;
         try {
             bufferedWriter = new BufferedWriter(new FileWriterWithEncoding(trainingFile, "UTF-8", true));
-            for (String token : tokens) {
-                bufferedWriter.write(token);
+            for (Token token : tokens) {
+                bufferedWriter.write(token.getSurface());
+                bufferedWriter.write(" ");
+                bufferedWriter.write(Joiner.on('+').join(token.getTextBlockTypes()));
+                bufferedWriter.write("NOT_PARSED_YET");
                 bufferedWriter.newLine();
             }
             bufferedWriter.flush();

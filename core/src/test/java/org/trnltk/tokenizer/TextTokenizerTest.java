@@ -16,16 +16,18 @@
 
 package org.trnltk.tokenizer;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.trnltk.testutil.RegexMatcher;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -47,27 +49,27 @@ public class TextTokenizerTest {
     public void shouldTokenizeSimpleText() {
         {
             final String text = "Fiyatları uçuşa geçti.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Fiyatları", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "Fiyatları uçuşa geçti. ";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Fiyatları", "uçuşa", "geçti", ".")));
         }
         {
             final String text = " Fiyatları uçuşa geçti.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Fiyatları", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "Fiyatları uçuşa geçti .";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Fiyatları", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "\r\t\nFiyatları uçuşa geçti .   ";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Fiyatları", "uçuşa", "geçti", ".")));
         }
     }
@@ -76,12 +78,12 @@ public class TextTokenizerTest {
     public void shouldTokenizeParenthesisQuotesText() {
         {
             final String text = "(Fiyatları) \"arttı.\"";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("(", "Fiyatları", ")", "\"", "arttı", ".", "\"")));
         }
         {
             final String text = "[5.]";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Joiner.on(" ").join(tokens), equalTo("[ 5. ]"));
         }
     }
@@ -90,17 +92,17 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithExceptionalCase_1() {
         {
             final String text = "\r\tBen 3. adam.\t\r\n\t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Ben", "3.", "adam", ".")));
         }
         {
             final String text = "\r\tBen 3987. adam.\t\r\n\t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Ben", "3987.", "adam", ".")));
         }
         {
             final String text = "\r\n 5.'de uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5.\'de", "uçuşa", "geçti", ".")));
         }
     }
@@ -109,22 +111,22 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithExceptionalCase_2() {
         {
             final String text = "Dağlara taşlara yürüyordum... Derken birşeyler oldu!...";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Dağlara", "taşlara", "yürüyordum", "...", "Derken", "birşeyler", "oldu", "!...")));
         }
         {
             final String text = "\r\tBen \"...\"  dedi adam.\t\r\n\t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Ben", "\"...\"", "dedi", "adam", ".")));
         }
         {
             final String text = "6., 7. ve 8. adamlar gelsin.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("6.", ",", "7.", "ve", "8.", "adamlar", "gelsin", ".")));
         }
         {
             final String text = "\r\n 5.'de uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5.\'de", "uçuşa", "geçti", ".")));
         }
     }
@@ -133,12 +135,12 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithExceptionalCase_3() {
         {
             final String text = "\r\tABD'de elma fiyatları  uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "\r\n 5'te uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5\'te", "uçuşa", "geçti", ".")));
         }
     }
@@ -147,17 +149,17 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithExceptionalCase_4() {
         {
             final String text = "Bu işleme 'amelasyon' denir.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Bu", "işleme", "'amelasyon'", "denir", ".")));
         }
         {
             final String text = "Bu işlemin adı 'amelasyon'du.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Bu", "işlemin", "adı", "'amelasyon'du", ".")));
         }
         {
             final String text = "Bu işlemin adı \"amelasyon\"du.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("Bu", "işlemin", "adı", "\"amelasyon\"du", ".")));
         }
     }
@@ -166,37 +168,37 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithExceptionalCase_5() {
         {
             final String text = "5:20 gibi gelecek.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5:20", "gibi", "gelecek", ".")));
         }
         {
             final String text = "5,60 TL verdim.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5,60", "TL", "verdim", ".")));
         }
         {
             final String text = "5.600 TL verdim.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5.600", "TL", "verdim", ".")));
         }
         {
             final String text = "5.600,1234 TL verdim.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5.600,1234", "TL", "verdim", ".")));
         }
         {
             final String text = "100'le gidiyor.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("100\'le", "gidiyor", ".")));
         }
         {
             final String text = "5:20'de geliyorum.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5:20\'de", "geliyorum", ".")));
         }
         {
             final String text = "5,74'te bir ihtimal.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("5,74\'te", "bir", "ihtimal", ".")));
         }
     }
@@ -205,37 +207,37 @@ public class TextTokenizerTest {
     public void shouldTokenizeTextWithMixOfExceptionalCases() {
         {
             final String text = "\r\tABD'de elma fiyatları  uçuşa geçti ..   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "uçuşa", "geçti", "..")));
         }
         {
             final String text = "\r\tABD'de elma fiyatları  uçuşa geçti !..   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "uçuşa", "geçti", "!..")));
         }
         {
             final String text = "\r\tABD'de elma fiyatları 3.  uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "3.", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "\r\tABD'de elma fiyatları 5'te uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "5\'te", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "\r\tABD'de elma fiyatları 5.'de uçuşa geçti .   \t";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("ABD\'de", "elma", "fiyatları", "5.\'de", "uçuşa", "geçti", ".")));
         }
         {
             final String text = "6, 7 ve 8 numara gelsin.";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("6", ",", "7", "ve", "8", "numara", "gelsin", ".")));
         }
         {
             final String text = "678.123 TL'yi cebe atmıştı ?.. ";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("678.123", "TL'yi", "cebe", "atmıştı", "?..")));
         }
     }
@@ -244,7 +246,7 @@ public class TextTokenizerTest {
     public void shouldSeparatePuncCharsInFrontOfWords() {
         {
             final String text = "(TBMM Tutanak)";
-            final Iterable<String> tokens = tokenizer.tokenize(text);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(text));
             assertThat(Lists.newArrayList(tokens), equalTo(Arrays.asList("(", "TBMM", "Tutanak", ")")));
         }
     }
@@ -260,13 +262,22 @@ public class TextTokenizerTest {
 
         final Iterable<String> strings = Splitter.on("\n").split(text);
         for (String string : strings) {
-            final Iterable<String> tokens = tokenizer.tokenize(string);
+            final Iterable<String> tokens = getSurfaces(tokenizer.tokenize(string));
 
             assertThat(tokens, not(hasItem("")));
             for (String token : tokens) {
                 assertThat(token, not(RegexMatcher.containsMatch("\\s")));
             }
         }
+    }
+
+    private static Iterable<String> getSurfaces(LinkedList<Token> tokens) {
+        return Iterables.transform(tokens, new Function<Token, String>() {
+            @Override
+            public String apply(org.trnltk.tokenizer.Token input) {
+                return input.getSurface();
+            }
+        });
     }
 
 }
