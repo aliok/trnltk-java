@@ -73,7 +73,6 @@ public class TrainingSetCreatorParserSelectionTest {
             final List<String> expectedParseResult = entry.getRight();
             final List<MorphemeContainer> morphemeContainers = morphologicParser.parseStr(surface);
             final List<String> retrieved = new ArrayList<String>(MorphemeContainerFormatter.formatMorphemeContainers(morphemeContainers));
-            filterOutPossibleAmbiguities(morphemeContainers, retrieved);
             Collections.sort(retrieved, parseResultOrdering);
             if (!expectedParseResult.equals(retrieved)) {
                 System.out.println("W " + surface);
@@ -91,16 +90,6 @@ public class TrainingSetCreatorParserSelectionTest {
 
         if (hasError)
             fail();
-    }
-
-    private void filterOutPossibleAmbiguities(List<MorphemeContainer> morphemeContainers, List<String> formattedMorphemeContainers){
-        Validate.isTrue(morphemeContainers.size() == formattedMorphemeContainers.size());
-        Iterator<MorphemeContainer> morphemeContainerIterator = morphemeContainers.iterator();
-        Iterator<String> formattedMorhpemeContrainerIterator = formattedMorphemeContainers.iterator();
-        while(morphemeContainerIterator.hasNext()){
-            MorphemeContainer morphemeContainer = morphemeContainerIterator.next();
-            String formattedMorhpemeContainer = formattedMorhpemeContrainerIterator.next();
-        }
     }
 
     private void validateEntries(List<Pair<String, List<String>>> entries) {
