@@ -18,7 +18,6 @@ package org.trnltk.web.training;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Ordering;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
@@ -61,7 +60,7 @@ public class TrainingSetCreatorParserSelectionTest {
     static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
 
     @Test
-//    @Ignore
+    @Ignore
     public void shouldMatchExpectations() throws IOException {
         boolean hasError = false;
 
@@ -94,23 +93,13 @@ public class TrainingSetCreatorParserSelectionTest {
             fail();
     }
 
-    private static final ImmutableList<String> UNNECESSARY_AMBIGUITIES = new ImmutableList.Builder<String>()
-            .add("P3sg+Adj+asd")
-            .build();
-
     private void filterOutPossibleAmbiguities(List<MorphemeContainer> morphemeContainers, List<String> formattedMorphemeContainers){
         Validate.isTrue(morphemeContainers.size() == formattedMorphemeContainers.size());
         Iterator<MorphemeContainer> morphemeContainerIterator = morphemeContainers.iterator();
-        Iterator<String> formattedMorphemeContainerIterator = formattedMorphemeContainers.iterator();
+        Iterator<String> formattedMorhpemeContrainerIterator = formattedMorphemeContainers.iterator();
         while(morphemeContainerIterator.hasNext()){
             MorphemeContainer morphemeContainer = morphemeContainerIterator.next();
-            String formattedMorphemeContainer = formattedMorphemeContainerIterator.next();
-            for (String unnecessaryAmbiguity : UNNECESSARY_AMBIGUITIES) {
-                if(formattedMorphemeContainer.contains(unnecessaryAmbiguity)){
-                    morphemeContainerIterator.remove();
-                    formattedMorphemeContainerIterator.remove();
-                }
-            }
+            String formattedMorhpemeContainer = formattedMorhpemeContrainerIterator.next();
         }
     }
 
