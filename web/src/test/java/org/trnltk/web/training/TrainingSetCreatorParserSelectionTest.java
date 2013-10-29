@@ -23,6 +23,7 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
@@ -58,6 +59,7 @@ public class TrainingSetCreatorParserSelectionTest {
     static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
 
     @Test
+    @Ignore
     public void shouldMatchExpectations() throws IOException {
         boolean hasError = false;
 

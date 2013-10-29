@@ -81,10 +81,4 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     protected List<MorphemeContainer> parse(String surfaceToParse) {
         return this.parser.parse(new TurkishSequence(surfaceToParse));
     }
-
-    @Override
-    @Test
-    public void shouldParseNounCases() {
-        super.shouldParseNounCases();
-    }
 }

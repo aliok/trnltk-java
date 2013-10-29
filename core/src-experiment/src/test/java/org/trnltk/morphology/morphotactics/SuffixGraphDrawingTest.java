@@ -18,8 +18,9 @@ package org.trnltk.morphology.morphotactics;
 
 import com.google.common.base.Predicate;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.formbased.SampleSuffixGraph;
 import org.trnltk.model.suffix.SuffixGroup;
+import org.trnltk.morphology.contextless.parser.formbased.SampleSuffixGraph;
+import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,6 +35,36 @@ public class SuffixGraphDrawingTest {
 
 
         this.dumpSuffixGraphInDotFormat(graph, null, null);
+    }
+
+    @Test
+    public void shouldDumpBasicRASuffixGraphInDotFormat() throws Exception {
+        final BasicRASuffixGraph graph = new BasicRASuffixGraph();
+        graph.initialize();
+
+
+        this.dumpSuffixGraphInDotFormat(graph, null, null);
+    }
+
+    @Test
+    public void shouldDumpBasicRASuffixGraphInDotFormatForNounAndAdjRelatedNodes() throws Exception {
+        final BasicRASuffixGraph graph = new BasicRASuffixGraph();
+        graph.initialize();
+
+
+        Predicate<SuffixGraphState> sourceNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN") || input.getName().startsWith("ADJ");
+            }
+        };
+        Predicate<SuffixGraphState> targetNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN") || input.getName().startsWith("ADJ");
+            }
+        };
+        this.dumpSuffixGraphInDotFormat(graph, sourceNodePredicate, targetNodePredicate);
     }
 
     @Test

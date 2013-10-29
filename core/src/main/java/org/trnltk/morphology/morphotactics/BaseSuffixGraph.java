@@ -120,6 +120,12 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
         return freeTransitionSuffix;
     }
 
+    protected ConditionalFreeTransitionSuffix registerConditionalFreeTransitionSuffix(String name){
+        final ConditionalFreeTransitionSuffix conditionalFreeTransitionSuffix = new ConditionalFreeTransitionSuffix(name);
+        putSuffixToMap(name, conditionalFreeTransitionSuffix);
+        return conditionalFreeTransitionSuffix;
+    }
+
     protected ZeroTransitionSuffix registerZeroTransitionSuffix(String name) {
         final ZeroTransitionSuffix zeroTransitionSuffix = new ZeroTransitionSuffix(name);
         putSuffixToMap(name, zeroTransitionSuffix);

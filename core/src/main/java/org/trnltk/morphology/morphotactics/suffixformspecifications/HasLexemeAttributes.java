@@ -23,6 +23,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.model.lexicon.LexemeAttribute;
+import org.trnltk.model.suffix.ConditionalFreeTransitionSuffix;
 import org.trnltk.model.suffix.FreeTransitionSuffix;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.SuffixTransition;
@@ -57,6 +58,7 @@ public class HasLexemeAttributes extends AbstractSpecification<MorphemeContainer
             public boolean apply(SuffixTransition input) {
                 return !(input.getSuffixFormApplication().getSuffixForm().getSuffix() instanceof FreeTransitionSuffix) &&
                         !(input.getSuffixFormApplication().getSuffixForm().getSuffix() instanceof ZeroTransitionSuffix) &&
+                        !(input.getSuffixFormApplication().getSuffixForm().getSuffix() instanceof ConditionalFreeTransitionSuffix) &&
                         StringUtils.isNotEmpty(input.getSuffixFormApplication().getActualSuffixForm()); // The str " " would change the phonetics!
             }
         });

@@ -31,10 +31,7 @@ import org.trnltk.model.lexicon.PrimaryPos;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.lexicon.SecondaryPos;
 import org.trnltk.model.morpheme.MorphemeContainer;
-import org.trnltk.model.suffix.FreeTransitionSuffix;
-import org.trnltk.model.suffix.Suffix;
-import org.trnltk.model.suffix.SuffixForm;
-import org.trnltk.model.suffix.SuffixTransition;
+import org.trnltk.model.suffix.*;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 
 import java.util.ArrayList;
@@ -69,7 +66,7 @@ public class MorphemeContainerFormatter {
             for (SuffixTransition suffixTransition : morphemeContainer.getSuffixTransitions()) {
                 // don't add free transitions to the formatted string
                 final Suffix suffix = suffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix();
-                if (suffix instanceof FreeTransitionSuffix)
+                if (suffix instanceof FreeTransitionSuffix || suffix instanceof ConditionalFreeTransitionSuffix)
                     continue;
 
                 b.append("+").append(formatTransition(suffixTransition, false));
@@ -105,7 +102,7 @@ public class MorphemeContainerFormatter {
             for (SuffixTransition suffixTransition : morphemeContainer.getSuffixTransitions()) {
                 // don't add free transitions to the formatted string
                 final Suffix suffix = suffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix();
-                if (suffix instanceof FreeTransitionSuffix)
+                if (suffix instanceof FreeTransitionSuffix || suffix instanceof ConditionalFreeTransitionSuffix)
                     continue;
 
                 b.append("+").append(formatTransition(suffixTransition, true));
@@ -156,7 +153,7 @@ public class MorphemeContainerFormatter {
             }
 
             final Suffix suffix = suffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix();
-            if (suffix instanceof FreeTransitionSuffix)
+            if (suffix instanceof FreeTransitionSuffix || suffix instanceof ConditionalFreeTransitionSuffix)
                 continue;
             else
                 currentGroup.add(suffix.getPrettyName());
@@ -213,7 +210,7 @@ public class MorphemeContainerFormatter {
                         currentPart.put("SPOS", currentSpos);
                 }
 
-                if (suffix instanceof FreeTransitionSuffix)
+                if (suffix instanceof FreeTransitionSuffix || suffix instanceof ConditionalFreeTransitionSuffix)
                     continue;
 
                 JSONArray suffixes;
