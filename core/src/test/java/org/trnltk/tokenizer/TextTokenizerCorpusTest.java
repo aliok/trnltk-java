@@ -26,9 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.trnltk.util.DiffUtil;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -67,8 +65,8 @@ public class TextTokenizerCorpusTest {
         stopWatch.start();
         stopWatch.suspend();
 
-        final List<String> lines = Files.readLines(sentencesFile, Charsets.UTF_8);
-        final int lineCount = lines.size();
+        final BufferedReader lineReader = Files.newReader(sentencesFile, Charsets.UTF_8);       // don't read the file into the memory
+        final int lineCount = lineCount(sentencesFile);     // I want to know this in advance to make a ETA statement
         System.out.println("Number of lines in the file : " + lineCount);
 
         final BufferedWriter tokensWriter = Files.newWriter(tokenizedFile, Charsets.UTF_8);
@@ -76,14 +74,14 @@ public class TextTokenizerCorpusTest {
         int tokenCount = 0;
         try {
             int index = 0;
-            for (Iterator<String> lineIterator = lines.iterator(); lineIterator.hasNext(); ) {
-                final String sentence = lineIterator.next();
-                if (index % 10000 == 0){
+            while(lineReader.ready()) {
+                final String sentence = lineReader.readLine();
+                if (index % 10000 == 0) {
                     System.out.println("Tokenizing line #" + index);
                     final long totalTimeSoFar = stopWatch.getTime();
                     final double avgTimeForALine = Long.valueOf(totalTimeSoFar).doubleValue() / index;
                     final double remainingTimeEstimate = avgTimeForALine * (lineCount - index);
-                    System.out.println("Remaining time estimate for file" + DurationFormatUtils.formatDurationHMS((long) remainingTimeEstimate));
+                    System.out.println("For file --> ETA : " + DurationFormatUtils.formatDurationHMS((long) remainingTimeEstimate) + " So far : " + stopWatch.toString());
                 }
                 stopWatch.resume();
                 final Iterable<Token> tokens = tokenizer.tokenize(sentence);
@@ -106,14 +104,14 @@ public class TextTokenizerCorpusTest {
 
         stopWatch.stop();
 
-        final TextTokenizer.TextTokenizerStats stats = tokenizer.getStats();
-
         System.out.println("Tokenized " + lineCount + " lines.");
         System.out.println("Found " + tokenCount + " tokens.");
         System.out.println("Avg time for tokenizing a line : " + Double.valueOf(stopWatch.getTime()) / Double.valueOf(lineCount) + " ms");
         System.out.println("\tProcessed : " + Double.valueOf(lineCount) / Double.valueOf(stopWatch.getTime()) * 1000d + " lines in a second");
         System.out.println("Avg time for generating a token : " + Double.valueOf(stopWatch.getTime()) / Double.valueOf(tokenCount) + " ms");
         System.out.println("\tProcessed : " + Double.valueOf(tokenCount) / Double.valueOf(stopWatch.getTime()) * 1000d + " tokens in a second");
+
+        final TextTokenizer.TextTokenizerStats stats = tokenizer.getStats();
 
         if (stats != null) {
             final LinkedHashMap<Pair<TextBlockTypeGroup, TextBlockTypeGroup>, Integer> successMap = stats.buildSortedSuccessMap();
@@ -168,6 +166,27 @@ public class TextTokenizerCorpusTest {
 
         if (messagesBuilder.length() != 0)
             fail(messagesBuilder.toString());
+    }
+
+    public static int lineCount(File file) throws IOException {
+        InputStream is = new BufferedInputStream(new FileInputStream(file));
+        try {
+            byte[] c = new byte[1024];
+            int count = 0;
+            int readChars = 0;
+            boolean empty = true;
+            while ((readChars = is.read(c)) != -1) {
+                empty = false;
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == '\n') {
+                        ++count;
+                    }
+                }
+            }
+            return (count == 0 && !empty) ? 1 : count;
+        } finally {
+            is.close();
+        }
     }
 
 }
