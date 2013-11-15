@@ -20,6 +20,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
@@ -66,16 +67,24 @@ public class TextTokenizerCorpusTest {
         stopWatch.start();
         stopWatch.suspend();
 
-        final List<String> sentences = Files.readLines(sentencesFile, Charsets.UTF_8);
+        final List<String> lines = Files.readLines(sentencesFile, Charsets.UTF_8);
+        final int lineCount = lines.size();
+        System.out.println("Number of lines in the file : " + lineCount);
 
         final BufferedWriter tokensWriter = Files.newWriter(tokenizedFile, Charsets.UTF_8);
 
         int tokenCount = 0;
         try {
-            for (int index = 0; index < sentences.size(); index++) {
-                final String sentence = sentences.get(index);
-                if (index % 10000 == 0)
-                    System.out.println("Tokenizing sentence #" + index);
+            int index = 0;
+            for (Iterator<String> lineIterator = lines.iterator(); lineIterator.hasNext(); ) {
+                final String sentence = lineIterator.next();
+                if (index % 10000 == 0){
+                    System.out.println("Tokenizing line #" + index);
+                    final long totalTimeSoFar = stopWatch.getTime();
+                    final double avgTimeForALine = Long.valueOf(totalTimeSoFar).doubleValue() / index;
+                    final double remainingTimeEstimate = avgTimeForALine * (lineCount - index);
+                    System.out.println("Remaining time estimate for file" + DurationFormatUtils.formatDurationHMS((long) remainingTimeEstimate));
+                }
                 stopWatch.resume();
                 final Iterable<Token> tokens = tokenizer.tokenize(sentence);
                 stopWatch.suspend();
@@ -88,6 +97,7 @@ public class TextTokenizerCorpusTest {
                         tokensWriter.write(" ");
                 }
                 tokensWriter.write("\n");
+                index++;
             }
 
         } finally {
@@ -98,10 +108,10 @@ public class TextTokenizerCorpusTest {
 
         final TextTokenizer.TextTokenizerStats stats = tokenizer.getStats();
 
-        System.out.println("Tokenized " + sentences.size() + " sentences.");
+        System.out.println("Tokenized " + lineCount + " lines.");
         System.out.println("Found " + tokenCount + " tokens.");
-        System.out.println("Avg time for tokenizing a sentence : " + Double.valueOf(stopWatch.getTime()) / Double.valueOf(sentences.size()) + " ms");
-        System.out.println("\tProcessed : " + Double.valueOf(sentences.size()) / Double.valueOf(stopWatch.getTime()) * 1000d + " sentences in a second");
+        System.out.println("Avg time for tokenizing a line : " + Double.valueOf(stopWatch.getTime()) / Double.valueOf(lineCount) + " ms");
+        System.out.println("\tProcessed : " + Double.valueOf(lineCount) / Double.valueOf(stopWatch.getTime()) * 1000d + " lines in a second");
         System.out.println("Avg time for generating a token : " + Double.valueOf(stopWatch.getTime()) / Double.valueOf(tokenCount) + " ms");
         System.out.println("\tProcessed : " + Double.valueOf(tokenCount) / Double.valueOf(stopWatch.getTime()) * 1000d + " tokens in a second");
 
