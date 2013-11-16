@@ -23,17 +23,20 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.runner.RunWith;
 import org.trnltk.app.App;
 import org.trnltk.app.AppRunner;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(AppRunner.class)
 public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
@@ -59,14 +62,14 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
     public void tokenizeTbmmJournal_b0241h_onSource() throws IOException {
         final File sentencesFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_lines.txt");
         final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
-        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
+        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile, false);
     }
 
     @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeTbmm_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\tbmm.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\tbmm_tokenized.txt");
-        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
+        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile, false);
     }
 
     @App("Creates tokenized files")
@@ -88,7 +91,7 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         for (File file : filesToTokenize) {
             final File targetFile = new File(file.getParent(), file.getName().substring(0, file.getName().length() - ".txt".length()) + "_tokenized.txt");
             System.out.println("Tokenizing file " + file + " to " + targetFile);
-            createTokenizedFile(fastRelaxedTokenizer, file, targetFile);
+            createTokenizedFile(fastRelaxedTokenizer, file, targetFile, false);
         }
     }
 
@@ -96,14 +99,14 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
     public void tokenizeNtvmsnbc_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\ntvmsnbc.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\ntvmsnbc_tokenized.txt");
-        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
+        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile, false);
     }
 
     @App("Creates tokenized file, so you can check that the difference of files manually with your IDE")
     public void tokenizeKadinlarKulubu_1M_file_onSource() throws IOException {
         final File sentencesFile = new File("F:\\data\\1MSentences\\kadinlar-klubu.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\kadinlar-klubu_tokenized.txt");
-        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
+        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile, false);
     }
 
     @App("Creates tokenized file for TBMM corpus and checks if only difference between tokenized and plain corpus is the whitespace")
@@ -112,7 +115,7 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         // otherwise, we need to introduce test method ordering, which is not good
         final File sentencesFile = new File("F:\\data\\1MSentences\\tbmm.txt");
         final File tokenizedFile = new File("F:\\data\\1MSentences\\tbmm_tokenized.txt");
-        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile);
+        createTokenizedFile(relaxedTokenizer, sentencesFile, tokenizedFile, false);
 
         shouldHaveNoDifferenceOtherThanWhiteSpace(sentencesFile, tokenizedFile);
     }
@@ -148,6 +151,107 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         } finally {
             bufferedWriter.close();
         }
+    }
+
+    @App
+    public void splitCorpusFiles() throws IOException {
+        // ignore IOExceptions
+
+        final File folder = new File("D:\\devl\\data\\aakindan");
+
+        final List<File> files = new ArrayList<File>();
+
+        for (File file : folder.listFiles()) {
+            if (file.isDirectory())
+                continue;
+            if (file.getName().endsWith(".txt"))
+                files.add(file);
+        }
+
+        int linesForEachFile = 100000;
+
+        for (File file : files) {
+            System.out.println("Processing file " + file);
+            int lineCount = 0;
+            int fileCount = 0;
+            final BufferedReader reader = Files.newReader(file, Charsets.UTF_8);
+            BufferedWriter writer = null;
+            do {
+                final String line = reader.readLine();
+                if (lineCount % linesForEachFile == 0) {
+                    if (writer != null)
+                        writer.close();
+
+                    final String srcFileName = file.getName();
+                    final File targetFile = new File(file.getParent() + "\\src_split", srcFileName + "." + String.format("%04d", fileCount));
+                    writer = new BufferedWriter(new FileWriter(targetFile));
+                    fileCount++;
+                    System.out.println("Using new target file " + targetFile);
+                }
+                lineCount++;
+
+                writer.write(line + "\n");
+            } while (reader.ready());
+
+            if (writer != null)
+                writer.close();
+        }
+    }
+
+    @App("Creates tokenized files")
+    public void tokenizeBig_files_onSource() throws IOException, InterruptedException {
+        final StopWatch taskStopWatch = new StopWatch();
+        taskStopWatch.start();
+
+        final File parentFolder = new File("D:\\devl\\data\\aakindan");
+        final File sourceFolder = new File(parentFolder, "src_split");
+        final File targetFolder = new File(parentFolder, "src_split_tokenized");
+        final File errorFolder = new File(parentFolder, "src_split_tokenization_error");
+        final File[] files = sourceFolder.listFiles();
+        Validate.notNull(files);
+
+        final List<File> filesToTokenize = new ArrayList<File>();
+        for (File file : files) {
+            if (file.isDirectory())
+                continue;
+
+            filesToTokenize.add(file);
+        }
+
+        int lineCountOfAllFiles = 0;
+        for (File file : filesToTokenize) {
+            lineCountOfAllFiles += lineCount(file);
+        }
+
+        System.out.println("Total lines in all files " + lineCountOfAllFiles);
+
+        final StopWatch callbackStopWatch = new StopWatch();
+        final TokenizationCommandCallback callback = new TokenizationCommandCallback(lineCountOfAllFiles, callbackStopWatch);
+
+        int NUMBER_OF_THREADS = 8;
+        final ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+        callbackStopWatch.start();
+        for (File sourceFile : filesToTokenize) {
+            final String fileBaseName = sourceFile.getName().substring(0, sourceFile.getName().length() - ".txt.0000".length());
+            final String index = FilenameUtils.getExtension(sourceFile.getName());
+            final File targetFile = new File(targetFolder, fileBaseName + "_tokenized.txt." + index);
+            final File errorFile = new File(errorFolder, fileBaseName + "_tokenization_error.txt." + index);
+
+            pool.execute(new TokenizationCommand(callback, fastRelaxedTokenizer, sourceFile, targetFile, errorFile));
+        }
+
+        pool.shutdown();
+        while (!pool.isTerminated()) {
+//            System.out.println("Waiting pool to be terminated!");
+            pool.awaitTermination(3000, TimeUnit.MILLISECONDS);
+        }
+
+        callbackStopWatch.stop();
+        taskStopWatch.stop();
+        System.out.println("Total time :" + taskStopWatch.toString());
+        System.out.println("Nr of tokens : " + callback.getNumberOfTokens());
+        System.out.println("Avg time : " + (taskStopWatch.getTime() * 1.0d) / (callback.getNumberOfTokens() * 1.0d) + " ms");
     }
 
 }
