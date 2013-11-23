@@ -19,6 +19,7 @@ package org.trnltk.tokenizer;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
@@ -252,6 +253,73 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         System.out.println("Total time :" + taskStopWatch.toString());
         System.out.println("Nr of tokens : " + callback.getNumberOfTokens());
         System.out.println("Avg time : " + (taskStopWatch.getTime() * 1.0d) / (callback.getNumberOfTokens() * 1.0d) + " ms");
+    }
+
+    @App("Creates tokenized files")
+    public void convertTokensToLines_Big_files_onSource() throws IOException, InterruptedException {
+        final StopWatch taskStopWatch = new StopWatch();
+        taskStopWatch.start();
+
+        final File parentFolder = new File("D:\\devl\\data\\aakindan");
+        final File sourceFolder = new File(parentFolder, "src_split_tokenized");
+        final File targetFolder = new File(parentFolder, "src_split_tokenized_lines");
+        final File[] files = sourceFolder.listFiles();
+        Validate.notNull(files);
+
+        final List<File> filesToTokenize = new ArrayList<File>();
+        for (File file : files) {
+            if (file.isDirectory())
+                continue;
+
+            filesToTokenize.add(file);
+        }
+
+        final StopWatch callbackStopWatch = new StopWatch();
+
+        int NUMBER_OF_THREADS = 8;
+        final ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+        callbackStopWatch.start();
+        for (final File sourceFile : filesToTokenize) {
+            final File targetFile = new File(targetFolder, sourceFile.getName());
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("Processing file " + sourceFile);
+                    BufferedWriter writer = null;
+                    try {
+                        final List<String> lines = Files.readLines(sourceFile, Charsets.UTF_8);
+                        writer = Files.newWriter(targetFile, Charsets.UTF_8);
+                        for (String line : lines) {
+                            final Iterable<String> tokens = Splitter.on(' ').omitEmptyStrings().trimResults().split(line);
+                            for (String token : tokens) {
+                                writer.write(token);
+                                writer.write("\n");
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (writer != null)
+                            try {
+                                writer.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    }
+                }
+            });
+        }
+
+        pool.shutdown();
+        while (!pool.isTerminated()) {
+            //            System.out.println("Waiting pool to be terminated!");
+            pool.awaitTermination(3000, TimeUnit.MILLISECONDS);
+        }
+
+        callbackStopWatch.stop();
+        taskStopWatch.stop();
+        System.out.println("Total time :" + taskStopWatch.toString());
     }
 
 }
