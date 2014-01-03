@@ -322,4 +322,71 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
         System.out.println("Total time :" + taskStopWatch.toString());
     }
 
+    @App("Creates tokenized files")
+    public void findUniqueChars_Big_files_onSource() throws IOException, InterruptedException {
+        final StopWatch taskStopWatch = new StopWatch();
+        taskStopWatch.start();
+
+        final File parentFolder = new File("D:\\devl\\data\\aakindan");
+        final File targetFile = new File(parentFolder, "chars_with_occurrence.txt");
+        final File sourceFolder = new File(parentFolder, "src_split_tokenized_lines");
+        final File[] files = sourceFolder.listFiles();
+        Validate.notNull(files);
+
+        final List<File> filesToInvestigate = new ArrayList<File>();
+        for (File file : files) {
+            if (file.isDirectory())
+                continue;
+
+            filesToInvestigate.add(file);
+        }
+
+        final StopWatch callbackStopWatch = new StopWatch();
+
+        int NUMBER_OF_THREADS = 8;
+        final ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+        final boolean[] b = new boolean[65536 * 5];
+
+        callbackStopWatch.start();
+        for (final File sourceFile : filesToInvestigate) {
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("Processing file " + sourceFile);
+                    try {
+                        final List<String> lines = Files.readLines(sourceFile, Charsets.UTF_8);
+                        for (String token : lines) {
+                            for (int i = 0; i < token.length(); i++) {
+                                char aChar = token.charAt(i);
+                                b[aChar] = true;
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        pool.shutdown();
+        while (!pool.isTerminated()) {
+            //            System.out.println("Waiting pool to be terminated!");
+            pool.awaitTermination(3000, TimeUnit.MILLISECONDS);
+        }
+
+        final BufferedWriter writer = Files.newWriter(targetFile, Charsets.UTF_8);
+        for (int i = 0; i < b.length; i++) {
+            boolean occurs = b[i];
+            if (occurs) {
+                writer.write((char) i);
+                writer.write("\n");
+            }
+        }
+        writer.close();
+
+        callbackStopWatch.stop();
+        taskStopWatch.stop();
+        System.out.println("Total time :" + taskStopWatch.toString());
+    }
+
 }

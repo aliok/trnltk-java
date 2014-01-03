@@ -163,7 +163,7 @@ public class CachingMorphologicParserApp {
 
     @App("Parse sample TBMM Journal with bulk parse")
     public void parseTbmmJournal_b0241h_withBulkParse() throws Exception {
-        final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
+        final File tokenizedFile = new File("core/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
