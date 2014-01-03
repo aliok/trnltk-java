@@ -133,7 +133,7 @@ public class TurkishAlphabet {
     public static final TurkicLetter N_9 = builder('9', 109).build();
 
 
-    public static final TurkicLetter[] TURKISH_LETTERS = {
+    static final TurkicLetter[] TURKISH_LETTERS = {
             L_a, L_b, L_c, L_cc, L_d, L_e, L_f, L_g,
             L_gg, L_h, L_ii, L_i, L_j, L_k, L_l, L_m,
             L_n, L_o, L_oo, L_p, L_r, L_s, L_ss, L_t,
@@ -143,24 +143,6 @@ public class TurkishAlphabet {
             P_Plus, P_Popen, P_Pclose, P_Bopen, P_Bclose, P_CBopen, P_CBclose,
             P_QuestionMark, P_ExcMark, P_SQuote, P_DQuote, P_Slash, P_Percent, P_Number,
             P_Dollar, P_Yen, P_Pound, P_Euro,
-            N_0, N_1, N_2, N_3, N_4, N_5, N_6, N_7, N_8, N_9
-    };
-
-    public static final TurkicLetter[] TURKISH_ALPHA_LETTERS = {
-            L_a, L_ac, L_b, L_c, L_cc, L_d, L_e, L_f, L_g,
-            L_gg, L_h, L_ii, L_i, L_ic, L_j, L_k, L_l, L_m,
-            L_n, L_o, L_oo, L_p, L_q, L_r, L_s, L_ss, L_t,
-            L_u, L_uu, L_uc, L_v, L_w, L_x, L_y, L_z
-    };
-
-    public static final TurkicLetter[] TURKISH_PUNC_LETTERS = {
-            P_Dot, P_Comma, P_Hyphen, P_Colon, P_Semicolon,
-            P_Plus, P_Popen, P_Pclose, P_Bopen, P_Bclose, P_CBopen, P_CBclose,
-            P_QuestionMark, P_ExcMark, P_SQuote, P_DQuote, P_Slash, P_Percent, P_Number,
-            P_Dollar, P_Yen, P_Pound, P_Euro
-    };
-
-    public static final TurkicLetter[] TURKISH_NUMERIC_LETTERS = {
             N_0, N_1, N_2, N_3, N_4, N_5, N_6, N_7, N_8, N_9
     };
 
@@ -221,14 +203,14 @@ public class TurkishAlphabet {
     /**
      * Devoices a turkish letter.
      * <ul>
-     * <li>b -> p (*)</li>
-     * <li>c -> ç</li>
-     * <li>d -> t</li>
-     * <li>g -> k (*)</li>
-     * <li>ğ -> k (*)</li>
-     * <li>Otherwise -> null</li>
+     *     <li>b -> p (*)</li>
+     *     <li>c -> ç</li>
+     *     <li>d -> t</li>
+     *     <li>g -> k (*)</li>
+     *     <li>ğ -> k (*)</li>
+     *     <li>Otherwise -> null</li>
      * </ul>
-     * <p/>
+     *
      * * = not really applicable, since there is no suffix starting with b, g or ğ
      *
      * @param l Letter to devoice
@@ -241,14 +223,13 @@ public class TurkishAlphabet {
     /**
      * Voices a turkish letter.
      * <ul>
-     * <li>p -> b</li>
-     * <li>k -> ğ</li>
-     * <li>ç -> c</li>
-     * <li>t -> d</li>
-     * <li>g -> ğ</li>
-     * <li>Otherwise -> null</li>
+     *     <li>p -> b</li>
+     *     <li>k -> ğ</li>
+     *     <li>ç -> c</li>
+     *     <li>t -> d</li>
+     *     <li>g -> ğ</li>
+     *     <li>Otherwise -> null</li>
      * </ul>
-     *
      * @param l Letter to voice
      * @return Voiced letter or null if letter is not voicable
      */

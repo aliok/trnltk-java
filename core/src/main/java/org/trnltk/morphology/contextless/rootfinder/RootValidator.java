@@ -45,7 +45,7 @@ public class RootValidator {
             return true;
 
         return partialSurface.startsWith(rootSequence) ||
-                partialSurface.getUnderlyingString().toLowerCase().startsWith(rootSequence.getUnderlyingString().toLowerCase());
+                partialSurface.getUnderlyingString().toLowerCase().startsWith(rootSequence.getUnderlyingString());
 
     }
 
