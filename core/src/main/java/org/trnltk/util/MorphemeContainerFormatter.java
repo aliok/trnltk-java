@@ -85,6 +85,15 @@ public class MorphemeContainerFormatter {
         });
     }
 
+    public static List<String> formatMorphemeContainers(final List<MorphemeContainer> morphemeContainers) {
+        return Lists.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return MorphemeContainerFormatter.formatMorphemeContainer(input);
+            }
+        });
+    }
+
     /**
      * @param morphemeContainer the MC
      * @return kitab(kitap)+Noun+A3sg+Pnon+Dat(+yA[a]) for word 'kitaba'
