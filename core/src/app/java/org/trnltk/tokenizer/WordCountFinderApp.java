@@ -17,12 +17,16 @@
 package org.trnltk.tokenizer;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.io.CharSource;
 import com.google.common.io.Files;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.runner.RunWith;
 import org.trnltk.app.App;
@@ -31,10 +35,9 @@ import org.trnltk.app.AppRunner;
 import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.util.Constants;
+import org.trnltk.util.Utilities;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -46,6 +49,154 @@ import java.util.concurrent.TimeUnit;
 @RunWith(AppRunner.class)
 public class WordCountFinderApp {
     private static final int NUMBER_OF_THREADS = 8;
+
+    @App("Goes thru histogram files created with the apps below and merges them")
+    public void mergeHistogramFiles() throws IOException {
+        final File histogramsFolder = new File(AppProperties.largeFilesFolder(), "histograms");
+        final File targetFile = new File(AppProperties.largeFilesFolder(), "wordCounts.txt");
+
+        final File[] histogramFiles = histogramsFolder.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                //if (!name.startsWith("wordHistogram-aa") && !name.startsWith("wordHistogram-ai"))
+                //    return false;
+                return name.endsWith(".txt");
+            }
+        });
+
+        int totalLines = 0;
+        for (File histogramFile : histogramFiles) {
+            totalLines += Utilities.lineCount(histogramFile);
+        }
+
+        System.out.println("Total lines : " + totalLines);
+
+        final BufferedWriter targetWriter = Files.newWriter(targetFile, Charsets.UTF_8);
+
+        final List<HistogramSource> sources = Lists.newArrayList(Iterables.transform(Arrays.asList(histogramFiles), new Function<File, HistogramSource>() {
+            @Override
+            public HistogramSource apply(File input) {
+                try {
+                    return new HistogramSource(input);
+                } catch (IOException e) {
+                    throw new RuntimeException("Unable to open file " + input, e);
+                }
+            }
+        }));
+
+        for (HistogramSource source : sources) {
+            System.out.println("Initializing source " + source);
+            source.readNext();
+        }
+
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        int lineIndex = 0;
+        while (!sources.isEmpty()) {
+            HistogramSource highestSource = null;
+            for (Iterator<HistogramSource> iterator = sources.iterator(); iterator.hasNext(); ) {
+                HistogramSource source = iterator.next();
+                if (!source.hasNext()) {
+                    iterator.remove();
+                } else {
+                    if (highestSource == null || source.isHigherThan(highestSource))
+                        highestSource = source;
+                }
+            }
+            if (highestSource != null) {
+                //noinspection ConstantConditions
+                targetWriter.write(highestSource.getCurrentWord() + " " + highestSource.getCurrentCount());
+                targetWriter.newLine();
+                highestSource.readNext();
+                lineIndex++;
+                if (lineIndex % 10000 == 0) {
+                    final long timeSoFar = stopWatch.getTime();
+                    double estimatedTime = new Long(timeSoFar).doubleValue() / new Integer(lineIndex).doubleValue() * new Integer(totalLines - lineIndex).doubleValue();
+                    System.out.println("Found " + lineIndex + "th word of " + totalLines + " So far: " + stopWatch + "\t Remaining: " + DurationFormatUtils.formatDurationHMS((long) estimatedTime));
+                }
+            }
+        }
+
+        for (HistogramSource source : sources) {
+            source.closeSource();
+        }
+
+        targetWriter.flush();
+        targetWriter.close();
+
+    }
+
+    private static class HistogramSource {
+        private final String name;
+        private BufferedReader bufferedReader;
+        private String currentWord;
+        private int currentCount;
+
+        public HistogramSource(File file) throws IOException {
+            this.name = FilenameUtils.getName(file.getName());
+            final CharSource charSource = Files.asCharSource(file, Charsets.UTF_8);
+            bufferedReader = charSource.openBufferedStream();
+        }
+
+        public boolean hasNext() throws IOException {
+            return bufferedReader.ready();
+        }
+
+        public void readNext() throws IOException {
+            if (!hasNext()) {
+                this.currentWord = null;
+                this.currentCount = 0;
+            }
+            final String line = bufferedReader.readLine();
+            if (StringUtils.isEmpty(line)) {
+
+            } else {
+                final int endIndexOfWord = line.lastIndexOf(' ');
+                this.currentWord = line.substring(0, endIndexOfWord);
+                this.currentCount = Integer.parseInt(line.substring(endIndexOfWord + 1));
+            }
+        }
+
+        public void closeSource() {
+            if (bufferedReader != null)
+                try {
+                    bufferedReader.close();
+                    bufferedReader = null;
+                } catch (IOException e) {
+                    System.err.println("Unable to close file!");
+                    e.printStackTrace();
+                }
+        }
+
+        public boolean isHigherThan(HistogramSource other) {
+            if (this.currentCount > other.currentCount)
+                return true;
+            else if (this.currentCount < other.currentCount)
+                return false;
+            else
+                return this.currentWord.compareTo(other.currentWord) >= 0;
+
+        }
+
+        public boolean isClosed() {
+            return bufferedReader == null;
+        }
+
+        public String getCurrentWord() {
+            return currentWord;
+        }
+
+        public int getCurrentCount() {
+            return currentCount;
+        }
+
+        @Override
+        public String toString() {
+            return "HistogramSource{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+    }
 
     @App("Goes thru tokenized files and builds word histogram for words starting with char ranges. e.g. in range of 'aa'-'ad'")
     public void findWordCount_forPredicates_charRanges() throws InterruptedException {
