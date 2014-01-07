@@ -104,7 +104,7 @@ public abstract class BaseContextlessMorphologicParserTest {
         assertThat(this.getFormattedParseResults(surfaceToParse), new ParseResultsDontExistMatcher(expectedParseResults));
     }
 
-    private Collection<String> getFormattedParseResults(String surfaceToParse) {
+    protected Collection<String> getFormattedParseResults(String surfaceToParse) {
         final List<MorphemeContainer> morphemeContainers = this.parse(surfaceToParse);
         return Lists.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
             @Override
