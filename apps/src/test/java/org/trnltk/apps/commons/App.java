@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.app;
+package org.trnltk.apps.commons;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.tokenizer;
+package org.trnltk.apps.tokenizer;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -28,8 +28,12 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppRunner;
+import org.trnltk.tokenizer.TextTokenizer;
+import org.trnltk.tokenizer.TextTokenizerCorpusTest;
+import org.trnltk.tokenizer.TokenizationUtils;
+import org.trnltk.util.Utilities;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -221,7 +225,7 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
 
         int lineCountOfAllFiles = 0;
         for (File file : filesToTokenize) {
-            lineCountOfAllFiles += lineCount(file);
+            lineCountOfAllFiles += Utilities.lineCount(file);
         }
 
         System.out.println("Total lines in all files " + lineCountOfAllFiles);
@@ -316,6 +320,73 @@ public class TextTokenizerCorpusApp extends TextTokenizerCorpusTest {
             //            System.out.println("Waiting pool to be terminated!");
             pool.awaitTermination(3000, TimeUnit.MILLISECONDS);
         }
+
+        callbackStopWatch.stop();
+        taskStopWatch.stop();
+        System.out.println("Total time :" + taskStopWatch.toString());
+    }
+
+    @App("Creates tokenized files")
+    public void findUniqueChars_Big_files_onSource() throws IOException, InterruptedException {
+        final StopWatch taskStopWatch = new StopWatch();
+        taskStopWatch.start();
+
+        final File parentFolder = new File("D:\\devl\\data\\aakindan");
+        final File targetFile = new File(parentFolder, "chars_with_occurrence.txt");
+        final File sourceFolder = new File(parentFolder, "src_split_tokenized_lines");
+        final File[] files = sourceFolder.listFiles();
+        Validate.notNull(files);
+
+        final List<File> filesToInvestigate = new ArrayList<File>();
+        for (File file : files) {
+            if (file.isDirectory())
+                continue;
+
+            filesToInvestigate.add(file);
+        }
+
+        final StopWatch callbackStopWatch = new StopWatch();
+
+        int NUMBER_OF_THREADS = 8;
+        final ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+        final boolean[] b = new boolean[65536 * 5];
+
+        callbackStopWatch.start();
+        for (final File sourceFile : filesToInvestigate) {
+            pool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("Processing file " + sourceFile);
+                    try {
+                        final List<String> lines = Files.readLines(sourceFile, Charsets.UTF_8);
+                        for (String token : lines) {
+                            for (int i = 0; i < token.length(); i++) {
+                                char aChar = token.charAt(i);
+                                b[aChar] = true;
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        pool.shutdown();
+        while (!pool.isTerminated()) {
+            //            System.out.println("Waiting pool to be terminated!");
+            pool.awaitTermination(3000, TimeUnit.MILLISECONDS);
+        }
+
+        final BufferedWriter writer = Files.newWriter(targetFile, Charsets.UTF_8);
+        for (int i = 0; i < b.length; i++) {
+            boolean occurs = b[i];
+            if (occurs) {
+                writer.write((char) i);
+                writer.write("\n");
+            }
+        }
+        writer.close();
 
         callbackStopWatch.stop();
         taskStopWatch.stop();

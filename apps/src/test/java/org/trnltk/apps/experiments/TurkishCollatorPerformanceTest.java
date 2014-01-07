@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.experiments;
+package org.trnltk.apps.experiments;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;

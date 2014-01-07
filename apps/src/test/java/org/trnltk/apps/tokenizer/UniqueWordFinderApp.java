@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.tokenizer;
+package org.trnltk.apps.tokenizer;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
@@ -22,8 +22,8 @@ import com.google.common.io.Files;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppRunner;
 
 import java.io.BufferedWriter;
 import java.io.File;

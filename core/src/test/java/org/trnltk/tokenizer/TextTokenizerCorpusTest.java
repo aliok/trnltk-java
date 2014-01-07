@@ -26,7 +26,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.trnltk.util.DiffUtil;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,7 +37,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.fail;
 
 public class TextTokenizerCorpusTest {
-    final TokenizationGraph graph;
+    final protected TokenizationGraph graph;
 
     TextTokenizer strictTokenizer;
 
@@ -81,7 +84,7 @@ public class TextTokenizerCorpusTest {
             System.out.println("Number of lines in the file : " + lineCount);
 
         final BufferedWriter tokensWriter = Files.newWriter(tokenizedFile, Charsets.UTF_8);
-        final PrintWriter errorWriter = errorFile!=null ? new PrintWriter(Files.newWriter(errorFile, Charsets.UTF_8)) : new PrintWriter(System.out);
+        final PrintWriter errorWriter = errorFile != null ? new PrintWriter(Files.newWriter(errorFile, Charsets.UTF_8)) : new PrintWriter(System.out);
 
 
         int numberOfLinesInError = 0;
@@ -104,9 +107,9 @@ public class TextTokenizerCorpusTest {
                 }
                 tokenizationStopWatch.resume();
                 final Iterable<Token> tokens;
-                try{
+                try {
                     tokens = tokenizer.tokenize(sentence);
-                }catch (Exception e){
+                } catch (Exception e) {
                     // skip the line
                     numberOfLinesInError++;
                     e.printStackTrace(errorWriter);
@@ -207,7 +210,7 @@ public class TextTokenizerCorpusTest {
             fail(messagesBuilder.toString());
     }
 
-    protected class TokenizationCommand implements Runnable {
+    public class TokenizationCommand implements Runnable {
 
         private final TokenizationCommandCallback callback;
         private final TextTokenizer tokenizer;
@@ -215,7 +218,7 @@ public class TextTokenizerCorpusTest {
         private final File tokenizedFile;
         private final File errorFile;
 
-        protected TokenizationCommand(TokenizationCommandCallback callback, TextTokenizer tokenizer, File sentencesFile, File tokenizedFile, File errorFile) {
+        public TokenizationCommand(TokenizationCommandCallback callback, TextTokenizer tokenizer, File sentencesFile, File tokenizedFile, File errorFile) {
             this.callback = callback;
             this.tokenizer = tokenizer;
             this.sentencesFile = sentencesFile;

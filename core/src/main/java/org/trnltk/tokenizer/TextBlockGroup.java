@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * @author Ali Ok
  */
-class TextBlockGroup {
+public class TextBlockGroup {
     private final ImmutableList<TextBlock> textBlocks;
     private final TextBlockTypeGroup textBlockTypeGroup;
     private final TextBlock firstTextBlock;

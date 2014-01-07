@@ -45,7 +45,7 @@ public class DictionaryRootFinder implements RootFinder {
         if (Character.isUpperCase(partialInput.charAt(0).getCharValue())) {
             final ArrayList<Root> result = new ArrayList<Root>();
 
-            final Collection<? extends Root> lowerCaseRoots = this.rootMap.get(Character.toLowerCase(partialInput.getUnderlyingString().charAt(0)) + partialInput.getUnderlyingString().substring(1));
+            final Collection<? extends Root> lowerCaseRoots = this.rootMap.get(Character.toLowerCase((int)partialInput.getUnderlyingString().charAt(0)) + partialInput.getUnderlyingString().substring(1));
             result.addAll(roots);
             result.addAll(lowerCaseRoots);
 

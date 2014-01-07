@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.tokenizer;
+package org.trnltk.apps.tokenizer;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -23,8 +23,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppRunner;
+import org.trnltk.tokenizer.*;
 
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
     @App
     public void dumpBigTokenizationGraphInDotFormat() {
         final TextTokenizer tokenizer = TextTokenizer.createDefaultTextTokenizer(true);
-        dumpTokenizationGraph(tokenizer.graph, Predicates.<TokenizationGraphNode>alwaysTrue(),
+        dumpTokenizationGraph(tokenizer.getGraph(), Predicates.<TokenizationGraphNode>alwaysTrue(),
                 Predicates.<TokenizationGraphNode>alwaysTrue(), Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
@@ -52,7 +53,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
                 }
             }
         };
-        dumpTokenizationGraph(tokenizer.graph, Type_Word_Matcher, Type_Word_Matcher, Predicates.<TokenizationGraphEdge>alwaysTrue());
+        dumpTokenizationGraph(tokenizer.getGraph(), Type_Word_Matcher, Type_Word_Matcher, Predicates.<TokenizationGraphEdge>alwaysTrue());
     }
 
     @App
@@ -114,7 +115,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
     //see http://en.wikipedia.org/wiki/DOT_language
     protected void dumpTokenizationGraph(TokenizationGraph graph, Predicate<TokenizationGraphNode> sourceNodePredicate,
                                          Predicate<TokenizationGraphNode> targetNodePredicate, Predicate<TokenizationGraphEdge> edgePredicate) {
-        final Map<TextBlockTypeGroup, TokenizationGraphNode> nodeMap = graph.nodeMap;
+        final Map<TextBlockTypeGroup, TokenizationGraphNode> nodeMap = graph.getNodeMap();
 
         int instructedEdgeCount = 0;
         int inferredEdgeCount = 0;
@@ -134,7 +135,7 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
             final String sourceNodeName = getNodeName(sourceNode);
             System.out.println("\t" + sourceNodeName);
 
-            final Map<TextBlockTypeGroup, TokenizationGraphEdge> edges = sourceNode.edges;
+            final Map<TextBlockTypeGroup, TokenizationGraphEdge> edges = sourceNode.getEdges();
             for (TokenizationGraphEdge tokenizationGraphEdge : edges.values()) {
                 final TokenizationGraphNode targetNode = tokenizationGraphEdge.getTarget();
                 if (!targetNodePredicate.apply(targetNode))
@@ -182,4 +183,6 @@ public class TextTokenizerDefaultTrainingApp extends TextTokenizerDefaultTrainin
         }));
         return "\"" + str + "\"";
     }
+
+
 }

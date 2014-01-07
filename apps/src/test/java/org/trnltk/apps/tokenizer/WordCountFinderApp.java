@@ -14,7 +14,7 @@
 *  limitations under the License.
 */
 
-package org.trnltk.tokenizer;
+package org.trnltk.apps.tokenizer;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -29,9 +29,9 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppProperties;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppProperties;
+import org.trnltk.apps.commons.AppRunner;
 import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.util.Constants;

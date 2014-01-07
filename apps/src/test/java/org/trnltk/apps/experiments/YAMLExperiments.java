@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.experiments;
+package org.trnltk.apps.experiments;
 
 import com.google.common.io.Resources;
 import org.junit.Test;

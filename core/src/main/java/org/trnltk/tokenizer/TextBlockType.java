@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 /**
  * @author Ali Ok
  */
-enum TextBlockType {
+public enum TextBlockType {
     // order is important!
 
     Sentence_Start {

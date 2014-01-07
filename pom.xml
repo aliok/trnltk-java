@@ -30,6 +30,7 @@
     <modules>
         <module>core</module>
         <module>web</module>
+        <module>apps</module>
     </modules>
 
     <!--TODO: How about distributing thru github? there is a wagon extension for that-->

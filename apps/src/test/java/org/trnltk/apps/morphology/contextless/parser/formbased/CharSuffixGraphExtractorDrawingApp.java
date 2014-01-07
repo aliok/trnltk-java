@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.formbased;
+package org.trnltk.apps.morphology.contextless.parser.formbased;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -29,8 +29,8 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppRunner;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.LexemeAttribute;
 import org.trnltk.model.lexicon.PhoneticAttribute;
@@ -40,6 +40,7 @@ import org.trnltk.model.suffix.Suffix;
 import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.model.suffix.SuffixTransition;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.formbased.*;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.RootValidator;

@@ -1,4 +1,4 @@
-package org.trnltk.app;
+package org.trnltk.apps.commons;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +16,10 @@ public class AppProperties {
 
     public static String oneMillionSentencesFolder() {
         return getString("app.data.folder.1msentences");
+    }
+
+    public static String generalFolder() {
+        return getString("app.data.folder.general");
     }
 
     private static String getString(String key) {

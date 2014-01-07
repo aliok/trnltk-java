@@ -251,5 +251,9 @@ public class TextTokenizer {
             return map;
         }
     }
+
+    public TokenizationGraph getGraph() {
+        return graph;
+    }
 }
 

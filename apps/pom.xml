@@ -26,52 +26,24 @@
         <version>${trnltk-version}</version>
     </parent>
 
-    <artifactId>core</artifactId>
+    <artifactId>apps</artifactId>
 
-    <name>TRNLTK Core</name>
-    <description>TRNLTK Core</description>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <name>TRNLTK Apps</name>
+    <description>TRNLTK Apps</description>
 
     <dependencies>
         <dependency>
-            <artifactId>diff_match_patch</artifactId>
-            <groupId>diff_match_patch</groupId>
-            <version>current</version>
+            <groupId>org.trnltk</groupId>
+            <artifactId>core</artifactId>
+            <version>${trnltk-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.11</version>
+            <groupId>org.trnltk</groupId>
+            <artifactId>core</artifactId>
+            <version>${trnltk-version}</version>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>google-diff-patch-match</id>
-            <name>google-diff-patch-match</name>
-            <url>http://google-diff-match-patch.googlecode.com/svn/trunk/maven/</url>
-        </repository>
-        <repository>
-            <id>Sonatype-public</id>
-            <name>SnakeYAML repository</name>
-            <url>http://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <properties>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>

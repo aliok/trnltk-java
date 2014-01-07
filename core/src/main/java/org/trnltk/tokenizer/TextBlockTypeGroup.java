@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author Ali Ok
  */
-class TextBlockTypeGroup {
+public class TextBlockTypeGroup {
     private final ImmutableList<TextBlockType> textBlockTypes;
 
     public TextBlockTypeGroup(List<TextBlockType> textBlockTypes) {

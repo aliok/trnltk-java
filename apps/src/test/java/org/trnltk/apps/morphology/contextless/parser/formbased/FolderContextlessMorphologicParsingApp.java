@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.formbased;
+package org.trnltk.apps.morphology.contextless.parser.formbased;
 
 
 import com.google.common.base.Charsets;
@@ -26,8 +26,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.trnltk.app.App;
-import org.trnltk.app.AppRunner;
+import org.trnltk.apps.commons.App;
+import org.trnltk.apps.commons.AppRunner;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
@@ -35,6 +35,10 @@ import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser;
+import org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraph;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraphExtractor;
 import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.*;

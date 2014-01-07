@@ -58,7 +58,9 @@ public class RootFinderChain {
             if (CollectionUtils.isNotEmpty(rootsForPartialInput)) {
                 //roots must be beginning of the partial input
                 for (Root rootForPartialInput : rootsForPartialInput) {
-                    Validate.isTrue(rootValidator.isValid(rootForPartialInput, partialInput), "Invalid root " + rootForPartialInput.toString() + " for partial input " + partialInput);
+                    final boolean isPartialInputValid = rootValidator.isValid(rootForPartialInput, partialInput);
+                    if (!isPartialInputValid)
+                        throw new IllegalArgumentException("Invalid root " + rootForPartialInput.toString() + " for partial input " + partialInput);
                 }
                 roots.addAll(rootsForPartialInput);
             }

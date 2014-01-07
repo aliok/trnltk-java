@@ -19,7 +19,7 @@ package org.trnltk.tokenizer;
 /**
  * @author Ali Ok
  */
-class TextBlock {
+public class TextBlock {
     private String text;
     private TextBlockType textBlockType;
 
