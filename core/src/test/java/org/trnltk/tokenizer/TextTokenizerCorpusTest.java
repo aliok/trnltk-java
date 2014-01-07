@@ -81,7 +81,7 @@ public class TextTokenizerCorpusTest {
             System.out.println("Number of lines in the file : " + lineCount);
 
         final BufferedWriter tokensWriter = Files.newWriter(tokenizedFile, Charsets.UTF_8);
-        final PrintWriter errorWriter = new PrintWriter(Files.newWriter(errorFile, Charsets.UTF_8));
+        final PrintWriter errorWriter = errorFile!=null ? new PrintWriter(Files.newWriter(errorFile, Charsets.UTF_8)) : new PrintWriter(System.out);
 
 
         int numberOfLinesInError = 0;
