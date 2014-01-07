@@ -20,6 +20,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.StopWatch;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.util.Constants;
 
@@ -41,6 +42,7 @@ import java.util.List;
 public class TurkishCollatorPerformanceTest {
 
     @Test
+    @Ignore
     public void testCollatorPerformance() {
         final Collator collator = Collator.getInstance(Constants.TURKISH_LOCALE);
         collator.setStrength(Collator.PRIMARY);
