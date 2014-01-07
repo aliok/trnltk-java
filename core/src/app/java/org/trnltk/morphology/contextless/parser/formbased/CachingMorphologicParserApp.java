@@ -25,6 +25,7 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.trnltk.app.App;
+import org.trnltk.app.AppProperties;
 import org.trnltk.app.AppRunner;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
@@ -113,7 +114,7 @@ public class CachingMorphologicParserApp {
 
     @App("Parse sample TBMM Journal w/o bulk parse")
     public void parseTbmmJournal_b0241h_noBulkParse() throws Exception {
-        final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
+        final File tokenizedFile = new File("core/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
@@ -163,7 +164,7 @@ public class CachingMorphologicParserApp {
 
     @App("Parse sample TBMM Journal with bulk parse")
     public void parseTbmmJournal_b0241h_withBulkParse() throws Exception {
-        final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
+        final File tokenizedFile = new File("core/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
@@ -216,11 +217,11 @@ public class CachingMorphologicParserApp {
     @App("Parse all sample corpus. Does not do an offline analysis to add most frequent words to cache in advance.")
     public void parse8MWords() throws Exception {
         final List<File> files = Arrays.asList(
-                new File("D:\\devl\\data\\1MSentences\\tbmm_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\ntvmsnbc_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\radikal_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\zaman_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\milliyet-sondakika_tokenized.txt")
+                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/ntvmsnbc_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/radikal_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/zaman_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/milliyet-sondakika_tokenized.txt")
         );
 
         final LinkedList<String> words = new LinkedList<String>();
@@ -282,11 +283,11 @@ public class CachingMorphologicParserApp {
     @App("Parse all sample corpus. Does an offline analysis to add most frequent words to cache in advance.")
     public void parse8MWords_withOfflineAnalysis() throws Exception {
         final List<File> files = Arrays.asList(
-                new File("D:\\devl\\data\\1MSentences\\tbmm_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\ntvmsnbc_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\radikal_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\zaman_tokenized.txt"),
-                new File("D:\\devl\\data\\1MSentences\\milliyet-sondakika_tokenized.txt")
+                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/ntvmsnbc_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/radikal_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/zaman_tokenized.txt"),
+                new File(AppProperties.oneMillionSentencesFolder() + "/milliyet-sondakika_tokenized.txt")
         );
 
         final List<String> words = new ArrayList<String>();
