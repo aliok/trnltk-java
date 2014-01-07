@@ -13,3 +13,6 @@ atlassian-ide-plugin.xml
 *.jar
 *.war
 *.ear
+
+# OS files:
+*.DS_Store
