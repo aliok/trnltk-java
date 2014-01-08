@@ -18,6 +18,7 @@ package org.trnltk.apps.experiments;
 
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.*;
@@ -25,8 +26,11 @@ import com.google.common.io.Files;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.trnltk.apps.commons.App;
 import org.trnltk.apps.commons.AppProperties;
+import org.trnltk.apps.commons.AppRunner;
+import org.trnltk.apps.commons.SampleFiles;
 import org.trnltk.model.letter.TurkishChar;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.Root;
@@ -60,10 +64,11 @@ import java.util.concurrent.TimeUnit;
  * Requires a lot of memory!
  * Make sure you set properly.
  * <p/>
- * I used -Xms3512M -Xmx6072M and worked good with max L1 cache size of 200000
+ * I used -Xms3512M -Xmx6072M and worked good.
  */
 // poor design of the test class....
-public class AmbigutyGraphTest {
+@RunWith(AppRunner.class)
+public class AmbiguityMatrixApp {
 
     private static final int BULK_SIZE = 1500;
     private static final int NUMBER_OF_THREADS = 8;
@@ -72,7 +77,7 @@ public class AmbigutyGraphTest {
     private HashMultimap<String, ? extends Root> originalRootMap;
 
 
-    public AmbigutyGraphTest() {
+    public AmbiguityMatrixApp() {
         this.originalRootMap = RootMapFactory.createSimpleConvertCircumflexes();
     }
 
@@ -113,8 +118,8 @@ public class AmbigutyGraphTest {
         this.contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
     }
 
-    @Test
-    public void parse8MWords_withOfflineAnalysis() throws Exception {
+    @App
+    public void parse8MWords_withOfflineAnalysis_andDumpMatrixForFeatures_andFindTop10KAmbiguousWords() throws Exception {
         final StopWatch completeProcessStopWatch = new StopWatch();
         completeProcessStopWatch.start();
 
@@ -149,39 +154,71 @@ public class AmbigutyGraphTest {
         final Map<String, Integer> totalAmbiguityMap = buildTotalAmbiguityMap(wordCountSet, resultMap);
         final SortedMap<String, Integer> sortedTotalAmbiguityMap = buildSortedTotalAmbiguityMap(totalAmbiguityMap);
 
-        final File outputFile = new File(AppProperties.generalFolder() + "/ambiguity_data.txt");
-        BufferedWriter bufferedWriter = null;
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(outputFile));
-            dumpGraphData(bufferedWriter, wordCountSet, distinctWordsWithEnoughOccurrences, resultMap, sortedTotalAmbiguityMap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (bufferedWriter != null)
-                bufferedWriter.close();
+        {
+            final File matrixFile = new File(AppProperties.generalFolder() + "/ambiguity_data_for_1m_sentences.txt");
+            BufferedWriter bufferedWriter = null;
+            try {
+                bufferedWriter = new BufferedWriter(new FileWriter(matrixFile));
+                System.out.println("Dumping matrix data to " + matrixFile);
+                System.out.println("With the columns representing following features:");
+                System.out.println(Joiner.on(" ").join(Iterables.transform(Lists.newArrayList(Feature.values()), new Function<Feature, String>() {
+                    @Override
+                    public String apply(AmbiguityMatrixApp.Feature input) {
+                        return input.name();
+                    }
+                })));
+                dumpMatrixData(bufferedWriter, wordCountSet, distinctWordsWithEnoughOccurrences, resultMap, sortedTotalAmbiguityMap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bufferedWriter != null)
+                    bufferedWriter.close();
+            }
         }
+
+        {
+            final File top10KFile = new File(AppProperties.generalFolder() + "/top_10K_most_ambiguous_entries_for_1m_sentences.txt");
+            BufferedWriter bufferedWriter = null;
+            try {
+                bufferedWriter = new BufferedWriter(new FileWriter(top10KFile));
+                System.out.println("Writing top 10K most ambiguous entries to " + top10KFile);
+                printFirst10KTopAmbiguousEntries(bufferedWriter, wordCountSet, resultMap, sortedTotalAmbiguityMap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bufferedWriter != null)
+                    bufferedWriter.close();
+            }
+        }
+
 
         completeProcessStopWatch.stop();
         System.out.println("It took " + completeProcessStopWatch.toString());
     }
 
-    private void dumpGraphData(BufferedWriter bufferedWriter, ImmutableMultiset<String> wordCountSet, List<String> distinctWordsWithEnoughOccurrences, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) throws IOException {
-        final String separator = " ";
+    private void printFirst10KTopAmbiguousEntries(BufferedWriter writer, ImmutableMultiset<String> wordCountSet, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) {
+        final Formatter formatter = new Formatter(writer);
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : sortedTotalAmbiguityMap.entrySet()) {
+            String surface = entry.getKey();
+            Integer totalAmbiguity = entry.getValue();
+            int occurrenceCount = wordCountSet.count(surface);
+            List<String> parseResults = resultMap.get(surface);
+            formatter.format(Locale.getDefault(), "%20s : %10d \t O:%10d \t A:%3d \t %s \n", surface, totalAmbiguity, occurrenceCount, parseResults.size(), Joiner.on("  ").join(parseResults));
+            if (i++ == 10000)
+                break;
+        }
+    }
 
-//        System.out.println(Joiner.on(separator).join(Iterables.transform(Lists.newArrayList(Feature.values()), new Function<Feature, String>() {
-//            @Override
-//            public String apply(org.trnltk.apps.experiments.AmbigutyGraphTest.Feature input) {
-//                return input.name();
-//            }
-//        })));
-        int[][] data = getGraphData(wordCountSet, distinctWordsWithEnoughOccurrences, resultMap, sortedTotalAmbiguityMap);
+    private void dumpMatrixData(BufferedWriter bufferedWriter, ImmutableMultiset<String> wordCountSet, List<String> distinctWordsWithEnoughOccurrences, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) throws IOException {
+        int[][] data = getMatrixData(wordCountSet, distinctWordsWithEnoughOccurrences, resultMap, sortedTotalAmbiguityMap);
         for (int[] row : data) {
-            bufferedWriter.write(Joiner.on(separator).join(ArrayUtils.toObject(row)));
+            bufferedWriter.write(Joiner.on(" ").join(ArrayUtils.toObject(row)));
             bufferedWriter.newLine();
         }
     }
 
-    private int[][] getGraphData(ImmutableMultiset<String> wordCountSet, List<String> distinctWordsWithEnoughOccurrences, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) {
+    private int[][] getMatrixData(ImmutableMultiset<String> wordCountSet, List<String> distinctWordsWithEnoughOccurrences, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) {
         int data[][] = new int[distinctWordsWithEnoughOccurrences.size()][Feature.values().length + 1];     // +1 for Y = totalAmbiguity
         int i = 0;
         for (Map.Entry<String, Integer> ambiguityEntry : sortedTotalAmbiguityMap.entrySet()) {
@@ -261,15 +298,7 @@ public class AmbigutyGraphTest {
     }
 
     private List<String> getAllWords() throws IOException {
-        final List<File> files = Arrays.asList(
-//                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized_half.txt")
-                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/ntvmsnbc_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/radikal_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/zaman_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/milliyet-sondakika_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_b0241h_tokenized.txt")
-        );
+        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final List<String> words = new ArrayList<String>();
         for (File tokenizedFile : files) {

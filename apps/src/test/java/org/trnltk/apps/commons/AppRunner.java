@@ -21,12 +21,18 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-import org.trnltk.apps.commons.App;
 
 import java.util.List;
 
 /**
  * A custom runner to run apps which are actually JUnit tests.
+ * <p/>
+ * The differences are:
+ * <ul>
+ * <li>apps are not picked by surefire, so they're not run during maven build.</li>
+ * <li>you cannot run multiple apps at once.</li>
+ * </ul>
+ * <p/>
  * <p/>
  * You should use the annotation {@link App} on the methods.
  */

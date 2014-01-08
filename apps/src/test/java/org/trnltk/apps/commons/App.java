@@ -25,6 +25,8 @@ import java.lang.annotation.Target;
  * Nothing that different than standard JUnit annotation {@link org.junit.Test}.
  * <p/>
  * More readable, since apps are actually JUnit tests, but not really "test"s in TDD manner.
+ *
+ * @see org.trnltk.apps.commons.AppRunner
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
