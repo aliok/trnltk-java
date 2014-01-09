@@ -17,10 +17,7 @@
 package org.trnltk.tokenizer;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 
@@ -211,5 +208,9 @@ public class TokenizationGraph {
                 "recordExamples=" + recordExamples +
                 ", nodeMap=" + nodeMap +
                 '}';
+    }
+
+    public Map<TextBlockTypeGroup, TokenizationGraphNode> getNodeMap() {
+        return Collections.unmodifiableMap(nodeMap);
     }
 }

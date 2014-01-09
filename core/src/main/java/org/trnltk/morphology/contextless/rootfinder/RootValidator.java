@@ -4,6 +4,7 @@ import org.apache.commons.lang3.Validate;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.LexemeAttribute;
 import org.trnltk.model.lexicon.Root;
+import org.trnltk.util.Constants;
 
 /**
  * Validates a root.
@@ -45,7 +46,7 @@ public class RootValidator {
             return true;
 
         return partialSurface.startsWith(rootSequence) ||
-                partialSurface.getUnderlyingString().toLowerCase().startsWith(rootSequence.getUnderlyingString());
+                partialSurface.getUnderlyingString().toLowerCase(Constants.TURKISH_LOCALE).startsWith(rootSequence.getUnderlyingString().toLowerCase(Constants.TURKISH_LOCALE));
 
     }
 

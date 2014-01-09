@@ -20,6 +20,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ import java.util.Map;
 /**
  * @author Ali Ok
  */
-class TokenizationGraphNode {
+public class TokenizationGraphNode {
     static Logger logger = Logger.getLogger(TokenizationGraphNode.class);
 
     protected final TextBlockTypeGroup data;
@@ -144,5 +145,9 @@ class TokenizationGraphNode {
     @Override
     public int hashCode() {
         return data.hashCode();
+    }
+
+    public Map<TextBlockTypeGroup, TokenizationGraphEdge> getEdges() {
+        return Collections.unmodifiableMap(edges);
     }
 }

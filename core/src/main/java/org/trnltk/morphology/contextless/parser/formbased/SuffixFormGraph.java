@@ -76,7 +76,7 @@ public class SuffixFormGraph {
     }
 
     // for tests
-    Map<SuffixFormGraphNodeKey, SuffixFormGraphNode> getMap() {
+    public Map<SuffixFormGraphNodeKey, SuffixFormGraphNode> getMap() {
         return nodeMap;
     }
 }

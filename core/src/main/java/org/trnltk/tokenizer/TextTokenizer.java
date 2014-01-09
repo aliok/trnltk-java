@@ -20,11 +20,11 @@ import com.google.common.collect.*;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
-import org.trnltk.tokenizer.*;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,7 +53,7 @@ public class TextTokenizer {
         this.textBlockSplitter = new TextBlockSplitter();
     }
 
-    public LinkedList<String> tokenize(String text) {
+    public LinkedList<Token> tokenize(String text) {
         if (logger.isDebugEnabled())
             logger.debug("Tokenizing text: '" + text + "'");
 
@@ -63,9 +63,10 @@ public class TextTokenizer {
         final LinkedList<TextBlock> textBlocks = textBlockSplitter.splitToTextParts(text);
         this.textBlockSplitter.addTextStartsAndEnds(textBlocks, this.blockSize);
 
-        final LinkedList<String> tokens = new LinkedList<String>();
+        final LinkedList<Token> tokens = new LinkedList<Token>();
 
         StringBuilder currentTokenBuilder = new StringBuilder();
+        List<TextBlockType> currentBlockTypes = new LinkedList<TextBlockType>();
 
 
         for (int i = this.blockSize; i <= textBlocks.size() - this.blockSize; i++) {
@@ -91,22 +92,30 @@ public class TextTokenizer {
                 }
             }
 
-            final String textToAdd = rightTextBlockGroup.getFirstTextBlock().getText();
+            final TextBlock firstTextBlock = rightTextBlockGroup.getFirstTextBlock();
+            final String textToAdd = firstTextBlock.getText();
+            final TextBlockType textBlockType = firstTextBlock.getTextBlockType();
             if (addSpace || SPACE.equals(textToAdd)) {
-                if (currentTokenBuilder.length() > 0)
-                    tokens.add(currentTokenBuilder.toString());
+                if (currentTokenBuilder.length() > 0){
+                    tokens.add(new Token(currentTokenBuilder.toString(), currentBlockTypes));
+                }
 
-                if (SPACE.equals(textToAdd))
+                if (SPACE.equals(textToAdd)){
                     currentTokenBuilder = new StringBuilder();
-                else
+                    currentBlockTypes = new LinkedList<TextBlockType>();
+                }
+                else{
                     currentTokenBuilder = new StringBuilder(textToAdd);
+                    currentBlockTypes.add(textBlockType);
+                }
             } else {
                 currentTokenBuilder.append(textToAdd);
+                currentBlockTypes.add(textBlockType);
             }
         }
 
         if (currentTokenBuilder.length() > 0)
-            tokens.add(currentTokenBuilder.toString());
+            tokens.add(new Token(currentTokenBuilder.toString(), currentBlockTypes));
 
         return tokens;
     }
@@ -140,7 +149,7 @@ public class TextTokenizer {
                     .blockSize(2)
                     .graph(graph)
                     .build();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -241,6 +250,10 @@ public class TextTokenizer {
 
             return map;
         }
+    }
+
+    public TokenizationGraph getGraph() {
+        return graph;
     }
 }
 

@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 /**
  * @author Ali Ok
  */
-enum TextBlockType {
+public enum TextBlockType {
     // order is important!
 
     Sentence_Start {
@@ -358,8 +358,7 @@ enum TextBlockType {
         {
             try {
                 final ImmutableSet.Builder<String> setBuilder = new ImmutableSet.Builder<String>();
-                final File abbreviationsFile = new File(Resources.getResource("tokenizer/abbreviations.txt").getFile());
-                final List<String> lines = Files.readLines(abbreviationsFile, Charsets.UTF_8);
+                final List<String> lines = Resources.readLines(Resources.getResource("tokenizer/abbreviations.txt"), Charsets.UTF_8);
                 for (String line : lines) {
                     //skip the ones without "." at the end
                     final int abbrEndIndex = line.indexOf(":");

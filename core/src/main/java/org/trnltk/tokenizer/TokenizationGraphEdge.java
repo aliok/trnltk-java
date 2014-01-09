@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author Ali Ok
  */
-class TokenizationGraphEdge {
+public class TokenizationGraphEdge {
     private final boolean inferred;
     private final TokenizationGraphNode target;
     private final boolean addSpace;

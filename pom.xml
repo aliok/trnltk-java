@@ -30,6 +30,7 @@
     <modules>
         <module>core</module>
         <module>web</module>
+        <module>apps</module>
     </modules>
 
     <!--TODO: How about distributing thru github? there is a wagon extension for that-->
@@ -134,6 +135,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
