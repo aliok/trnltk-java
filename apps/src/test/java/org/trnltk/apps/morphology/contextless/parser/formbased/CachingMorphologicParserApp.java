@@ -19,14 +19,20 @@ package org.trnltk.apps.morphology.contextless.parser.formbased;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
-import com.google.common.collect.*;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.trnltk.apps.analysis.FrequentWordAnalysis;
+import org.trnltk.apps.commands.BulkParseCommand;
+import org.trnltk.apps.commands.SingleParseCommand;
 import org.trnltk.apps.commons.App;
-import org.trnltk.apps.commons.AppProperties;
 import org.trnltk.apps.commons.AppRunner;
+import org.trnltk.apps.commons.LoggingSettings;
+import org.trnltk.apps.commons.SampleFiles;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
@@ -200,8 +206,9 @@ public class CachingMorphologicParserApp {
             final MorphologicParser parser = parsers[(i / BULK_SIZE) % NUMBER_OF_THREADS];
             int start = i;
             int end = i + BULK_SIZE < words.size() ? i + BULK_SIZE : words.size();
-            final List<String> subWordList = words.subList(start, end);
             final int wordIndex = i;
+
+            final List<String> subWordList = words.subList(start, end);
             pool.execute(new BulkParseCommand(parser, subWordList, wordIndex, false));
         }
 
@@ -220,13 +227,12 @@ public class CachingMorphologicParserApp {
 
     @App("Parse all sample corpus. Does not do an offline analysis to add most frequent words to cache in advance.")
     public void parse8MWords() throws Exception {
-        final List<File> files = Arrays.asList(
-                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/ntvmsnbc_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/radikal_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/zaman_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/milliyet-sondakika_tokenized.txt")
-        );
+        /*
+         Total time :0:07:29.799
+         Nr of tokens : 18362187
+         Avg time : 0.024495938310616267 ms
+        */
+        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final LinkedList<String> words = new LinkedList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
@@ -243,9 +249,6 @@ public class CachingMorphologicParserApp {
         System.out.println("Number of words : " + words.size());
         System.out.println("Number of unique words : " + uniqueWords.size());
         System.out.println("======================");
-
-        if (1 == 1)
-            return;
 
         final MorphologicParserCache l1Cache = new LRUMorphologicParserCache(NUMBER_OF_THREADS, INITIAL_L1_CACHE_SIZE, MAX_L1_CACHE_SIZE);
 
@@ -285,14 +288,15 @@ public class CachingMorphologicParserApp {
     }
 
     @App("Parse all sample corpus. Does an offline analysis to add most frequent words to cache in advance.")
-    public void parse8MWords_withOfflineAnalysis() throws Exception {
-        final List<File> files = Arrays.asList(
-                new File(AppProperties.oneMillionSentencesFolder() + "/tbmm_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/ntvmsnbc_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/radikal_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/zaman_tokenized.txt"),
-                new File(AppProperties.oneMillionSentencesFolder() + "/milliyet-sondakika_tokenized.txt")
-        );
+    public void parseWordsOfOneMillionSentences_withOfflineAnalysis() throws Exception {
+        /*
+        Total time :0:05:27.806
+        Nr of tokens : 18362187
+        Avg time : 0.01785223078274935 ms
+        */
+        LoggingSettings.turnOnLogger(LoggingSettings.Piece.FrequentWordAnalysis);
+
+        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final List<String> words = new ArrayList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
@@ -333,7 +337,9 @@ public class CachingMorphologicParserApp {
             @Override
             public void build(MorphologicParser parser) {
                 final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
-                final List<String> wordsToUseInCache = findWordsToUseInCache(words);
+                final FrequentWordAnalysis.FrequentWordAnalysisResult result = new FrequentWordAnalysis().run(words, 0.75);
+
+                final List<String> wordsToUseInCache = result.getWordsWithEnoughOccurrences();
                 for (String word : wordsToUseInCache) {
                     builder.put(word, contextlessMorphologicParser.parseStr(word));
                 }
@@ -381,105 +387,6 @@ public class CachingMorphologicParserApp {
         System.out.println("Total time :" + stopWatch.toString());
         System.out.println("Nr of tokens : " + words.size());
         System.out.println("Avg time : " + (stopWatch.getTime() * 1.0d) / (words.size() * 1.0d) + " ms");
-    }
-
-    private List<String> findWordsToUseInCache(List<String> words) {
-        final Multiset<String> wordSet = HashMultiset.create(words);
-        final ImmutableMultiset<String> orderedWordSet = Multisets.copyHighestCountFirst(wordSet);
-        final List<String> wordsWithMultipleOccurrence = new ArrayList<String>();
-        long multipleOccurrenceCount = 0L;
-        for (String word : orderedWordSet.elementSet()) {
-            final int count = orderedWordSet.count(word);
-            if (count < 2)
-                break;
-            wordsWithMultipleOccurrence.add(word);
-            multipleOccurrenceCount += count;
-        }
-
-        System.out.println("Number of words that have multiple occurrence : " + wordsWithMultipleOccurrence.size());
-        System.out.println("Total occurrence count of them : " + multipleOccurrenceCount + " which is " + (Long.valueOf(multipleOccurrenceCount).doubleValue() / Integer.valueOf(words.size()).doubleValue() * 100.0) + " % of total");
-
-//        int N = 100;
-//        System.out.println("First " + N + "words with multiple occurrence:");
-//        for (int i = 0; i < N; i++) {
-//            String word = wordsWithMultipleOccurrence.get(i);
-//            final int count = orderedWordSet.count(word);
-//            System.out.println(word + "\t\t : " + count + " which is " + (Long.valueOf(count).doubleValue() / Integer.valueOf(words.size()).doubleValue() * 100.0) + " % of total");
-//        }
-
-        double ratio = 0.75;
-
-        final List<String> wordsToUse = new LinkedList<String>();
-        int occurrencesSoFar = 0;
-        for (int i = 0; i < wordsWithMultipleOccurrence.size(); i++) {
-            final String word = wordsWithMultipleOccurrence.get(i);
-            final int count = orderedWordSet.count(word);
-
-            wordsToUse.add(word);
-
-            occurrencesSoFar += count;
-            if (occurrencesSoFar > (words.size() * ratio))
-                break;
-        }
-
-        System.out.println("Found " + wordsToUse.size() + " words which are " + 100.0 * Integer.valueOf(occurrencesSoFar).doubleValue() / Integer.valueOf(words.size()).doubleValue() + " % of all words");
-
-        return wordsToUse;
-
-    }
-
-    private static class BulkParseCommand implements Runnable {
-        private final MorphologicParser parser;
-        private final List<String> subWordList;
-        private final int wordIndex;
-        private boolean printUnparseable;
-
-        private BulkParseCommand(final MorphologicParser parser, final List<String> subWordList, final int wordIndex, boolean printUnparseable) {
-            this.parser = parser;
-            this.subWordList = subWordList;
-            this.wordIndex = wordIndex;
-            this.printUnparseable = printUnparseable;
-        }
-
-        @Override
-        public void run() {
-            final List<List<MorphemeContainer>> results = parser.parseAllStr(subWordList);
-
-            System.out.println("Finished " + wordIndex);
-
-            if (printUnparseable) {
-                for (int i = 0; i < results.size(); i++) {
-                    List<MorphemeContainer> result = results.get(i);
-                    if (result.isEmpty())
-                        System.out.println("Word is not parsable " + subWordList.get(i));
-                }
-            }
-        }
-    }
-
-    private static class SingleParseCommand implements Runnable {
-        private final MorphologicParser parser;
-        private final String word;
-        private final int wordIndex;
-        private boolean printUnparseable;
-
-        private SingleParseCommand(final MorphologicParser parser, final String word, final int wordIndex, boolean printUnparseable) {
-            this.parser = parser;
-            this.word = word;
-            this.wordIndex = wordIndex;
-            this.printUnparseable = printUnparseable;
-        }
-
-        @Override
-        public void run() {
-            final List<MorphemeContainer> morphemeContainers = parser.parseStr(word);
-            if (printUnparseable) {
-                if (morphemeContainers.isEmpty())
-                    System.out.println("Word is not parsable " + word);
-            }
-            if (wordIndex % 500 == 0)
-                System.out.println("Finished " + wordIndex);
-        }
     }
 
 }

@@ -16,6 +16,7 @@
 
 package org.trnltk.apps.commons;
 
+import org.apache.log4j.Level;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -70,5 +71,11 @@ public class AppRunner extends BlockJUnit4ClassRunner {
             throw new IllegalStateException("You cannot run multiple apps at once! This runner prevents that!");
         else
             return super.classBlock(notifier);
+    }
+
+    @Override
+    protected Statement methodBlock(FrameworkMethod method) {
+        LoggingSettings.setLoggerLevel(LoggingSettings.Piece.EVERYTHING, Level.WARN);
+        return super.methodBlock(method);
     }
 }
