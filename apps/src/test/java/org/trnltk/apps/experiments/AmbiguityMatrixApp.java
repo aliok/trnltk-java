@@ -27,6 +27,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.trnltk.apps.commands.BulkParseCommand;
 import org.trnltk.apps.commons.App;
 import org.trnltk.apps.commons.AppProperties;
 import org.trnltk.apps.commons.AppRunner;
@@ -34,7 +35,6 @@ import org.trnltk.apps.commons.SampleFiles;
 import org.trnltk.model.letter.TurkishChar;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.Root;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
@@ -49,7 +49,6 @@ import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -332,42 +331,6 @@ public class AmbiguityMatrixApp {
             }
         }
         return mergedMap;
-    }
-
-    private static class BulkParseCommand implements Runnable {
-        private final MorphologicParser parser;
-        private final List<String> subWordList;
-        private final int wordIndex;
-        private boolean printUnparseable;
-        final Map<String, List<String>> resultMap;
-
-        private BulkParseCommand(final MorphologicParser parser, final List<String> subWordList, final int wordIndex, boolean printUnparseable, Map<String, List<String>> resultMap) {
-            this.parser = parser;
-            this.subWordList = subWordList;
-            this.wordIndex = wordIndex;
-            this.printUnparseable = printUnparseable;
-            this.resultMap = resultMap;
-        }
-
-        @Override
-        public void run() {
-            final List<List<MorphemeContainer>> results = parser.parseAllStr(subWordList);
-
-            System.out.println("Finished " + wordIndex);
-
-
-            for (int i = 0; i < results.size(); i++) {
-                String surface = subWordList.get(i);
-                List<MorphemeContainer> result = results.get(i);
-                if (result.size() > 1)
-                    resultMap.put(surface, MorphemeContainerFormatter.formatMorphemeContainers(result));
-
-                if (printUnparseable && result.isEmpty()) {
-                    System.out.println("Word is not parsable " + surface);
-                }
-
-            }
-        }
     }
 
     private static enum Feature {

@@ -17,6 +17,7 @@
 package org.trnltk.apps.experiments;
 
 import com.google.common.io.Resources;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+@Ignore
 public class YAMLExperiments {
 
     @Test
