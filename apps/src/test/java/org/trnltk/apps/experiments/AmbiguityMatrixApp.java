@@ -118,7 +118,7 @@ public class AmbiguityMatrixApp {
     }
 
     @App
-    public void parse8MWords_withOfflineAnalysis_andDumpMatrixForFeatures_andFindTop10KAmbiguousWords() throws Exception {
+    public void parse8MWords_withOfflineAnalysis_andDumpMatrixForFeatures_andFindTop1KAmbiguousWords() throws Exception {
         final StopWatch completeProcessStopWatch = new StopWatch();
         completeProcessStopWatch.start();
 
@@ -176,12 +176,12 @@ public class AmbiguityMatrixApp {
         }
 
         {
-            final File top10KFile = new File(AppProperties.generalFolder() + "/top_10K_most_ambiguous_entries_for_1m_sentences.txt");
+            final File top10KFile = new File(AppProperties.generalFolder() + "/top_1K_most_ambiguous_entries_for_1m_sentences.txt");
             BufferedWriter bufferedWriter = null;
             try {
                 bufferedWriter = new BufferedWriter(new FileWriter(top10KFile));
                 System.out.println("Writing top 10K most ambiguous entries to " + top10KFile);
-                printFirst10KTopAmbiguousEntries(bufferedWriter, wordCountSet, resultMap, sortedTotalAmbiguityMap);
+                printFirstNTopAmbiguousEntries(bufferedWriter, wordCountSet, resultMap, sortedTotalAmbiguityMap, 1000);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -195,7 +195,7 @@ public class AmbiguityMatrixApp {
         System.out.println("It took " + completeProcessStopWatch.toString());
     }
 
-    private void printFirst10KTopAmbiguousEntries(BufferedWriter writer, ImmutableMultiset<String> wordCountSet, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap) {
+    private void printFirstNTopAmbiguousEntries(BufferedWriter writer, ImmutableMultiset<String> wordCountSet, Map<String, List<String>> resultMap, SortedMap<String, Integer> sortedTotalAmbiguityMap, int N) {
         final Formatter formatter = new Formatter(writer);
         int i = 0;
         for (Map.Entry<String, Integer> entry : sortedTotalAmbiguityMap.entrySet()) {
@@ -204,7 +204,7 @@ public class AmbiguityMatrixApp {
             int occurrenceCount = wordCountSet.count(surface);
             List<String> parseResults = resultMap.get(surface);
             formatter.format(Locale.getDefault(), "%20s : %10d \t O:%10d \t A:%3d \t %s \n", surface, totalAmbiguity, occurrenceCount, parseResults.size(), Joiner.on("  ").join(parseResults));
-            if (i++ == 10000)
+            if (i++ == N)
                 break;
         }
     }
@@ -297,7 +297,7 @@ public class AmbiguityMatrixApp {
     }
 
     private List<String> getAllWords() throws IOException {
-        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
+        final Set<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final List<String> words = new ArrayList<String>();
         for (File tokenizedFile : files) {
@@ -317,7 +317,8 @@ public class AmbiguityMatrixApp {
             int occurrenceCount = wordCountSet.count(word);
             List<String> results = resultMap.get(word);
             if (results != null)
-                totalAmbiguityMap.put(word, occurrenceCount * results.size());
+                // for now, assume score grows with parse result count's square
+                totalAmbiguityMap.put(word, occurrenceCount * results.size() * results.size());
         }
 
         return totalAmbiguityMap;

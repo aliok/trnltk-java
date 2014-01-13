@@ -232,7 +232,7 @@ public class CachingMorphologicParserApp {
          Nr of tokens : 18362187
          Avg time : 0.024495938310616267 ms
         */
-        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
+        final Set<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final LinkedList<String> words = new LinkedList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
@@ -296,7 +296,7 @@ public class CachingMorphologicParserApp {
         */
         LoggingSettings.turnOnLogger(LoggingSettings.Piece.FrequentWordAnalysis);
 
-        final List<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
+        final Set<File> files = SampleFiles.oneMillionSentencesTokenizedFiles();
 
         final List<String> words = new ArrayList<String>();
         final HashSet<String> uniqueWords = new HashSet<String>();
