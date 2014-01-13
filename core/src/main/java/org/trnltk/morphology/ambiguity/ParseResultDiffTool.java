@@ -16,33 +16,23 @@
 
 package org.trnltk.morphology.ambiguity;
 
-import com.google.common.collect.Ordering;
-import com.google.common.primitives.Ints;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.trnltk.common.util.Comparators;
 import org.trnltk.model.ambiguity.morphology.*;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 //DOCME
 public class ParseResultDiffTool {
 
-    public static final Ordering<String> byLengthOrdering = new Ordering<String>() {
-        public int compare(String left, String right) {
-            return Ints.compare(left.length(), right.length());
-        }
-    };
-
-    public static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
-
     public ParseResultDifference findDifference(ParseResult _parseResultA, ParseResult _parseResultB) {
         final ParseResult firstParseResult;
         final ParseResult secondParseResult;
 
-        if (parseResultOrdering.compare(_parseResultA.getStr(), _parseResultB.getStr()) <= 0) {
+        if (Comparators.parseResultOrdering.compare(_parseResultA.getStr(), _parseResultB.getStr()) <= 0) {
             firstParseResult = _parseResultA;
             secondParseResult = _parseResultB;
         } else {

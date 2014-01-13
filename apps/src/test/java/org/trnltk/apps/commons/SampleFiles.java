@@ -1,11 +1,16 @@
 package org.trnltk.apps.commons;
 
-import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.Ordering;
+import com.google.common.base.Charsets;
+import com.google.common.collect.*;
+import com.google.common.io.CharSource;
+import com.google.common.io.Files;
 import org.apache.commons.lang3.Validate;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.apache.commons.io.FilenameUtils.concat;
 import static org.trnltk.apps.commons.AppProperties.oneMillionSentencesFolder;
@@ -64,6 +69,26 @@ public class SampleFiles {
     private static void checkFileExistsAndReadable(File file) {
         Validate.isTrue(file.exists(), "File does not exist : " + file + " Please configure trnltk.apps.properties file.");
         Validate.isTrue(file.canRead(), "File is not readable : " + file + " Do you have the correct permissions for the file?");
+    }
+
+    /**
+     * @return Map of FileId-Lines where each line is a sentence whose surfaces are seperated with a WhiteSpace character
+     */
+    public static Map<String, ArrayList<String>> getLinesOfOneMillionSentences() {
+        final Map<String, ArrayList<String>> tokenizedFiles = new HashMap<String, ArrayList<String>>();
+        final ImmutableMap<String, File> filesMap = SampleFiles.oneMillionSentencesTokenizedFilesMap();
+        for (Map.Entry<String, File> entry : filesMap.entrySet()) {
+            final CharSource charSource = Files.asCharSource(entry.getValue(), Charsets.UTF_8);
+            final ImmutableList<String> lines;
+            try {
+                lines = charSource.readLines();
+            } catch (IOException e) {
+                throw new RuntimeException("Cannot read file " + entry.getValue(), e);
+            }
+            tokenizedFiles.put(entry.getKey(), Lists.newArrayList(lines));
+        }
+
+        return tokenizedFiles;
     }
 }
 
