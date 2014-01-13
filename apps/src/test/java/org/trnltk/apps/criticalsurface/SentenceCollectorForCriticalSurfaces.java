@@ -93,13 +93,20 @@ public class SentenceCollectorForCriticalSurfaces {
         outer:
         for (int i = lineToStartAfter + 1; i < lines.size(); i++) {
             String line = lines.get(i);
+            boolean found = false;
             for (String surface : onSpaceSplitter.split(line)) {
                 if (surface.equals(surfaceToSearch)) {
-                    final SentenceIdentifier sentenceIdentifier = new SentenceIdentifier(fileId, i);
-                    occurrences.add(sentenceIdentifier);
-                    if (occurrences.size() >= REQUIRED_EXAMPLE_COUNT)
-                        break outer;
+                    if (!found)
+                        found = true;
+                    else
+                        continue outer;     // we don't want a sentence that has multiple occurrences of the surface
                 }
+            }
+            if (found) {
+                final SentenceIdentifier sentenceIdentifier = new SentenceIdentifier(fileId, i);
+                occurrences.add(sentenceIdentifier);
+                if (occurrences.size() >= REQUIRED_EXAMPLE_COUNT)
+                    break outer;
             }
         }
 
