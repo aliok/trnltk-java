@@ -10,6 +10,7 @@ import com.google.common.collect.Sets;
 import com.google.common.io.CharSource;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.trnltk.common.structure.StringEnum;
 import org.trnltk.common.structure.StringEnumMap;
 import org.trnltk.model.lexicon.LexemeAttribute;
@@ -134,7 +135,28 @@ public class CriticalSurfaceFileHelper implements Serializable {
                     throw new RuntimeException("Unable to close writer for file : " + criticalSurfacesFile, e);
                 }
         }
+    }
 
+    public String getSentenceFromMemory(Map<String, ArrayList<String>> tokenizedFiles, SentenceIdentifier sentenceIdentifier) {
+        // for now, all sentences are in the memory
+        // so, just read it directly
+        // but when files are too big to fit the memory, then
+        // * add line numbers in front of files
+        // * try to estimate the location of line : averageLineLength * lineNumber
+        // * seek to estimation point
+        // * find previous line (cr, lf or crlf)
+        // * read line number --> seekLineNumber
+        // * if lineNumberToSearch < seekLineNumber, make a new estimation which is in a previous point than the current point. do it again recursively
+        // * else if > ... do the similar, but on the latter part
+        // * else, read until next line
+        // this might not be ideal for SSD harddisks, make a research first!
+        final ArrayList<String> fileLines = tokenizedFiles.get(sentenceIdentifier.getFileId());
+        Validate.notNull(fileLines, "No file content found for file id " + sentenceIdentifier.getFileId());
+        try {
+            return fileLines.get(sentenceIdentifier.getLine());
+        } catch (Exception e) {
+            throw new RuntimeException("Line #" + sentenceIdentifier.getLine() + " does not exist for the file " + sentenceIdentifier.getFileId());
+        }
     }
 
 
