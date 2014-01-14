@@ -45,7 +45,7 @@ public class CriticalSurfaceTaggingController implements Serializable {
     public void postConstruct() {
         criticalSurfaceFileHelper = new CriticalSurfaceFileHelper();
 
-        final File criticalSurfacesFile = new File(AppProperties.generalFolder() + "/criticalSurfaces.txt");
+        final File criticalSurfacesFile = new File(AppProperties.criticalSurfaceFolder() + "/criticalSurfaces.txt");
         criticalSurfaceTaggingData.setCriticalSurfaceEntries(criticalSurfaceFileHelper.readCriticalSurfacesFile(criticalSurfacesFile));
 
         criticalSurfaceTaggingData.setTokenizedSentencesOfFiles(SampleFiles.getLinesOfOneMillionSentences());
@@ -58,8 +58,8 @@ public class CriticalSurfaceTaggingController implements Serializable {
 
     public void flush() throws IOException {
         // 1. take a backup of the original file
-        final File criticalSurfacesFile = new File(AppProperties.generalFolder() + "/criticalSurfaces.txt");
-        final File criticalSurfacesBackupFile = new File(AppProperties.generalFolder() + "/criticalSurfaces_" + System.currentTimeMillis() + ".txt");
+        final File criticalSurfacesFile = new File(AppProperties.criticalSurfaceFolder() + "/criticalSurfaces.txt");
+        final File criticalSurfacesBackupFile = new File(AppProperties.criticalSurfaceFolder() + "/criticalSurfaces_" + System.currentTimeMillis() + ".txt");
         FileUtils.copyFile(criticalSurfacesFile, criticalSurfacesBackupFile);
 
         // 2. write to file
