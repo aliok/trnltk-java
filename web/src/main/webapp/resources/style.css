@@ -1,0 +1,47 @@
+.criticalSurfaceSentence {
+
+}
+
+.sentenceSurface, .criticalSurface {
+    display: inline-block;
+}
+
+.criticalSurface {
+    font-weight: bold;
+    color: #FFA300;
+}
+
+@media (max-width: 1199px) {
+    *, .label, .badge {
+        font-size: xx-small;
+    }
+
+    .btn, .navbar .nav > li > a {
+        padding: 0;
+    }
+
+    .navbar .nav > li > a {
+        padding-left: 5px;
+    }
+
+    fieldset {
+        min-width: 0;
+    }
+
+    .sentenceSurface, .criticalSurface {
+        margin-right: 2px;
+    }
+
+    h1, h2, h3, h4, h5, legend {
+        font-size: smaller;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sentenceSurface, .criticalSurface {
+        font-size: larger;
+        margin-right: 4px;
+    }
+}
+
+

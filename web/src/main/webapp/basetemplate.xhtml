@@ -24,6 +24,7 @@
         <title>TRNLTK Web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="/resources/thirdparty/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/resources/style.css" rel="stylesheet"/>
         <ui:insert name="head"/>
     </h:head>
 
@@ -31,23 +32,22 @@
         <div class="container">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <span class="brand">TRNLTK</span>
+                    <span class="brand hidden-phone">TRNLTK</span>
                     <ul class="nav">
-                        <li id="navbar-item-index"><a href="index.html"><i class="icon-home"></i> Home</a></li>
-                        <li id="navbar-item-createTrainingFile"><a href="createTrainingFile.html"><i class="icon-hand-up"></i> createTrainingFile</a></li>
-                        <li id="navbar-item-settings"><a href="settings.html"><i class="icon-wrench"></i> Settings</a>
-                        </li>
-                        <li id="navbar-item-help"><a href="help.html"><i class="icon-question-sign"></i> Help</a></li>
-                        <li id="navbar-item-about"><a href="about.html"><i class="icon-info-sign"></i> About</a></li>
+                        <li id="navbar-item-index"><a href="index.html"><i class="icon-home hidden-phone"></i> Home</a></li>
+                        <li id="navbar-item-createTrainingFile"><a href="createTrainingFile.html"><i class="icon-hand-up hidden-phone"></i> createTrainingFile</a></li>
+                        <li id="navbar-item-tagCriticalSurfaces"><a href="tagCriticalSurfaces.html"><i class="icon-hand-up hidden-phone"></i> tagCriticalSurfaces</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="page-header">
+            <div class="page-header hidden-phone">
                 <h1>
                     <ui:insert name="page-header">
                         TRNLTK Web
                         <small>Turkish Natural Language Toolkit</small>
                     </ui:insert>
+                    <h:graphicImage id="loadingImg" style="display: none;" library="img" name="ajaxloading.gif"
+                                                                alt="Loading..."/>
                 </h1>
             </div>
 

@@ -61,6 +61,13 @@
         <param-value>.xhtml</param-value>
     </context-param>
 
+    <context-param>
+        <!--see http://mail-archives.apache.org/mod_mbox/myfaces-users/201304.mbox/%3C1e7063b6.3e457e16.51768711.dd58c@o2.pl%3E-->
+        <!--unfortunately using dots doesn't work with Intellij. so using the old behavior.-->
+        <param-name>org.apache.myfaces.STRICT_JSF_2_ALLOW_SLASH_LIBRARY_NAME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
 
 
     <listener>

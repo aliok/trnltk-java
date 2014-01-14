@@ -115,7 +115,7 @@ public class CriticalSurfaceFileHelper implements Serializable {
 
                 // write each of the parse results and matching sentences
                 for (Map.Entry<String, TreeSet<SentenceIdentifier>> parseResultEntry : criticalSurfaceEntry.getParseResultSentences().entrySet()) {
-                    writer.write("  " + LineType.ParseResult.getStringForm() + " " + parseResultEntry.getKey());
+                    writer.write("  " + LineType.ParseResult.getStringForm() + " " + parseResultEntry.getKey() + " ");
                     writer.write(sentenceIdentifierJoiner.join(parseResultEntry.getValue()));
                     writer.newLine();
                 }

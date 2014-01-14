@@ -24,7 +24,7 @@ import java.util.TreeSet;
  */
 @RunWith(AppRunner.class)
 public class SentenceCollectorForCriticalSurfaces {
-    private static final int REQUIRED_EXAMPLE_COUNT = 5;
+    private static final int REQUIRED_EXAMPLE_COUNT = 20;
 
     private final Map<String, ArrayList<String>> tokenizedFiles;
 

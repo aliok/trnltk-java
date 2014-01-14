@@ -1,0 +1,24 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core" xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <cc:interface shortDescription="Display a sentence with a critical surface with coloring etc.">
+        <cc:attribute name="sentenceIdentifier" required="true" type="org.trnltk.apps.criticalsurface.SentenceIdentifier"/>
+        <cc:attribute name="sentence" required="true" type="java.util.List" shortDescription="Sentence as list of surfaces"/>
+        <cc:attribute name="indexOfCriticalSurfaceInSentence" required="true" type="java.lang.Integer"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <span class="label label-success" style="margin-right: 3px;">#{cc.attrs.sentenceIdentifier.toString()}</span>
+        <span class="criticalSurfaceSentence">
+            <ui:repeat value="#{cc.attrs.sentence}" var="surface" varStatus="varStatus">
+                <h:outputText value="#{surface}" styleClass="sentenceSurface" rendered="#{varStatus.index != cc.attrs.indexOfCriticalSurfaceInSentence}" />
+                <h:outputText value="#{surface}" styleClass="sentenceSurface criticalSurface" rendered="#{varStatus.index eq cc.attrs.indexOfCriticalSurfaceInSentence}" />
+            </ui:repeat>
+        </span>
+    </cc:implementation>
+
+</ui:composition>

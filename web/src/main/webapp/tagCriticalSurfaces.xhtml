@@ -1,0 +1,152 @@
+<!--
+  ~ Copyright  2013  Ali Ok (aliokATapacheDOTorg)
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<ui:composition template="basetemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:criticalSurface="http://java.sun.com/jsf/composite/components/criticalsurface"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+        <h:form prependId="false" styleClass="form-horizontal">
+
+            <p:outputPanel rendered="#{criticalSurfaceTaggingProgressData.atTheEnd}">
+                <button id="initializeButton" type="button" class="btn btn-primary">
+                    Initialize process
+                </button>
+
+                <p:remoteCommand id="initializeCommand" name="initialize" action="#{criticalSurfaceTaggingController.initialize}"
+                     process="@form"
+                     global="true" onstart="jQuery('#loadingImg').show();"
+                     oncomplete="jQuery('#loadingImg').hide();"
+                     update="@form"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{not criticalSurfaceTaggingProgressData.atTheEnd}">
+                <fieldset>
+                    <legend>Tag critical surface <h:outputText value="#{criticalSurfaceTaggingProgressData.currentEntry.criticalSurface}" styleClass="criticalSurface"/>
+                    </legend>
+
+                    <!--@elvariable id="currentSentence" type="java.lang.String"-->
+                    <ui:param name="currentSentence" value="#{criticalSurfaceTaggingController.currentSentence}"/>
+
+                    <!--@elvariable id="indexOfCurrentCriticalSurfaceInCurrentSentence" type="java.lang.Integer"-->
+                    <ui:param name="indexOfCurrentCriticalSurfaceInCurrentSentence" value="#{criticalSurfaceTaggingController.indexOfCurrentCriticalSurfaceInCurrentSentence}"/>
+
+                    <criticalSurface:sentence
+                            sentenceIdentifier="#{criticalSurfaceTaggingController.currentSentenceIdentifier}"
+                            sentence="#{currentSentence}"
+                            indexOfCriticalSurfaceInSentence="#{indexOfCurrentCriticalSurfaceInCurrentSentence}"/>
+
+                    <h2>Choices</h2>
+
+                    <button id="skipButton" type="button" class="btn">
+                        <i class="icon-forward"/> Skip
+                    </button>
+
+                    <p:remoteCommand id="skipCommand" name="skip" action="#{criticalSurfaceTaggingController.skipTaggingOccurrence}"
+                                 process="@this"
+                                 global="true" onstart="jQuery('#loadingImg').show();"
+                                 oncomplete="jQuery('#loadingImg').hide();"
+                                 update="@form"/>
+
+                    <button id="ignoreButton" type="button" class="btn">
+                        <i class="icon-thumbs-down"/> Ignore
+                    </button>
+
+                    <p:remoteCommand id="ignoreCommand" name="ignore" action="#{criticalSurfaceTaggingController.ignoreOccurrence}"
+                                 process="@this"
+                                 global="true" onstart="jQuery('#loadingImg').show();"
+                                 oncomplete="jQuery('#loadingImg').hide();"
+                                 update="@form"/>
+
+                    <button id="flushButton" type="button" class="btn">
+                        <i class="icon-hdd"/> Flush
+                    </button>
+
+                    <p:remoteCommand id="flushCommand" name="flush" action="#{criticalSurfaceTaggingController.flush}"
+                                 process="@this"
+                                 global="true" onstart="jQuery('#loadingImg').show();"
+                                 oncomplete="jQuery('#loadingImg').hide();"
+                                 update="@form"/>
+
+                    <p/>
+
+                    <table class="table table-striped">
+                        <ui:repeat value="#{criticalSurfaceTaggingController.choices}" var="container" varStatus="varStatus">
+                            <tr class="#{varStatus.odd ? 'success' : 'info'}"><td>
+
+                                <button id="tagButton_#{varStatus.index}" type="button" class="btn">
+                                    <i class="icon-ok"/> Select
+                                </button>
+
+                                <h:outputText value="#{container.parseResultStr}" style="margin-left: 5px;"/>
+
+                                <blockquote>
+                                    <ui:repeat value="#{container.sentencesAndIndices}" var="pair">
+                                        <p>
+                                            <criticalSurface:sentence
+                                                    sentenceIdentifier="#{pair.left.sentenceIdentifier}"
+                                                    sentence="#{pair.left.surfaces}"
+                                                    indexOfCriticalSurfaceInSentence="#{pair.right}"/>
+                                        </p>
+                                    </ui:repeat>
+                                </blockquote>
+
+                                <p:remoteCommand id="tagButton_#{varStatus.index}_command" name="tagButton_#{varStatus.index}"
+                                                 action="#{criticalSurfaceTaggingController.tagOccurrence(varStatus.index)}"
+                                                 process="@this" update="@form"
+                                                 global="true" onstart="jQuery('#loadingImg').show();"
+                                                 oncomplete="jQuery('#loadingImg').hide();" />
+
+                                <script>
+                                    jQuery('#tagButton_#{varStatus.index}').on('click', function(e){
+                                        tagButton_#{varStatus.index}();
+                                    });
+                                </script>
+
+                            </td></tr>
+                        </ui:repeat>
+                    </table>
+
+                </fieldset>
+
+                <h:messages showDetail="true"/>
+            </p:outputPanel>
+        </h:form>
+
+        <script>
+            $(document).ready(function () {
+                jQuery('#initializeButton').live('click', function (e) {
+                    initialize();
+                });
+                jQuery('#skipButton').live('click', function (e) {
+                    skip();
+                });
+                jQuery('#ignoreButton').live('click', function (e) {
+                    ignore();
+                });
+                jQuery('#flushButton').live('click', function (e) {
+                    flush();
+                });
+
+            });
+        </script>
+    </ui:define>
+
+</ui:composition>

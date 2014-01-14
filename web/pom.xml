@@ -40,6 +40,12 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.8.v20121106</version>
                 <configuration>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>9090</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
                         <contextPath>/</contextPath>
@@ -59,6 +65,14 @@
             <groupId>org.trnltk</groupId>
             <artifactId>core</artifactId>
             <version>${trnltk-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.trnltk</groupId>
+            <artifactId>apps</artifactId>
+            <version>${trnltk-version}</version>
+            <type>test-jar</type>
+            <scope>compile</scope>
+            <!-- I know looks weird -->
         </dependency>
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
@@ -88,7 +102,7 @@
     </dependencies>
 
     <properties>
-        <myfaces-version>2.1.9</myfaces-version>
+        <myfaces-version>2.1.14</myfaces-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
