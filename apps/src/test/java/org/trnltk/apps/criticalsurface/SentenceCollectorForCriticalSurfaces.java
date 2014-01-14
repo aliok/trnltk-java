@@ -66,7 +66,7 @@ public class SentenceCollectorForCriticalSurfaces {
 
     @App
     public void findNewOccurrencesForCriticalSurfacesForRequired() {
-        final File criticalSurfacesFile = new File(AppProperties.generalFolder() + "/criticalSurfaces.txt");
+        final File criticalSurfacesFile = new File(AppProperties.criticalSurfaceFolder() + "/criticalSurfaces.txt");
         final List<CriticalSurfaceEntry> criticalSurfaceEntries = criticalSurfaceFileHelper.readCriticalSurfacesFile(criticalSurfacesFile);
         for (CriticalSurfaceEntry criticalSurfaceEntry : criticalSurfaceEntries) {
             if (CollectionUtils.isEmpty(criticalSurfaceEntry.getNonTaggedOccurrences())) {
