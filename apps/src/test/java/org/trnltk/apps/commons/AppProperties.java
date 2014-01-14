@@ -22,6 +22,10 @@ public class AppProperties {
         return getString("app.data.folder.general");
     }
 
+    public static String criticalSurfaceFolder() {
+        return getString("app.data.folder.criticalSurface");
+    }
+
     private static String getString(String key) {
         return (String) getObject(key);
     }

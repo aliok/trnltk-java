@@ -60,7 +60,7 @@ public class SentenceCollectorForCriticalSurfaces {
             criticalSurfaceEntryList.add(criticalSurfaceEntry);
         }
 
-        final File criticalSurfacesFile = new File(AppProperties.generalFolder() + "/criticalSurfaces_initial.txt");
+        final File criticalSurfacesFile = new File(AppProperties.criticalSurfaceFolder() + "/criticalSurfaces.txt");
         criticalSurfaceFileHelper.writeCriticalSurfaceEntriesToFile(criticalSurfaceEntryList, criticalSurfacesFile);
     }
 
