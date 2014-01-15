@@ -1,3 +1,21 @@
+/*dark background starts*/
+body{
+    background: #6e6e6e;
+}
+
+body, legend{
+    color: white;
+}
+
+.table tbody tr.info td{
+    background: #232941;
+}
+
+.table tbody tr.success td{
+    background: #575e53;
+}
+/*dark background ends*/
+
 .criticalSurfaceSentence {
 
 }
@@ -7,7 +25,6 @@
 }
 
 .criticalSurface {
-    font-weight: bold;
     color: #FFA300;
 }
 
