@@ -69,10 +69,9 @@ public class CriticalSurfaceTaggingController implements Serializable {
     public void skipTaggingOccurrence() {
         final CriticalSurfaceEntry currentEntry = criticalSurfaceTaggingProgressData.getCurrentEntry();
         final int currentOccurrenceIndex = criticalSurfaceTaggingProgressData.getCurrentOccurrenceIndex();
-        if ((currentOccurrenceIndex + 1) < currentEntry.getNonTaggedOccurrences().size()){
+        if ((currentOccurrenceIndex + 1) < currentEntry.getNonTaggedOccurrences().size()) {
             criticalSurfaceTaggingProgressData.setCurrentOccurrenceIndex(currentOccurrenceIndex + 1);
-        }
-        else{
+        } else {
             final int currentSurfaceIndex = criticalSurfaceTaggingProgressData.getCurrentSurfaceIndex();
             if ((currentSurfaceIndex + 1) < criticalSurfaceTaggingData.getCriticalSurfaceEntries().size()) {
                 criticalSurfaceTaggingProgressData.setCurrentSurfaceIndex(currentSurfaceIndex + 1);
@@ -125,12 +124,16 @@ public class CriticalSurfaceTaggingController implements Serializable {
                 final String parseResultStr = input.getKey();
                 final TreeSet<SentenceIdentifier> parseResultExamples = input.getValue();
                 final List<Pair<SentenceContainer, Integer>> sentences = new ArrayList<Pair<SentenceContainer, Integer>>();
+                int i = 0;
                 for (SentenceIdentifier parseResultExample : parseResultExamples) {
                     final String sentence = criticalSurfaceFileHelper.getSentenceFromMemory(criticalSurfaceTaggingData.getTokenizedSentencesOfFiles(), parseResultExample);
                     final ArrayList<String> surfacesInTheSentence = Lists.newArrayList(onSpaceSplitter.split(sentence));
                     final int indexOfSurfaceInTheSentence = surfacesInTheSentence.indexOf(currentEntry.getCriticalSurface());
                     Validate.isTrue(indexOfSurfaceInTheSentence >= 0);
                     sentences.add(ImmutablePair.of(new SentenceContainer(surfacesInTheSentence, parseResultExample), indexOfSurfaceInTheSentence));
+                    i = i + 1;
+                    if (i >= 5)
+                        break;
                 }
                 return new ParseResultWithSentencesContainer(parseResultStr, sentences);
             }
