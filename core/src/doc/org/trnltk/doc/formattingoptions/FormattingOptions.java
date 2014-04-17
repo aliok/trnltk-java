@@ -2,8 +2,7 @@ package org.trnltk.doc.formattingoptions;
 
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder;
+import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParserBuilder;
 import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.List;

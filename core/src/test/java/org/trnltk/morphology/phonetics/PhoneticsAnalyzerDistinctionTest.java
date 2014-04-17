@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.trnltk.model.lexicon.PhoneticAttribute;
 import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
 import org.trnltk.model.lexicon.Root;
-import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserSimpleParseSetCharacterTest;
+import org.trnltk.morphology.contextless.parser.parsing.base.BaseContextlessMorphologicParserSimpleParseSetCharacterTest;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.testutil.TestEnvironment;
 

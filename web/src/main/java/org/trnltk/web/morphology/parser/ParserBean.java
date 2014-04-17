@@ -23,11 +23,12 @@ import com.google.common.primitives.Ints;
 import org.apache.log4j.Logger;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
-import org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets;
-import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraph;
-import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraphExtractor;
+import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
+import org.trnltk.morphology.contextless.parser.SuffixFormGraph;
+import org.trnltk.morphology.contextless.parser.SuffixFormGraphExtractor;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
@@ -93,8 +94,8 @@ public class ParserBean implements Serializable {
             // extract the formBasedGraph
             final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
 
-            final org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser morphologicParser =
-                    new org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+            final ContextlessMorphologicParser morphologicParser =
+                    new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
 
             //TODO: add formatting option!
             this.parseResults = Lists.transform(morphologicParser.parse(new TurkishSequence(this.surface)), new Function<MorphemeContainer, String>() {

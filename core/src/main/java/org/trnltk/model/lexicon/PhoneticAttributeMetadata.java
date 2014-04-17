@@ -31,9 +31,9 @@ import static org.trnltk.model.lexicon.PhoneticAttribute.*;
  * <p/>
  * Defines what {@link PhoneticAttribute}s can co-exist or cannot co-exist or is required for each other.
  * <p/>
- * These rules are especially important when computing the possible valid {@link org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets}
+ * These rules are especially important when computing the possible valid {@link org.trnltk.morphology.contextless.parser.PhoneticAttributeSets}
  *
- * @see org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets
+ * @see org.trnltk.morphology.contextless.parser.PhoneticAttributeSets
  */
 public class PhoneticAttributeMetadata {
 

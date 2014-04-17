@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder;
+import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParserBuilder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

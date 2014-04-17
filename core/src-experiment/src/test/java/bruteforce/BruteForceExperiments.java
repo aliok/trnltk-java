@@ -24,9 +24,10 @@ import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets;
-import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraph;
-import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraphExtractor;
+import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
+import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
+import org.trnltk.morphology.contextless.parser.SuffixFormGraph;
+import org.trnltk.morphology.contextless.parser.SuffixFormGraphExtractor;
 import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
@@ -46,7 +47,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class BruteForceExperiments {
-    private org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser parser;
+    private ContextlessMorphologicParser parser;
 
     @Before
     public void before() {
@@ -86,7 +87,7 @@ public class BruteForceExperiments {
                 .offer(bruteForceNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
                 .offer(bruteForceVerbRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
-        parser = new org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
     }
 
     @Test
