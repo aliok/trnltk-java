@@ -24,12 +24,10 @@ import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.Test;
-import org.trnltk.morphology.contextless.rootfinder.BruteForceCompoundNounRootFinder;
-import org.trnltk.morphology.contextless.rootfinder.BruteForceNounRootFinder;
-import org.trnltk.morphology.contextless.rootfinder.BruteForceVerbRootFinder;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserFactory;
+import org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraph;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraphExtractor;
+import org.trnltk.morphology.contextless.rootfinder.*;
 import org.trnltk.morphology.contextless.parser.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.lexicon.CircumflexConvertingRootGenerator;
@@ -40,6 +38,7 @@ import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.morphology.morphotactics.*;
+import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
 import java.io.File;
@@ -47,7 +46,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class BruteForceExperiments {
-    private ContextlessMorphologicParser parser;
+    private org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser parser;
 
     @Before
     public void before() {
@@ -71,19 +70,28 @@ public class BruteForceExperiments {
         copulaSuffixGraph.initialize();
         predefinedPaths.initialize();
 
-        parser = new ContextlessMorphologicParserFactory()
-                .rootFinder(bruteForceCompoundNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
-                .rootFinder(bruteForceNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
-                .rootFinder(bruteForceVerbRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
-                .predefinedPaths(predefinedPaths)
-                .suffixApplier(suffixApplier)
-                .suffixGraph(copulaSuffixGraph)
-                .build();
+        // create common phonetic and morphotactic parts
+        final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+        final PhoneticAttributeSets phoneticAttributeSets = new PhoneticAttributeSets();
+
+        // following is to extract a form-based graph from a suffix-based graph
+        final SuffixFormGraphExtractor suffixFormGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
+
+        // extract the formBasedGraph
+        final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(copulaSuffixGraph);
+
+        final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator());
+        rootFinderChain
+                .offer(bruteForceCompoundNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
+                .offer(bruteForceNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
+                .offer(bruteForceVerbRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
+
+        parser = new org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
     }
 
     @Test
     public void shouldParseTbmmJournal_b0241h() throws IOException {
-        final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
+        final File tokenizedFile = new File("core/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
         for (String line : lines) {
@@ -132,7 +140,7 @@ public class BruteForceExperiments {
 
     @Test
     public void shouldParseTbmmJournal_b0241h_andCreateRootHistogram() throws IOException {
-        final File tokenizedFile = new File("shared/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
+        final File tokenizedFile = new File("core/src/test/resources/tokenizer/tbmm_b0241h_tokenized.txt");
         final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
         final LinkedList<String> words = new LinkedList<String>();
         for (String line : lines) {

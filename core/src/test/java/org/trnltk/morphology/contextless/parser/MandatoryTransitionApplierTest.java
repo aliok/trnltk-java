@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser.suffixbased;
+package org.trnltk.morphology.contextless.parser;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;

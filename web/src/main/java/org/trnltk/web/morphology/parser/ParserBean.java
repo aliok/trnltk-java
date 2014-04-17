@@ -21,16 +21,19 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
 import org.apache.log4j.Logger;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParser;
-import org.trnltk.morphology.contextless.parser.PredefinedPaths;
-import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.contextless.parser.SuffixApplier;
-import org.trnltk.util.MorphemeContainerFormatter;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
+import org.trnltk.morphology.contextless.parser.formbased.PhoneticAttributeSets;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraph;
+import org.trnltk.morphology.contextless.parser.formbased.SuffixFormGraphExtractor;
+import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
+import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -80,7 +83,18 @@ public class ParserBean implements Serializable {
 
             final RootFinderChain rootFinderChain = this.rootFinderSelectionData.getRootFinderChain();
 
-            final ContextlessMorphologicParser morphologicParser = new ContextlessMorphologicParser(suffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
+            // create common phonetic and morphotactic parts
+            final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+            final PhoneticAttributeSets phoneticAttributeSets = new PhoneticAttributeSets();
+
+            // following is to extract a form-based graph from a suffix-based graph
+            final SuffixFormGraphExtractor suffixFormGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, phoneticsAnalyzer, phoneticAttributeSets);
+
+            // extract the formBasedGraph
+            final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
+
+            final org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser morphologicParser =
+                    new org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
 
             //TODO: add formatting option!
             this.parseResults = Lists.transform(morphologicParser.parse(new TurkishSequence(this.surface)), new Function<MorphemeContainer, String>() {

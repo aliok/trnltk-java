@@ -25,12 +25,11 @@ import com.google.common.io.Resources;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.model.lexicon.PhoneticAttribute;
 import org.trnltk.model.lexicon.PhoneticAttributeMetadata;
 import org.trnltk.model.lexicon.Root;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserSimpleParseSetCharacterTest;
+import org.trnltk.morphology.contextless.parser.parsing.BaseContextlessMorphologicParserSimpleParseSetCharacterTest;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.testutil.TestEnvironment;
 
@@ -103,7 +102,7 @@ public class PhoneticsAnalyzerDistinctionTest {
 
         final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
 
-        final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new ContextlessMorphologicParserSimpleParseSetCharacterTest.SimpleParseSetValidationLineProcessor());
+        final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new BaseContextlessMorphologicParserSimpleParseSetCharacterTest.SimpleParseSetValidationLineProcessor());
 
         for (Pair<String, String> line : lines) {
             final String surfaceToParse = line.getLeft();

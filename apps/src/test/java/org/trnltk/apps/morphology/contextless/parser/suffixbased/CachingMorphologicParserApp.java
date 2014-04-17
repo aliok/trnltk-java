@@ -35,7 +35,7 @@ import org.trnltk.morphology.contextless.parser.MorphologicParser;
 import org.trnltk.morphology.contextless.parser.cache.LRUMorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.cache.TwoLevelMorphologicParserCache;
-import org.trnltk.morphology.contextless.parser.suffixbased.ContextlessMorphologicParserFactory;
+import org.trnltk.morphology.contextless.parser.formbased.ContextlessMorphologicParserBuilder;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 
 import java.io.File;
@@ -59,18 +59,14 @@ public class CachingMorphologicParserApp {
     private static final int INITIAL_L1_CACHE_SIZE = 1000 * 200;
     private static final long MAX_L1_CACHE_SIZE = 1000 * 200;
 
-
     private MorphologicParser contextlessMorphologicParser;
-    private HashMultimap<String, ? extends Root> originalRootMap;
-
-    public CachingMorphologicParserApp() {
-        this.originalRootMap = RootMapFactory.createSimpleWithNumbersConvertCircumflexes();
-    }
 
     @Before
     public void setUp() throws Exception {
-        final HashMultimap<String, Root> rootMap = HashMultimap.create(this.originalRootMap);
-        this.contextlessMorphologicParser = ContextlessMorphologicParserFactory.createWithBigGraphForRootMap(rootMap);
+        this.contextlessMorphologicParser = ContextlessMorphologicParserBuilder.newBuilder()
+                .addAllBundledNoBruteForceRootFinders(true)
+                .includeAllBundledSuffixGraphs()
+                .build(true);
     }
 
     @App
