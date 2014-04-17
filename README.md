@@ -42,3 +42,24 @@ How it is tested?
 There are thousands of parsing unit tests. Plus, I use the treebank from METU-Sabanci, but is closed-source.
 Unfortunately, its license doesn't allow anyone to publish any portion of the treebank,
 thus I only test the parser against it in my local environment.
+
+
+Plan
+=================
+  # Get rid of unused stuff as much as possible. Such as
+    * suffix based parsing (deprecated by form based parsing)
+  # Prepare for reducing ambiguity in suffix graph. Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest
+  # Reduce ambiguity in suffix graph. E.g. discard parse results like
+    * `"sokakları", "sokak(sokak)+Noun+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3sg(+sI[ı])+Nom", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom", "sokak(sokak)+Noun+A3sg+P3pl(lAr!I[ları])+Nom"`
+    * ...
+  # Write a disambiguator with hunch-based parameters and metrics
+  # Use machine learning techniques to determine metrics and parameters
+  # Apply ideas:
+    * Ambiguity classification (to apply similar disambiguation techniques in case of a similar disambiguity)
+    * Critical surface tagging (solve "easy-win"s)
+    * Implement a parse tree for POS tagging
+    * Integrate disambiguation and POS tagging
+    * Proper noun identification
+    *
+
+
