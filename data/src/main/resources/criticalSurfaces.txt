@@ -9,8 +9,8 @@ CS için
   PR iç+Adj+Noun+Zero+A3sg+Pnon+Gen 
 CS öncelikle
   IO 
-  NT 1M-cnn-turk#11971 1M-cnn-turk#14126 1M-cnn-turk#15665 1M-cnn-turk#16826 1M-cnn-turk#17259 1M-cnn-turk#18191 1M-cnn-turk#19497 1M-cnn-turk#19546 1M-cnn-turk#19556 1M-cnn-turk#19701 1M-cnn-turk#21357
-  PR öncelikle+Adv 1M-cnn-turk#132 1M-cnn-turk#2469 1M-cnn-turk#3841 1M-cnn-turk#4725 1M-cnn-turk#5997 1M-cnn-turk#6834 1M-cnn-turk#7278 1M-cnn-turk#11544 1M-cnn-turk#11545
+  NT 
+  PR öncelikle+Adv 1M-cnn-turk#132 1M-cnn-turk#2469 1M-cnn-turk#3841 1M-cnn-turk#4725 1M-cnn-turk#5997 1M-cnn-turk#6834 1M-cnn-turk#7278 1M-cnn-turk#11544 1M-cnn-turk#11545 1M-cnn-turk#11971 1M-cnn-turk#14126 1M-cnn-turk#15665 1M-cnn-turk#16826 1M-cnn-turk#17259 1M-cnn-turk#18191 1M-cnn-turk#19497 1M-cnn-turk#19546 1M-cnn-turk#19556 1M-cnn-turk#19701 1M-cnn-turk#21357
   PR öncelik+Noun+A3sg+Pnon+Ins 
   PR ön+Adj+Adj+Equ+Noun+Ness+A3sg+Pnon+Ins 
   PR ön+Adj+Adj+Quite+Noun+Ness+A3sg+Pnon+Ins 
@@ -53,9 +53,9 @@ CS öncelikle
   PR ön+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ+Noun+Zero+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+Pnon+Ins 
 CS önce
   IO 
-  NT 1M-cnn-turk#60 1M-cnn-turk#63 1M-cnn-turk#149 1M-cnn-turk#156 1M-cnn-turk#160 1M-cnn-turk#181 1M-cnn-turk#203 1M-cnn-turk#275 1M-cnn-turk#277 1M-cnn-turk#282 1M-cnn-turk#381 1M-cnn-turk#455 1M-cnn-turk#513 1M-cnn-turk#535 1M-cnn-turk#621 1M-cnn-turk#644 1M-cnn-turk#645 1M-cnn-turk#823 1M-cnn-turk#861 1M-cnn-turk#918
+  NT 
   PR ön+Adj+Adv+Ly 
-  PR önce+Adv+Time 
+  PR önce+Adv+Time 1M-cnn-turk#60 1M-cnn-turk#63 1M-cnn-turk#149 1M-cnn-turk#156 1M-cnn-turk#160 1M-cnn-turk#181 1M-cnn-turk#203 1M-cnn-turk#275 1M-cnn-turk#277 1M-cnn-turk#282 1M-cnn-turk#381 1M-cnn-turk#455 1M-cnn-turk#513 1M-cnn-turk#535 1M-cnn-turk#621 1M-cnn-turk#644 1M-cnn-turk#645 1M-cnn-turk#823 1M-cnn-turk#861 1M-cnn-turk#918
   PR ön+Adj+Adj+Equ 
   PR ön+Adj+Adj+Quite 
   PR ön+Noun+A3sg+Pnon+Nom+Adv+By 
@@ -67,13 +67,13 @@ CS önce
   PR ön+Adj+Noun+Zero+A3sg+Pnon+Nom+Adv+InTermsOf 
 CS dolarlık
   IO 
-  NT 1M-cnn-turk#445 1M-cnn-turk#603 1M-cnn-turk#710 1M-cnn-turk#1677 1M-cnn-turk#3500 1M-cnn-turk#4751 1M-cnn-turk#4752 1M-cnn-turk#5709 1M-cnn-turk#5711 1M-cnn-turk#7053 1M-cnn-turk#7347 1M-cnn-turk#7348 1M-cnn-turk#7660 1M-cnn-turk#8052 1M-cnn-turk#9238 1M-cnn-turk#9531 1M-cnn-turk#9567 1M-cnn-turk#9627 1M-cnn-turk#9628 1M-cnn-turk#9637
+  NT 
   PR do+Noun+A3pl+Pnon+Nom+Adj+Y 
   PR do+Noun+A3pl+Pnon+Nom+Adj+For 
   PR dolar+Noun+A3sg+Pnon+Nom+Adj+Y 
   PR do+Noun+A3pl+Pnon+Nom+Adj+OfUnit 
-  PR dolar+Noun+A3sg+Pnon+Nom+Adj+For 
-  PR dolar+Noun+A3sg+Pnon+Nom+Adj+OfUnit 
+  PR dolar+Noun+A3sg+Pnon+Nom+Adj+For 1M-cnn-turk#7660
+  PR dolar+Noun+A3sg+Pnon+Nom+Adj+OfUnit 1M-cnn-turk#445 1M-cnn-turk#603 1M-cnn-turk#710 1M-cnn-turk#1677 1M-cnn-turk#3500 1M-cnn-turk#4751 1M-cnn-turk#4752 1M-cnn-turk#5709 1M-cnn-turk#5711 1M-cnn-turk#7053 1M-cnn-turk#7347 1M-cnn-turk#7348 1M-cnn-turk#8052 1M-cnn-turk#9238 1M-cnn-turk#9531 1M-cnn-turk#9567 1M-cnn-turk#9627 1M-cnn-turk#9628 1M-cnn-turk#9637
   PR do+Noun+A3pl+Pnon+Nom+Adj+DurationOf 
   PR dolar+Noun+A3sg+Pnon+Nom+Adj+DurationOf 
   PR do+Noun+A3pl+Pnon+Nom+Noun+Prof+A3sg+Pnon+Nom 
@@ -100,10 +100,10 @@ CS dolarlık
   PR dola+Verb+Pos+Aor+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Noun+FitFor+A3sg+Pnon+Nom 
 CS bir
   IO 
-  NT 1M-cnn-turk#2 1M-cnn-turk#4 1M-cnn-turk#5 1M-cnn-turk#8 1M-cnn-turk#9 1M-cnn-turk#25 1M-cnn-turk#27 1M-cnn-turk#29 1M-cnn-turk#37 1M-cnn-turk#47 1M-cnn-turk#53 1M-cnn-turk#54 1M-cnn-turk#56 1M-cnn-turk#60 1M-cnn-turk#70 1M-cnn-turk#76 1M-cnn-turk#79 1M-cnn-turk#80 1M-cnn-turk#86 1M-cnn-turk#92
+  NT 1M-cnn-turk#37 1M-cnn-turk#47 1M-cnn-turk#53 1M-cnn-turk#54 1M-cnn-turk#56 1M-cnn-turk#60 1M-cnn-turk#70 1M-cnn-turk#76 1M-cnn-turk#79 1M-cnn-turk#80 1M-cnn-turk#86 1M-cnn-turk#92
   PR bir+Adj 
   PR bir+Adv 
-  PR bir+Det 
+  PR bir+Det 1M-cnn-turk#2 1M-cnn-turk#4 1M-cnn-turk#5 1M-cnn-turk#8 1M-cnn-turk#9 1M-cnn-turk#25 1M-cnn-turk#27 1M-cnn-turk#29
 CS karar
   IO 
   NT 1M-cnn-turk#32 1M-cnn-turk#111 1M-cnn-turk#116 1M-cnn-turk#122 1M-cnn-turk#136 1M-cnn-turk#151 1M-cnn-turk#437 1M-cnn-turk#644 1M-cnn-turk#693 1M-cnn-turk#699 1M-cnn-turk#701 1M-cnn-turk#1103 1M-cnn-turk#1106 1M-cnn-turk#1107 1M-cnn-turk#1267 1M-cnn-turk#1510 1M-cnn-turk#1689 1M-cnn-turk#1803 1M-cnn-turk#1816 1M-cnn-turk#1834
@@ -21346,65 +21346,3 @@ CS müdürlüklerinde
   PR müdür+Noun+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3pl+P3pl+Loc 
   PR müdür+Noun+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3pl+P3sg+Loc 
   PR müdür+Noun+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P3pl+Loc 
-CS avcılığına
-  IO 
-  NT 
-  PR avcı+Adj+Noun+Ness+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Ness+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+Prof+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+Prof+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+Title+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+Title+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Ness+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Ness+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+Prof+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+Prof+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+Title+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+Title+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Noun+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P3sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P2sg+Dat 
-  PR avcı+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+Prof+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+Prof+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+Title+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+Title+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Noun+FitFor+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+Y+Noun+Zero+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+For+Noun+Zero+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+OfUnit+Noun+Zero+A3sg+P3sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P2sg+Dat 
-  PR av+Noun+A3sg+Pnon+Nom+Adj+Agt+Noun+Zero+A3sg+Pnon+Nom+Adj+DurationOf+Noun+Zero+A3sg+P3sg+Dat 
-CS alınacağı
-  IO
-  NT 1M-cnn-turk#10074 1M-cnn-turk#15469 1M-cnn-turk#17711 1M-cnn-turk#18803 1M-cnn-turk#18804 1M-cnn-turk#22323 1M-cnn-turk#33058 1M-cnn-turk#41849 1M-cnn-turk#44538 1M-cnn-turk#45443 1M-cnn-turk#45457 1M-cnn-turk#58106 1M-cnn-turk#64348 1M-cnn-turk#67161 1M-cnn-turk#69312 1M-cnn-turk#76863 1M-cnn-turk#88011 1M-cnn-turk#94207 1M-cnn-turk#98152
-  PR alın+Verb+Pos+Adj+FutPart+P3sg
-  PR al+Verb+Verb+Pass+Pos+Adj+FutPart+P3sg
-  PR alın+Verb+Pos+Noun+FutPart+A3sg+P3sg+Nom
-  PR alın+Verb+Pos+Noun+FutPart+A3sg+Pnon+Acc
-  PR al+Verb+Verb+Pass+Pos+Noun+FutPart+A3sg+P3sg+Nom
-  PR al+Verb+Verb+Pass+Pos+Noun+FutPart+A3sg+Pnon+Acc
-  PR alın+Verb+Pos+Fut+Adj+Zero+Noun+Zero+A3sg+P3sg+Nom
-  PR alın+Verb+Pos+Fut+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc
-  PR al+Verb+Verb+Pass+Pos+Fut+Adj+Zero+Noun+Zero+A3sg+P3sg+Nom
-  PR al+Verb+Verb+Pass+Pos+Fut+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc
