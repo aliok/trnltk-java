@@ -110,9 +110,6 @@ public class TurkicLetter {
                 throw new IllegalArgumentException("Alphabetical index must be positive:" + _alphabeticIndex);
             }
 
-            if ((!_inAscii) && (_charValue < 'a' && _charValue > 'z'))
-                throw new IllegalArgumentException("Marked as non ASCII, but it is!:" + _charValue);
-
             return new TurkicLetter(this);
         }
     }
