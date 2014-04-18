@@ -70,11 +70,9 @@ public final class ImmutableRoot implements Root {
         ImmutableRoot that = (ImmutableRoot) o;
 
         if (!lexeme.equals(that.lexeme)) return false;
-        if (phoneticAttributes != null ? !phoneticAttributes.equals(that.phoneticAttributes) : that.phoneticAttributes != null)
-            return false;
-        if (phoneticExpectations != null ? !phoneticExpectations.equals(that.phoneticExpectations) : that.phoneticExpectations != null)
-            return false;
-        if (!sequence.equals(that.sequence)) return false;
+        else if (phoneticAttributes != null ? !phoneticAttributes.equals(that.phoneticAttributes) : that.phoneticAttributes != null) return false;
+        else if (phoneticExpectations != null ? !phoneticExpectations.equals(that.phoneticExpectations) : that.phoneticExpectations != null) return false;
+        else if (!sequence.equals(that.sequence)) return false;
 
         return true;
     }

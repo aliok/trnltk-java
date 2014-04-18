@@ -57,7 +57,8 @@ public class RootDifference {
         return differs;
     }
 
-    public boolean equalStringPair(Pair<String, String> pair) {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private boolean equalStringPair(Pair<String, String> pair) {
         return ObjectUtils.equals(pair.getLeft(), pair.getRight());
     }
 
@@ -94,11 +95,10 @@ public class RootDifference {
 
         RootDifference that = (RootDifference) o;
 
-        if (lemmaRootStrDiff != null ? !lemmaRootStrDiff.equals(that.lemmaRootStrDiff) : that.lemmaRootStrDiff != null)
-            return false;
-        if (posDiff != null ? !posDiff.equals(that.posDiff) : that.posDiff != null) return false;
-        if (rootStrDiff != null ? !rootStrDiff.equals(that.rootStrDiff) : that.rootStrDiff != null) return false;
-        if (sposDiff != null ? !sposDiff.equals(that.sposDiff) : that.sposDiff != null) return false;
+        if (lemmaRootStrDiff != null ? !lemmaRootStrDiff.equals(that.lemmaRootStrDiff) : that.lemmaRootStrDiff != null) return false;
+        else if (posDiff != null ? !posDiff.equals(that.posDiff) : that.posDiff != null) return false;
+        else if (rootStrDiff != null ? !rootStrDiff.equals(that.rootStrDiff) : that.rootStrDiff != null) return false;
+        else if (sposDiff != null ? !sposDiff.equals(that.sposDiff) : that.sposDiff != null) return false;
 
         return true;
     }

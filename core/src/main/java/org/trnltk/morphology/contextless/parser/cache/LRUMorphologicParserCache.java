@@ -58,6 +58,7 @@ public class LRUMorphologicParserCache implements MorphologicParserCache {
      *
      * @param cache The Guava cache
      */
+    @SuppressWarnings("UnusedDeclaration")
     public LRUMorphologicParserCache(Cache<String, List<MorphemeContainer>> cache) {
         this.cache = cache;
     }
@@ -87,8 +88,8 @@ public class LRUMorphologicParserCache implements MorphologicParserCache {
     }
 
     @Override
-    public boolean isBuilt() {
+    public boolean isNotBuilt() {
         // do nothing since it is an online cache
-        return true;
+        return false;
     }
 }

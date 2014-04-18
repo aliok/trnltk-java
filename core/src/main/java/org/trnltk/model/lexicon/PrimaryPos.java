@@ -25,6 +25,7 @@ import org.trnltk.common.structure.StringEnumMap;
  * See <a href="http://en.wikipedia.org/wiki/Part_of_speech"> this Wikipedia article </a>
  * for definition of the part of speech.
  */
+@SuppressWarnings("UnusedDeclaration")
 public enum PrimaryPos implements StringEnum<PrimaryPos> {
     Noun("Noun"),
     Adjective("Adj"),
@@ -41,7 +42,7 @@ public enum PrimaryPos implements StringEnum<PrimaryPos> {
     Punctuation("Punc"),
     Unknown("Unk");
 
-    public String shortForm;
+    private final String shortForm;
 
     PrimaryPos(String shortForm) {
         this.shortForm = shortForm;

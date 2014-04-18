@@ -50,13 +50,13 @@ public class DictionaryRootFinder implements RootFinder {
             result.addAll(lowerCaseRoots);
 
             if (CollectionUtils.isEmpty(result))
-                return Collections.EMPTY_LIST;
+                return Collections.emptyList();
             else
                 return result;
 
         } else {
             if (CollectionUtils.isEmpty(roots))
-                return Collections.EMPTY_LIST;
+                return Collections.emptyList();
             else
                 return roots;
         }

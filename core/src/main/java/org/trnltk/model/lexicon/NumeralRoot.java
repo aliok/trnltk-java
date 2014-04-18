@@ -49,8 +49,7 @@ public class NumeralRoot implements Root {
         final Lexeme lexeme = new ImmutableLexeme(partialInputUnderlyingString, partialInputUnderlyingString, primaryPos,
                 secondaryPos, lexemeAttributes);
 
-        final ImmutableSet<PhoneticExpectation> phoneticExpectations = null;
-        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phoneticAttributes, phoneticExpectations);
+        this.immutableRoot = new ImmutableRoot(partialInput, lexeme, phoneticAttributes, null);
 
         this.underlyingNumeralText = underlyingNumeralText;
     }
@@ -90,7 +89,7 @@ public class NumeralRoot implements Root {
         NumeralRoot that = (NumeralRoot) o;
 
         if (!immutableRoot.equals(that.immutableRoot)) return false;
-        if (!underlyingNumeralText.equals(that.underlyingNumeralText)) return false;
+        else if (!underlyingNumeralText.equals(that.underlyingNumeralText)) return false;
 
         return true;
     }

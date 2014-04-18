@@ -23,7 +23,46 @@ package org.trnltk.common.specification;
  */
 @SuppressWarnings("unchecked")
 public abstract class Specifications {
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> or(Specification<T> specification1, Specification<T> specification2) {
+        return internalOr(specification1, specification2);
+    }
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> or(Specification<T> specification1, Specification<T> specification2, Specification<T> specification3) {
+        return internalOr(specification1, specification2, specification3);
+    }
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> or(Specification<T> specification1, Specification<T> specification2, Specification<T> specification3, Specification<T> specification4) {
+        return internalOr(specification1, specification2, specification3, specification4);
+    }
+
     public static <T> Specification<T> or(Specification<T>... specifications) {
+        return internalOr(specifications);
+    }
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> and(Specification<T> specification1, Specification<T> specification2) {
+        return internalAnd(specification1, specification2);
+    }
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> and(Specification<T> specification1, Specification<T> specification2, Specification<T> specification3) {
+        return internalAnd(specification1, specification2, specification3);
+    }
+
+    // this is here to prevent "Unchecked generics array creation for varargs parameter"
+    public static <T> Specification<T> and(Specification<T> specification1, Specification<T> specification2, Specification<T> specification3, Specification<T> specification4) {
+        return internalAnd(specification1, specification2, specification3, specification4);
+    }
+
+    public static <T> Specification<T> and(Specification<T>... specifications) {
+        return internalAnd(specifications);
+    }
+
+    private static <T> Specification<T> internalOr(Specification<T>... specifications) {
         Specification<T> returnValue = (Specification<T>) FalseSpecification.INSTANCE;
         for (Specification specification : specifications) {
             returnValue = returnValue.or(specification);
@@ -31,7 +70,7 @@ public abstract class Specifications {
         return returnValue;
     }
 
-    public static <T> Specification<T> and(Specification<T>... specifications) {
+    private static <T> Specification<T> internalAnd(Specification<T>... specifications) {
         Specification<T> returnValue = (Specification<T>) TrueSpecification.INSTANCE;
         for (Specification<T> specification : specifications) {
             returnValue = returnValue.and(specification);

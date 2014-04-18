@@ -44,5 +44,5 @@ public interface MorphologicParserCache {
      * Check if cache is already built.
      * @see MorphologicParserCache#build(org.trnltk.morphology.contextless.parser.MorphologicParser)
      */
-    boolean isBuilt();
+    boolean isNotBuilt();
 }

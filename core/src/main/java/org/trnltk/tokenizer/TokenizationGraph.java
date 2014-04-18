@@ -27,10 +27,10 @@ import java.util.*;
  * @author Ali Ok
  */
 public class TokenizationGraph {
-    static Logger logger = Logger.getLogger(TokenizationGraph.class);
+    private static Logger logger = Logger.getLogger(TokenizationGraph.class);
 
-    protected final Map<TextBlockTypeGroup, TokenizationGraphNode> nodeMap = new HashMap<TextBlockTypeGroup, TokenizationGraphNode>();
-    protected final boolean recordExamples;
+    private final Map<TextBlockTypeGroup, TokenizationGraphNode> nodeMap = new HashMap<TextBlockTypeGroup, TokenizationGraphNode>();
+    private final boolean recordExamples;
     private static final int CONTEXT_LENGTH = 10;
 
     public TokenizationGraph(boolean recordExamples) {
@@ -141,6 +141,7 @@ public class TokenizationGraph {
         this.addInferredEdges(nodesToAddRules, addSpace, exampleTextBlocks);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean addSingleEdge(TokenizationGraphNode sourceNode, TokenizationGraphNode targetNode, boolean addSpace, boolean inferred, ImmutableList<TextBlock> exampleTextBlocks) {
         if (recordExamples) {
             return sourceNode.addEdge(targetNode, addSpace, inferred, exampleTextBlocks);
@@ -197,9 +198,7 @@ public class TokenizationGraph {
             throw new MissingTokenizationRuleException(leftTextBlockGroup, rightTextBlockGroup, "No target node found \n\tleft : " + leftTextBlockGroupStr + "\n\tright " + rightTextBlockGroupStr, contextBlockGroup);
         }
 
-        final TokenizationGraphEdge edge = sourceNode.getEdge(rightTextBlockTypeGroup);
-
-        return edge;
+        return sourceNode.getEdge(rightTextBlockTypeGroup);
     }
 
     @Override

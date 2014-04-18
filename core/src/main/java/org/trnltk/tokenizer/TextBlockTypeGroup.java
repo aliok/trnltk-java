@@ -34,10 +34,6 @@ public class TextBlockTypeGroup {
         return textBlockTypes;
     }
 
-    public int getSize() {
-        return this.textBlockTypes.size();
-    }
-
     @Override
     public String toString() {
         return "TextBlockTypeGroup{" +
@@ -52,9 +48,7 @@ public class TextBlockTypeGroup {
 
         TextBlockTypeGroup that = (TextBlockTypeGroup) o;
 
-        if (!textBlockTypes.equals(that.textBlockTypes)) return false;
-
-        return true;
+        return textBlockTypes.equals(that.textBlockTypes);
     }
 
     @Override

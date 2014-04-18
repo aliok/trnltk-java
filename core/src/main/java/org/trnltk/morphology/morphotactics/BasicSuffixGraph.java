@@ -480,9 +480,11 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
     }
 
     private void registerPossessiveAgreements() {
-        final Specification<MorphemeContainer> doesnt_come_after_PointerQual = Specifications.and(doesnt(comesAfterLastNonBlankDerivation(PointQual_Adv)),
+        final Specification<MorphemeContainer> doesnt_come_after_PointerQual = Specifications.and(
+                doesnt(comesAfterLastNonBlankDerivation(PointQual_Adv)),
                 doesnt(comesAfterLastNonBlankDerivation(PointQual_Noun)),
-                doesnt(comesAfterLastNonBlankDerivation(PointQual_Pron)));
+                doesnt(comesAfterLastNonBlankDerivation(PointQual_Pron))
+        );
 
         NOUN_WITH_AGREEMENT.addOutSuffix(Pnon_Noun, NOUN_WITH_POSSESSION);
         Pnon_Noun.addSuffixForm("");
@@ -803,7 +805,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         Desr.addSuffixForm("sA");
     }
 
-    private final void registerSwappedA3PlVerbs() {
+    private void registerSwappedA3PlVerbs() {
         VERB_WITH_TENSE.addOutSuffix(A3Pl_Verb, VERB_WITH_SWAPPED_A3PL);
 
         VERB_WITH_SWAPPED_A3PL.addOutSuffix(Cond, VERB_TERMINAL_TRANSFER);
@@ -1117,7 +1119,7 @@ public class BasicSuffixGraph extends BaseSuffixGraph {
         PRONOUN_WITH_POSSESSION.addOutSuffix(Gen_Pron, PRONOUN_WITH_CASE);
         Gen_Pron.addSuffixForm("+nIn");
         //Gen_Pron forms for "ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
-        ;
+
         PRONOUN_WITH_POSSESSION.addOutSuffix(Ins_Pron, PRONOUN_WITH_CASE);
         Ins_Pron.addSuffixForm("+ylA");
         //Ins_Pron forms for "ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined

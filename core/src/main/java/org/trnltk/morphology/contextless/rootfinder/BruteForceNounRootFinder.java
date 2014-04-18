@@ -38,30 +38,31 @@ import java.util.*;
  */
 public class BruteForceNounRootFinder implements RootFinder {
 
-    final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+    private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 
     @Override
     public boolean handles(TurkishSequence partialInput, TurkishSequence wholeSurface) {
         if (partialInput == null || partialInput.isBlank())
             return false;
 
-        if (wholeSurface == null || wholeSurface.isBlank()) {
+        else if (wholeSurface == null || wholeSurface.isBlank()) {
             return false;
         }
 
-        if (wholeSurface.length() < partialInput.length())
+        else if (wholeSurface.length() < partialInput.length())
             return false;
 
-        if (partialInput.length() < 2 && wholeSurface.length() >= 2)
+        else if (partialInput.length() < 2 && wholeSurface.length() >= 2)
             return false;
 
-        if (!wholeSurface.startsWith(partialInput))
+        else if (!wholeSurface.startsWith(partialInput))
             return false;
 
         return true;
     }
 
     @Override
+    @SuppressWarnings({"UnnecessaryLocalVariable", "ConstantConditions"})
     public Collection<DynamicRoot> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence wholeSurface) {
         final TurkishSequence rootSeq = partialInput;
         final TurkishSequence lemmaSeq = rootSeq;
@@ -166,7 +167,7 @@ public class BruteForceNounRootFinder implements RootFinder {
         final String lemmaRoot = noOrtographicRoot.getLexeme().getLemmaRoot();
         for (TurkicLetter inverseDevoicingLetter : inverseDevoicingLetters) {
             final DynamicRoot voicingRoot = new DynamicRoot(noOrtographicRoot);
-            final String voicedLemma = lemmaRoot.substring(0, lemmaRoot.length() - 1) + inverseDevoicingLetter.charValue;
+            final String voicedLemma = lemmaRoot.substring(0, lemmaRoot.length() - 1) + inverseDevoicingLetter.charValue();
             voicingRoot.getLexeme().setLemma(voicedLemma);
             voicingRoot.getLexeme().setLemmaRoot(voicedLemma);
             inverseDevoicedRoots.add(voicingRoot);

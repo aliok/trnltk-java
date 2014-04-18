@@ -184,6 +184,7 @@ public class DigitsToTextConverter {
             int mostSignificantGroupBase = this.findMostSignificantGroupBase(naturalNumber);
             for (int i = mostSignificantGroupBase / 3; i > 0; i--) {
                 int groupNumber = this.getNthGroupNumber(naturalNumber, i);
+                //noinspection StatementWithEmptyBody
                 if (groupNumber == 0) {
                     // don't write 'sifir milyon'
                 } else if (groupNumber == 1 && i == 1) {

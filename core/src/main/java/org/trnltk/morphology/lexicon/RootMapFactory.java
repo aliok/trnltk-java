@@ -23,6 +23,7 @@ import org.trnltk.model.lexicon.Root;
 import java.util.Collection;
 import java.util.HashSet;
 
+@SuppressWarnings({"WeakerAccess", "UnusedDeclaration"})
 public class RootMapFactory {
     public static HashMultimap<String, ? extends Root> createSimple() {
         final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultMasterDictionary();

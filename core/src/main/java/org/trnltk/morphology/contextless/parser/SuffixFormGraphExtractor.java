@@ -107,7 +107,7 @@ public class SuffixFormGraphExtractor {
                 Validate.notNull(lastLetter);
                 final TurkicLetter voicedLastLetter = TurkishAlphabet.voice(lastLetter);
                 if (voicedLastLetter != null) {
-                    final String voicedSuffixForm = appliedSuffixForm.substring(0, appliedSuffixForm.length() - 1) + voicedLastLetter.charValue;
+                    final String voicedSuffixForm = appliedSuffixForm.substring(0, appliedSuffixForm.length() - 1) + voicedLastLetter.charValue();
                     addSuffixFormEdge(suffixFormGraph, sourceSuffixFormGraphNode, targetState, suffixForm, voicedSuffixForm, appliedSuffixForm, Arrays.asList(PhoneticExpectation.VowelStart));
                 }
             }

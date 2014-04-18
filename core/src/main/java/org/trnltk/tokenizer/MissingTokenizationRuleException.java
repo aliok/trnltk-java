@@ -48,8 +48,8 @@ public class MissingTokenizationRuleException extends RuntimeException {
         MissingTokenizationRuleException that = (MissingTokenizationRuleException) o;
 
         if (!contextBlockGroup.equals(that.contextBlockGroup)) return false;
-        if (!leftTextBlockGroup.equals(that.leftTextBlockGroup)) return false;
-        if (!rightTextBlockGroup.equals(that.rightTextBlockGroup)) return false;
+        else if (!leftTextBlockGroup.equals(that.leftTextBlockGroup)) return false;
+        else if (!rightTextBlockGroup.equals(that.rightTextBlockGroup)) return false;
 
         return true;
     }

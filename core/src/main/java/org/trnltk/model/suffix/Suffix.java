@@ -37,19 +37,6 @@ public class Suffix {
 
 
     /**
-     * Creates a Suffix with no permit for repetition.
-     *
-     * @param name        Unique name of the Suffix
-     * @param suffixGroup Group of the suffix
-     * @param prettyName  Pretty name of the suffix which is used e.g. formatting the MorphemeContainer.
-     *                    It doesn't have to be unique
-     * @see Suffix#Suffix(String, SuffixGroup, String, boolean)
-     */
-    public Suffix(String name, SuffixGroup suffixGroup, String prettyName) {
-        this(name, suffixGroup, prettyName, false);
-    }
-
-    /**
      * Creates a new <code>Suffix</code>.
      *
      * @param name            Unique name of the Suffix
@@ -122,6 +109,7 @@ public class Suffix {
      * @param suffixFormStr String representation of the {@link SuffixForm} that is searched
      * @return null if not found
      */
+    @SuppressWarnings("UnusedDeclaration")
     public SuffixForm getSuffixForm(String suffixFormStr) {
         SuffixForm result = null;
 
@@ -174,6 +162,7 @@ public class Suffix {
      * @return true if <code>Suffix</code> is allowed to be repeated in a row, false otherwise
      * @see Suffix#Suffix(String, SuffixGroup, String, boolean)
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isAllowRepetition() {
         return allowRepetition;
     }
@@ -186,9 +175,7 @@ public class Suffix {
 
         Suffix suffix = (Suffix) o;
 
-        if (!name.equals(suffix.name)) return false;
-
-        return true;
+        return name.equals(suffix.name);
     }
 
     @Override

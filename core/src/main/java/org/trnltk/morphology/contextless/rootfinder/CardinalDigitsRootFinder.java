@@ -36,7 +36,7 @@ public class CardinalDigitsRootFinder implements RootFinder {
     // TODO: how about marking "10%" as Percentage?
     // TODO: how about marking "10-20" as Range?
     // TODO: how about others?
-    private static List<Pattern> NUMBER_REGEXES = Arrays.asList(
+    private static final List<Pattern> NUMBER_REGEXES = Arrays.asList(
             Pattern.compile("^[-+]?\\d+(,\\d)?\\d*$"),
             Pattern.compile("^[-+]?(\\d{1,3}\\.)+\\d{3}(,\\d)?\\d*$")
     );

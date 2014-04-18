@@ -47,7 +47,7 @@ public class SuffixEdge {
         SuffixEdge that = (SuffixEdge) o;
 
         if (!suffix.equals(that.suffix)) return false;
-        if (!targetState.equals(that.targetState)) return false;
+        else if (!targetState.equals(that.targetState)) return false;
 
         return true;
     }

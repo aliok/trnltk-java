@@ -19,18 +19,19 @@ package org.trnltk.model.letter;
 /**
  * This is a Letter which contains Turkic language specific attributes, such as vowel type, englishEquivalent characters.
  */
+@SuppressWarnings("UnusedDeclaration")
 public class TurkicLetter {
 
-    public final char charValue;
-    public final int alphabeticIndex;
-    public final boolean vowel;
-    public final boolean frontal;
-    public final boolean rounded;
-    public final boolean voiceless;
-    public final boolean continuant;
-    public final boolean inAscii;
-    public final boolean foreign;
-    public final char englishEquivalentChar;
+    private final char charValue;
+    private final int alphabeticIndex;
+    private final boolean vowel;
+    private final boolean frontal;
+    private final boolean rounded;
+    private final boolean voiceless;
+    private final boolean continuant;
+    private final boolean inAscii;
+    private final boolean foreign;
+    private final char englishEquivalentChar;
 
     public static final TurkicLetter UNDEFINED = new TurkicLetter((char) 0, -1);
 
@@ -109,10 +110,10 @@ public class TurkicLetter {
                 throw new IllegalArgumentException("Alphabetical index must be positive:" + _alphabeticIndex);
             }
 
-            if ((!_inAscii) && (_charValue < 'a' && _charValue > 'z')) ;
+            if ((!_inAscii) && (_charValue < 'a' && _charValue > 'z'))
+                throw new IllegalArgumentException("Marked as non ASCII, but it is!:" + _charValue);
 
-            TurkicLetter tl = new TurkicLetter(this);
-            return tl;
+            return new TurkicLetter(this);
         }
     }
 
@@ -199,9 +200,7 @@ public class TurkicLetter {
 
         TurkicLetter that = (TurkicLetter) o;
 
-        if (charValue != that.charValue) return false;
-
-        return true;
+        return charValue == that.charValue;
     }
 
     @Override

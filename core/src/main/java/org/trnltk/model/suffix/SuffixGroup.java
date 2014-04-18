@@ -54,9 +54,7 @@ public class SuffixGroup {
 
         SuffixGroup that = (SuffixGroup) o;
 
-        if (!name.equals(that.name)) return false;
-
-        return true;
+        return name.equals(that.name);
     }
 
     @Override

@@ -103,8 +103,8 @@ public class SuffixFormApplication {
         SuffixFormApplication that = (SuffixFormApplication) o;
 
         if (!actualSuffixForm.equals(that.actualSuffixForm)) return false;
-        if (!fittingSuffixForm.equals(that.fittingSuffixForm)) return false;
-        if (!suffixForm.equals(that.suffixForm)) return false;
+        else if (!fittingSuffixForm.equals(that.fittingSuffixForm)) return false;
+        else if (!suffixForm.equals(that.suffixForm)) return false;
 
         return true;
     }

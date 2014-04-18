@@ -42,7 +42,7 @@ public class CachingMorphologicParser implements MorphologicParser {
         this.cache = cache;
         this.delegate = delegate;
         this.useLocalCache = useLocalCache;
-        if(!this.cache.isBuilt())
+        if(this.cache.isNotBuilt())
             this.cache.build(delegate);
     }
 
@@ -74,7 +74,7 @@ public class CachingMorphologicParser implements MorphologicParser {
                         results.add(cachedResult);
                     } else {
                         List<MorphemeContainer> morphemeContainers = this.delegate.parseStr(input);
-                        morphemeContainers = morphemeContainers == null ? Collections.EMPTY_LIST : morphemeContainers;
+                        morphemeContainers = morphemeContainers == null ? Collections.<MorphemeContainer>emptyList() : morphemeContainers;
                         results.add(morphemeContainers);
                         newValuesMap.put(input, morphemeContainers);
                     }
@@ -100,7 +100,7 @@ public class CachingMorphologicParser implements MorphologicParser {
         } else {
             final List<MorphemeContainer> morphemeContainers = this.delegate.parseStr(input);
             cache.put(input, morphemeContainers);
-            return morphemeContainers == null ? Collections.EMPTY_LIST : morphemeContainers;
+            return morphemeContainers == null ? Collections.<MorphemeContainer>emptyList() : morphemeContainers;
         }
     }
 

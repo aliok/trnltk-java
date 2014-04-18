@@ -32,17 +32,17 @@ import java.util.Set;
  */
 public class TextTokenizer {
 
-    static Logger logger = Logger.getLogger(TextTokenizer.class);
+    private static Logger logger = Logger.getLogger(TextTokenizer.class);
 
     private static final String SPACE = " ";
 
-    protected final int blockSize;
-    protected final TokenizationGraph graph;
-    protected final boolean strict;
+    private final int blockSize;
+    private final TokenizationGraph graph;
+    private final boolean strict;
 
-    protected final TextBlockSplitter textBlockSplitter;
+    private final TextBlockSplitter textBlockSplitter;
 
-    protected final TextTokenizerStats stats;
+    private final TextTokenizerStats stats;
 
     private TextTokenizer(TextTokenizerBuilder builder) {
         this.blockSize = builder.blockSize;
@@ -131,6 +131,7 @@ public class TextTokenizer {
      * @return the built and trained tokenizer
      * @see TextTokenizer#createDefaultTextTokenizer(boolean)
      */
+    @SuppressWarnings("UnusedDeclaration")
     public static TextTokenizer createDefaultTextTokenizer() {
         return createDefaultTextTokenizer(false);
     }

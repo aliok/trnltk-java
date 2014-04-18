@@ -33,6 +33,7 @@ import static org.trnltk.morphology.morphotactics.suffixformspecifications.Suffi
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesntComeAfter;
 import static org.trnltk.model.lexicon.PrimaryPos.*;
 
+@SuppressWarnings("WeakerAccess")
 public class CopulaSuffixGraph extends BaseSuffixGraph {
     private final SuffixGraphState NOUN_COPULA = registerState("NOUN_COPULA", DERIVATIONAL, Noun);
     private final SuffixGraphState ADJECTIVE_COPULA = registerState("ADJECTIVE_COPULA", DERIVATIONAL, Adjective);
@@ -180,6 +181,7 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     }
 
     private void registerSwappedA3PlVerbs() {
+        @SuppressWarnings("unchecked")
         final Specification<MorphemeContainer> swappedVerbCopulaPrecondition = Specifications.or(
                 comesAfter(Decorated_Neces),
                 comesAfter(Decorated_Aorist),
@@ -235,6 +237,7 @@ public class CopulaSuffixGraph extends BaseSuffixGraph {
     }
 
     public void registerVerbExplicitCopula() {
+        @SuppressWarnings("unchecked")
         final Specification<MorphemeContainer> explicitVerbCopulaPrecondition = Specifications.and(
                 doesntComeAfter(Decorated_Aorist),
                 doesntComeAfter(Decorated_Past),

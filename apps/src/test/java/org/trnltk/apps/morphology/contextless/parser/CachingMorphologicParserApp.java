@@ -348,8 +348,8 @@ public class CachingMorphologicParserApp {
             }
 
             @Override
-            public boolean isBuilt() {
-                return this.built;
+            public boolean isNotBuilt() {
+                return !this.built;
             }
         };
 

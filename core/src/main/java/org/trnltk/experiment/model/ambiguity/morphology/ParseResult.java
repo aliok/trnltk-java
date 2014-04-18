@@ -80,9 +80,7 @@ public class ParseResult {
 
         ParseResult that = (ParseResult) o;
 
-        if (!str.equals(that.str)) return false;
-
-        return true;
+        return str.equals(that.str);
     }
 
     @Override

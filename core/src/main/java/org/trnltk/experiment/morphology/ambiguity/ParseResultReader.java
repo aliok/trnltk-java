@@ -44,11 +44,13 @@ public class ParseResultReader {
                 final String word = line.substring("- word: ".length());
                 currentEntry = new WordParseResultEntry(word);
                 entries.add(currentEntry);
-            } else if (line.startsWith("  results:")) {
+            } else //noinspection StatementWithEmptyBody
+                if (line.startsWith("  results:")) {
                 // ok, go
             } else if (line.startsWith("    - ")) {
                 final String result = line.substring("    - ".length());
                 final ParseResult objParseResult = this.createParseResultObject(result);
+                assert currentEntry != null;
                 currentEntry.addParseResult(objParseResult);
             }
         }

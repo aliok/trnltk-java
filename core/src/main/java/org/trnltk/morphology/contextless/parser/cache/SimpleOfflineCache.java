@@ -66,6 +66,7 @@ public class SimpleOfflineCache implements MorphologicParserCache {
     /**
      * Builds a cache with values of given words and their parse results.
      */
+    @SuppressWarnings("WeakerAccess")
     public SimpleOfflineCache(Collection<String> words) {
         Validate.notEmpty(words, "Cache keys cannot be null or empty.");
         this.cacheKeys = words;
@@ -86,8 +87,8 @@ public class SimpleOfflineCache implements MorphologicParserCache {
     }
 
     @Override
-    public boolean isBuilt() {
-        return this.built;
+    public boolean isNotBuilt() {
+        return !this.built;
     }
 
     @Override

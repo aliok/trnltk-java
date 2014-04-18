@@ -37,9 +37,9 @@ import static org.trnltk.model.lexicon.PhoneticAttribute.*;
  */
 public class PhoneticAttributeMetadata {
 
-    private static final ImmutableMap<PhoneticAttribute, Specification> SPECIFICATION_MAP = buildSpecificationMap();
+    private static final ImmutableMap<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>> SPECIFICATION_MAP = buildSpecificationMap();
 
-    private static ImmutableMap<PhoneticAttribute, Specification> buildSpecificationMap() {
+    private static ImmutableMap<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>> buildSpecificationMap() {
         final Specification<Collection<PhoneticAttribute>> hasVowel = Specifications.and(
                 cannotHave(HasNoVowel),
                 mustHaveOneOf(LastVowelBack, LastVowelFrontal),
@@ -50,7 +50,7 @@ public class PhoneticAttributeMetadata {
         final MustHaveOneOfSpecification mustHaveFirstLetterAttr = mustHaveOneOf(FirstLetterConsonant, FirstLetterVowel);
         final MustHaveOneOfSpecification mustHaveLastLetterAttr = mustHaveOneOf(LastLetterConsonant, LastLetterVowel);
 
-        final HashMap<PhoneticAttribute, Specification> map = new HashMap<PhoneticAttribute, Specification>();
+        final HashMap<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>> map = new HashMap<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>>();
 
         // define specs for all attributes
 
@@ -137,6 +137,7 @@ public class PhoneticAttributeMetadata {
                         mustHaveOneOf(LastLetterVowel, LastLetterConsonant)
                 )
         );
+        //noinspection unchecked
         map.put(HasNoVowel,
                 Specifications.and(
                         hasNoVowel,
@@ -156,10 +157,10 @@ public class PhoneticAttributeMetadata {
                 mustHaveLastLetterAttr
         );
 
-        final ImmutableMap.Builder<PhoneticAttribute, Specification> builder = new ImmutableMap.Builder<PhoneticAttribute, Specification>();
-        for (Map.Entry<PhoneticAttribute, Specification> phoneticAttributeSpecificationEntry : map.entrySet()) {
+        final ImmutableMap.Builder<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>> builder = new ImmutableMap.Builder<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>>();
+        for (Map.Entry<PhoneticAttribute, Specification<Collection<PhoneticAttribute>>> phoneticAttributeSpecificationEntry : map.entrySet()) {
             final PhoneticAttribute key = phoneticAttributeSpecificationEntry.getKey();
-            final Specification value = phoneticAttributeSpecificationEntry.getValue();
+            final Specification<Collection<PhoneticAttribute>> value = phoneticAttributeSpecificationEntry.getValue();
 
             // all attributes' specs must also include the common spec which is always valid
 
@@ -181,7 +182,7 @@ public class PhoneticAttributeMetadata {
             return false;
 
         for (PhoneticAttribute phoneticAttribute : phoneticAttributes) {
-            final Specification specification = SPECIFICATION_MAP.get(phoneticAttribute);
+            final Specification<Collection<PhoneticAttribute>> specification = SPECIFICATION_MAP.get(phoneticAttribute);
             if (!specification.isSatisfiedBy(phoneticAttributes))
                 return false;
         }

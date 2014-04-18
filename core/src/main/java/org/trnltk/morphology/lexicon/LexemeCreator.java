@@ -82,7 +82,8 @@ class LexemeCreator {
                 } else if (metaPart.startsWith("R:")) {
                     metaPart = metaPart.substring("R:".length());
                     rootStr = metaPart;
-                } else if (metaPart.startsWith("S:")) {
+                } else //noinspection StatementWithEmptyBody
+                    if (metaPart.startsWith("S:")) {
                     // TODO: skip, Z3 uses some special stuff!
                 } else {
                     throw new RuntimeException("Unable to parse line : " + line);

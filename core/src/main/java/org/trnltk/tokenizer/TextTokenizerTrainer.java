@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 
 public class TextTokenizerTrainer {
 
-    static Logger logger = Logger.getLogger(TextTokenizerTrainer.class);
+    private static Logger logger = Logger.getLogger(TextTokenizerTrainer.class);
 
     private static final String SPACE = " ";
     private static final TextBlock SPACE_TEXT_BLOCK = new TextBlock(SPACE, TextBlockType.Space);
@@ -45,8 +45,8 @@ public class TextTokenizerTrainer {
 
     private final TextBlockSplitter textBlockSplitter;
 
-    protected final int blockSize;
-    protected final TokenizationGraph graph;
+    private final int blockSize;
+    private final TokenizationGraph graph;
 
     public TextTokenizerTrainer(int blockSize, boolean recordTrainingExamples) {
         this.blockSize = blockSize;
@@ -85,8 +85,9 @@ public class TextTokenizerTrainer {
     private void textsShouldHaveNoDifferenceOtherThanWhiteSpace(final String text, final String tokenizedText) {
         final String[] diffLines = DiffUtil.diffLines(text, tokenizedText, true);
         if (diffLines != null) {
-            StringBuilder messageBuilder = new StringBuilder();
-            messageBuilder.append("Have difference other than white space in line ").append("\n")
+            @SuppressWarnings("StringBufferReplaceableByString")
+            StringBuilder messageBuilder = new StringBuilder("Have difference other than white space in line \n");
+            messageBuilder
                     .append("\t")
                     .append(Joiner.on("\n\t").join(Arrays.asList(diffLines)))
                     .append("\n\n");
@@ -95,7 +96,7 @@ public class TextTokenizerTrainer {
         }
     }
 
-    protected void createRules(List<TextBlock> untokenizedTextBlocks, LinkedList<TextBlock> tokenizedTextBlocks) {
+    void createRules(List<TextBlock> untokenizedTextBlocks, LinkedList<TextBlock> tokenizedTextBlocks) {
         this.textBlockSplitter.addTextStartsAndEnds(untokenizedTextBlocks, blockSize);
         this.textBlockSplitter.addTextStartsAndEnds(tokenizedTextBlocks, blockSize);
 

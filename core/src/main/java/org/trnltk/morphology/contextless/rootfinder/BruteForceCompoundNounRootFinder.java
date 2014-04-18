@@ -88,10 +88,10 @@ public class BruteForceCompoundNounRootFinder implements RootFinder {
         if (Character.isUpperCase(firstCharAfterPartialInput.getCharValue()))
             return false;
 
-        if (!firstLetterAfterPartialInput.equals(TurkishAlphabet.L_n))
+        else if (!firstLetterAfterPartialInput.equals(TurkishAlphabet.L_n))
             return false;
 
-        if (wholeSurface.length() < partialInput.length() + 2)    //need a char after char 'n'
+        else if (wholeSurface.length() < partialInput.length() + 2)    //need a char after char 'n'
             return false;
 
         return true;

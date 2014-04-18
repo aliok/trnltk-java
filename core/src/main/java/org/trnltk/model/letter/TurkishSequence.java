@@ -60,6 +60,7 @@ public class TurkishSequence {
      *
      * @param toClone Sequence to copy
      */
+    @SuppressWarnings("UnusedDeclaration")
     public TurkishSequence(final TurkishSequence toClone) {
         this(toClone, "");
     }
@@ -248,6 +249,7 @@ public class TurkishSequence {
      * @param endIndex The end index
      * @return Substring
      */
+    @SuppressWarnings("UnusedDeclaration")
     private String substring(int beginIndex, int endIndex) {
         return this.underlyingString.substring(beginIndex, endIndex);
     }
@@ -255,7 +257,7 @@ public class TurkishSequence {
     /**
      * Convenience method to check if the sequence is blank (blank != empty. empty ⊂ blank).
      *
-     * @see org.apache.commons.lang3.StringUtils.isBlank(CharSequence)
+     * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
      *
      * @return true/false
      */
@@ -289,10 +291,7 @@ public class TurkishSequence {
 
         TurkishSequence that = (TurkishSequence) o;
 
-        if (count != that.count) return false;
-        if (!underlyingString.equals(that.underlyingString)) return false;
-
-        return true;
+        return count == that.count && underlyingString.equals(that.underlyingString);
     }
 
     @Override

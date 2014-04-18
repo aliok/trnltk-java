@@ -51,8 +51,8 @@ import java.util.*;
  * Ignores inverse harmony, since verbs don't have it.
  */
 public class BruteForceVerbRootFinder implements RootFinder {
-    final PhoneticsEngine phoneticsEngine = new PhoneticsEngine(new SuffixFormSequenceApplier());
-    final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+    private final PhoneticsEngine phoneticsEngine = new PhoneticsEngine(new SuffixFormSequenceApplier());
+    private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
     private static final SuffixFormSequence INFINITIVE_SUFFIX_FORM = new SuffixFormSequence("mAk");
 
     @Override
@@ -83,9 +83,9 @@ public class BruteForceVerbRootFinder implements RootFinder {
     }
 
     @Override
+    @SuppressWarnings({"UnnecessaryLocalVariable", "ConstantConditions"})
     public Collection<DynamicRoot> findRootsForPartialInput(TurkishSequence partialInput, TurkishSequence wholeSurface) {
         final TurkishChar lastVowel = partialInput.getLastVowel();
-
 
         final TurkishSequence rootSeq = partialInput;
         final TurkishSequence lemmaSeq = rootSeq;
@@ -108,7 +108,7 @@ public class BruteForceVerbRootFinder implements RootFinder {
         final boolean partialSurfaceCanBeRootOfAVerb = this.seemsLikeAValidVerbRoot(partialInput);
 
         if (wholeSurface.equals(partialInput))
-            return partialSurfaceCanBeRootOfAVerb ? Arrays.asList(noAttrRoot) : CollectionUtils.EMPTY_COLLECTION;
+            return partialSurfaceCanBeRootOfAVerb ? Arrays.asList(noAttrRoot) : Collections.<DynamicRoot>emptyList();
 
         final TurkishChar firstCharAfterPartialInput = wholeSurface.charAt(partialInput.length());
 
@@ -400,7 +400,7 @@ public class BruteForceVerbRootFinder implements RootFinder {
         final DynamicRoot cloneRoot = new DynamicRoot(root);
         // ignoring Voicing+ProgressiveVowelDrop
         final String orgLemmaRoot = cloneRoot.getLexeme().getLemmaRoot();
-        cloneRoot.getLexeme().setLemma(orgLemmaRoot.substring(0, orgLemmaRoot.length() - 1) + TurkishAlphabet.L_t.charValue);
+        cloneRoot.getLexeme().setLemma(orgLemmaRoot.substring(0, orgLemmaRoot.length() - 1) + TurkishAlphabet.L_t.charValue());
         cloneRoot.getLexeme().setLemmaRoot(cloneRoot.getLexeme().getLemma());
         cloneRoot.getLexeme().getAttributes().add(LexemeAttribute.Voicing);
         return cloneRoot;

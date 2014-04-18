@@ -380,7 +380,7 @@ public class WordCountFinderApp {
 
             for (int i = 0; i < TurkishAlphabet.TURKISH_ALPHA_LETTERS.length; i++) {
                 final TurkicLetter letter = TurkishAlphabet.TURKISH_ALPHA_LETTERS[i];
-                char lowerCaseChar = letter.charValue;
+                char lowerCaseChar = letter.charValue();
                 final char upperCaseChar = String.valueOf(lowerCaseChar).toUpperCase(Constants.TURKISH_LOCALE).charAt(0);
                 IS_ALPHA[lowerCaseChar] = true;
                 IS_ALPHA[upperCaseChar] = true;
@@ -398,8 +398,8 @@ public class WordCountFinderApp {
                     int secondCharEndIndex = j + N;
                     if (secondCharEndIndex > TurkishAlphabet.TURKISH_ALPHA_LETTERS.length)
                         secondCharEndIndex = TurkishAlphabet.TURKISH_ALPHA_LETTERS.length - 1;
-                    String rangeStart = "" + TurkishAlphabet.TURKISH_ALPHA_LETTERS[i].charValue + TurkishAlphabet.TURKISH_ALPHA_LETTERS[j].charValue;
-                    String rangeEnd = "" + TurkishAlphabet.TURKISH_ALPHA_LETTERS[i].charValue + TurkishAlphabet.TURKISH_ALPHA_LETTERS[secondCharEndIndex].charValue;
+                    String rangeStart = "" + TurkishAlphabet.TURKISH_ALPHA_LETTERS[i].charValue() + TurkishAlphabet.TURKISH_ALPHA_LETTERS[j].charValue();
+                    String rangeEnd = "" + TurkishAlphabet.TURKISH_ALPHA_LETTERS[i].charValue() + TurkishAlphabet.TURKISH_ALPHA_LETTERS[secondCharEndIndex].charValue();
                     predicates.add(new CharRangePredicate2(rangeStart, rangeEnd));
                 }
             }

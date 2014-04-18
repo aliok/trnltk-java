@@ -251,8 +251,8 @@ public class FolderContextlessMorphologicParsingApp {
                     }
 
                     @Override
-                    public boolean isBuilt() {
-                        return this.built;
+                    public boolean isNotBuilt() {
+                        return !this.built;
                     }
                 };
 

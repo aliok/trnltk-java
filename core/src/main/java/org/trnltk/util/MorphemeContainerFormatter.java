@@ -39,6 +39,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+@SuppressWarnings("JavaDoc")
 public class MorphemeContainerFormatter {
 
     private static final ImmutableSet<Pair<PrimaryPos, SecondaryPos>> DERIVATION_GROUPING_FORMAT_SECONDARY_POS_TO_SKIP
@@ -76,6 +77,7 @@ public class MorphemeContainerFormatter {
         return b.toString();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static Collection<String> formatMorphemeContainers(final Collection<MorphemeContainer> morphemeContainers) {
         return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
             @Override
@@ -163,6 +165,7 @@ public class MorphemeContainerFormatter {
 
             final Suffix suffix = suffixTransition.getSuffixFormApplication().getSuffixForm().getSuffix();
             if (suffix instanceof FreeTransitionSuffix || suffix instanceof ConditionalFreeTransitionSuffix)
+                //noinspection UnnecessaryContinue
                 continue;
             else
                 currentGroup.add(suffix.getPrettyName());

@@ -16,6 +16,8 @@
 
 package org.trnltk.tokenizer.data;
 
+// ignore stuff w/o usage as it is used when YAML processor creates entries.
+@SuppressWarnings("UnusedDeclaration")
 public class TokenizerTrainingEntry {
     private String text;
     private String tknz;
@@ -57,7 +59,7 @@ public class TokenizerTrainingEntry {
         TokenizerTrainingEntry wheel = (TokenizerTrainingEntry) o;
 
         if (!text.equals(wheel.text)) return false;
-        if (!tknz.equals(wheel.tknz)) return false;
+        else if (!tknz.equals(wheel.tknz)) return false;
 
         return true;
     }

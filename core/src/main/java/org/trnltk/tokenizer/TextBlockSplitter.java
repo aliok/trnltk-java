@@ -41,6 +41,7 @@ public class TextBlockSplitter {
                     foundOneClass = true;
                     break;
                 } else {
+                    //noinspection UnnecessaryContinue
                     continue;
                 }
             }

@@ -31,6 +31,7 @@ import org.trnltk.common.structure.StringEnumMap;
  *
  * @see PrimaryPos
  */
+@SuppressWarnings("UnusedDeclaration")
 public enum SecondaryPos implements StringEnum<SecondaryPos> {
     Demonstrative("Demons"),
     Time("Time"),

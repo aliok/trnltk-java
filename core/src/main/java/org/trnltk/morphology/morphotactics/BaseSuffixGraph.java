@@ -28,17 +28,18 @@ import org.trnltk.model.lexicon.PrimaryPos;
 import java.util.*;
 
 public abstract class BaseSuffixGraph implements SuffixGraph {
-    Map<String, SuffixGraphState> stateMap;
-    Map<String, Suffix> suffixMap;
+    private Map<String, SuffixGraphState> stateMap;
+    private Map<String, Suffix> suffixMap;
 
-    SuffixGraph decorated;
+    private final SuffixGraph decorated;
 
 
-    protected BaseSuffixGraph() {
+    public BaseSuffixGraph() {
         this(new EmptySuffixGraph());
     }
 
-    protected BaseSuffixGraph(SuffixGraph decorated) {
+    @SuppressWarnings("WeakerAccess")
+    public BaseSuffixGraph(SuffixGraph decorated) {
         this.stateMap = new HashMap<String, SuffixGraphState>();
         this.suffixMap = new HashMap<String, Suffix>();
         this.decorated = decorated;
@@ -83,6 +84,7 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
         return registerState(name, suffixGraphStateType, primaryPos, null);
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected SuffixGraphState registerState(String name, SuffixGraphStateType suffixGraphStateType, PrimaryPos primaryPos, SecondaryPos secondaryPos) {
         final SuffixGraphState suffixGraphState = new SuffixGraphState(name, suffixGraphStateType, primaryPos, secondaryPos);
         Validate.isTrue(!this.stateMap.containsKey(name));
@@ -174,6 +176,7 @@ public abstract class BaseSuffixGraph implements SuffixGraph {
         return Lists.newLinkedList(Iterables.concat(this.suffixMap.values(), this.decorated.getAllSuffixes()));
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void validate() {
         for (String stateName : this.stateMap.keySet()) {
             Validate.isTrue(this.decorated.getSuffixGraphState(stateName) == null, "State " + stateName + " also exists in decorated graph!");

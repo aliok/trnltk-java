@@ -96,12 +96,10 @@ public class SuffixForm {
         SuffixForm that = (SuffixForm) o;
 
         if (!form.equals(that.form)) return false;
-        if (postCondition != null ? !postCondition.equals(that.postCondition) : that.postCondition != null)
-            return false;
-        if (postDerivativeCondition != null ? !postDerivativeCondition.equals(that.postDerivativeCondition) : that.postDerivativeCondition != null)
-            return false;
-        if (precondition != null ? !precondition.equals(that.precondition) : that.precondition != null) return false;
-        if (!suffix.equals(that.suffix)) return false;
+        else if (postCondition != null ? !postCondition.equals(that.postCondition) : that.postCondition != null) return false;
+        else if (postDerivativeCondition != null ? !postDerivativeCondition.equals(that.postDerivativeCondition) : that.postDerivativeCondition != null) return false;
+        else if (precondition != null ? !precondition.equals(that.precondition) : that.precondition != null) return false;
+        else if (!suffix.equals(that.suffix)) return false;
 
         return true;
     }

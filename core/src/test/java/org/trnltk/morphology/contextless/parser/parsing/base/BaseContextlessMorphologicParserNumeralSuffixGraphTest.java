@@ -162,9 +162,7 @@ public abstract class BaseContextlessMorphologicParserNumeralSuffixGraphTest ext
         // 100-999
         assertParseCorrectForVerb("100'ü", "100(100)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc(+yI[ü])", "100(100)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+P3sg(+sI[ü])+Nom");
         assertParseCorrectForVerb("110'u", "110(110)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc(+yI[u])", "110(110)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+P3sg(+sI[u])+Nom");
-        ;
         assertParseCorrectForVerb("111'i", "111(111)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc(+yI[i])", "111(111)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+P3sg(+sI[i])+Nom");
-        ;
         assertParseCorrectForVerb("200'ü", "200(200)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+Pnon+Acc(+yI[ü])", "200(200)+Num+DigitsC+Apos+Adj+Zero+Noun+Zero+A3sg+P3sg(+sI[ü])+Nom");
 
         // 1000-9999 (bin)

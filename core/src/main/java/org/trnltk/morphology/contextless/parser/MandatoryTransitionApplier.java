@@ -46,7 +46,7 @@ import static org.trnltk.morphology.morphotactics.suffixformspecifications.Suffi
  */
 public class MandatoryTransitionApplier {
 
-    protected final Logger logger = Logger.getLogger(MandatoryTransitionApplier.class);
+    private final Logger logger = Logger.getLogger(MandatoryTransitionApplier.class);
 
     private final SuffixGraph suffixGraph;
     private final SuffixApplier suffixApplier;
@@ -110,19 +110,19 @@ public class MandatoryTransitionApplier {
         this.mandatoryTransitionRules.add(progressiveVowelDropRule);
     }
 
-    private MorphemeContainer applyRequiredTransitionRuleStepToMorphemeContainer(MorphemeContainer morphemeContainer, MandatoryTransitionRuleStep mandatoryTransitionRuleStep, TurkishSequence input) {
+    private MorphemeContainer applyRequiredTransitionRuleStepToMorphemeContainer(final MorphemeContainer morphemeContainer, MandatoryTransitionRuleStep mandatoryTransitionRuleStep, TurkishSequence input) {
         final SuffixForm suffixForm = mandatoryTransitionRuleStep.getSuffixForm();
         final Suffix suffix = suffixForm.getSuffix();
         if (!this.suffixApplier.transitionAllowedForSuffix(morphemeContainer, suffix))
             throw new IllegalStateException(String.format("There is a matching mandatory transition rule, but suffix \"%s\" cannot be applied to %s", suffix, morphemeContainer));
 
-        morphemeContainer = this.suffixApplier.trySuffixForm(morphemeContainer, suffixForm, mandatoryTransitionRuleStep.getTargetState(), input);
-        if (morphemeContainer == null) {
+        final MorphemeContainer newMorphemeContainer = this.suffixApplier.trySuffixForm(morphemeContainer, suffixForm, mandatoryTransitionRuleStep.getTargetState(), input);
+        if (newMorphemeContainer == null) {
             if (logger.isDebugEnabled())
                 logger.debug(String.format("There is a matching mandatory transition rule, but suffix form \"%s\" cannot be applied to %s", suffixForm, morphemeContainer));
             return null;
         } else {
-            return morphemeContainer;
+            return newMorphemeContainer;
         }
     }
 

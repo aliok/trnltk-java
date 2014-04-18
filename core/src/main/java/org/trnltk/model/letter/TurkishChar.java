@@ -46,9 +46,7 @@ public class TurkishChar {
 
         TurkishChar that = (TurkishChar) o;
 
-        if (charValue != that.charValue) return false;
-
-        return true;
+        return charValue == that.charValue;
     }
 
     @Override

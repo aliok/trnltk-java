@@ -52,7 +52,7 @@ public class TextBlock {
         TextBlock textBlock = (TextBlock) o;
 
         if (!text.equals(textBlock.text)) return false;
-        if (textBlockType != textBlock.textBlockType) return false;
+        else if (textBlockType != textBlock.textBlockType) return false;
 
         return true;
     }

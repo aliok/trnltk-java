@@ -68,6 +68,7 @@ public class StringEnumMap<T extends StringEnum> {
             });
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public boolean enumExists(String s) {
         return map.containsKey(s);
     }

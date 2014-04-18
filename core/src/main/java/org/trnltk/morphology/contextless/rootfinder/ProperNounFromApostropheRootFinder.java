@@ -40,10 +40,10 @@ public class ProperNounFromApostropheRootFinder implements RootFinder {
         if (partialInput == null || partialInput.isBlank())
             return false;
 
-        if (partialInput.length() < 2)
+        else if (partialInput.length() < 2)
             return false;
 
-        if (Character.isUpperCase(partialInput.charAt(0).getCharValue()) && partialInput.getLastChar().getCharValue() == APOSTROPHE)
+        else if (Character.isUpperCase(partialInput.charAt(0).getCharValue()) && partialInput.getLastChar().getCharValue() == APOSTROPHE)
             return true;
 
         return false;

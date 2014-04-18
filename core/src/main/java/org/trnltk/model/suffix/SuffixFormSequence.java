@@ -177,6 +177,7 @@ public class SuffixFormSequence {
         return suffixFormStr;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public boolean isBlank() {
         return StringUtils.isBlank(this.suffixFormStr);
     }
@@ -215,9 +216,7 @@ public class SuffixFormSequence {
 
         SuffixFormSequence that = (SuffixFormSequence) o;
 
-        if (!suffixFormStr.equals(that.suffixFormStr)) return false;
-
-        return true;
+        return suffixFormStr.equals(that.suffixFormStr);
     }
 
     @Override
@@ -464,9 +463,7 @@ public class SuffixFormSequence {
                 return true;
 
             for (SuffixFormSequenceRule rule : rules) {
-                if (OPTIONAL_RULE_TYPES.contains(rule.getRuleType()))
-                    continue;
-                else
+                if (!OPTIONAL_RULE_TYPES.contains(rule.getRuleType()))
                     return false;
             }
 

@@ -77,9 +77,7 @@ public class TextBlockGroup {
 
         TextBlockGroup that = (TextBlockGroup) o;
 
-        if (!textBlocks.equals(that.textBlocks)) return false;
-
-        return true;
+        return textBlocks.equals(that.textBlocks);
     }
 
     @Override

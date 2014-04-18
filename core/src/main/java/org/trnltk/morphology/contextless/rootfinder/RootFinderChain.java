@@ -65,10 +65,11 @@ public class RootFinderChain {
                 roots.addAll(rootsForPartialInput);
             }
 
-            if (RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED.equals(rootFinderPolicy))
-                break;
-            else if (RootFinderPolicy.CONTINUE_ON_CHAIN.equals(rootFinderPolicy))
+            if (RootFinderPolicy.CONTINUE_ON_CHAIN.equals(rootFinderPolicy))
+                //noinspection UnnecessaryContinue
                 continue;
+            else if (RootFinderPolicy.STOP_CHAIN_WHEN_INPUT_IS_HANDLED.equals(rootFinderPolicy))
+                break;
             else
                 throw new IllegalStateException();
         }

@@ -18,5 +18,5 @@ package org.trnltk.model.lexicon;
 
 public enum PhoneticExpectation {
     VowelStart,
-    ConsonantStart;
+    ConsonantStart
 }

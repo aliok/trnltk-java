@@ -10,12 +10,16 @@ import java.util.Arrays;
  */
 public class Comparators {
 
+    @SuppressWarnings("WeakerAccess")
     public static final Ordering<String> byLengthOrdering = new Ordering<String>() {
         public int compare(String left, String right) {
             return Ints.compare(left.length(), right.length());
         }
     };
 
-    public static final Ordering<String> parseResultOrdering = Ordering.compound(Arrays.asList(byLengthOrdering, Ordering.<String>natural()));
+    @SuppressWarnings("unchecked")
+    public static final Ordering<String> parseResultOrdering = Ordering.compound(
+            Arrays.asList(byLengthOrdering, Ordering.<String>natural())
+    );
 
 }

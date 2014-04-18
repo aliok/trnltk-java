@@ -63,9 +63,9 @@ public class DynamicRoot implements Root {
         DynamicRoot that = (DynamicRoot) o;
 
         if (!lexeme.equals(that.lexeme)) return false;
-        if (!phoneticAttributes.equals(that.phoneticAttributes)) return false;
-        if (!phoneticExpectations.equals(that.phoneticExpectations)) return false;
-        if (!sequence.equals(that.sequence)) return false;
+        else if (!phoneticAttributes.equals(that.phoneticAttributes)) return false;
+        else if (!phoneticExpectations.equals(that.phoneticExpectations)) return false;
+        else if (!sequence.equals(that.sequence)) return false;
 
         return true;
     }
@@ -93,6 +93,7 @@ public class DynamicRoot implements Root {
         return lexeme;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setLexeme(DynamicLexeme lexeme) {
         this.lexeme = lexeme;
     }
@@ -111,6 +112,7 @@ public class DynamicRoot implements Root {
         return phoneticExpectations;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPhoneticExpectations(EnumSet<PhoneticExpectation> phoneticExpectations) {
         this.phoneticExpectations = phoneticExpectations;
     }

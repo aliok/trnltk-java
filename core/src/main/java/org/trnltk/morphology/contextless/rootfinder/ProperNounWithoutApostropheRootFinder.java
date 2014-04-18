@@ -44,6 +44,7 @@ public class ProperNounWithoutApostropheRootFinder implements RootFinder {
 
         // the case with apostrophe is handled by ProperNounFromApostropheRootFinder
         final String wholeSurfaceUnderlyingString = wholeSurface.getUnderlyingString();
+        //noinspection RedundantIfStatement
         if (!Character.isUpperCase(wholeSurface.charAt(0).getCharValue()) || wholeSurfaceUnderlyingString.contains(String.valueOf(APOSTROPHE))) {
             return false;
         }

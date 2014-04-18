@@ -76,8 +76,8 @@ public class SuffixTransition {
         SuffixTransition that = (SuffixTransition) o;
 
         if (!sourceState.equals(that.sourceState)) return false;
-        if (!suffixFormApplication.equals(that.suffixFormApplication)) return false;
-        if (!targetState.equals(that.targetState)) return false;
+        else if (!suffixFormApplication.equals(that.suffixFormApplication)) return false;
+        else if (!targetState.equals(that.targetState)) return false;
 
         return true;
     }

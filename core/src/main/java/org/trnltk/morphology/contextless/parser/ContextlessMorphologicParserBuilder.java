@@ -14,6 +14,7 @@ import org.trnltk.morphology.phonetics.PhoneticsEngine;
 /**
  * A helper class to build morphologic parsers.
  */
+@SuppressWarnings({"WeakerAccess", "UnusedDeclaration"})
 public class ContextlessMorphologicParserBuilder {
 
     private SuffixGraph suffixGraph;
@@ -21,7 +22,7 @@ public class ContextlessMorphologicParserBuilder {
     private MorphologicParserCache cache;
     private boolean useLocalCache;
 
-    final HashMultimap<String, ? extends Root> _dictionaryRootMap;
+    private final HashMultimap<String, ? extends Root> _dictionaryRootMap;
 
     private ContextlessMorphologicParserBuilder(boolean convertCircumflexes) {
         this.rootFinderChain = new RootFinderChain(new RootValidator());

@@ -50,10 +50,8 @@ public class SuffixFormGraphSuffixEdge {
 
         SuffixFormGraphSuffixEdge that = (SuffixFormGraphSuffixEdge) o;
 
-        if (suffixFormApplication != null ? !suffixFormApplication.equals(that.suffixFormApplication) : that.suffixFormApplication != null)
-            return false;
-        if (targetSuffixFormGraphNode != null ? !targetSuffixFormGraphNode.equals(that.targetSuffixFormGraphNode) : that.targetSuffixFormGraphNode != null)
-            return false;
+        if (suffixFormApplication != null ? !suffixFormApplication.equals(that.suffixFormApplication) : that.suffixFormApplication != null) return false;
+        else if (targetSuffixFormGraphNode != null ? !targetSuffixFormGraphNode.equals(that.targetSuffixFormGraphNode) : that.targetSuffixFormGraphNode != null) return false;
 
         return true;
     }

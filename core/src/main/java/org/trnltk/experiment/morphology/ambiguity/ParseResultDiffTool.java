@@ -22,6 +22,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.common.util.Comparators;
 import org.trnltk.experiment.model.ambiguity.morphology.*;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,8 +45,8 @@ public class ParseResultDiffTool {
 
         final DataDiffUtil<ParseResultPart> diffUtil = new DataDiffUtil<ParseResultPart>();
 
-        final List<ParseResultPart> firstParseResultParts = CollectionUtils.isEmpty(firstParseResult.getParts()) ? ListUtils.EMPTY_LIST : firstParseResult.getParts();
-        final List<ParseResultPart> secondParseResultParts = CollectionUtils.isEmpty(secondParseResult.getParts()) ? ListUtils.EMPTY_LIST : secondParseResult.getParts();
+        final List<ParseResultPart> firstParseResultParts = CollectionUtils.isEmpty(firstParseResult.getParts()) ? Collections.<ParseResultPart>emptyList() : firstParseResult.getParts();
+        final List<ParseResultPart> secondParseResultParts = CollectionUtils.isEmpty(secondParseResult.getParts()) ? Collections.<ParseResultPart>emptyList() : secondParseResult.getParts();
 
         final LinkedList<DataDiffUtil.Diff<ParseResultPart>> diffs = diffUtil.diff_main(firstParseResultParts, secondParseResultParts);
         diffUtil.diff_cleanupSemantic(diffs);

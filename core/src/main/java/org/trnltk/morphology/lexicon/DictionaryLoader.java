@@ -56,6 +56,7 @@ public class DictionaryLoader {
         return new DictionaryLoader().load(supplier);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public HashSet<Lexeme> load(InputSupplier<InputStreamReader> inputSupplier) {
         try {
             // could have created a line processor, but all file will be

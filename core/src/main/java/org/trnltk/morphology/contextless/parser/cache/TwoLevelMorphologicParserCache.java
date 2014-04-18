@@ -74,16 +74,20 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
 
     @Override
     public void put(String input, List<MorphemeContainer> morphemeContainers) {
+        //noinspection SynchronizeOnNonFinalField
         synchronized (l2Cache) {
             // l2Cache should not be changed during put operation.
             // remember : there can be multiple threads accessing this instance of TwoLevelMorphologicParserCache
-            l2Cache.put(input, morphemeContainers == null ? (List<MorphemeContainer>) Collections.EMPTY_LIST : morphemeContainers);
+            l2Cache.put(input, morphemeContainers == null ? Collections.<MorphemeContainer>emptyList() : morphemeContainers);
             l2Size++;
         }
         if (l2Size >= l2MaxSize) {
+            //noinspection SynchronizeOnNonFinalField
             synchronized (l2Cache) {
                 // l2Cache should not be changed during bulk insert to l1Cache operation
                 l1Cache.putAll(l2Cache);
+                // TODO: weird code! lock is on l2Cache, but it is reinitialized!
+                // shouldn't the lock be on 'this' ?
                 l2Cache = new HashMap<String, List<MorphemeContainer>>(l2MaxSize);
                 l2Size = 0;
             }
@@ -93,13 +97,17 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
     @Override
     public void putAll(Map<String, List<MorphemeContainer>> map) {
         if (l2Size + map.size() >= l2MaxSize) {
+            //noinspection SynchronizeOnNonFinalField
             synchronized (l2Cache) {
                 l1Cache.putAll(l2Cache);
                 l1Cache.putAll(map);
+                // TODO: weird code! lock is on l2Cache, but it is reinitialized!
+                // shouldn't the lock be on 'this' ?
                 l2Cache = new HashMap<String, List<MorphemeContainer>>(l2MaxSize);
                 l2Size = 0;
             }
         } else {
+            //noinspection SynchronizeOnNonFinalField
             synchronized (l2Cache) {
                 l2Cache.putAll(map);
                 l2Size += map.size();
@@ -111,14 +119,14 @@ public class TwoLevelMorphologicParserCache implements MorphologicParserCache {
     public void build(MorphologicParser parser) {
         // cannot build self, since it is online.
         // but l1Cache might need building
-        if(!l1Cache.isBuilt())
+        if(l1Cache.isNotBuilt())
             l1Cache.build(parser);
 
         built = true;
     }
 
     @Override
-    public boolean isBuilt() {
-        return this.built;
+    public boolean isNotBuilt() {
+        return !this.built;
     }
 }

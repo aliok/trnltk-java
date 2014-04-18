@@ -29,14 +29,17 @@ public class ParseResultPart {
         this.suffixes = suffixes;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getPrimaryPos() {
         return primaryPos;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getSecondaryPos() {
         return secondaryPos;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public List<String> getSuffixes() {
         return suffixes;
     }
@@ -58,8 +61,8 @@ public class ParseResultPart {
         ParseResultPart that = (ParseResultPart) o;
 
         if (primaryPos != null ? !primaryPos.equals(that.primaryPos) : that.primaryPos != null) return false;
-        if (secondaryPos != null ? !secondaryPos.equals(that.secondaryPos) : that.secondaryPos != null) return false;
-        if (suffixes != null ? !suffixes.equals(that.suffixes) : that.suffixes != null) return false;
+        else if (secondaryPos != null ? !secondaryPos.equals(that.secondaryPos) : that.secondaryPos != null) return false;
+        else if (suffixes != null ? !suffixes.equals(that.suffixes) : that.suffixes != null) return false;
 
         return true;
     }

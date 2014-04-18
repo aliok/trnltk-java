@@ -16,7 +16,6 @@
 
 package org.trnltk.morphology.morphotactics;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.suffix.Suffix;
 import org.trnltk.model.suffix.SuffixForm;
@@ -32,7 +31,7 @@ public class EmptySuffixGraph implements SuffixGraph {
 
     @Override
     public Collection<SuffixGraphState> getRootSuffixGraphStates() {
-        return CollectionUtils.EMPTY_COLLECTION;
+        return Collections.emptyList();
     }
 
     @Override
@@ -52,7 +51,7 @@ public class EmptySuffixGraph implements SuffixGraph {
 
     @Override
     public Collection<Suffix> getAllSuffixes() {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     @Override

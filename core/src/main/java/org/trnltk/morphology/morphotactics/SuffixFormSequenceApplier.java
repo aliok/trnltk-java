@@ -28,9 +28,7 @@ public class SuffixFormSequenceApplier {
         final StringBuilder builder = new StringBuilder();
         for (SuffixFormSequence.SuffixFormSequenceRule rule : suffixFormSequence.getRules()) {
             final Character c = rule.apply(phoneticAttributesOfSurface);
-            if (c == null)
-                continue;
-            else
+            if (c != null)
                 builder.append(c);
         }
 

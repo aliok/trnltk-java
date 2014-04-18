@@ -30,6 +30,7 @@ import static org.trnltk.model.letter.TurkicLetter.builder;
  * Contains Turkish Letters, Turkish Letter equivalent chars, several helper methods.
  * TurkishAlphabet only contains small case letters.
  */
+@SuppressWarnings({"UnusedDeclaration","WeakerAccess"})
 public class TurkishAlphabet {
 
     // Turkish specific characters.
@@ -281,7 +282,7 @@ public class TurkishAlphabet {
      * @param c character to check
      * @return true if it is part of the Turkish alphabet. false otherwise
      */
-    public static final boolean isValid(char c) {
+    public static boolean isValid(char c) {
         return c < MAX_CHAR_VALUE && VALID_CHAR_TABLE[c];
     }
 

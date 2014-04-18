@@ -49,9 +49,10 @@ import java.util.*;
  * This class is optimized to save the state of most commonly used information e.g. last suffix or suffixes since last derivation;
  * thus it is heavy.
  */
+@SuppressWarnings("WeakerAccess")
 public class MorphemeContainer {
 
-    final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
+    private final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
 
     // final values
     private final Root root;
@@ -60,6 +61,7 @@ public class MorphemeContainer {
     // things below are changed with suffixTransitions, but do have a value set in constructor
     private TurkishSequence surfaceSoFar;
     private String remainingSurface;
+    @SuppressWarnings("CanBeFinal")
     private LinkedList<SuffixTransition> suffixTransitions;
     private SuffixGraphState lastState;
     private String wholeSurface;
@@ -438,13 +440,11 @@ public class MorphemeContainer {
         MorphemeContainer that = (MorphemeContainer) o;
 
         if (!rootState.equals(that.rootState)) return false;
-        if (phoneticExpectations != null ? !phoneticExpectations.equals(that.phoneticExpectations) : that.phoneticExpectations != null)
-            return false;
-        if (!remainingSurface.equals(that.remainingSurface)) return false;
-        if (!root.equals(that.root)) return false;
-        if (!surfaceSoFar.equals(that.surfaceSoFar)) return false;
-        if (suffixTransitions != null ? !suffixTransitions.equals(that.suffixTransitions) : that.suffixTransitions != null)
-            return false;
+        else if (phoneticExpectations != null ? !phoneticExpectations.equals(that.phoneticExpectations) : that.phoneticExpectations != null) return false;
+        else if (!remainingSurface.equals(that.remainingSurface)) return false;
+        else if (!root.equals(that.root)) return false;
+        else if (!surfaceSoFar.equals(that.surfaceSoFar)) return false;
+        else if (suffixTransitions != null ? !suffixTransitions.equals(that.suffixTransitions) : that.suffixTransitions != null) return false;
 
         return true;
     }

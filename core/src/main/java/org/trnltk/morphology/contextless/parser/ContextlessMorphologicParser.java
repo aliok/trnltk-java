@@ -39,7 +39,7 @@ import java.util.*;
  * A form-based morphologic parser implementation which does not the context of the input.
  */
 public class ContextlessMorphologicParser implements MorphologicParser {
-    protected final Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);
+    private final Logger logger = Logger.getLogger(ContextlessMorphologicParser.class);
 
     private final MandatoryTransitionApplier mandatoryTransitionApplier;
     private ContextlessMorphologicParserListener listener;
@@ -197,7 +197,7 @@ public class ContextlessMorphologicParser implements MorphologicParser {
             final SuffixFormApplication suffixFormApplication = transitionEdge.getSuffixFormApplication();
 
             if (logger.isDebugEnabled())
-                logger.debug(String.format("   Going to try suffixFormApplication", suffixFormApplication));
+                logger.debug(String.format("   Going to try suffixFormApplication : %s", suffixFormApplication));
 
             final SuffixGraphState targetState = transitionEdge.getTargetSuffixFormGraphNode().getSuffixFormGraphNodeKey().getState();
             final MorphemeContainer morphemeContainerForSuffixFormApplication = this.suffixApplier.trySuffixFormApplication(initialContainer, suffixFormApplication, targetState, transitionEdge.getPhoneticExpectations(), input);

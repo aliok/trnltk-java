@@ -44,40 +44,12 @@ import java.util.List;
  * Checks if a {@link Suffix}, a {@link SuffixForm} or a {@link SuffixFormApplication} is applicable for a given {@link MorphemeContainer} and applies these.
  */
 public class SuffixApplier {
-    protected final Logger logger = Logger.getLogger(SuffixApplier.class);
+    private final Logger logger = Logger.getLogger(SuffixApplier.class);
 
     private final PhoneticsEngine phoneticsEngine;
 
     public SuffixApplier(PhoneticsEngine phoneticsEngine) {
         this.phoneticsEngine = phoneticsEngine;
-    }
-
-    /**
-     * Checks if the suffix is applicable and applies it.
-     * <p/>
-     * Tries all {@link SuffixForm}s of the given suffix.
-     *
-     * @return Morpheme containers where the transitions for the suffix are applied. Passed container is immutable thus untouched.
-     * @see SuffixApplier#transitionAllowedForSuffix(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.Suffix)
-     */
-    public List<MorphemeContainer> trySuffix(MorphemeContainer morphemeContainer, Suffix suffix, SuffixGraphState targetState, TurkishSequence input) {
-        if (!this.transitionAllowedForSuffix(morphemeContainer, suffix))
-            return new ArrayList<MorphemeContainer>();
-
-        final List<MorphemeContainer> newMorphemeContainers = new LinkedList<MorphemeContainer>();
-
-        if (logger.isDebugEnabled())
-            logger.debug(String.format("    Gonna try %d suffix forms : '%s'", suffix.getSuffixForms().size(), suffix.getSuffixForms()));
-
-        for (SuffixForm suffixForm : suffix.getSuffixForms()) {
-            if (logger.isDebugEnabled())
-                logger.debug(String.format("    Gonna try suffix form : '%s'", suffix));
-
-            MorphemeContainer newMorphemeContainer = this.trySuffixForm(morphemeContainer, suffixForm, targetState, input);
-            if (newMorphemeContainer != null)
-                newMorphemeContainers.add(newMorphemeContainer);
-        }
-        return newMorphemeContainers;
     }
 
     /**
@@ -93,6 +65,7 @@ public class SuffixApplier {
      * Given {@link Suffix} does not allow repetition, then it cannot exist twice in an inflection group.</li>
      * </ul>
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean transitionAllowedForSuffix(MorphemeContainer morphemeContainer, Suffix suffix) {
         if (suffix.getSuffixGroup() != null && morphemeContainer.getSuffixGroupsSinceLastDerivationSuffix().contains(suffix.getSuffixGroup())) {
             if (logger.isDebugEnabled()) {
@@ -279,6 +252,7 @@ public class SuffixApplier {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean transitionAllowedForSuffixForm(MorphemeContainer morphemeContainer, SuffixForm suffixForm) {
         // Is precondition of the suffix form satisfied with the given container?
         if (suffixForm.getPrecondition() != null && !suffixForm.getPrecondition().isSatisfiedBy(morphemeContainer)) {

@@ -29,83 +29,84 @@ import org.trnltk.model.lexicon.PrimaryPos;
 
 import java.util.Arrays;
 
+@SuppressWarnings("WeakerAccess")
 public class SuffixFormSpecifications {
 
-    public static final Specification<MorphemeContainer> doesnt(final Specification<MorphemeContainer> specification) {
+    public static Specification<MorphemeContainer> doesnt(final Specification<MorphemeContainer> specification) {
         return specification.not();
     }
 
     ////// preconditions
-    public static final Specification<MorphemeContainer> comesAfter(Suffix suffix) {
+    public static Specification<MorphemeContainer> comesAfter(Suffix suffix) {
         return comesAfter(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> comesAfter(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> comesAfter(Suffix suffix, String suffixFormStr) {
         return new HasSuffixFormSinceLastDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> doesntComeAfter(Suffix suffix) {
+    public static Specification<MorphemeContainer> doesntComeAfter(Suffix suffix) {
         return comesAfter(suffix).not();
     }
 
-    public static final Specification<MorphemeContainer> comesAfterDerivation(Suffix suffix) {
+    public static Specification<MorphemeContainer> comesAfterDerivation(Suffix suffix) {
         return comesAfterDerivation(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> comesAfterDerivation(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> comesAfterDerivation(Suffix suffix, String suffixFormStr) {
         return new HasSuffixFormAsLastDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> doesntComeAfterDerivation(Suffix suffix) {
+    public static Specification<MorphemeContainer> doesntComeAfterDerivation(Suffix suffix) {
         return doesntComeAfterDerivation(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> doesntComeAfterDerivation(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> doesntComeAfterDerivation(Suffix suffix, String suffixFormStr) {
         return comesAfterDerivation(suffix, suffixFormStr).not();
     }
 
-    public static final Specification<MorphemeContainer> appliesToRoot(String rootStr) {
+    public static Specification<MorphemeContainer> appliesToRoot(String rootStr) {
         return new AppliesToRoot(rootStr);
     }
 
-    public static final Specification<MorphemeContainer> rootHasSecondaryPos(SecondaryPos secondaryPos) {
+    public static Specification<MorphemeContainer> rootHasSecondaryPos(SecondaryPos secondaryPos) {
         return new RootHasSecondaryPos(secondaryPos);
     }
 
-    public static final Specification<MorphemeContainer> hasLexemeAttributes(LexemeAttribute... lexemeAttributes) {
+    public static Specification<MorphemeContainer> hasLexemeAttributes(LexemeAttribute... lexemeAttributes) {
         return new HasLexemeAttributes(Sets.immutableEnumSet(Arrays.asList(lexemeAttributes)));
     }
 
-    public static final Specification<MorphemeContainer> doesntHaveLexemeAttributes(LexemeAttribute... lexemeAttributes) {
+    public static Specification<MorphemeContainer> doesntHaveLexemeAttributes(LexemeAttribute... lexemeAttributes) {
         return new DoesntHaveLexemeAttributes(Sets.immutableEnumSet(Arrays.asList(lexemeAttributes)));
     }
 
-    public static final Specification<MorphemeContainer> comesAfterLastNonBlankDerivation(Suffix suffix) {
+    public static Specification<MorphemeContainer> comesAfterLastNonBlankDerivation(Suffix suffix) {
         return comesAfterLastNonBlankDerivation(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> comesAfterLastNonBlankDerivation(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> comesAfterLastNonBlankDerivation(Suffix suffix, String suffixFormStr) {
         return new HasLastNonBlankDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> rootHasPrimaryPos(PrimaryPos primaryPos) {
+    public static Specification<MorphemeContainer> rootHasPrimaryPos(PrimaryPos primaryPos) {
         return new RootHasPrimaryPos(primaryPos);
     }
 
-    public static final Specification<MorphemeContainer> rootHasProgressiveVowelDrop() {
+    public static Specification<MorphemeContainer> rootHasProgressiveVowelDrop() {
         return new RootHasVowelDrop();
     }
 
     ////////// postconditions
-    public static final Specification<MorphemeContainer> followedBy(Suffix suffix) {
+    public static Specification<MorphemeContainer> followedBy(Suffix suffix) {
         return followedBy(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> followedBy(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> followedBy(Suffix suffix, String suffixFormStr) {
         return new HasSuffixFormSinceLastDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> followedByOneFromGroup(SuffixGroup suffixGroup) {
+    public static Specification<MorphemeContainer> followedByOneFromGroup(SuffixGroup suffixGroup) {
         @SuppressWarnings("unchecked")
         Specification<MorphemeContainer> spec = (Specification<MorphemeContainer>) TrueSpecification.INSTANCE;
         for (Suffix suffix : suffixGroup.getSuffixes()) {
@@ -115,15 +116,15 @@ public class SuffixFormSpecifications {
         return spec;
     }
 
-    public static final Specification<MorphemeContainer> followedByDerivation(Suffix suffix) {
+    public static Specification<MorphemeContainer> followedByDerivation(Suffix suffix) {
         return followedByDerivation(suffix, null);
     }
 
-    public static final Specification<MorphemeContainer> followedByDerivation(Suffix suffix, String suffixFormStr) {
+    public static Specification<MorphemeContainer> followedByDerivation(Suffix suffix, String suffixFormStr) {
         return new HasSuffixFormAsLastDerivation(suffix, suffixFormStr);
     }
 
-    public static final Specification<MorphemeContainer> followedBySuffixGoesTo(SuffixGraphStateType followedBySuffixGoesTo) {
+    public static Specification<MorphemeContainer> followedBySuffixGoesTo(SuffixGraphStateType followedBySuffixGoesTo) {
         return new LastSuffixGoesToStateWithType(followedBySuffixGoesTo);
     }
 

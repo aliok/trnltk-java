@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.io.Files;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.json.JSONException;
 import org.trnltk.experiment.model.ambiguity.morphology.ParseResult;
@@ -44,6 +45,8 @@ public class AmbiguityClassifier {
         final File folder = new File("D:\\devl\\data\\1MSentences\\split");
 
         final File[] files = folder.listFiles();
+        if(files==null)
+            throw new RuntimeException();
 
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -59,6 +62,7 @@ public class AmbiguityClassifier {
 
             final List<WordParseResultEntry> parseResultEntries = parseResultReader.getParseResultEntries(Files.newReader(file, Charsets.UTF_8));
             numberOfWords += parseResultEntries.size();
+            //noinspection ForLoopReplaceableByForEach
             for (int parseResultEntryIndex = 0; parseResultEntryIndex < parseResultEntries.size(); parseResultEntryIndex++) {
                 WordParseResultEntry parseResultEntry = parseResultEntries.get(parseResultEntryIndex);
                 final List<ParseResult> parseResults = parseResultEntry.getParseResults();
@@ -75,6 +79,7 @@ public class AmbiguityClassifier {
                     }
                 }
             }
+            //noinspection ConstantConditions
             if (fileIndex == 0)
                 break;
         }

@@ -76,11 +76,6 @@ public class PhoneticAttributeSets {
         return validPhoneticAttributeSets;
     }
 
-
-    public Set<PhoneticAttribute> internSet(Set<PhoneticAttribute> set) {
-        return validPhoneticAttributeSetsMap.get(this.getNumberForSet(set));
-    }
-
     public long getNumberForSet(Set<PhoneticAttribute> set) {
         long number = 0L;
         for (PhoneticAttribute phoneticAttribute : PhoneticAttribute.values()) {

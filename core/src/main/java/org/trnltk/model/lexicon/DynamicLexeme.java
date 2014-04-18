@@ -68,10 +68,10 @@ public class DynamicLexeme implements Lexeme {
         DynamicLexeme that = (DynamicLexeme) o;
 
         if (!lemma.equals(that.lemma)) return false;
-        if (!lemmaRoot.equals(that.lemmaRoot)) return false;
-        if (!lexemeAttributes.equals(that.lexemeAttributes)) return false;
-        if (primaryPos != that.primaryPos) return false;
-        if (secondaryPos != that.secondaryPos) return false;
+        else if (!lemmaRoot.equals(that.lemmaRoot)) return false;
+        else if (!lexemeAttributes.equals(that.lexemeAttributes)) return false;
+        else if (primaryPos != that.primaryPos) return false;
+        else if (secondaryPos != that.secondaryPos) return false;
 
         return true;
     }
@@ -109,6 +109,7 @@ public class DynamicLexeme implements Lexeme {
         return primaryPos;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setPrimaryPos(PrimaryPos primaryPos) {
         this.primaryPos = primaryPos;
     }
@@ -118,6 +119,7 @@ public class DynamicLexeme implements Lexeme {
         return secondaryPos;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setSecondaryPos(SecondaryPos secondaryPos) {
         this.secondaryPos = secondaryPos;
     }

@@ -16,8 +16,6 @@
 
 package org.trnltk.experiment.model.ambiguity.morphology;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,6 +31,7 @@ public class WordParseResultEntry {
         this.word = word;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getWord() {
         return word;
     }
@@ -41,7 +40,7 @@ public class WordParseResultEntry {
         return Collections.unmodifiableList(parseResults);
     }
 
-    public void addParseResult(ParseResult parseResult) throws JSONException {
+    public void addParseResult(ParseResult parseResult){
         this.parseResults.add(parseResult);
     }
 

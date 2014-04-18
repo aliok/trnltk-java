@@ -48,5 +48,6 @@ public interface MorphologicParser {
     /**
      * Parses all of the given {@link TurkishSequence}s and returns all possible results for each. Returned results are in inputs' order.
      */
+    @SuppressWarnings("UnusedDeclaration")
     public List<List<MorphemeContainer>> parseAll(final List<TurkishSequence> input);
 }

@@ -37,10 +37,6 @@ public class TokenizationGraphEdge {
         this.examples = new LinkedList<List<TextBlock>>();
     }
 
-    public void addExample(TextBlock... example) {
-        this.addExample(Lists.newArrayList(example));
-    }
-
     public void addExample(List<TextBlock> example) {
         this.examples.add(example);
     }
@@ -77,7 +73,7 @@ public class TokenizationGraphEdge {
         TokenizationGraphEdge that = (TokenizationGraphEdge) o;
 
         if (addSpace != that.addSpace) return false;
-        if (!target.equals(that.target)) return false;
+        else if (!target.equals(that.target)) return false;
 
         return true;
     }

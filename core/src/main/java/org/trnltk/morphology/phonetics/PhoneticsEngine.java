@@ -62,19 +62,6 @@ public class PhoneticsEngine {
         return this.apply(surface, phoneticsAnalyzer.calculatePhoneticAttributes(surface, lexemeAttributes), form, lexemeAttributes);
     }
 
-    public Pair<TurkishSequence, String> apply(TurkishSequence surface, ImmutableSet<PhoneticAttribute> _phoneticAttributes, String suffixFormToApply, ImmutableSet<LexemeAttribute> _lexemeAttributes) {
-        if (surface == null || surface.isBlank())
-            return Pair.of(null, null);
-
-        if (StringUtils.isBlank(suffixFormToApply))
-            return Pair.of(surface, StringUtils.EMPTY);
-
-        final Collection<LexemeAttribute> lexemeAttributes = _lexemeAttributes == null ? new ArrayList<LexemeAttribute>() : _lexemeAttributes;
-        final Set<PhoneticAttribute> phoneticAttributes = _phoneticAttributes == null ? ImmutableSet.<PhoneticAttribute>of() : _phoneticAttributes;
-
-        return this.handlePhonetics(surface, phoneticAttributes, suffixFormToApply, lexemeAttributes);
-    }
-
     public Pair<TurkishSequence, String> apply(final TurkishSequence surface, final Set<PhoneticAttribute> _phoneticAttributes, final SuffixFormSequence suffixFormSequence, final Collection<LexemeAttribute> _lexemeAttributes) {
         if (surface == null || surface.isBlank())
             return Pair.of(null, null);
@@ -99,19 +86,6 @@ public class PhoneticsEngine {
         final String appliedSuffixForm = suffixFormSequenceApplier.apply(suffixFormSequence, phoneticAttributes);
 
         return Pair.of(newSurface, appliedSuffixForm);
-    }
-
-    private Pair<TurkishSequence, String> handlePhonetics(final TurkishSequence _surface, final Set<PhoneticAttribute> phoneticAttributes, final String suffixFormToApply, final Collection<LexemeAttribute> lexemeAttributes) {
-        TurkishSequence newSurface = _surface;
-
-        final TurkicLetter letterForFirstCharOfSuffixFormToApply = TurkishAlphabet.getLetter(suffixFormToApply.charAt(0));
-
-        // first try voicing
-        if (!lexemeAttributes.contains(LexemeAttribute.NoVoicing) && phoneticAttributes.contains(PhoneticAttribute.LastLetterVoicelessStop) && letterForFirstCharOfSuffixFormToApply.isVowel()) {
-            newSurface = _surface.voiceLastLetterIfPossible();
-        }
-
-        return Pair.of(newSurface, suffixFormToApply);
     }
 
     public boolean expectationsSatisfied(final Collection<PhoneticExpectation> phoneticExpectations, final SuffixFormSequence _form) {

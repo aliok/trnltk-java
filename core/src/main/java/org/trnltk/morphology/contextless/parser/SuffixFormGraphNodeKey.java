@@ -46,7 +46,7 @@ public class SuffixFormGraphNodeKey {
         SuffixFormGraphNodeKey suffixFormGraphNodeKey = (SuffixFormGraphNodeKey) o;
 
         if (!phonAttrSet.equals(suffixFormGraphNodeKey.phonAttrSet)) return false;
-        if (!state.equals(suffixFormGraphNodeKey.state)) return false;
+        else if (!state.equals(suffixFormGraphNodeKey.state)) return false;
 
         return true;
     }

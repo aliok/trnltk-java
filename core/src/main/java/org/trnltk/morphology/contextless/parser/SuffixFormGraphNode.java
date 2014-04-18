@@ -54,9 +54,7 @@ public class SuffixFormGraphNode {
 
         SuffixFormGraphNode suffixFormGraphNode = (SuffixFormGraphNode) o;
 
-        if (!suffixFormGraphNodeKey.equals(suffixFormGraphNode.suffixFormGraphNodeKey)) return false;
-
-        return true;
+        return suffixFormGraphNodeKey.equals(suffixFormGraphNode.suffixFormGraphNodeKey);
     }
 
     @Override

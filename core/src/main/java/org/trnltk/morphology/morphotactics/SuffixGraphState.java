@@ -73,9 +73,7 @@ public class SuffixGraphState {
 
         SuffixGraphState that = (SuffixGraphState) o;
 
-        if (!name.equals(that.name)) return false;
-
-        return true;
+        return name.equals(that.name);
     }
 
     @Override

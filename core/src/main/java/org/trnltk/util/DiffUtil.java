@@ -136,8 +136,10 @@ public class DiffUtil {
         for (int index = i - 1; index >= 0; index--) {
             final diff_match_patch.Diff diff = diffs.get(index);
             if (diff.operation.equals(diff_match_patch.Operation.EQUAL))
+                //noinspection UnnecessaryContinue
                 continue;
             else if (StringUtils.isBlank(diff.text))
+                //noinspection UnnecessaryContinue
                 continue;
             else
                 return diff;
@@ -149,8 +151,10 @@ public class DiffUtil {
         for (int index = i + 1; index < diffs.size(); index++) {
             final diff_match_patch.Diff diff = diffs.get(index);
             if (diff.operation.equals(diff_match_patch.Operation.EQUAL))
+                //noinspection UnnecessaryContinue
                 continue;
             else if (StringUtils.isBlank(diff.text))
+                //noinspection UnnecessaryContinue
                 continue;
             else
                 return diff;

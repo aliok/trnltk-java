@@ -46,6 +46,7 @@ public class ParseResultDifference {
         return this.rootDifference == null;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public boolean hasRootDifference() {
         return !this.hasNoPartDifference();
     }
@@ -77,12 +78,8 @@ public class ParseResultDifference {
 
         ParseResultDifference that = (ParseResultDifference) o;
 
-        if (!parseResultPartDifferences.equals(that.parseResultPartDifferences))
-            return false;
-        if (rootDifference != null ? !rootDifference.equals(that.rootDifference) : that.rootDifference != null)
-            return false;
+        return parseResultPartDifferences.equals(that.parseResultPartDifferences) && !(rootDifference != null ? !rootDifference.equals(that.rootDifference) : that.rootDifference != null);
 
-        return true;
     }
 
     @Override

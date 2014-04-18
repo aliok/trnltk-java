@@ -32,20 +32,24 @@ public class TokenizerTrainingData {
         return entries;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setEntries(List<TokenizerTrainingEntry> entries) {
         this.entries = entries;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static TokenizerTrainingData createDefaultTrainingData() throws IOException {
         final InputSupplier<InputStream> inputStreamInputSupplier = Resources.newInputStreamSupplier(Resources.getResource("tokenizer/training-data.yaml"));
         return createFromYamlInputStream(inputStreamInputSupplier.getInput());
     }
 
+    @SuppressWarnings({"WeakerAccess", "UnusedDeclaration"})
     public static TokenizerTrainingData createFromYamlFile(File file) throws FileNotFoundException {
         final FileInputStream fileInputStream = new FileInputStream(file);
         return createFromYamlInputStream(fileInputStream);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public static TokenizerTrainingData createFromYamlInputStream(InputStream inputStream) {
         TypeDescription dataDescription = new TypeDescription(TokenizerTrainingData.class);
         dataDescription.putListPropertyType("entries", TokenizerTrainingEntry.class);
@@ -54,7 +58,6 @@ public class TokenizerTrainingData {
         constructor.addTypeDescription(dataDescription);
         Yaml yaml = new Yaml(constructor);
 
-        final TokenizerTrainingData data = (TokenizerTrainingData) yaml.load(inputStream);
-        return data;
+        return (TokenizerTrainingData) yaml.load(inputStream);
     }
 }

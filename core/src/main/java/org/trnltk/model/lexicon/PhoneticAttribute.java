@@ -51,6 +51,7 @@ public enum PhoneticAttribute implements StringEnum<PhoneticAttribute> {
         return shortForm;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static StringEnumMap<PhoneticAttribute> converter() {
         return shortFormToPosMap;
     }

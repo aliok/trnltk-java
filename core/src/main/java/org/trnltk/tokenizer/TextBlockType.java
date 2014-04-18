@@ -446,8 +446,9 @@ public enum TextBlockType {
         }
     };
 
-    public static final ImmutableSet<TextBlockType> META_TYPES = Sets.immutableEnumSet(Sentence_Start, Sentence_End);
-    public static final ImmutableSet<TextBlockType> PHYSICAL_TYPES = Sets.immutableEnumSet(
+    @SuppressWarnings("WeakerAccess")
+    static final ImmutableSet<TextBlockType> META_TYPES = Sets.immutableEnumSet(Sentence_Start, Sentence_End);
+    static final ImmutableSet<TextBlockType> PHYSICAL_TYPES = Sets.immutableEnumSet(
             Sets.difference(
                     Sets.immutableEnumSet(Lists.newArrayList(TextBlockType.values())),
                     META_TYPES));
@@ -473,6 +474,7 @@ public enum TextBlockType {
 
     public abstract String findMatchFromBeginning(String text);
 
+    @SuppressWarnings("WeakerAccess")
     public abstract TextBlockType getInferenceType();
 
     private static String getPatternMatch(Pattern pattern, String text) {

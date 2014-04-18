@@ -29,10 +29,10 @@ import java.util.Map;
  * @author Ali Ok
  */
 public class TokenizationGraphNode {
-    static Logger logger = Logger.getLogger(TokenizationGraphNode.class);
+    private static Logger logger = Logger.getLogger(TokenizationGraphNode.class);
 
-    protected final TextBlockTypeGroup data;
-    protected final Map<TextBlockTypeGroup, TokenizationGraphEdge> edges;
+    private final TextBlockTypeGroup data;
+    private final Map<TextBlockTypeGroup, TokenizationGraphEdge> edges;
 
     public TokenizationGraphNode(TextBlockTypeGroup data) {
         this.data = data;
@@ -78,7 +78,7 @@ public class TokenizationGraphNode {
 
                     return false;
                 } else {
-                    final TokenizationGraphEdge newEdge = this.addNewEdge(targetNode, addSpace, inferred, exampleTextBlocks);
+                    final TokenizationGraphEdge newEdge = this.addNewEdge(targetNode, addSpace, false, exampleTextBlocks);
 
                     if (logger.isDebugEnabled())
                         logger.debug("Since edge wanted to add is NOT an inferred one, it is overwritten with this one: " + newEdge);
@@ -137,9 +137,7 @@ public class TokenizationGraphNode {
 
         TokenizationGraphNode that = (TokenizationGraphNode) o;
 
-        if (!data.equals(that.data)) return false;
-
-        return true;
+        return data.equals(that.data);
     }
 
     @Override

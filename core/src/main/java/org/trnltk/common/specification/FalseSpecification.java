@@ -17,7 +17,7 @@
 package org.trnltk.common.specification;
 
 public class FalseSpecification<T> extends AbstractSpecification<T> {
-    public static FalseSpecification INSTANCE = new FalseSpecification();
+    public static final FalseSpecification INSTANCE = new FalseSpecification();
 
     private FalseSpecification() {
     }

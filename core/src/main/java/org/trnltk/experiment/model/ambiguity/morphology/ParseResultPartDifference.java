@@ -50,9 +50,7 @@ public class ParseResultPartDifference {
 
         ParseResultPartDifference that = (ParseResultPartDifference) o;
 
-        if (parts != null ? !parts.equals(that.parts) : that.parts != null) return false;
-
-        return true;
+        return !(parts != null ? !parts.equals(that.parts) : that.parts != null);
     }
 
     @Override

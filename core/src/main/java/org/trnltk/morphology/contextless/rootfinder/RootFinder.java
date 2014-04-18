@@ -39,6 +39,7 @@ public interface RootFinder {
      * @param wholeSurface Whole surface
      * @return true if partial input could be handled
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean handles(TurkishSequence partialInput, TurkishSequence wholeSurface);
 
     /**
