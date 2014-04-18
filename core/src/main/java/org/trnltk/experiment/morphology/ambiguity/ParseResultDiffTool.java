@@ -14,13 +14,13 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.ambiguity;
+package org.trnltk.experiment.morphology.ambiguity;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.trnltk.common.util.Comparators;
-import org.trnltk.model.ambiguity.morphology.*;
+import org.trnltk.experiment.model.ambiguity.morphology.*;
 
 import java.util.LinkedList;
 import java.util.List;

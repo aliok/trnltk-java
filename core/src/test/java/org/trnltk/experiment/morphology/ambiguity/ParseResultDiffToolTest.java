@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.ambiguity;
+package org.trnltk.experiment.morphology.ambiguity;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -23,10 +23,10 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONException;
 import org.junit.Test;
-import org.trnltk.model.ambiguity.morphology.ParseResult;
-import org.trnltk.model.ambiguity.morphology.ParseResultDifference;
-import org.trnltk.model.ambiguity.morphology.ParseResultPartDifference;
-import org.trnltk.model.ambiguity.morphology.RootDifference;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResult;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResultDifference;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResultPartDifference;
+import org.trnltk.experiment.model.ambiguity.morphology.RootDifference;
 
 import java.lang.reflect.Field;
 import java.util.List;

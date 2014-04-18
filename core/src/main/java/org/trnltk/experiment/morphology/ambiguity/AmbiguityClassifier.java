@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.ambiguity;
+package org.trnltk.experiment.morphology.ambiguity;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.HashMultiset;
@@ -24,9 +24,9 @@ import com.google.common.collect.Multisets;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.json.JSONException;
-import org.trnltk.model.ambiguity.morphology.ParseResult;
-import org.trnltk.model.ambiguity.morphology.ParseResultDifference;
-import org.trnltk.model.ambiguity.morphology.WordParseResultEntry;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResult;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResultDifference;
+import org.trnltk.experiment.model.ambiguity.morphology.WordParseResultEntry;
 
 import java.io.File;
 import java.io.IOException;

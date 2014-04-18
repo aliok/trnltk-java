@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package bruteforce;
+package org.trnltk.experiment.bruteforce;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;

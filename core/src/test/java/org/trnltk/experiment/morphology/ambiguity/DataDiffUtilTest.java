@@ -14,14 +14,14 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.ambiguity;
+package org.trnltk.experiment.morphology.ambiguity;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.trnltk.experiment.morphology.ambiguity.DataDiffUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

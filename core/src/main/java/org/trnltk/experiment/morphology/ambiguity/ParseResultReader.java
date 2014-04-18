@@ -14,14 +14,14 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.ambiguity;
+package org.trnltk.experiment.morphology.ambiguity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.trnltk.model.ambiguity.morphology.ParseResult;
-import org.trnltk.model.ambiguity.morphology.ParseResultPart;
-import org.trnltk.model.ambiguity.morphology.WordParseResultEntry;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResult;
+import org.trnltk.experiment.model.ambiguity.morphology.ParseResultPart;
+import org.trnltk.experiment.model.ambiguity.morphology.WordParseResultEntry;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser;
+package org.trnltk.experiment.morphology.contextless.parser;
 
 import com.google.common.collect.ImmutableMap;
 import org.junit.Ignore;

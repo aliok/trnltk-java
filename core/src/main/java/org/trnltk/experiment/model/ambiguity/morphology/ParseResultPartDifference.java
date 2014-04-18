@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.model.ambiguity.morphology;
+package org.trnltk.experiment.model.ambiguity.morphology;
 
 import org.apache.commons.lang3.tuple.Pair;
 

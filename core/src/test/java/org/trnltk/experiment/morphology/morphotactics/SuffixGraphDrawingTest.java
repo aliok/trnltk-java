@@ -14,16 +14,19 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.morphotactics;
+package org.trnltk.experiment.morphology.morphotactics;
 
 import com.google.common.base.Predicate;
 import org.junit.Test;
 import org.trnltk.model.suffix.SuffixGroup;
 import org.trnltk.morphology.contextless.parser.parsing.SampleSuffixGraph;
+import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class SuffixGraphDrawingTest {
@@ -209,7 +212,7 @@ public class SuffixGraphDrawingTest {
 
         BaseSuffixGraph graph = theGraph;
         while (graph != null) {
-            for (SuffixGraphState state : graph.stateMap.values()) {
+            for (SuffixGraphState state : getStateMap(graph).values()) {
                 if (sourceNodePredicate != null && !sourceNodePredicate.apply(state))
                     continue;
 
@@ -240,8 +243,8 @@ public class SuffixGraphDrawingTest {
                 }
             }
 
-            if (graph.decorated instanceof BaseSuffixGraph)
-                graph = (BaseSuffixGraph) graph.decorated;
+            if (getDecorated(graph) instanceof BaseSuffixGraph)
+                graph = (BaseSuffixGraph) getDecorated(graph);
             else
                 graph = null;
         }
@@ -283,6 +286,27 @@ public class SuffixGraphDrawingTest {
         int b = Double.valueOf(Math.random() * 0xd0).intValue() + 0x10;
 
         return "#" + Integer.toHexString(r) + Integer.toHexString(g) + Integer.toHexString(b);
+
+    }
+
+    private Map<String, SuffixGraphState> getStateMap(BaseSuffixGraph graph) {
+        try {
+            final Field field = BaseSuffixGraph.class.getDeclaredField("stateMap");
+            field.setAccessible(true);
+            return (Map<String, SuffixGraphState>) field.get(graph);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private SuffixGraph getDecorated(BaseSuffixGraph graph) {
+        try {
+            final Field field = BaseSuffixGraph.class.getDeclaredField("decorated");
+            field.setAccessible(true);
+            return (SuffixGraph) field.get(graph);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
