@@ -19,8 +19,9 @@ package org.trnltk.morphology.contextless.rootfinder;
 import com.google.common.collect.Multimap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
-import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.letter.TurkishAlphabet;
 import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.Root;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,7 +46,8 @@ public class DictionaryRootFinder implements RootFinder {
         if (Character.isUpperCase(partialInput.charAt(0).getCharValue())) {
             final ArrayList<Root> result = new ArrayList<Root>();
 
-            final Collection<? extends Root> lowerCaseRoots = this.rootMap.get(Character.toLowerCase((int)partialInput.getUnderlyingString().charAt(0)) + partialInput.getUnderlyingString().substring(1));
+            final String uncapitalized = TurkishAlphabet.uncapitalize(partialInput.getUnderlyingString());
+            final Collection<? extends Root> lowerCaseRoots = this.rootMap.get(uncapitalized);
             result.addAll(roots);
             result.addAll(lowerCaseRoots);
 

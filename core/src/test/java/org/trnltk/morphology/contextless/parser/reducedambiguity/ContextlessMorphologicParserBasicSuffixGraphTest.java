@@ -20,6 +20,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.PrimaryPos;
@@ -45,6 +46,7 @@ import org.trnltk.morphology.phonetics.PhoneticsEngine;
 import java.util.Collection;
 import java.util.List;
 
+@Ignore
 public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContextlessMorphologicParserTest {
 
     private ContextlessMorphologicParser parser;

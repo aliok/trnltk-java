@@ -35,7 +35,7 @@ But with that approach it is impossible to have an overview of the graph, since 
 **See [documentation](docs/README.md) for more information.**
 
 
-Phonetic rules and implementation is similar to from open-source java library Zemberek3.
+Phonetic rules and phonetic implementation are similar to from open-source java library Zemberek3.
 
 How it is tested?
 =================

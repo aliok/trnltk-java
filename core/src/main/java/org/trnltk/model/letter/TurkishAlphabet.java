@@ -30,7 +30,7 @@ import static org.trnltk.model.letter.TurkicLetter.builder;
  * Contains Turkish Letters, Turkish Letter equivalent chars, several helper methods.
  * TurkishAlphabet only contains small case letters.
  */
-@SuppressWarnings({"UnusedDeclaration","WeakerAccess"})
+@SuppressWarnings({"UnusedDeclaration", "WeakerAccess"})
 public class TurkishAlphabet {
 
     // Turkish specific characters.
@@ -284,6 +284,24 @@ public class TurkishAlphabet {
      */
     public static boolean isValid(char c) {
         return c < MAX_CHAR_VALUE && VALID_CHAR_TABLE[c];
+    }
+
+    public static String capitalize(String str) {
+        if (StringUtils.isEmpty(str))
+            return str;
+
+        final char c = str.charAt(0);
+        final char upperChar = StringUtils.upperCase(String.valueOf(c), Constants.TURKISH_LOCALE).charAt(0);
+        return String.valueOf(upperChar) + str.substring(1);
+    }
+
+    public static String uncapitalize(String str) {
+        if (StringUtils.isEmpty(str))
+            return str;
+
+        final char c = str.charAt(0);
+        final char upperChar = StringUtils.lowerCase(String.valueOf(c), Constants.TURKISH_LOCALE).charAt(0);
+        return String.valueOf(upperChar) + str.substring(1);
     }
 
 }
