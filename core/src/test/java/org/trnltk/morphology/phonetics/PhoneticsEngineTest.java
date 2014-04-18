@@ -202,6 +202,14 @@ public class PhoneticsEngineTest {
 
         assertThat(engine.applicationMatches(new TurkishSequence("yapacağım"), "yap", false), equalTo(true));
         assertThat(engine.applicationMatches(new TurkishSequence("armut"), "armut", false), equalTo(true));
+
+        assertThat(engine.applicationMatches(new TurkishSequence("Elma"), "Elma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("Elmalar"), "Elma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("Elmalar"), "Elma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("elma"), "Elma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("Elmalar"), "elma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("elmalar"), "eLma", true), equalTo(true));
+        assertThat(engine.applicationMatches(new TurkishSequence("ELMALAR"), "eLma", true), equalTo(true));
     }
 
     @Test

@@ -1838,5 +1838,7 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
     @Test
     public void shouldParseSomeWordsWithCapitalStart() {
         assertParseCorrect("Sokak", "sokak(sokak)+Noun+A3sg+Pnon+Nom");
+        assertParseCorrect("Is", "ıs(ıs)+Noun+A3sg+Pnon+Nom");
+        assertParseCorrect("İs", "is(is)+Noun+A3sg+Pnon+Nom");
     }
 }

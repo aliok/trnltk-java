@@ -19,15 +19,15 @@ package org.trnltk.morphology.contextless.parser.parsing;
 
 import com.google.common.collect.HashMultimap;
 import org.junit.Before;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.Root;
+import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.*;
 import org.trnltk.morphology.contextless.parser.parsing.base.BaseContextlessMorphologicParserBasicSuffixGraphTest;
 import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
-import org.trnltk.model.lexicon.Root;
-import org.trnltk.model.letter.TurkishSequence;
-import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
