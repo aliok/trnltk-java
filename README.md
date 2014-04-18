@@ -46,10 +46,10 @@ thus I only test the parser against it in my local environment.
 
 Plan
 =================
-  1. Get rid of unused stuff as much as possible. Such as
+  1. DONE: Get rid of unused stuff as much as possible. Such as
     * suffix based parsing (deprecated by form based parsing)
-  1. Fix the build!
-  1. Prepare for reducing ambiguity in suffix graph. Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest
+  1. DONE:  Fix the build!
+  1. Prepare for reducing ambiguity in suffix graph. Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest and remove @Ignore annotation
   1. Reduce ambiguity in suffix graph. E.g. discard parse results like
     * `"sokakları", "sokak(sokak)+Noun+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3sg(+sI[ı])+Nom", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom", "sokak(sokak)+Noun+A3sg+P3pl(lAr!I[ları])+Nom"`
     * ...
