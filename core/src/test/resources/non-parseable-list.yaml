@@ -1,0 +1,91 @@
+# entries in this file should be marked as not parseable
+# each entry is a group:
+# - group       : Group name       --> is used when parsing test wants to give more info
+#   ignoreRoots : sal, al+Verb     --> Root "sal" is ignored during parsing. That means "sal+Noun" and "sal+Verb" is ignored. Similarly "al+Verb" is ignored.
+#   words       : |                --> List of words that should not be parseable
+#     bibercikcik
+#     kedilerdiler
+
+entries:
+- group       : noun cases
+  ignoreRoots : kap+Verb
+  words       : |
+    kapıyımın
+    kapıyın
+    kapıdam
+    kapıdanı
+    kapıdamlar
+    dayılardam
+    dayılardası
+    sokaklarlam
+# TODO: add to copula list!    sokağımlar
+
+- group       : noun to noun derivations
+  ignoreRoots : 
+  words       : |
+    kitapçıkçık
+    parçacıkcık
+    
+- group       : noun to adjective derivations
+  ignoreRoots : kut, kutula+Verb
+  words       : |
+    kutumlu
+    kutumlulu
+    kutumsuz
+    kutularlı
+    kutularsız
+    kutumlusuz
+    kutumsuzlu
+    kutularlısız
+    kutumumsu
+    kutularımsı
+    kutumsusu
+    
+    korumcu
+    korusucu
+    korularcı
+    korucucu
+        
+        
+- group       : positive verb tenses
+  ignoreRoots : 
+  words       : |
+    yapırım
+    yapırsın
+    yapır
+    yaparık
+    
+    yapayorum
+    yapyorsun
+    yapıyok
+    
+    yapmaktayın
+    yapmaktayık
+    
+    yapayacağım
+    yapacaksınlar
+    yapacağık
+    
+    yaptısın
+    yaptız
+    
+    yapmışın
+    yapmışık
+    
+- group       : negative verb tenses
+  ignoreRoots : 
+  words       : |
+    yapmazım
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+

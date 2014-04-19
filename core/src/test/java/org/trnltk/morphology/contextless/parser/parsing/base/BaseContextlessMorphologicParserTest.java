@@ -41,7 +41,7 @@ import java.util.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public abstract class BaseContextlessMorphologicParserTest {
-    private HashMultimap<String, Root> clonedRootMap;
+    protected HashMultimap<String, Root> clonedRootMap;
 
     @Before
     public void setUp() throws Exception {
