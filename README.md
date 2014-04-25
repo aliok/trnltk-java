@@ -49,7 +49,7 @@ Plan
   1. DONE: Get rid of unused stuff as much as possible. Such as
     * suffix based parsing (deprecated by form based parsing)
   1. DONE:  Fix the build!
-  1. Write a graphical tool to build suffix graphs.
+  1. SKIPPED Write a graphical tool to build suffix graphs.
     * Support editing a suffix graph
     * Show form-based graph immediately
     * Always save backups upon edit!
