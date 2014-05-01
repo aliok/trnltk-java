@@ -17,12 +17,15 @@
 package org.trnltk.experiment.morphology.morphotactics;
 
 import com.google.common.base.Predicate;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.trnltk.model.suffix.SuffixGroup;
 import org.trnltk.morphology.contextless.parser.parsing.SampleSuffixGraph;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,7 +49,7 @@ public class SuffixGraphDrawingTest {
         graph.initialize();
 
 
-        this.dumpSuffixGraphInDotFormat(graph, null, null);
+        this.dumpSuffixGraphInDotFormat(new File("core/target/ra_full.dot"), graph, null, null);
     }
 
     @Test
@@ -67,7 +70,7 @@ public class SuffixGraphDrawingTest {
                 return input.getName().startsWith("NOUN") || input.getName().startsWith("ADJ");
             }
         };
-        this.dumpSuffixGraphInDotFormat(graph, sourceNodePredicate, targetNodePredicate);
+        this.dumpSuffixGraphInDotFormat(new File("core/target/ra_noun_adj.dot"), graph, sourceNodePredicate, targetNodePredicate);
     }
 
     @Test
@@ -204,7 +207,18 @@ public class SuffixGraphDrawingTest {
 
 
     public void dumpSuffixGraphInDotFormat(BaseSuffixGraph theGraph, Predicate<SuffixGraphState> sourceNodePredicate, Predicate<SuffixGraphState> targetNodePredicate) {
-        System.out.println("digraph suffixGraph {");
+        final String suffixGraphInDotFormat = createSuffixGraphInDotFormat(theGraph, sourceNodePredicate, targetNodePredicate);
+        System.out.println(suffixGraphInDotFormat);
+    }
+
+    public void dumpSuffixGraphInDotFormat(File targetFile, BaseSuffixGraph theGraph, Predicate<SuffixGraphState> sourceNodePredicate, Predicate<SuffixGraphState> targetNodePredicate) throws IOException {
+        final String suffixGraphInDotFormat = createSuffixGraphInDotFormat(theGraph, sourceNodePredicate, targetNodePredicate);
+        System.out.println("Dumping suffix graph to file " + targetFile.getAbsolutePath());
+        FileUtils.write(targetFile, suffixGraphInDotFormat);
+    }
+
+    public String createSuffixGraphInDotFormat(BaseSuffixGraph theGraph, Predicate<SuffixGraphState> sourceNodePredicate, Predicate<SuffixGraphState> targetNodePredicate) {
+        final StringBuilder builder = new StringBuilder("digraph suffixGraph {").append("\n");
 
         final Set<String> nodeNames = new HashSet<String>();
         int edgeCount = 0;
@@ -219,7 +233,7 @@ public class SuffixGraphDrawingTest {
                 final String sourceStateName = state.getName();
                 final boolean sourceStateAdded = nodeNames.add(sourceStateName);
                 if (sourceStateAdded)
-                    System.out.println(String.format("\t%s [shape=\"%s\"]", sourceStateName, getNodeShape(state)));
+                    builder.append(String.format("\t%s [shape=\"%s\"]", sourceStateName, getNodeShape(state))).append("\n");
 
                 for (SuffixEdge suffixEdge : state.getOutEdges()) {
                     final SuffixGraphState targetState = suffixEdge.getTargetState();
@@ -230,14 +244,14 @@ public class SuffixGraphDrawingTest {
                     final boolean targetStateAdded = nodeNames.add(targetStateName);
 
                     if (targetStateAdded)
-                        System.out.println(String.format("\t%s [shape=\"%s\"]", targetStateName, getNodeShape(targetState)));
+                        builder.append(String.format("\t%s [shape=\"%s\"]", targetStateName, getNodeShape(targetState))).append("\n");
 
 
                     String style = "solid";
                     String color = getEdgeColor(suffixEdge, suffixGroupColorMap);
                     String label = suffixEdge.getSuffix().getName();
                     String line = "\t%s -> %s [style=\"%s\" color=\"%s\" label=\"%s\"]";
-                    System.out.println(String.format(line, sourceStateName, targetStateName, style, color, label));
+                    builder.append(String.format(line, sourceStateName, targetStateName, style, color, label)).append("\n");
 
                     edgeCount++;
                 }
@@ -249,11 +263,12 @@ public class SuffixGraphDrawingTest {
                 graph = null;
         }
 
-        System.out.println("// Number of nodes : " + nodeNames.size());
-        System.out.println("// Number of edges: " + edgeCount);
+        builder.append("// Number of nodes : ").append(nodeNames.size()).append("\n");
+        builder.append("// Number of edges: ").append(edgeCount).append("\n");
 
-        System.out.println("}");
+        builder.append("}").append("\n");
 
+        return builder.toString();
     }
 
     private String getEdgeColor(SuffixEdge suffixEdge, HashMap<String, String> suffixGroupColorMap) {

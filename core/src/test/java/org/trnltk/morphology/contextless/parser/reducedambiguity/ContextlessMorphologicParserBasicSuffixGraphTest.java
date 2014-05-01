@@ -16,8 +16,10 @@
 
 package org.trnltk.morphology.contextless.parser.reducedambiguity;
 
+import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +38,7 @@ import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
+import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,7 +49,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     private HashMultimap<String, ? extends Root> originalRootMap;
 
     public ContextlessMorphologicParserBasicSuffixGraphTest() {
-        this.originalRootMap = RootMapFactory.createSimpleConvertCircumflexes();
+        this.originalRootMap = RootMapFactory.createSimpleConvertCircumflexes(true);
     }
 
     @Before
@@ -85,22 +88,43 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     }
 
     private final ImmutableSet<String> NOT_ALLOWED_CASES = new ImmutableSet.Builder<String>()
+            // '>' char means parse result end
+
             .add("A3sg+P3pl")       // e.g. sokaklari
-            .add("Adj+Zero+Noun+Zero+A3sg+Pnon+Nom")        // kirmizi --> shouldn't be tagged as a noun in this stage!
+            .add("Adj+Zero+Noun+Zero+A3sg+Pnon+Nom>")        // kirmizi --> shouldn't be tagged as a noun in this stage!
+            .add("Adj+With+Noun+Zero+A3sg+Pnon+Nom>")        // kirmizili --> shouldn't be tagged as a noun in this stage!
             .add("o(o)+Pron+Demons").add("o(o)+Pron+Pers")
             .build();
 
     @Override
     protected Collection<String> getFormattedParseResults(String surfaceToParse) {
-        Collection<String> formattedParseResults = super.getFormattedParseResults(surfaceToParse);
-        for (String formattedParseResult : formattedParseResults) {
+        final List<MorphemeContainer> morphemeContainers = this.parse(surfaceToParse);
+
+        final List<String> simpleFormattedParseResults = Lists.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return MorphemeContainerFormatter.formatMorphemeContainer(input);
+            }
+        });
+
+        final List<String> withFormsFormattedParseResults = Lists.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
+            @Override
+            public String apply(MorphemeContainer input) {
+                return MorphemeContainerFormatter.formatMorphemeContainerWithForms(input);
+            }
+        });
+
+        for (String formattedParseResult : simpleFormattedParseResults) {
+            formattedParseResult = '<' + formattedParseResult + '>';        // add special chars to the start and end to allow matching by them. e.g. to have sth like "a parse result cannot end with XYZ"
+
             for (String notAllowedCase : NOT_ALLOWED_CASES) {
                 if (formattedParseResult.contains(notAllowedCase)) {
                     StringBuilder failMessageBuilder = new StringBuilder("A not allowed case is found!")
                             .append("\n Surface : ").append(surfaceToParse)
+                            .append("\n Not allowed case : ").append(notAllowedCase)
                             .append("\n Parse results : ");
 
-                    for (String parseResult : formattedParseResults) {
+                    for (String parseResult : withFormsFormattedParseResults) {
                         failMessageBuilder.append("\n - ").append(parseResult);
                     }
 
@@ -109,7 +133,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
             }
         }
 
-        return formattedParseResults;
+        return withFormsFormattedParseResults;
     }
 
     @Override
@@ -126,7 +150,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kapıya", "kapı(kapı)+Noun+A3sg+Pnon+Dat(+yA[ya])");
         assertParseCorrect("kapıda", "kapı(kapı)+Noun+A3sg+Pnon+Loc(dA[da])");
         assertParseCorrect("kapıdan", "kapı(kapı)+Noun+A3sg+Pnon+Abl(dAn[dan])");
-        assertParseCorrect("dayının", "dayı(dayı)+Adj+Noun+Zero+A3sg+Pnon+Gen(+nIn[nın])");
+        assertParseCorrect("dayının", "dayı(dayı)+Adj+Noun+Zero+A3sg+Pnon+Gen(+nIn[nın])", "dayı(dayı)+Adj+Noun+Zero+A3sg+P2sg(+In[n])+Gen(+nIn[ın])");
         assertParseCorrect("sokağın", "sokağ(sokak)+Noun+A3sg+Pnon+Gen(+nIn[ın])", "sokağ(sokak)+Noun+A3sg+P2sg(+In[ın])+Nom");
         assertParseCorrect("sokakla", "sokak(sokak)+Noun+A3sg+Pnon+Ins(+ylA[la])");
 

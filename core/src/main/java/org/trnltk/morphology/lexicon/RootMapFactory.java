@@ -35,6 +35,15 @@ public class RootMapFactory {
         return buildWithLexemesConvertCircumflexes(lexemes);
     }
 
+    public static HashMultimap<String, ? extends Root> createSimpleConvertCircumflexes(boolean reducedAmbiguity) {
+        if (!reducedAmbiguity) {
+            return createSimpleConvertCircumflexes();
+        } else {
+            final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultMasterDictionary(true);
+            return buildWithLexemesConvertCircumflexes(lexemes);
+        }
+    }
+
     public static HashMultimap<String, ? extends Root> createNumbers() {
         final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultNumeralMasterDictionary();
         return buildWithLexemes(lexemes);

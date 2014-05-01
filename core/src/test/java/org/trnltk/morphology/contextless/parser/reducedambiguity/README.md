@@ -194,4 +194,6 @@ Bkz: yaparcasina
 
 
 
-
+Yapilacaklar
+===================
+- dayi, baba vs kelimeler sadece Adj olacak!

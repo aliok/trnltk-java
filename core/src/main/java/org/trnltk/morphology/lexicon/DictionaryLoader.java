@@ -51,6 +51,15 @@ public class DictionaryLoader {
         return new DictionaryLoader().load(supplier);
     }
 
+    public static HashSet<Lexeme> loadDefaultMasterDictionary(boolean reducedAmbiguity) {
+        if (!reducedAmbiguity) {
+            return loadDefaultMasterDictionary();
+        } else {
+            final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-ra-dictionary.dict"), Charset.forName("utf-8"));
+            return new DictionaryLoader().load(supplier);
+        }
+    }
+
     public static HashSet<Lexeme> loadDefaultNumeralMasterDictionary() {
         final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-numeral-dictionary.dict"), Charset.forName("utf-8"));
         return new DictionaryLoader().load(supplier);
