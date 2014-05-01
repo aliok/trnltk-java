@@ -36,7 +36,7 @@ import org.trnltk.model.letter.TurkishChar;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;

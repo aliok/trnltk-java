@@ -29,7 +29,7 @@ import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraph;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraphExtractor;
 import org.trnltk.morphology.contextless.rootfinder.*;
-import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.lexicon.CircumflexConvertingRootGenerator;
 import org.trnltk.morphology.lexicon.DictionaryLoader;

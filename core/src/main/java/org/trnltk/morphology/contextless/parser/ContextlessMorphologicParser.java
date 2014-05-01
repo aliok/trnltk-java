@@ -29,6 +29,7 @@ import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
+import org.trnltk.morphology.morphotactics.PredefinedPaths;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import org.trnltk.util.MorphemeContainerFormatter;

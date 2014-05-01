@@ -32,7 +32,7 @@ import org.trnltk.morphology.morphotactics.SuffixGraphState;
 /**
  * Helper class that makes easy and readable to build a predefined path for an irregular word.
  *
- * @see PredefinedPaths
+ * @see org.trnltk.morphology.morphotactics.PredefinedPaths
  */
 public class PredefinedPathBuilder {
     private final SuffixGraph suffixGraph;

@@ -6,7 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.contextless.parser.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPaths;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.cache.SimpleOfflineCache;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;

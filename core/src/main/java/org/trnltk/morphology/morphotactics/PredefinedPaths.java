@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package org.trnltk.morphology.contextless.parser;
+package org.trnltk.morphology.morphotactics;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -26,6 +26,8 @@ import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.lexicon.SecondaryPos;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.Suffix;
+import org.trnltk.morphology.contextless.parser.PredefinedPathBuilder;
+import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.model.lexicon.PrimaryPos;
 
