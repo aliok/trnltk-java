@@ -78,7 +78,14 @@ entries:
     yapmazım
     
     
-    
+- group       : multiple verb tenses
+  ignoreRoots :
+  words       : |
+    yaptıydım
+    yaptıydım
+    yaptıydı
+
+
     
     
     

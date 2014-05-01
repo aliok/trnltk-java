@@ -51,12 +51,18 @@ Plan
   1. DONE:  Fix the build!
   1. Prepare for reducing ambiguity in suffix graph.
      * Remove @Ignore annotation
-     * Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest
+     * Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest. Reduce cases as much as possible without losing information. e.g. Adj->Noun zero transition can always be done with a second layer process
      * Add not-allowed cases!
      * Create a "shouldn't be parseable list". e.g. for words like : elmalarsimiz or masacikcik or yaptinmis or abarttirttirtmis
+     * Find all possible parse combinations
+     * Find the most ambiguous parse combinations and enter training examples for them
+     * Parse combination grouping/relationships/etc. ?
   1. Reduce ambiguity in suffix graph. E.g. discard parse results like
     * `"sokakları", "sokak(sokak)+Noun+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3sg(+sI[ı])+Nom", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom", "sokak(sokak)+Noun+A3sg+P3pl(lAr!I[ları])+Nom"`
     * ...
+  1. Update METU-Sabanci corpus!
+  1. Find actual possible unique morphologic parse suffix combinations
+  1. Add sample training sentences for ambiguity cases
   1. Write a disambiguator with hunch-based parameters and metrics
   1. Use machine learning techniques to determine metrics and parameters
   1. Apply ideas:

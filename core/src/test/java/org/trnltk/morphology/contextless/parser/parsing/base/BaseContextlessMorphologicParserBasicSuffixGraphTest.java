@@ -1457,6 +1457,15 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
     }
 
     @Test
+    public void shouldParseSomeWordsWithVowelDrops() {
+        assertParseCorrect("vaktimi", "vakt(vakit)+Noun+A3sg+P1sg(+Im[im])+Acc(+yI[i])");
+        assertParseCorrect("havliyle", "havl(havil)+Noun+A3sg+P3sg(+sI[i])+Ins(+ylA[yle])");
+        assertParseCorrect("savruldu", "savr(savurmak)+Verb+Verb+Pass(+nIl[ul])+Pos+Past(dI[du])+A3sg");
+        assertParseCorrect("kavruldu", "kavr(kavurmak)+Verb+Verb+Pass(+nIl[ul])+Pos+Past(dI[du])+A3sg");
+        assertParseCorrect("sıyrılıyor", "sıyr(sıyırmak)+Verb+Verb+Pass(+nIl[ıl])+Pos+Prog(Iyor[ıyor])+A3sg");
+    }
+
+    @Test
     public void shouldParseCoguBircogu() {
         assertParseCorrectForVerb("çoğu", "çoğu(çoğu)+Adj", "çoğu(çoğu)+Pron+A3sg+P3sg+Nom", "çoğu(çoğu)+Adj+Noun+Zero+A3sg+Pnon+Nom");
         assertParseCorrectForVerb("çoğumuz", "çoğu(çoğu)+Pron+A3sg+P1pl(muz[muz])+Nom", "çoğu(çoğu)+Adj+Noun+Zero+A3sg+P1pl(+ImIz[muz])+Nom");
@@ -1466,15 +1475,6 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrectForVerb("birçoğumuz", "birçoğu(birçoğu)+Pron+A3sg+P1pl(muz[muz])+Nom");
         assertParseCorrectForVerb("birçoğunun", "birçoğu(birçoğu)+Pron+A3sg+P3sg+Gen(+nIn[nun])");
         assertParseCorrectForVerb("birçoğumuzdan", "birçoğu(birçoğu)+Pron+A3sg+P1pl(muz[muz])+Abl(dAn[dan])");
-    }
-
-    @Test
-    public void shouldParseSomeWordsWithVowelDrops() {
-        assertParseCorrect("vaktimi", "vakt(vakit)+Noun+A3sg+P1sg(+Im[im])+Acc(+yI[i])");
-        assertParseCorrect("havliyle", "havl(havil)+Noun+A3sg+P3sg(+sI[i])+Ins(+ylA[yle])");
-        assertParseCorrect("savruldu", "savr(savurmak)+Verb+Verb+Pass(+nIl[ul])+Pos+Past(dI[du])+A3sg");
-        assertParseCorrect("kavruldu", "kavr(kavurmak)+Verb+Verb+Pass(+nIl[ul])+Pos+Past(dI[du])+A3sg");
-        assertParseCorrect("sıyrılıyor", "sıyr(sıyırmak)+Verb+Verb+Pass(+nIl[ıl])+Pos+Prog(Iyor[ıyor])+A3sg");
     }
 
     @Test

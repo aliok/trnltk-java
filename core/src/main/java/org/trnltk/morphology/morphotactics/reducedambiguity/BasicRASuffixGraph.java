@@ -34,13 +34,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.trnltk.model.lexicon.PrimaryPos.*;
-import static org.trnltk.model.lexicon.PrimaryPos.Question;
-import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.DERIVATIONAL;
-import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TERMINAL;
-import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.TRANSFER;
+import static org.trnltk.morphology.morphotactics.SuffixGraphStateType.*;
 import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.*;
-import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.appliesToRoot;
-import static org.trnltk.morphology.morphotactics.suffixformspecifications.SuffixFormSpecifications.doesnt;
 
 public class BasicRASuffixGraph extends BaseSuffixGraph {
     // states
@@ -197,9 +192,6 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
     private final Suffix P3Sg_Noun_Compound = registerSuffix("P3Sg_Noun_Compound", "P3sg");
     private final Suffix P3Pl_Noun_Compound = registerSuffix("P3Pl_Noun_Compound", "P3pl");
     private final Suffix Nom_Noun_Compound_Deriv = registerSuffix("Nom_Noun_Compound_Deriv", "Nom");
-
-    /////////////// Noun terminal suffixes
-    private final Suffix NounTerminalTransition = registerConditionalFreeTransitionSuffix("Noun_Terminal_Conditional_Free_Transition");
 
     /////////////// Verb agreements
     private final SuffixGroup Verb_Agreements_Group = new SuffixGroup("Verb_Agreements_Group");
@@ -395,7 +387,8 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
     private void registerFreeTransitions() {
         ///////////////  Free transitions
         NOUN_WITH_CASE.addOutSuffix(registerFreeTransitionSuffix("Noun_Free_Transition_1"), NOUN_TERMINAL_TRANSFER);
-        NOUN_WITH_CASE.addOutSuffix(registerFreeTransitionSuffix("Noun_Free_Transition_2"), NOUN_DERIV_WITH_CASE);
+        NOUN_TERMINAL_TRANSFER.addOutSuffix(registerFreeTransitionSuffix("Noun_Free_Transition_2"), NOUN_TERMINAL);
+        NOUN_WITH_CASE.addOutSuffix(registerFreeTransitionSuffix("Noun_Free_Transition_3"), NOUN_DERIV_WITH_CASE);
 
         VERB_ROOT.addOutSuffix(registerFreeTransitionSuffix("Verb_Free_Transition_1"), VERB_PLAIN_DERIV);
         VERB_WITH_POLARITY.addOutSuffix(registerFreeTransitionSuffix("Verb_Free_Transition_2"), VERB_POLARITY_DERIV);
@@ -441,7 +434,6 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         registerNounToAdverbDerivations();
         registerNounToPronounDerivations();
         registerNounCompoundSuffixes();
-        registerNounConditionalFreeTransitions();
     }
 
     private void registerVerbSuffixes() {
@@ -689,14 +681,6 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
 
         NOUN_COMPOUND_WITH_POSSESSION.addOutSuffix(Nom_Noun_Compound_Deriv, NOUN_NOM_DERIV);
         Nom_Noun_Compound_Deriv.addSuffixForm("");
-    }
-
-    private void registerNounConditionalFreeTransitions(){
-        Specification<MorphemeContainer> notDerivedFromAdjThenFollowedByA3sgPnonNom =
-                doesnt(Specifications.and(comesAfterDerivation(getSuffix("Adj_to_Noun_Zero_Transition")), comesAfter(A3Sg_Noun), comesAfter(Pnon_Noun), comesAfter(Nom_Noun)));
-
-        NOUN_TERMINAL_TRANSFER.addOutSuffix(NounTerminalTransition, NOUN_TERMINAL);
-        NounTerminalTransition.addSuffixForm("", notDerivedFromAdjThenFollowedByA3sgPnonNom);
     }
 
     private void registerVerbPolarisations() {
