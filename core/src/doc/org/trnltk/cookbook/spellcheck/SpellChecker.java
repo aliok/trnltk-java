@@ -6,7 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.cache.SimpleOfflineCache;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
@@ -59,8 +59,8 @@ public class SpellChecker {
 
         final HashMultimap<String, ? extends Root> dictionaryRootMap = buildDictionaryRootMap(toleranceValues);
 
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, dictionaryRootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
         final RootFinderChain rootFinderChain = buildRootFinderChain(toleranceValues, dictionaryRootMap);
 
@@ -68,7 +68,7 @@ public class SpellChecker {
         final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
 
         final MorphologicParser parser =
-                new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+                new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
 
         return parser;
     }

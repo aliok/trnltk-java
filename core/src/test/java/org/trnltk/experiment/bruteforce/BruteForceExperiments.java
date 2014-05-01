@@ -29,7 +29,7 @@ import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraph;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraphExtractor;
 import org.trnltk.morphology.contextless.rootfinder.*;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.lexicon.CircumflexConvertingRootGenerator;
 import org.trnltk.morphology.lexicon.DictionaryLoader;
@@ -62,14 +62,14 @@ public class BruteForceExperiments {
         final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
         final PhoneticsEngine phoneticsEngine = new PhoneticsEngine(suffixFormSequenceApplier);
         final SuffixApplier suffixApplier = new SuffixApplier(phoneticsEngine);
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(copulaSuffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(copulaSuffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
 
         final BruteForceCompoundNounRootFinder bruteForceCompoundNounRootFinder = new BruteForceCompoundNounRootFinder();
         final BruteForceNounRootFinder bruteForceNounRootFinder = new BruteForceNounRootFinder();
         final BruteForceVerbRootFinder bruteForceVerbRootFinder = new BruteForceVerbRootFinder();
 
         copulaSuffixGraph.initialize();
-        predefinedPaths.initialize();
+        predefinedPathProvider.initialize();
 
         // create common phonetic and morphotactic parts
         final PhoneticsAnalyzer phoneticsAnalyzer = new PhoneticsAnalyzer();
@@ -87,7 +87,7 @@ public class BruteForceExperiments {
                 .offer(bruteForceNounRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
                 .offer(bruteForceVerbRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
-        parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
     }
 
     @Test

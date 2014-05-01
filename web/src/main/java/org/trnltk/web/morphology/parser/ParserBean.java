@@ -24,7 +24,8 @@ import org.apache.log4j.Logger;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraph;
@@ -79,8 +80,8 @@ public class ParserBean implements Serializable {
 
             final SuffixGraph suffixGraph = this.suffixGraphData.getSelectedSuffixGraph();
 
-            final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, rootMapData.getRootMap(), suffixApplier);
-            predefinedPaths.initialize();
+            final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, rootMapData.getRootMap(), suffixApplier);
+            predefinedPathProvider.initialize();
 
             final RootFinderChain rootFinderChain = this.rootFinderSelectionData.getRootFinderChain();
 
@@ -95,7 +96,7 @@ public class ParserBean implements Serializable {
             final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
 
             final ContextlessMorphologicParser morphologicParser =
-                    new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+                    new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
 
             //TODO: add formatting option!
             this.parseResults = Lists.transform(morphologicParser.parse(new TurkishSequence(this.surface)), new Function<MorphemeContainer, String>() {

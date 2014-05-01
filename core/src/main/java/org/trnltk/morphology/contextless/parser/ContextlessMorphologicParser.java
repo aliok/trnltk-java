@@ -29,7 +29,7 @@ import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
 import org.trnltk.morphology.morphotactics.SuffixGraphState;
 import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
 import org.trnltk.util.MorphemeContainerFormatter;
@@ -46,13 +46,13 @@ public class ContextlessMorphologicParser implements MorphologicParser {
     private ContextlessMorphologicParserListener listener;
 
     private final SuffixFormGraph suffixFormGraph;
-    private final PredefinedPaths predefinedPaths;
+    private final PredefinedPathProvider predefinedPathProvider;
     private final RootFinderChain rootFinderChain;
     private final SuffixApplier suffixApplier;
 
-    public ContextlessMorphologicParser(final SuffixFormGraph suffixFormGraph, final PredefinedPaths predefinedPaths, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
+    public ContextlessMorphologicParser(final SuffixFormGraph suffixFormGraph, final PredefinedPathProvider predefinedPathProvider, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
         this.suffixFormGraph = suffixFormGraph;
-        this.predefinedPaths = predefinedPaths;
+        this.predefinedPathProvider = predefinedPathProvider;
         this.rootFinderChain = rootFinderChain;
         this.suffixApplier = suffixApplier;
         this.mandatoryTransitionApplier = new MandatoryTransitionApplier(suffixFormGraph.getSuffixGraph(), suffixApplier);
@@ -261,7 +261,7 @@ public class ContextlessMorphologicParser implements MorphologicParser {
                 }
             }
 
-            if (this.predefinedPaths == null) {
+            if (this.predefinedPathProvider == null) {
                 for (Root root : roots) {
                     final String remainingInput = input.substring(root.getSequence().length());
                     final SuffixGraphState defaultStateForRoot = this.suffixFormGraph.getDefaultStateForRoot(root);
@@ -278,8 +278,8 @@ public class ContextlessMorphologicParser implements MorphologicParser {
                     if (defaultStateForRoot == null)
                         throw new IllegalStateException("No default state found for root " + root);
 
-                    if (this.predefinedPaths.hasPathsForRoot(root)) {
-                        final Set<MorphemeContainer> predefinedMorphemeContainers = this.predefinedPaths.getPaths(root);
+                    if (this.predefinedPathProvider.hasPathsForRoot(root)) {
+                        final Set<MorphemeContainer> predefinedMorphemeContainers = this.predefinedPathProvider.getPaths(root);
                         if (logger.isDebugEnabled()) {
                             logger.debug("Found predefined morpheme containers for root candidate " + root + " : " + predefinedMorphemeContainers);
                         }

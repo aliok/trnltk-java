@@ -31,7 +31,8 @@ import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.morphology.morphotactics.BasicSuffixGraph;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -65,9 +66,9 @@ public class ContextlessMorphologicParserSimpleParseSetSpeedTest extends BaseCon
 
         final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
         final SuffixApplier suffixApplier = new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier));
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(basicSuffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(basicSuffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
 
-        predefinedPaths.initialize();
+        predefinedPathProvider.initialize();
 
         final RootFinderChain rootFinderChain = new RootFinderChain(new RootValidator())
                 .offer(new DictionaryRootFinder(clonedRootMap), RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
@@ -76,7 +77,7 @@ public class ContextlessMorphologicParserSimpleParseSetSpeedTest extends BaseCon
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, new PhoneticsAnalyzer(), phoneticAttributeSets);
         final SuffixFormGraph charSuffixGraph = charSuffixGraphExtractor.extract(basicSuffixGraph);
 
-        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
     }
 
     @Override

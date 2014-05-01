@@ -36,7 +36,8 @@ import org.trnltk.model.letter.TurkishChar;
 import org.trnltk.model.letter.TurkishSequence;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
@@ -111,10 +112,10 @@ public class AmbiguityMatrixApp {
 //                .offer(properNounWithoutApostropheRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN)
                 .offer(dictionaryRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        predefinedPathProvider.initialize();
 
-        this.contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        this.contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
     }
 
     @App

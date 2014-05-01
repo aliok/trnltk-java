@@ -85,10 +85,10 @@ public class ContextlessMorphologicParserCopulaSuffixGraphTest extends BaseConte
                 .offer(dictionaryRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
 
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(copulaSuffixGraph, clonedRootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(copulaSuffixGraph, clonedRootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
-        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
     }
 
     @Override

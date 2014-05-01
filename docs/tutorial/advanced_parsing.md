@@ -102,7 +102,7 @@ final SuffixGraph suffixGraph = new CopulaSuffixGraph(new ProperNounSuffixGraph(
 suffixGraph.initialize();
 
 // build predefined paths with suffix graphs and dictionary
-final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap, suffixApplier);
+final PredefinedPathProvider predefinedPaths = new PredefinedPathProviderImpl(suffixGraph, dictionaryRootMap, suffixApplier);
 predefinedPaths.initialize();
 
 // build root finders and add them into the chain

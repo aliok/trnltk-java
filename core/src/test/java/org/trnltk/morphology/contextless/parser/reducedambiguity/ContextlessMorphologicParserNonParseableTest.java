@@ -144,8 +144,8 @@ public class ContextlessMorphologicParserNonParseableTest extends BaseContextles
 
         final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
         final SuffixApplier suffixApplier = new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier));
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(copulaSuffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(copulaSuffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        predefinedPathProvider.initialize();
 
         final DictionaryRootFinder dictionaryRootFinder = new DictionaryRootFinder(clonedRootMap);
         final RangeDigitsRootFinder rangeDigitsRootFinder = new RangeDigitsRootFinder();
@@ -169,7 +169,7 @@ public class ContextlessMorphologicParserNonParseableTest extends BaseContextles
         final SuffixFormGraphExtractor charSuffixGraphExtractor = new SuffixFormGraphExtractor(suffixFormSequenceApplier, new PhoneticsAnalyzer(), phoneticAttributeSets);
         final SuffixFormGraph charSuffixGraph = charSuffixGraphExtractor.extract(copulaSuffixGraph);
 
-        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
     }
 
     @Override

@@ -93,10 +93,10 @@ public class ContextlessMorphologicParserBuilder {
 
 
         // create predefined paths
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, _dictionaryRootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, _dictionaryRootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
-        final MorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        final MorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
 
         if (cache != null)
             return new CachingMorphologicParser(cache, parser, useLocalCache);

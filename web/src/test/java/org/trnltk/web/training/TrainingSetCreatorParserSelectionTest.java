@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
@@ -152,8 +152,8 @@ public class TrainingSetCreatorParserSelectionTest {
         suffixGraph.initialize();
 
         // build predefined paths with suffix graphs and dictionary
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, dictionaryRootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
         // build root finders and add them into the chain
         final DictionaryRootFinder dictionaryRootFinder = new DictionaryRootFinder(dictionaryRootMap);
@@ -179,7 +179,7 @@ public class TrainingSetCreatorParserSelectionTest {
         final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
 
         // finally, build parser
-        final ContextlessMorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        final ContextlessMorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
 
         return parser;
     }

@@ -87,8 +87,8 @@ public class AdvancedParsing {
         suffixGraph.initialize();
 
         // build predefined paths with suffix graphs and dictionary
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(suffixGraph, dictionaryRootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(suffixGraph, dictionaryRootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
         // build root finders and add them into the chain
         final DictionaryRootFinder dictionaryRootFinder = new DictionaryRootFinder(dictionaryRootMap);
@@ -114,7 +114,7 @@ public class AdvancedParsing {
         final SuffixFormGraph suffixFormGraph = suffixFormGraphExtractor.extract(suffixGraph);
 
         // finally, build parser
-        final ContextlessMorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        final ContextlessMorphologicParser parser = new ContextlessMorphologicParser(suffixFormGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
 
         // build cache
         final MorphologicParserCache l1Cache = new LRUMorphologicParserCache(NUMBER_OF_THREADS, L1_CACHE_INITIAL_SIZE, L1_CACHE_MAX_SIZE);

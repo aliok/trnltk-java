@@ -45,15 +45,15 @@ import static org.trnltk.model.lexicon.PrimaryPos.Noun;
 import static org.trnltk.model.lexicon.PrimaryPos.Pronoun;
 import static org.trnltk.model.lexicon.SecondaryPos.Personal;
 
-public class PredefinedPathsTest {
+public class PredefinedPathProviderImplTest {
 
     private final HashMultimap<String, ? extends Root> rootMap;
     private final BasicSuffixGraph basicSuffixGraph;
     private final SuffixApplier suffixApplier;
 
-    private PredefinedPaths predefinedPaths;
+    private PredefinedPathProviderImpl predefinedPathProviderImpl;
 
-    public PredefinedPathsTest() {
+    public PredefinedPathProviderImplTest() {
         final HashSet<Lexeme> lexemes = DictionaryLoader.loadDefaultMasterDictionary();
         final ImmutableRootGenerator immutableRootGenerator = new ImmutableRootGenerator();
         Collection<? extends Root> roots = immutableRootGenerator.generateAll(lexemes);
@@ -70,14 +70,14 @@ public class PredefinedPathsTest {
 
     @Before
     public void setUp() throws Exception {
-        this.predefinedPaths = new PredefinedPaths(basicSuffixGraph, rootMap, suffixApplier);
+        this.predefinedPathProviderImpl = new PredefinedPathProviderImpl(basicSuffixGraph, rootMap, suffixApplier);
     }
 
     @Test
     public void shouldHavePathsForPersonalPronouns() {
-        predefinedPaths.createPredefinedPathOf_ben();
-        predefinedPaths.createPredefinedPathOf_sen();
-        predefinedPaths.createPredefinedPathOf_biz();
+        predefinedPathProviderImpl.createPredefinedPathOf_ben();
+        predefinedPathProviderImpl.createPredefinedPathOf_sen();
+        predefinedPathProviderImpl.createPredefinedPathOf_biz();
 
         // last one ends with transition to derivation state
         assertDefinedPath("ben", Pronoun, Personal,
@@ -133,7 +133,7 @@ public class PredefinedPathsTest {
 
     @Test
     public void test_should_have_paths_for_hepsi() {
-        predefinedPaths.createPredefinedPathOf_hepsi();
+        predefinedPathProviderImpl.createPredefinedPathOf_hepsi();
 
         // last one ends with transition to derivation state
         assertDefinedPath("hepsi", Pronoun, null,
@@ -171,7 +171,7 @@ public class PredefinedPathsTest {
 
     @Test
     public void test_should_have_paths_for_ques() {
-        predefinedPaths.createPredefinedPathOf_question_particles();
+        predefinedPathProviderImpl.createPredefinedPathOf_question_particles();
 
         // last one ends with transition to derivation state
         assertDefinedPath("mı", PrimaryPos.Question, null,
@@ -197,15 +197,15 @@ public class PredefinedPathsTest {
 
     @Test
     public void test_should_have_paths_for_pronouns_with_implicit_possession() {
-        predefinedPaths.createPredefinedPathOf_bazilari_bazisi();
-        predefinedPaths.createPredefinedPathOf_kimileri_kimisi_kimi();
-        predefinedPaths.createPredefinedPathOf_birileri_birisi_biri();
-        predefinedPaths.createPredefinedPathOf_hicbirisi_hicbiri();
-        predefinedPaths.createPredefinedPathOf_birbiri();
-        predefinedPaths.createPredefinedPathOf_cogu_bircogu_coklari_bircoklari();
-        predefinedPaths.createPredefinedPathOf_birkaci();
-        predefinedPaths.createPredefinedPathOf_cumlesi();
-        predefinedPaths.createPredefinedPathOf_digeri_digerleri();
+        predefinedPathProviderImpl.createPredefinedPathOf_bazilari_bazisi();
+        predefinedPathProviderImpl.createPredefinedPathOf_kimileri_kimisi_kimi();
+        predefinedPathProviderImpl.createPredefinedPathOf_birileri_birisi_biri();
+        predefinedPathProviderImpl.createPredefinedPathOf_hicbirisi_hicbiri();
+        predefinedPathProviderImpl.createPredefinedPathOf_birbiri();
+        predefinedPathProviderImpl.createPredefinedPathOf_cogu_bircogu_coklari_bircoklari();
+        predefinedPathProviderImpl.createPredefinedPathOf_birkaci();
+        predefinedPathProviderImpl.createPredefinedPathOf_cumlesi();
+        predefinedPathProviderImpl.createPredefinedPathOf_digeri_digerleri();
 
         assertDefinedPath("bazıları", Pronoun, null, "bazıları(bazıları)+Pron+A3sg+P3sg", "bazıları(bazıları)+Pron+A3sg+P1pl(mız[mız])", "bazıları(bazıları)+Pron+A3sg+P2pl(nız[nız])");
         assertDefinedPath("bazısı", Pronoun, null, "bazısı(bazısı)+Pron+A3sg+P3sg");
@@ -239,14 +239,14 @@ public class PredefinedPathsTest {
 
     @Test
     public void test_should_have_paths_for_irregular_pronouns() {
-        predefinedPaths.createPredefinedPathOf_herkes();
+        predefinedPathProviderImpl.createPredefinedPathOf_herkes();
 
         assertDefinedPath("herkes", Pronoun, null, "herkes(herkes)+Pron+A3sg+Pnon");
     }
 
     @Test
     public void test_should_have_paths_for_pronouns_bura_sura_ora() {
-        predefinedPaths.createPredefinedPathOf_ora_bura_sura_nere();
+        predefinedPathProviderImpl.createPredefinedPathOf_ora_bura_sura_nere();
 
         assertDefinedPath("or", Pronoun, null, "or(ora)+Pron+A3sg+Pnon+Loc(da[da])", "or(ora)+Pron+A3sg+Pnon+Abl(dan[dan])");
         assertDefinedPath("bur", Pronoun, null, "bur(bura)+Pron+A3sg+Pnon+Loc(da[da])", "bur(bura)+Pron+A3sg+Pnon+Abl(dan[dan])");
@@ -256,7 +256,7 @@ public class PredefinedPathsTest {
 
     @Test
     public void test_should_have_paths_for_iceri_disari() {
-        predefinedPaths.createPredefinedPathOf_iceri_disari();
+        predefinedPathProviderImpl.createPredefinedPathOf_iceri_disari();
 
         assertDefinedPath("içer", Noun, null, "içer(içeri)+Noun+A3sg+Pnon+Loc(de[de])", "içer(içeri)+Noun+A3sg+Pnon+Abl(den[den])", "içer(içeri)+Noun+A3sg+P3sg(si[si])");
         assertDefinedPath("dışar", Noun, null, "dışar(dışarı)+Noun+A3sg+Pnon+Loc(da[da])", "dışar(dışarı)+Noun+A3sg+Pnon+Abl(dan[dan])", "dışar(dışarı)+Noun+A3sg+P3sg(sı[sı])");
@@ -264,7 +264,7 @@ public class PredefinedPathsTest {
 
     @Test
     public void shouldBuildAllPathsWithoutAnError() {
-        predefinedPaths.initialize();
+        predefinedPathProviderImpl.initialize();
     }
 
     private void assertDefinedPath(String rootStr, PrimaryPos primaryPos, SecondaryPos secondaryPos, String... expectedResults) {
@@ -284,7 +284,7 @@ public class PredefinedPathsTest {
     }
 
     private Collection<String> getFormattedPredefinedMorhpemeContainersForRoot(final Root root) {
-        final Set<MorphemeContainer> morphemeContainers = this.predefinedPaths.getPaths(root);
+        final Set<MorphemeContainer> morphemeContainers = this.predefinedPathProviderImpl.getPaths(root);
         return Collections2.transform(morphemeContainers, new Function<MorphemeContainer, String>() {
             @Override
             public String apply(MorphemeContainer input) {

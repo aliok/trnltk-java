@@ -37,7 +37,7 @@ import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
-import org.trnltk.morphology.morphotactics.PredefinedPaths;
+import org.trnltk.morphology.morphotactics.PredefinedPathProviderImpl;
 import org.trnltk.morphology.contextless.parser.SuffixApplier;
 import org.trnltk.morphology.contextless.parser.cache.LRUMorphologicParserCache;
 import org.trnltk.morphology.contextless.parser.cache.MorphologicParserCache;
@@ -116,10 +116,10 @@ public class CachingMorphologicParserApp {
                 .offer(dictionaryRootFinder, RootFinderChain.RootFinderPolicy.CONTINUE_ON_CHAIN);
 
 
-        final PredefinedPaths predefinedPaths = new PredefinedPaths(copulaSuffixGraph, rootMap, suffixApplier);
-        predefinedPaths.initialize();
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(copulaSuffixGraph, rootMap, suffixApplier);
+        predefinedPathProvider.initialize();
 
-        this.contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPaths, rootFinderChain, suffixApplier);
+        this.contextlessMorphologicParser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, suffixApplier);
     }
 
     @App("Parse sample TBMM Journal w/o bulk parse")
