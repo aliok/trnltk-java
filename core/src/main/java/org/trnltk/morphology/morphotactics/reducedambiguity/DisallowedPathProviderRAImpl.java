@@ -6,6 +6,7 @@ import org.trnltk.model.suffix.Suffix;
 import org.trnltk.model.suffix.SuffixTransition;
 import org.trnltk.morphology.contextless.parser.SuffixFormGraphSuffixEdge;
 import org.trnltk.morphology.morphotactics.DisallowedPathProvider;
+import org.trnltk.morphology.morphotactics.SuffixEdge;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 
 import java.util.ArrayList;
@@ -61,6 +62,18 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
     @Override
     public boolean isPathDisallowed(SuffixFormGraphSuffixEdge suffixFormGraphSuffixEdge, List<SuffixTransition> suffixTransitionsOfMorphemeContainer) {
         final Collection<DisallowedPathRule> relevantRules = getRulesForPathsEndingWith(suffixFormGraphSuffixEdge.getSuffixFormApplication().getSuffixForm().getSuffix());
+        for (DisallowedPathRule rule : relevantRules) {
+            if (rule.matches(suffixTransitionsOfMorphemeContainer)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isPathDisallowed(SuffixEdge suffixEdge, List<SuffixTransition> suffixTransitionsOfMorphemeContainer) {
+        final Collection<DisallowedPathRule> relevantRules = getRulesForPathsEndingWith(suffixEdge.getSuffix());
         for (DisallowedPathRule rule : relevantRules) {
             if (rule.matches(suffixTransitionsOfMorphemeContainer)) {
                 return true;

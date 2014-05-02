@@ -53,6 +53,34 @@ public class SuffixApplier {
     }
 
     /**
+     * Checks if the suffix is applicable and applies it.
+     * <p/>
+     * Tries all {@link SuffixForm}s of the given suffix.
+     *
+     * @return Morpheme containers where the transitions for the suffix are applied. Passed container is immutable thus untouched.
+     * @see SuffixApplier#transitionAllowedForSuffix(org.trnltk.model.morpheme.MorphemeContainer, org.trnltk.model.suffix.Suffix)
+     */
+    public List<MorphemeContainer> trySuffix(MorphemeContainer morphemeContainer, Suffix suffix, SuffixGraphState targetState, TurkishSequence input) {
+        if (!this.transitionAllowedForSuffix(morphemeContainer, suffix))
+            return new ArrayList<MorphemeContainer>();
+
+        final List<MorphemeContainer> newMorphemeContainers = new LinkedList<MorphemeContainer>();
+
+        if (logger.isDebugEnabled())
+            logger.debug(String.format("    Gonna try %d suffix forms : '%s'", suffix.getSuffixForms().size(), suffix.getSuffixForms()));
+
+        for (SuffixForm suffixForm : suffix.getSuffixForms()) {
+            if (logger.isDebugEnabled())
+                logger.debug(String.format("    Gonna try suffix form : '%s'", suffix));
+
+            MorphemeContainer newMorphemeContainer = this.trySuffixForm(morphemeContainer, suffixForm, targetState, input);
+            if (newMorphemeContainer != null)
+                newMorphemeContainers.add(newMorphemeContainer);
+        }
+        return newMorphemeContainers;
+    }
+
+    /**
      * Checks if the suffix is applicable to given container.
      * <p/>
      * Given suffix is applicable <i>iff</i>

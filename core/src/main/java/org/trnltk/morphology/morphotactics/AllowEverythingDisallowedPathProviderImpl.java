@@ -19,4 +19,10 @@ public class AllowEverythingDisallowedPathProviderImpl implements DisallowedPath
         // allow everything
         return false;
     }
+
+    @Override
+    public boolean isPathDisallowed(SuffixEdge suffixEdge, List<SuffixTransition> suffixTransitionsOfMorphemeContainer) {
+        // allow everything
+        return false;
+    }
 }

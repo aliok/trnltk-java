@@ -13,4 +13,6 @@ public interface DisallowedPathProvider {
     void initialize();
 
     boolean isPathDisallowed(SuffixFormGraphSuffixEdge suffixFormGraphSuffixEdge, List<SuffixTransition> suffixTransitionsOfMorphemeContainer);
+
+    boolean isPathDisallowed(SuffixEdge suffixEdge, List<SuffixTransition> suffixTransitionsOfMorphemeContainer);
 }
