@@ -1548,14 +1548,14 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("zeytinyağına", "zeytinyağ(zeytinyağı)+Noun+A3sg+P3sg(+sI[ı])+Dat(nA[na])");
         assertParseCorrect("zeytinyağlı", "zeytinyağ(zeytinyağı)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lı])");
         assertParseCorrect("zeytinyağlıya", "zeytinyağ(zeytinyağı)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lı])+Noun+Zero+A3sg+Pnon+Dat(+yA[ya])");
-        assertParseCorrect("zeytinyağları", "zeytinyağ(zeytinyağı)+Noun+A3sg+P3pl(lAr!I[ları])+Nom");
-        assertParseCorrect("zeytinyağlarını", "zeytinyağ(zeytinyağı)+Noun+A3sg(lAr[lar])+P3sp(!I[ı])+Acc(nI[nı])");
+        assertParseCorrect("zeytinyağları", "zeytinyağ(zeytinyağı)+Noun+A3pl(lAr[lar])+P3sp(!I[ı])+Nom");
+        assertParseCorrect("zeytinyağlarını", "zeytinyağ(zeytinyağı)+Noun+A3pl(lAr[lar])+P3sp(!I[ı])+Acc(nI[nı])");
 
         removeRoots("a", "ak", "akşam");
         removeRootsExceptTheOneWithPrimaryPos("akşamüstü", PrimaryPos.Noun);
 
         assertParseCorrect("akşamüstü", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3sg(+sI[ü])+Nom");
-        assertParseCorrect("akşamüstleri", "akşamüst(akşamüstü)+Noun+Time+A3sg(lAr[ler])+P3sp(!I[i])+Nom");
+        assertParseCorrect("akşamüstleri", "akşamüst(akşamüstü)+Noun+Time+A3pl(lAr[ler])+P3sp(!I[i])+Nom");
         assertParseCorrect("akşamüstüne", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3sg(+sI[ü])+Dat(nA[ne])");
         assertParseCorrect("akşamüstlü", "akşamüst(akşamüstü)+Noun+Time+A3sg+Pnon+Nom+Adj+With(lI[lü])");
 

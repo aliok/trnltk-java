@@ -188,9 +188,10 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
 
     /////////////// Noun Compound suffixes
     private final Suffix A3Sg_Noun_Compound = registerSuffix("A3Sg_Noun_Compound", "A3sg");
+    private final Suffix A3Pl_Noun_Compound = registerSuffix("A3Pl_Noun_Compound", "A3pl");
     private final Suffix PNon_Noun_Compound = registerSuffix("Pnon_Noun_Compound", "Pnon");
     private final Suffix P3Sg_Noun_Compound = registerSuffix("P3Sg_Noun_Compound", "P3sg");
-    private final Suffix P3Pl_Noun_Compound = registerSuffix("P3Pl_Noun_Compound", "P3pl");
+    private final Suffix P3Sp_Noun_Compound = registerSuffix("P3Sp_Noun_Compound", "P3sp");             // see P3Sp_Noun
     private final Suffix Nom_Noun_Compound_Deriv = registerSuffix("Nom_Noun_Compound_Deriv", "Nom");
 
     /////////////// Verb agreements
@@ -516,7 +517,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
                 comesAfter(P3Sg_Noun),
                 comesAfter(P3Sp_Noun),
                 comesAfter(P3Sg_Noun_Compound),
-                comesAfter(P3Pl_Noun_Compound)
+                comesAfter(P3Sp_Noun_Compound)
         );
 
         final Specification<MorphemeContainer> doesntComeAfterP3 = comesAfterP3.not();
@@ -669,11 +670,14 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         NOUN_COMPOUND_ROOT.addOutSuffix(A3Sg_Noun_Compound, NOUN_COMPOUND_WITH_AGREEMENT);
         A3Sg_Noun_Compound.addSuffixForm("");
 
-        NOUN_COMPOUND_WITH_AGREEMENT.addOutSuffix(P3Sg_Noun_Compound, NOUN_WITH_POSSESSION);
-        P3Sg_Noun_Compound.addSuffixForm("+sI");
+        NOUN_COMPOUND_ROOT.addOutSuffix(A3Pl_Noun_Compound, NOUN_COMPOUND_WITH_AGREEMENT);
+        A3Pl_Noun_Compound.addSuffixForm("lAr");
 
-        NOUN_COMPOUND_WITH_AGREEMENT.addOutSuffix(P3Pl_Noun_Compound, NOUN_WITH_POSSESSION);
-        P3Pl_Noun_Compound.addSuffixForm("lAr!I");
+        NOUN_COMPOUND_WITH_AGREEMENT.addOutSuffix(P3Sg_Noun_Compound, NOUN_WITH_POSSESSION);
+        P3Sg_Noun_Compound.addSuffixForm("+sI", doesntComeAfter(A3Pl_Noun_Compound));
+
+        NOUN_COMPOUND_WITH_AGREEMENT.addOutSuffix(P3Sp_Noun_Compound, NOUN_WITH_POSSESSION);
+        P3Sp_Noun_Compound.addSuffixForm("!I", comesAfter(A3Pl_Noun_Compound));
 
         NOUN_COMPOUND_WITH_AGREEMENT.addOutSuffix(PNon_Noun_Compound, NOUN_COMPOUND_WITH_POSSESSION);
         PNon_Noun_Compound.addSuffixForm("");

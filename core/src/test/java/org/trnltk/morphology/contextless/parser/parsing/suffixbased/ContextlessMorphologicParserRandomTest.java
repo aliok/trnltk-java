@@ -60,6 +60,6 @@ public class ContextlessMorphologicParserRandomTest extends BaseContextlessMorph
 
         turnParserLoggingOn();
 
-        assertParseCorrect("sokakları", "sokak(sokak)+Noun+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3sp(!I[ı])+Nom");      // P3sp means both P3sg and P3pl are possible.
+        assertParseCorrect("zeytinyağları", "zeytinyağ(zeytinyağı)+Noun+A3pl(lAr[lar])+P3sp(!I[ı])+Nom");
     }
 }
