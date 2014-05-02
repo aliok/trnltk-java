@@ -33,10 +33,12 @@ import org.trnltk.morphology.contextless.rootfinder.DictionaryRootFinder;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
 import org.trnltk.morphology.contextless.rootfinder.RootValidator;
 import org.trnltk.morphology.lexicon.RootMapFactory;
+import org.trnltk.morphology.morphotactics.DisallowedPathProvider;
 import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.morphotactics.SuffixGraph;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
+import org.trnltk.morphology.morphotactics.reducedambiguity.DisallowedPathProviderRAImpl;
 import org.trnltk.morphology.morphotactics.reducedambiguity.PredefinedPathProviderRAImpl;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
@@ -81,7 +83,10 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderRAImpl(suffixGraph, clonedRootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
         predefinedPathProvider.initialize();
 
-        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, rootFinderChain, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        final DisallowedPathProvider disallowedPathProvider = new DisallowedPathProviderRAImpl(suffixGraph);
+        disallowedPathProvider.initialize();
+
+        this.parser = new ContextlessMorphologicParser(charSuffixGraph, predefinedPathProvider, disallowedPathProvider, rootFinderChain, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
     }
 
     @Override

@@ -29,9 +29,7 @@ import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.model.suffix.SuffixFormApplication;
 import org.trnltk.morphology.contextless.rootfinder.RootFinderChain;
-import org.trnltk.morphology.morphotactics.PredefinedPathProvider;
-import org.trnltk.morphology.morphotactics.SuffixGraphState;
-import org.trnltk.morphology.morphotactics.SuffixGraphStateType;
+import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.util.MorphemeContainerFormatter;
 
 import java.util.*;
@@ -47,15 +45,21 @@ public class ContextlessMorphologicParser implements MorphologicParser {
 
     private final SuffixFormGraph suffixFormGraph;
     private final PredefinedPathProvider predefinedPathProvider;
+    private final DisallowedPathProvider disallowedPathProvider;
     private final RootFinderChain rootFinderChain;
     private final SuffixApplier suffixApplier;
 
-    public ContextlessMorphologicParser(final SuffixFormGraph suffixFormGraph, final PredefinedPathProvider predefinedPathProvider, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
+    public ContextlessMorphologicParser(final SuffixFormGraph suffixFormGraph, final PredefinedPathProvider predefinedPathProvider, final DisallowedPathProvider disallowedPathProvider, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
         this.suffixFormGraph = suffixFormGraph;
         this.predefinedPathProvider = predefinedPathProvider;
+        this.disallowedPathProvider = disallowedPathProvider;
         this.rootFinderChain = rootFinderChain;
         this.suffixApplier = suffixApplier;
         this.mandatoryTransitionApplier = new MandatoryTransitionApplier(suffixFormGraph.getSuffixGraph(), suffixApplier);
+    }
+
+    public ContextlessMorphologicParser(final SuffixFormGraph suffixFormGraph, final PredefinedPathProvider predefinedPathProvider, final RootFinderChain rootFinderChain, final SuffixApplier suffixApplier) {
+        this(suffixFormGraph, predefinedPathProvider, new AllowEverythingDisallowedPathProviderImpl(), rootFinderChain, suffixApplier);
     }
 
     @Override
@@ -239,6 +243,15 @@ public class ContextlessMorphologicParser implements MorphologicParser {
         });
         if (logger.isDebugEnabled())
             logger.debug("   Filtered out the applied suffixes since last derivation " + morphemeContainer.getSuffixesSinceDerivationSuffix() + " : " + edges);
+
+        edges = Sets.filter(edges, new Predicate<SuffixFormGraphSuffixEdge>() {
+            @Override
+            public boolean apply(SuffixFormGraphSuffixEdge input) {
+                return !(disallowedPathProvider.isPathDisallowed(input, morphemeContainer.getSuffixTransitions()));
+            }
+        });
+        if (logger.isDebugEnabled())
+            logger.debug("   Filtered out edges which are the last edge in a disallowed path  " + morphemeContainer.getSuffixesSinceDerivationSuffix() + " : " + edges);
 
         return edges;
     }
