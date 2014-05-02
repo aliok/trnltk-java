@@ -732,16 +732,18 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         final Root root_su = this.findRoot("su", PrimaryPos.Noun, null);
 
         final Suffix A3Sg_Noun = this.suffixGraph.getSuffix("A3Sg_Noun");
+        final Suffix A3Pl_Noun = this.suffixGraph.getSuffix("A3Pl_Noun");
 
         this.pathBuilder(root_su).s(A3Sg_Noun).s("P1Sg_Noun", "yum").add();
         this.pathBuilder(root_su).s(A3Sg_Noun).s("P2Sg_Noun", "yun").add();
         this.pathBuilder(root_su).s(A3Sg_Noun).s("P3Sg_Noun", "yu").add();
         this.pathBuilder(root_su).s(A3Sg_Noun).s("P1Pl_Noun", "yumuz").add();
         this.pathBuilder(root_su).s(A3Sg_Noun).s("P2Pl_Noun", "yunuz").add();
-        this.pathBuilder(root_su).s(A3Sg_Noun).s("P3Pl_Noun", "ları").add();
+        // no more A3Sg + P3Pl for nouns! we only have A3Pl + P3Sp
         this.pathBuilder(root_su).s(A3Sg_Noun).s("Pnon_Noun").s("Gen_Noun", "yun").add();
         this.pathBuilder(root_su).s(A3Sg_Noun).s("Pnon_Noun").add();
 
+        this.pathBuilder(root_su).s(A3Pl_Noun, "lar").s("P3Sp_Noun", "ı").add();
         this.pathBuilder(root_su).s("A3Pl_Noun", "lar").s("Pnon_Noun").add();
     }
 

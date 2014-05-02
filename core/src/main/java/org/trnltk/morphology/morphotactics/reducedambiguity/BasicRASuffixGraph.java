@@ -134,7 +134,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
     private final Suffix P3Sg_Noun = registerSuffix("P3Sg_Noun", Noun_Possessions_Group, "P3sg");
     private final Suffix P1Pl_Noun = registerSuffix("P1Pl_Noun", Noun_Possessions_Group, "P1pl");
     private final Suffix P2Pl_Noun = registerSuffix("P2Pl_Noun", Noun_Possessions_Group, "P2pl");
-    private final Suffix P3Pl_Noun = registerSuffix("P3Pl_Noun", Noun_Possessions_Group, "P3pl");
+    private final Suffix P3Sp_Noun = registerSuffix("P3Sp_Noun", Noun_Possessions_Group, "P3sp");       // this means : P3pl or P3sg . Cannot make a difference. 'onun kitaplari' OR 'onlarin kitaplari'
 
     ///////////////  Noun cases
     private final SuffixGroup Noun_Cases_Group = new SuffixGroup("Noun_Case_Group");
@@ -499,7 +499,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         P2Sg_Noun.addSuffixForm("+In", doesnt_come_after_PointerQual);
 
         NOUN_WITH_AGREEMENT.addOutSuffix(P3Sg_Noun, NOUN_WITH_POSSESSION);
-        P3Sg_Noun.addSuffixForm("+sI", doesnt_come_after_PointerQual);
+        P3Sg_Noun.addSuffixForm("+sI", doesnt_come_after_PointerQual.and(doesntComeAfter(A3Pl_Noun)));
 
         NOUN_WITH_AGREEMENT.addOutSuffix(P1Pl_Noun, NOUN_WITH_POSSESSION);
         P1Pl_Noun.addSuffixForm("+ImIz", doesnt_come_after_PointerQual);
@@ -507,15 +507,14 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         NOUN_WITH_AGREEMENT.addOutSuffix(P2Pl_Noun, NOUN_WITH_POSSESSION);
         P2Pl_Noun.addSuffixForm("+InIz", doesnt_come_after_PointerQual);
 
-        NOUN_WITH_AGREEMENT.addOutSuffix(P3Pl_Noun, NOUN_WITH_POSSESSION);
-        P3Pl_Noun.addSuffixForm("lAr!I", doesnt_come_after_PointerQual);
-        P3Pl_Noun.addSuffixForm("!I", comesAfter(A3Pl_Noun).and(doesnt_come_after_PointerQual));
+        NOUN_WITH_AGREEMENT.addOutSuffix(P3Sp_Noun, NOUN_WITH_POSSESSION);
+        P3Sp_Noun.addSuffixForm("!I", comesAfter(A3Pl_Noun).and(doesnt_come_after_PointerQual));
     }
 
     private void registerNounCases() {
         final Specification<MorphemeContainer> comesAfterP3 = Specifications.or(
                 comesAfter(P3Sg_Noun),
-                comesAfter(P3Pl_Noun),
+                comesAfter(P3Sp_Noun),
                 comesAfter(P3Sg_Noun_Compound),
                 comesAfter(P3Pl_Noun_Compound)
         );

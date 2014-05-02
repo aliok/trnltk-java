@@ -669,7 +669,6 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
                 "sandalye(sandalye)+Noun+A3pl(lAr[ler])+P3sp(!I[i])+Gen(+nIn[nin])"
         );
         assertParseCorrect("sandalyeleriyle",
-                "sandalye(sandalye)+Noun+A3pl(lAr[ler])+P3sg(+sI[i])+Ins(+ylA[yle])",
                 "sandalye(sandalye)+Noun+A3pl(lAr[ler])+P3sp(!I[i])+Ins(+ylA[yle])"
         );
         assertParseCorrect("sandalyelerinle",
@@ -1349,8 +1348,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
 
         assertParseCorrect("organlarınca",      // as in "bu islem duyu organlarinca yapilir."
                 "organ(organ)+Noun+A3sg+P3pl(lAr!I[ları])+Nom+Adv+By(ncA[nca])",
-                "organ(organ)+Noun+A3pl(lAr[lar])+P3sg(+sI[ı])+Nom+Adv+By(ncA[nca])",
-                "organ(organ)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom+Adv+By(ncA[nca])");
+                "organ(organ)+Noun+A3pl(lAr[lar])+P3sp(!I[ı])+Nom+Adv+By(ncA[nca])");
 
         removeRoots("on", "onca", "bizle");
         removeRootsExceptTheOneWithPrimaryPos("ben", PrimaryPos.Pronoun);
@@ -1502,7 +1500,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("okur", "oku(okumak)+Verb+Pos+Aor(+Ar[r])+A3sg");
         assertParseCorrect("okurcasına", "oku(okumak)+Verb+Pos+Aor(+Ar[r])+Adv+AsIf(cAs!InA[casına])");
         assertParseCorrect("okumuşçasına", "oku(okumak)+Verb+Pos+Narr(mIş[muş])+Adv+AsIf(cAs!InA[çasına])");
-        assertParseCorrect("yeşillikleri", "yeşil(yeşil)+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+Y(lIk[lik])+Noun+Zero+A3sg+P3pl(lAr!I[leri])+Nom");
+        assertParseCorrect("yeşillikleri", "yeşil(yeşil)+Adj+Noun+Zero+A3sg+Pnon+Nom+Adj+Y(lIk[lik])+Noun+Zero+A3sg(lAr[ler])+P3sp(!I[i])+Nom");   // TODO: add Accusative ?
         assertParseCorrect("sulandı", "sula(sulamak)+Verb+Verb+Pass(+In[n])+Pos+Past(dI[dı])+A3sg");
         assertParseCorrect("sulaştı", "sula(sulamak)+Verb+Verb+Recip(+Iş[ş])+Pos+Past(dI[tı])+A3sg");
 
@@ -1551,13 +1549,13 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("zeytinyağlı", "zeytinyağ(zeytinyağı)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lı])");
         assertParseCorrect("zeytinyağlıya", "zeytinyağ(zeytinyağı)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lı])+Noun+Zero+A3sg+Pnon+Dat(+yA[ya])");
         assertParseCorrect("zeytinyağları", "zeytinyağ(zeytinyağı)+Noun+A3sg+P3pl(lAr!I[ları])+Nom");
-        assertParseCorrect("zeytinyağlarını", "zeytinyağ(zeytinyağı)+Noun+A3sg+P3pl(lAr!I[ları])+Acc(nI[nı])");
+        assertParseCorrect("zeytinyağlarını", "zeytinyağ(zeytinyağı)+Noun+A3sg(lAr[lar])+P3sp(!I[ı])+Acc(nI[nı])");
 
         removeRoots("a", "ak", "akşam");
         removeRootsExceptTheOneWithPrimaryPos("akşamüstü", PrimaryPos.Noun);
 
         assertParseCorrect("akşamüstü", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3sg(+sI[ü])+Nom");
-        assertParseCorrect("akşamüstleri", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3pl(lAr!I[leri])+Nom");
+        assertParseCorrect("akşamüstleri", "akşamüst(akşamüstü)+Noun+Time+A3sg(lAr[ler])+P3sp(!I[i])+Nom");
         assertParseCorrect("akşamüstüne", "akşamüst(akşamüstü)+Noun+Time+A3sg+P3sg(+sI[ü])+Dat(nA[ne])");
         assertParseCorrect("akşamüstlü", "akşamüst(akşamüstü)+Noun+Time+A3sg+Pnon+Nom+Adj+With(lI[lü])");
 

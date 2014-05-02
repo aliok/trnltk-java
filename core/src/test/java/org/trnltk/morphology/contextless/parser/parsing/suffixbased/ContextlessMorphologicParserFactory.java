@@ -28,6 +28,7 @@ import org.trnltk.morphology.lexicon.RootMapGenerator;
 import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.morphotactics.reducedambiguity.BasicRASuffixGraph;
 import org.trnltk.morphology.morphotactics.reducedambiguity.DisallowedPathProviderRAImpl;
+import org.trnltk.morphology.morphotactics.reducedambiguity.PredefinedPathProviderRAImpl;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
 import java.util.Collection;
@@ -64,7 +65,7 @@ public class ContextlessMorphologicParserFactory {
         return this;
     }
 
-    public ContextlessMorphologicParserFactory disallowedPathProvider(DisallowedPathProvider disallowedPathProvider){
+    public ContextlessMorphologicParserFactory disallowedPathProvider(DisallowedPathProvider disallowedPathProvider) {
         this.disallowedPathProvider = disallowedPathProvider;
         return this;
     }
@@ -170,7 +171,7 @@ public class ContextlessMorphologicParserFactory {
 
         final SuffixFormSequenceApplier suffixFormSequenceApplier = new SuffixFormSequenceApplier();
         final SuffixApplier suffixApplier = new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier));
-        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderImpl(basicRASuffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
+        final PredefinedPathProvider predefinedPathProvider = new PredefinedPathProviderRAImpl(basicRASuffixGraph, rootMap, new SuffixApplier(new PhoneticsEngine(suffixFormSequenceApplier)));
         predefinedPathProvider.initialize();
 
         final DisallowedPathProviderRAImpl disallowedPathProvider = new DisallowedPathProviderRAImpl(basicRASuffixGraph);

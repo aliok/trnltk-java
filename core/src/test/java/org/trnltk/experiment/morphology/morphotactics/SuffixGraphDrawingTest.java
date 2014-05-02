@@ -74,6 +74,27 @@ public class SuffixGraphDrawingTest {
     }
 
     @Test
+    public void shouldDumpBasicRASuffixGraphInDotFormatForNounRelatedNodes() throws Exception {
+        final BasicRASuffixGraph graph = new BasicRASuffixGraph();
+        graph.initialize();
+
+
+        Predicate<SuffixGraphState> sourceNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN");
+            }
+        };
+        Predicate<SuffixGraphState> targetNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN");
+            }
+        };
+        this.dumpSuffixGraphInDotFormat(new File("core/target/ra_noun.dot"), graph, sourceNodePredicate, targetNodePredicate);
+    }
+
+    @Test
     public void shouldDumpSampleGraphInDotFormat() throws Exception {
         final BaseSuffixGraph graph = new SampleSuffixGraph();
         graph.initialize();
