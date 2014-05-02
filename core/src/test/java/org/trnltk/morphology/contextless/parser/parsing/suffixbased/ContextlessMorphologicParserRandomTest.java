@@ -1,6 +1,8 @@
 package org.trnltk.morphology.contextless.parser.parsing.suffixbased;
 
 import com.google.common.collect.HashMultimap;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.trnltk.model.letter.TurkishSequence;
@@ -47,10 +49,18 @@ public class ContextlessMorphologicParserRandomTest extends BaseContextlessMorph
         return this.parser.parse(new TurkishSequence(surfaceToParse));
     }
 
+    @Override
+    protected void turnParserLoggingOn() {
+        Logger.getLogger(ContextlessMorphologicParser.class).setLevel(Level.DEBUG);
+    }
+
     @Test
     public void testSomething() {
         removeRoots("kut");
 
-        //assertParseCorrect("kutulu", "kutu(kutu)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lu])");
+        turnParserLoggingOn();
+
+        assertParseCorrect("kutulu", "kutu(kutu)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lu])");
+        assertParseCorrect("kutulum", "kutu(kutu)+Noun+A3sg+Pnon+Nom+Adj+With(lI[lu])+Noun+Zero+A3sg+P1sg(+Im[m])+Nom");    //derive back to noun
     }
 }

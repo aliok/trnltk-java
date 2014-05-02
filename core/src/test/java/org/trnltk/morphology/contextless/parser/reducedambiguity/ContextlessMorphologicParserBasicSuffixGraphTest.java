@@ -337,14 +337,14 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("yapmamaktasın", "yap(yapmak)+Verb+Neg(mA[ma])+Prog(mAktA[makta])+A2sg(sIn[sın])");
         assertParseCorrect("yapmamakta", "yap(yapmak)+Verb+Neg(mA[ma])+Prog(mAktA[makta])+A3sg", "yap(yapmak)+Verb+Neg(mA[ma])+Noun+Inf(mAk[mak])+A3sg+Pnon+Loc(dA[ta])");
 
-        assertParseCorrectForVerb("yapmayacağım",
+        assertParseCorrect("yapmayacağım",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacağ])+A1sg(+Im[ım])",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Adj+FutPart(+yAcAk[yacağ])+P1sg(+Im[ım])",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Noun+FutPart(+yAcAk[yacağ])+A3sg+P1sg(+Im[ım])+Nom",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacağ])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[ım])+Nom"
         );
-        assertParseCorrectForVerb("yapmayacaksın", "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacak])+A2sg(sIn[sın])");
-        assertParseCorrectForVerb("yapmayacak",
+        assertParseCorrect("yapmayacaksın", "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacak])+A2sg(sIn[sın])");
+        assertParseCorrect("yapmayacak",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacak])+A3sg",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Adj+FutPart(+yAcAk[yacak])+Pnon",
                 "yap(yapmak)+Verb+Neg(mA[ma])+Fut(+yAcAk[yacak])+Adj+Zero",
@@ -373,14 +373,14 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("çevirmemektesin", "çevir(çevirmek)+Verb+Neg(mA[me])+Prog(mAktA[mekte])+A2sg(sIn[sin])");
         assertParseCorrect("çevirmemekte", "çevir(çevirmek)+Verb+Neg(mA[me])+Prog(mAktA[mekte])+A3sg", "çevir(çevirmek)+Verb+Neg(mA[me])+Noun+Inf(mAk[mek])+A3sg+Pnon+Loc(dA[te])");
 
-        assertParseCorrectForVerb("çevirmeyeceğim",
+        assertParseCorrect("çevirmeyeceğim",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yeceğ])+A1sg(+Im[im])",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Adj+FutPart(+yAcAk[yeceğ])+P1sg(+Im[im])",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Noun+FutPart(+yAcAk[yeceğ])+A3sg+P1sg(+Im[im])+Nom",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yeceğ])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom"
         );
-        assertParseCorrectForVerb("çevirmeyeceksin", "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A2sg(sIn[sin])");
-        assertParseCorrectForVerb("çevirmeyecek",
+        assertParseCorrect("çevirmeyeceksin", "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A2sg(sIn[sin])");
+        assertParseCorrect("çevirmeyecek",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A3sg",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Adj+FutPart(+yAcAk[yecek])+Pnon",
                 "çevir(çevirmek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+Adj+Zero",
@@ -408,14 +408,14 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("elememektesin", "ele(elemek)+Verb+Neg(mA[me])+Prog(mAktA[mekte])+A2sg(sIn[sin])");
         assertParseCorrect("elememekte", "ele(elemek)+Verb+Neg(mA[me])+Prog(mAktA[mekte])+A3sg", "ele(elemek)+Verb+Neg(mA[me])+Noun+Inf(mAk[mek])+A3sg+Pnon+Loc(dA[te])");
 
-        assertParseCorrectForVerb("elemeyeceğim",
+        assertParseCorrect("elemeyeceğim",
                 "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yeceğ])+A1sg(+Im[im])",
                 "ele(elemek)+Verb+Neg(mA[me])+Adj+FutPart(+yAcAk[yeceğ])+P1sg(+Im[im])",
                 "ele(elemek)+Verb+Neg(mA[me])+Noun+FutPart(+yAcAk[yeceğ])+A3sg+P1sg(+Im[im])+Nom",
                 "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yeceğ])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom"
         );
-        assertParseCorrectForVerb("elemeyeceksin", "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A2sg(sIn[sin])");
-        assertParseCorrectForVerb("elemeyecek",
+        assertParseCorrect("elemeyeceksin", "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A2sg(sIn[sin])");
+        assertParseCorrect("elemeyecek",
                 "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+A3sg",
                 "ele(elemek)+Verb+Neg(mA[me])+Adj+FutPart(+yAcAk[yecek])+Pnon",
                 "ele(elemek)+Verb+Neg(mA[me])+Fut(+yAcAk[yecek])+Adj+Zero",

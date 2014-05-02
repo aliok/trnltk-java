@@ -244,14 +244,18 @@ public class ContextlessMorphologicParser implements MorphologicParser {
         if (logger.isDebugEnabled())
             logger.debug("   Filtered out the applied suffixes since last derivation " + morphemeContainer.getSuffixesSinceDerivationSuffix() + " : " + edges);
 
+        final Set<SuffixFormGraphSuffixEdge> edgesBeforeDisallowedPathRemoval = edges;
         edges = Sets.filter(edges, new Predicate<SuffixFormGraphSuffixEdge>() {
             @Override
             public boolean apply(SuffixFormGraphSuffixEdge input) {
                 return !(disallowedPathProvider.isPathDisallowed(input, morphemeContainer.getSuffixTransitions()));
             }
         });
-        if (logger.isDebugEnabled())
-            logger.debug("   Filtered out edges which are the last edge in a disallowed path  " + morphemeContainer.getSuffixesSinceDerivationSuffix() + " : " + edges);
+        if (logger.isDebugEnabled()){
+            logger.debug("   Filtered out edges which are the last edge in a disallowed path  " + morphemeContainer.getSuffixTransitions() + " : " + edges);
+            logger.debug("   Removed edges : " + CollectionUtils.disjunction(edges, edgesBeforeDisallowedPathRemoval));
+        }
+
 
         return edges;
     }

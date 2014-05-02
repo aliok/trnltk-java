@@ -60,7 +60,6 @@ public abstract class BaseContextlessMorphologicParserTest {
     // since parser and other things are really verbose, we cannot enable logging by default
     protected void turnParserLoggingOn() {
         Logger.getLogger(ContextlessMorphologicParser.class).setLevel(Level.DEBUG);
-        Logger.getLogger(ContextlessMorphologicParser.class).setLevel(Level.DEBUG);
     }
 
     // useful while running tests individually

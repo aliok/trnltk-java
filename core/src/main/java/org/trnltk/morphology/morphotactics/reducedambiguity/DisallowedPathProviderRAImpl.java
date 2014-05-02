@@ -37,7 +37,7 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
             // NOT ALLOWED: kirmizili --> kirmizi+Adj+li+Adj+Noun+Zero+..Nom$
             // ALLOWED: kirmizinin --> kirmizi+Adj+Noun+Zero+..Gen
             // ALLOWED: kirmizilasmak --> kirmizi+Adj+Verb+Become+..+Noun+Inf+..Nom$
-            addRule("Adj_to_Noun_Zero_Transition", "Noun_Free_Transition_2");
+            addRule("Adj_to_Noun_Zero_Transition", "A3Sg_Noun", "Pnon_Noun", "Nom_Noun", "Noun_Free_Transition_2");
         }
     }
 
@@ -46,7 +46,7 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
      */
     private void addRule(String... suffixIds) {
         final List<Suffix> suffixes = new ArrayList<>(suffixIds.length);
-        for (int i = suffixIds.length - 1; i >= 0; i--) {
+        for (int i = 0; i < suffixIds.length; i++) {
             final String suffixId = suffixIds[i];
             final Suffix suffix = this.suffixGraph.getSuffix(suffixId);
             if (suffix == null) {
@@ -56,7 +56,7 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
             }
         }
 
-        this.ruleMap.put(suffixes.get(0), new DisallowedPathRule(suffixes, DisallowedPathRuleType.CHECK_LAST_DERIVATION_GROUP));
+        this.ruleMap.put(suffixes.get(suffixIds.length - 1), new DisallowedPathRule(suffixes, DisallowedPathRuleType.CHECK_LAST_DERIVATION_GROUP));
     }
 
     @Override
@@ -140,7 +140,7 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
             // -> O(M)
 
             int indexOfSuffix = suffixTransitionsOfMorphemeContainer.size() - 1;
-            for (int i = suffixes.size() - 1; i >= 0; i--) {
+            for (int i = suffixes.size() - 2; i >= 0; i--) {            // ignore last element. we know it is not there as current rule is matched by that.
                 final Suffix ruleSuffix = suffixes.get(i);
                 indexOfSuffix = searchSuffix(ruleSuffix, suffixTransitionsOfMorphemeContainer, indexOfSuffix);
                 if (indexOfSuffix < 0) // if cannot found
