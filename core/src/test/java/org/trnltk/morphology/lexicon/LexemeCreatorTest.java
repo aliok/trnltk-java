@@ -64,21 +64,21 @@ public class LexemeCreatorTest {
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(NVO, C_DIR, AA)));
 
         lexemeAttributes = loader.inferMorphemicAttributes("ata", PrimaryPos.Verb, new HashSet<LexemeAttribute>());
-        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
+        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AA, C_T, NVO)));
 
         lexemeAttributes = loader.inferMorphemicAttributes("dola", PrimaryPos.Verb, new HashSet<LexemeAttribute>());
-        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
+        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AA, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("tanı", PrimaryPos.Verb, ImmutableSet.of(AI));
-        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, PVD, PI, AI, C_T, NVO)));
+        lexemeAttributes = loader.inferMorphemicAttributes("tanı", PrimaryPos.Verb, ImmutableSet.<LexemeAttribute>of());
+        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AA, C_T, NVO)));
 
-        lexemeAttributes = loader.inferMorphemicAttributes("getir", PrimaryPos.Verb, ImmutableSet.of(AI));
-        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, AI, C_T, NVO)));
+        lexemeAttributes = loader.inferMorphemicAttributes("getir", PrimaryPos.Verb, ImmutableSet.<LexemeAttribute>of());
+        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(AI, C_T, NVO)));
 
         lexemeAttributes = loader.inferMorphemicAttributes("ürk", PrimaryPos.Verb, ImmutableSet.of(C_IT));
         assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(C_IT, AA, NVO)));
 
         lexemeAttributes = loader.inferMorphemicAttributes("ağla", PrimaryPos.Verb, new HashSet<LexemeAttribute>());
-        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AI, C_T, NVO)));
+        assertThat(lexemeAttributes, Matchers.<Set<LexemeAttribute>>equalTo(ImmutableSet.of(PVD, PI, AA, C_T, NVO)));
     }
 }

@@ -49,6 +49,11 @@ Plan
   1. DONE: Get rid of unused stuff as much as possible. Such as
     * suffix based parsing (deprecated by form based parsing)
   1. DONE:  Fix the build!
+  1. SKIPPED Write a graphical tool to build suffix graphs.
+    * Support editing a suffix graph
+    * Show form-based graph immediately
+    * Always save backups upon edit!
+    * Show related portion of form-based graph whenever a suffix is selected in suffix-based graph
   1. Prepare for reducing ambiguity in suffix graph.
      * Remove @Ignore annotation
      * Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest. Reduce cases as much as possible without losing information. e.g. Adj->Noun zero transition can always be done with a second layer process

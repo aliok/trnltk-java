@@ -304,4 +304,13 @@ public class TurkishAlphabet {
         return String.valueOf(upperChar) + str.substring(1);
     }
 
+    public static int vowelCount(String str) {
+        int count = 0;
+        for (char c : str.toCharArray()) {
+            if (TurkishAlphabet.getLetter(c).isVowel())
+                count++;
+        }
+        return count;
+    }
+
 }

@@ -702,7 +702,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         final Specification<MorphemeContainer> followed_by_A1Sg_A1Pl = followedBy(A1Sg_Verb, "+Im").or(followedBy(A1Pl_Verb, "yIz"));
 
         Aorist.addSuffixForm("+Ir", hasLexemeAttributes(LexemeAttribute.Aorist_I).and(doesntComeAfter(Negative)));
-        Aorist.addSuffixForm("+Ar", doesntComeAfter(Negative));
+        Aorist.addSuffixForm("+Ar", hasLexemeAttributes(LexemeAttribute.Aorist_A).and(doesntComeAfter(Negative)));
         Aorist.addSuffixForm("z", comesAfter(Negative), doesnt(followed_by_A1Sg_A1Pl));    // gel-me-z or gel-me-z-sin
         Aorist.addSuffixForm("", comesAfter(Negative), followed_by_A1Sg_A1Pl);     // gel-me-m or gel-me-yiz
 

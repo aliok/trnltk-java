@@ -39,10 +39,16 @@ public enum LexemeAttribute implements StringEnum<LexemeAttribute> {
 
     /**
      * Marks a verb as using Aorist suffix I. For example, <i>gelir</i>, <i>vurur</i> but not <i>geler</i>, <i>vurar</i>.
+     * There are a couple of rules about Aorist_A and Aorist_I in {@link org.trnltk.morphology.lexicon.LexemeCreator}
+     * <p/>
+     * All verbs have either Aorist_I or Aorist_A attribute. One must exist.
      */
     Aorist_I(Predicates.APPLICABLE_FOR_VERBS),
     /**
      * Marks a verb as using Aorist suffix A. For example, <i>gider</i>, <i>yazar</i> but not <i>gidir</i>, <i>yazir</i>.
+     * There are a couple of rules about Aorist_A and Aorist_I in {@link org.trnltk.morphology.lexicon.LexemeCreator}
+     * <p/>
+     * All verbs have either Aorist_I or Aorist_A attribute. One must exist.
      */
     Aorist_A(Predicates.APPLICABLE_FOR_VERBS),
 
