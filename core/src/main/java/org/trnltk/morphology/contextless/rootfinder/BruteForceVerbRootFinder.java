@@ -21,20 +21,17 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
-import org.trnltk.model.letter.TurkishSequence;
-
-import org.trnltk.model.lexicon.*;
+import org.trnltk.model.letter.TurkicLetter;
 import org.trnltk.model.letter.TurkishAlphabet;
+import org.trnltk.model.letter.TurkishChar;
+import org.trnltk.model.letter.TurkishSequence;
+import org.trnltk.model.lexicon.*;
 import org.trnltk.model.suffix.SuffixFormSequence;
 import org.trnltk.morphology.morphotactics.SuffixFormSequenceApplier;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
-import org.trnltk.model.letter.TurkishChar;
-import org.trnltk.model.letter.TurkicLetter;
 
 import java.util.*;
 
@@ -311,12 +308,9 @@ public class BruteForceVerbRootFinder implements RootFinder {
 
             final DynamicRoot generatedRoot = new DynamicRoot(defaultAttrRoot);
 
-            generatedRoot.getLexeme().setAttributes(EnumSet.of(causativeAttr));
-
-            if (defaultAttrRoot.getLexeme().getAttributes().contains(LexemeAttribute.Aorist_A))
-                generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_A);
-            else
-                generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_I);
+            final EnumSet<LexemeAttribute> lexemeAttributes = EnumSet.of(causativeAttr);
+            lexemeAttributes.addAll(defaultAttrRoot.getLexeme().getAttributes());
+            generatedRoot.getLexeme().setAttributes(lexemeAttributes);
 
             generatedRoot.setPhoneticAttributes(this.phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, generatedRoot.getLexeme().getAttributes()));
 
@@ -330,8 +324,6 @@ public class BruteForceVerbRootFinder implements RootFinder {
     private Set<DynamicRoot> getPossiblePassiveRoots(TurkicLetter lastLetter, TurkishSequence partialInput, TurkishSequence wholeSurface, DynamicRoot defaultAttrRoot) {
         final String wholeSurfaceStr = wholeSurface.getUnderlyingString();
         final String partialInputStr = partialInput.getUnderlyingString();
-
-        final LexemeAttribute aoristAttribute = defaultAttrRoot.getLexeme().getAttributes().contains(LexemeAttribute.Aorist_A) ? LexemeAttribute.Aorist_A : LexemeAttribute.Aorist_I;
 
         final boolean mightHavePassive_Il =
                 (!lastLetter.isVowel() && this.strStartsWithAnyAdditionOfStr(wholeSurfaceStr, partialInputStr, Arrays.asList("ıl", "il", "ul", "ül")))
@@ -367,7 +359,9 @@ public class BruteForceVerbRootFinder implements RootFinder {
 
             final DynamicRoot generatedRoot = new DynamicRoot(defaultAttrRoot);
 
-            generatedRoot.getLexeme().setAttributes(EnumSet.of(passiveAttr, aoristAttribute));
+            final EnumSet<LexemeAttribute> lexemeAttributeSet = EnumSet.of(passiveAttr);
+            lexemeAttributeSet.addAll(defaultAttrRoot.getLexeme().getAttributes());
+            generatedRoot.getLexeme().setAttributes(lexemeAttributeSet);
 
             generatedRoot.setPhoneticAttributes(this.phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, generatedRoot.getLexeme().getAttributes()));
 
