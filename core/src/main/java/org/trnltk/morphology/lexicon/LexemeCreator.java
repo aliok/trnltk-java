@@ -125,19 +125,10 @@ class LexemeCreator {
         return new ImmutableLexeme(lemma, lemmaRoot, primaryPos, secondaryPos, Sets.immutableEnumSet(lexemeAttributes));
     }
 
-    private int vowelCount(String str) {
-        int count = 0;
-        for (char c : str.toCharArray()) {
-            if (TurkishAlphabet.getLetter(c).isVowel())
-                count++;
-        }
-        return count;
-    }
-
     Set<LexemeAttribute> inferMorphemicAttributes(final String lemmaRoot, final PrimaryPos primaryPos, final Set<LexemeAttribute> _lexemeAttributes) {
         final char lastChar = lemmaRoot.charAt(lemmaRoot.length() - 1);
         final TurkicLetter lastLetter = TurkishAlphabet.getLetter(lastChar);
-        final int vowelCount = this.vowelCount(lemmaRoot);
+        final int vowelCount = TurkishAlphabet.vowelCount(lemmaRoot);
 
         final HashSet<LexemeAttribute> lexemeAttributes = new HashSet<LexemeAttribute>(_lexemeAttributes);
 
@@ -186,11 +177,34 @@ class LexemeCreator {
             lexemeAttributes.add(LexemeAttribute.Passive_In);
         }
 
-        if (vowelCount > 1 && !lexemeAttributes.contains(LexemeAttribute.Aorist_A))
-            lexemeAttributes.add(LexemeAttribute.Aorist_I);
+        // Aorist rules:
+        // 1. If verb ends with a vowel, then it is 'r'
+        // 2. If verb ends with a consonant
+        // 2.a. If verb has only one vowel, then it is 'Ar'
+        // 2.a.i. Except "gel-ir, al-ır, bil-ir, var-ır, gör-ür, kal-ır, bul-ur, ver-ir, öl-ür, vur-ur, ol-ur, san-ır, dur-ur". For these, it is 'Ir'. These are defined in the dictionary!
+        // 2.b  If verb has more than one vowel, then it is 'Ir'
 
-        if (vowelCount == 1 && !lexemeAttributes.contains(LexemeAttribute.Aorist_I))
-            lexemeAttributes.add(LexemeAttribute.Aorist_A);
+        // note : since '+Ar' and '+Ir' can both match 'r' when verb ends with a vowel, I choose '+Ar' for these
+
+        if(lexemeAttributes.contains(LexemeAttribute.Aorist_A) || lexemeAttributes.contains(LexemeAttribute.Aorist_I)){
+            // do nothing as it is already defined in the dictionary
+        }
+        else{
+            if(lastLetter.isVowel()){
+                lexemeAttributes.add(LexemeAttribute.Aorist_A);
+            }
+            else{
+                if (vowelCount == 1)
+                    lexemeAttributes.add(LexemeAttribute.Aorist_A);
+
+                else if (vowelCount > 1)
+                    lexemeAttributes.add(LexemeAttribute.Aorist_I);
+
+                else
+                    throw new IllegalArgumentException("A verb without vowel?");
+            }
+        }
+
 
         if (lastLetter.equals(TurkishAlphabet.L_l))
             lexemeAttributes.add(LexemeAttribute.Passive_In);

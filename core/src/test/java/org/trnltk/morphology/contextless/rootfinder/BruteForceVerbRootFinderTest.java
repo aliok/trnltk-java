@@ -218,7 +218,7 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("sal", "sal");
@@ -227,7 +227,7 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("sal"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("salmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("al", "aldı");
@@ -236,7 +236,7 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("sal", "saldı");
@@ -245,12 +245,13 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("sal"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("salmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
         }
     }
 
     @Test
     public void should_create_roots_with_progressive_vowel_drop() {
+        // following all ends with vowels. thus according to the rule defined in LexemeCreator, they must have LexemeAttribute.Aorist_A (to only match '+Ar' for 'r' but to not match '+Ir' for 'r')
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("başl", "başlıyor");
             assertThat(roots, hasSize(2));
@@ -258,12 +259,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("başla"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("başlamak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("başl"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("başlı"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("başlımak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("ell", "elliyorduk");
@@ -272,12 +273,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("elle"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("ellemek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("ell"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("elli"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("ellimek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("oyn", "oynuyorlar");
@@ -286,12 +287,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("oyna"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("oynamak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("oyn"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("oynu"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("oynumak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("söyl", "söylüyorsun");
@@ -300,100 +301,83 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("söyle"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("söylemek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("söyl"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("söylü"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("söylümek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop, LexemeAttribute.Aorist_A)));
         }
     }
 
     @Test
     public void should_create_roots_with_aorist_A_and_causative_Ar() {
         // each Aorist_A case is also a Causative_Ar case
+        // since Aorist_I is only applicable to multi-vowel verbs, these don't match with Aorist_I
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("çık", "çıkar");
-            assertThat(roots, hasSize(3));
+            assertThat(roots, hasSize(2));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("çık"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("çık"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("çıkmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("çık"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("çık"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("çıkmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
-            assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("çık"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("çık"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("çıkmak"));
-            assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ar)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ar)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("öt", "ötermiş");
-            assertThat(roots, hasSize(3));
+            assertThat(roots, hasSize(2));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("öt"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("öt"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("ötmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("öt"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("öt"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("ötmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
-            assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("öt"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("öt"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("ötmek"));
-            assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ar)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ar)));
         }
     }
 
     @Test
     public void should_create_roots_with_aorist_I_and_causative_Ir() {
-        // each Aorist_I case is also a Causative_Ir case
-        // this actually doesn't make sense since yat+Aor->yatar but yat+Caus->yatir
-        // however, there is no way to distinguish
+        // each Aorist_I case is also a Causative_Ir case if there are multiple vowels and verb ends with a consonant
+        // there can be situations like a verb is Causative_Ir but Aorist_A.
+        // --> note that Aorist_I is only applicable to multi syllable verbs ending with a consonant
+        // --> plus some exceptional verbs take Aorist_I. however that is not job of a brute force finder to take care of these.
+        // --> see LexemeCreator for these rules, especially exceptions (there are only 13)
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("yat", "yatır");
-            assertThat(roots, hasSize(3));
+            assertThat(roots, hasSize(2));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("yat"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("yat"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("yatmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("yat"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("yat"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("yatmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I)));
-            assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("yat"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("yat"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("yatmak"));
-            assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ir)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("gel", "gelir");
-            assertThat(roots, hasSize(3));
+            assertThat(roots, hasSize(2));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("gel"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("gel"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("gelmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("gel"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("gel"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("gelmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I)));
-            assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("gel"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("gel"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("gelmek"));
-            assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ir)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir)));
         }
         {
             // no Aorist_I for -ur, -ür
@@ -403,12 +387,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("zop"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("zopmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("zop"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("zop"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("zopmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ir)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir)));
         }
 
     }
@@ -422,12 +406,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("kapa"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("kapamak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("kapa"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("kapa"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("kapamak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_t)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_t)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("yürü", "yürütecekmiş");
@@ -436,12 +420,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("yürü"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("yürümek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("yürü"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("yürü"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("yürümek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_t)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_t)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("köpür", "köpürttüm");
@@ -450,12 +434,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("köpür"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("köpürmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("köpür"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("köpür"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("köpürmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_t)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I, LexemeAttribute.Causative_t)));
         }
     }
 
@@ -468,7 +452,7 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("kapat"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("kapatmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I)));
         }
     }
 
@@ -481,12 +465,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("ak"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("akmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("ak"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("ak"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("akmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_It)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_It)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("kork", "korkutacaklar");
@@ -495,12 +479,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("kork"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("korkmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("kork"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("kork"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("korkmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_It)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_It)));
         }
     }
 
@@ -513,12 +497,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("al"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_dIr)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("öl", "öldürmüşcesine");
@@ -527,12 +511,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("öl"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("ölmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("öl"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("öl"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("ölmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_dIr)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("öt", "öttürüyorum");
@@ -541,12 +525,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("öt"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("ötmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("öt"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("öt"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("ötmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_dIr)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr)));
         }
     }
 
@@ -559,12 +543,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("sat"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("satmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("sat"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("sat"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("satmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_Il)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_Il)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("döv", "dövülen");
@@ -573,12 +557,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("döv"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("dövmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("döv"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("döv"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("dövmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_Il)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_Il)));
         }
     }
 
@@ -591,12 +575,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("al"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("al"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("almak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_In)));
         }
         {
             final List<DynamicRoot> roots = findRootsForPartialInput("tekmele", "tekmelendim");
@@ -605,12 +589,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("tekmele"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("tekmelemek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("tekmele"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("tekmele"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("tekmelemek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_In)));
         }
     }
 
@@ -623,17 +607,17 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("de"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("demek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("de"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("de"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("demek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_In)));
             assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("de"));
             assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("de"));
             assertThat(roots.get(2).getLexeme().getLemma(), equalTo("demek"));
             assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_InIl)));
+            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_InIl)));
         }
     }
 
@@ -647,12 +631,12 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("gid"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("gidmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("gid"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("git"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("gitmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
         }
 
 
@@ -666,95 +650,76 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("yelde"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("yeldemek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.ProgressiveVowelDrop)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("yeld"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("yeldi"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("yeldimek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.ProgressiveVowelDrop)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.ProgressiveVowelDrop)));
             assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("yeld"));
             assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("yeld"));
             assertThat(roots.get(2).getLexeme().getLemma(), equalTo("yeldmek"));
             assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(3).getSequence().getUnderlyingString(), equalTo("yeld"));
             assertThat(roots.get(3).getLexeme().getLemmaRoot(), equalTo("yelt"));
             assertThat(roots.get(3).getLexeme().getLemma(), equalTo("yeltmek"));
             assertThat(roots.get(3).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing)));
+            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
             // NOTE: there is also "yeltemek" and "yeltimek", but doesn't seem likely. skipping it!
         }
         {
             // voicing and aorist_A and causative_Ar (ok, gidermek is not really git+Caus);
             final List<DynamicRoot> roots = findRootsForPartialInput("gid", "giderdi");
-            assertThat(roots, hasSize(6));
+            assertThat(roots, hasSize(4));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("gid"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("gid"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("gidmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("gid"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("gid"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("gidmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ar)));
             assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("gid"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("gid"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("gidmek"));
+            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("git"));
+            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("gitmek"));
             assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ar)));
+            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(3).getSequence().getUnderlyingString(), equalTo("gid"));
             assertThat(roots.get(3).getLexeme().getLemmaRoot(), equalTo("git"));
             assertThat(roots.get(3).getLexeme().getLemma(), equalTo("gitmek"));
             assertThat(roots.get(3).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing)));
-            assertThat(roots.get(4).getSequence().getUnderlyingString(), equalTo("gid"));
-            assertThat(roots.get(4).getLexeme().getLemmaRoot(), equalTo("git"));
-            assertThat(roots.get(4).getLexeme().getLemma(), equalTo("gitmek"));
-            assertThat(roots.get(4).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(4).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
-            assertThat(roots.get(5).getSequence().getUnderlyingString(), equalTo("gid"));
-            assertThat(roots.get(5).getLexeme().getLemmaRoot(), equalTo("git"));
-            assertThat(roots.get(5).getLexeme().getLemma(), equalTo("gitmek"));
-            assertThat(roots.get(5).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(5).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Causative_Ar)));
+            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ar)));
         }
         {
-            // voicing and aorist_I and causative_Ir
-            // couldn't find an example, but lets support it until we find out that it is impossible
+            // voicing and aorist_I and causative_Ir : impossible!
+            // need to have a 2 syllable verb which ends with a consonant since Aorist_I is only applicable to those
+            // however, Causative_Ir doesn't apply to those type! it is only applicable to verbs which end with 't' but has a single syllable
             // imaginary verb "zantmak"
             final List<DynamicRoot> roots = findRootsForPartialInput("zand", "zandırmış");
-            assertThat(roots, hasSize(6));
+            assertThat(roots, hasSize(4));
             assertThat(roots.get(0).getSequence().getUnderlyingString(), equalTo("zand"));
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("zand"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("zandmak"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("zand"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("zand"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("zandmak"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_I)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir)));
             assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("zand"));
-            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("zand"));
-            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("zandmak"));
+            assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("zant"));
+            assertThat(roots.get(2).getLexeme().getLemma(), equalTo("zantmak"));
             assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Causative_Ir)));
+            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(3).getSequence().getUnderlyingString(), equalTo("zand"));
             assertThat(roots.get(3).getLexeme().getLemmaRoot(), equalTo("zant"));
             assertThat(roots.get(3).getLexeme().getLemma(), equalTo("zantmak"));
             assertThat(roots.get(3).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing)));
-            assertThat(roots.get(4).getSequence().getUnderlyingString(), equalTo("zand"));
-            assertThat(roots.get(4).getLexeme().getLemmaRoot(), equalTo("zant"));
-            assertThat(roots.get(4).getLexeme().getLemma(), equalTo("zantmak"));
-            assertThat(roots.get(4).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(4).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_I)));
-            assertThat(roots.get(5).getSequence().getUnderlyingString(), equalTo("zand"));
-            assertThat(roots.get(5).getLexeme().getLemmaRoot(), equalTo("zant"));
-            assertThat(roots.get(5).getLexeme().getLemma(), equalTo("zantmak"));
-            assertThat(roots.get(5).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(5).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Causative_Ir)));
+            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir)));
         }
 
         // skip {Causative_t, Causative_It, Causative_dIr} and voicing
@@ -768,22 +733,22 @@ public class BruteForceVerbRootFinderTest extends BaseRootFinderTest<DynamicRoot
             assertThat(roots.get(0).getLexeme().getLemmaRoot(), equalTo("ed"));
             assertThat(roots.get(0).getLexeme().getLemma(), equalTo("edmek"));
             assertThat(roots.get(0).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing)));
+            assertThat(roots.get(0).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(1).getSequence().getUnderlyingString(), equalTo("ed"));
             assertThat(roots.get(1).getLexeme().getLemmaRoot(), equalTo("ed"));
             assertThat(roots.get(1).getLexeme().getLemma(), equalTo("edmek"));
             assertThat(roots.get(1).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Passive_Il)));
+            assertThat(roots.get(1).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_Il)));
             assertThat(roots.get(2).getSequence().getUnderlyingString(), equalTo("ed"));
             assertThat(roots.get(2).getLexeme().getLemmaRoot(), equalTo("et"));
             assertThat(roots.get(2).getLexeme().getLemma(), equalTo("etmek"));
             assertThat(roots.get(2).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing)));
+            assertThat(roots.get(2).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A)));
             assertThat(roots.get(3).getSequence().getUnderlyingString(), equalTo("ed"));
             assertThat(roots.get(3).getLexeme().getLemmaRoot(), equalTo("et"));
             assertThat(roots.get(3).getLexeme().getLemma(), equalTo("etmek"));
             assertThat(roots.get(3).getLexeme().getPrimaryPos(), equalTo(PrimaryPos.Verb));
-            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Passive_Il)));
+            assertThat(roots.get(3).getLexeme().getAttributes(), equalTo((Set<LexemeAttribute>) ImmutableSet.of(LexemeAttribute.Voicing, LexemeAttribute.Aorist_A, LexemeAttribute.Passive_Il)));
         }
 
         // skip voicing and {passive_InIl, passive_In}

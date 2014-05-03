@@ -42,7 +42,7 @@ import java.util.*;
  * Finds the possible roots by brute force.
  * <p/>
  * Checks for the signs of the orthographic changes, and finds roots according to that.
- * Considers progressive vowel drop (başla+ıyor -> başlıyor), voicing (git+er -> gider), aorist A (yap+ar), aorist I (gel+ir),
+ * Considers progressive vowel drop (başla+ıyor -> başlıyor), voicing (git+er -> gider), aorist A (yap+ar), aorist I (dikil+ir),
  * causatives and passives.
  * <p/>
  * Returns phonetically valid verbs. For example 'ürk' and 'büyült' are valid, but 'zanh' is not valid.
@@ -97,53 +97,51 @@ public class BruteForceVerbRootFinder implements RootFinder {
         final EnumSet<PhoneticExpectation> phoneticExpectations = EnumSet.noneOf(PhoneticExpectation.class);
         final EnumSet<PhoneticAttribute> phoneticAttributes = phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, lexemeAttributes);
 
-        final DynamicRoot noAttrRoot = new DynamicRoot(rootSeq, lexeme, phoneticAttributes, phoneticExpectations);
-
-        this.setLexemeAndPhoneticAttributes(Arrays.asList(noAttrRoot));
-        this.setLemma(Arrays.asList(noAttrRoot));
+        final DynamicRoot defaultAttrRoot = new DynamicRoot(rootSeq, lexeme, phoneticAttributes, phoneticExpectations);
 
         final TurkishChar lastChar = partialInput.getLastChar();
         final TurkicLetter lastLetter = lastChar.getLetter();
 
         final boolean partialSurfaceCanBeRootOfAVerb = this.seemsLikeAValidVerbRoot(partialInput);
 
-        if (wholeSurface.equals(partialInput))
-            return partialSurfaceCanBeRootOfAVerb ? Arrays.asList(noAttrRoot) : Collections.<DynamicRoot>emptyList();
-
-        final TurkishChar firstCharAfterPartialInput = wholeSurface.charAt(partialInput.length());
-
-        final TurkicLetter firstLetterAfterPartialInput = firstCharAfterPartialInput.getLetter();
-
         final String wholeSurfaceStr = wholeSurface.getUnderlyingString();
         final String partialInputStr = partialInput.getUnderlyingString();
+
+        final int vowelCount = TurkishAlphabet.vowelCount(partialInputStr);
 
         final boolean mightHaveProgressiveVowelDrop = !lastLetter.isVowel()
                 && strStartsWithAnyAdditionOfStr(wholeSurfaceStr, partialInputStr, Arrays.asList("iyor", "ıyor", "uyor", "üyor"));
 
-        final boolean mightHaveAorist_A = !lastLetter.isVowel()
-                && strStartsWithAnyAdditionOfStr(wholeSurfaceStr, partialInputStr, Arrays.asList("ar", "er"));
+        // see LexemeCreator for the reason of the following condition!
+        final boolean mightHaveAorist_I = !lastLetter.isVowel() && vowelCount > 1;
 
-        // no Aorist_I for -ur, -ür
-        final boolean mightHaveAorist_I = !lastLetter.isVowel()
-                && strStartsWithAnyAdditionOfStr(wholeSurfaceStr, partialInputStr, Arrays.asList("ır", "ir"));
+        // cannot have Aorist_A and Aorist_I at the same time
+        // and a verb must have one of them!
+        final boolean mightHaveAorist_A = !mightHaveAorist_I;
+
+        if (mightHaveAorist_A)
+            defaultAttrRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_A);
+        else
+            defaultAttrRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_I);
+
+        this.setLexemeAndPhoneticAttributes(Arrays.asList(defaultAttrRoot));
+        this.setLemma(Arrays.asList(defaultAttrRoot));
+
+        if (wholeSurface.equals(partialInput))
+            return partialSurfaceCanBeRootOfAVerb ? Arrays.asList(defaultAttrRoot) : Collections.<DynamicRoot>emptyList();
+
+        final TurkishChar firstCharAfterPartialInput = wholeSurface.charAt(partialInput.length());
+        final TurkicLetter firstLetterAfterPartialInput = firstCharAfterPartialInput.getLetter();
 
         // for other letters, no voicing in verbs. {git+er->gider} vs {yapar, açar, diker}
         final boolean voicingMightHaveHappened = lastLetter.equals(TurkishAlphabet.L_d) && firstLetterAfterPartialInput.isVowel();
 
         final Set<DynamicRoot> possibleProgressiveVowelDropRoots = mightHaveProgressiveVowelDrop
-                ? this.getProgressiveDropRoots(noAttrRoot, lastVowel)
+                ? this.getProgressiveDropRoots(defaultAttrRoot, lastVowel)
                 : new HashSet<DynamicRoot>();
 
-        final Set<DynamicRoot> possibleAorist_A_Roots = mightHaveAorist_A
-                ? this.getAorist_A_Roots(noAttrRoot)
-                : new HashSet<DynamicRoot>();
-
-        final Set<DynamicRoot> possibleAorist_I_Roots = mightHaveAorist_I
-                ? this.getAorist_I_Roots(noAttrRoot)
-                : new HashSet<DynamicRoot>();
-
-        final Set<DynamicRoot> possibleCausativeRoots = this.getPossibleCausativeRoots(lastLetter, partialInput, wholeSurface, noAttrRoot);
-        final Set<DynamicRoot> possiblePassiveRoots = this.getPossiblePassiveRoots(lastLetter, partialInput, wholeSurface, noAttrRoot);
+        final Set<DynamicRoot> possibleCausativeRoots = this.getPossibleCausativeRoots(lastLetter, partialInput, wholeSurface, defaultAttrRoot);
+        final Set<DynamicRoot> possiblePassiveRoots = this.getPossiblePassiveRoots(lastLetter, partialInput, wholeSurface, defaultAttrRoot);
 
         if (voicingMightHaveHappened) {
             Function<DynamicRoot, DynamicRoot> voicingRootFunction = new Function<DynamicRoot, DynamicRoot>() {
@@ -156,12 +154,6 @@ public class BruteForceVerbRootFinder implements RootFinder {
             final Collection<DynamicRoot> possibleProgressiveVowelDropRoots_voicing = Collections2.transform(ImmutableSet.copyOf(possibleProgressiveVowelDropRoots), voicingRootFunction);
             possibleProgressiveVowelDropRoots.addAll(possibleProgressiveVowelDropRoots_voicing);
 
-            final Collection<DynamicRoot> possibleAorist_A_Roots_voicing = Collections2.transform(ImmutableSet.copyOf(possibleAorist_A_Roots), voicingRootFunction);
-            possibleAorist_A_Roots.addAll(possibleAorist_A_Roots_voicing);
-
-            final Collection<DynamicRoot> possibleAorist_I_Roots_voicing = Collections2.transform(ImmutableSet.copyOf(possibleAorist_I_Roots), voicingRootFunction);
-            possibleAorist_A_Roots.addAll(possibleAorist_I_Roots_voicing);
-
             final Collection<DynamicRoot> possibleCausativeRoots_voicing = Collections2.transform(ImmutableSet.copyOf(possibleCausativeRoots), voicingRootFunction);
             possibleCausativeRoots.addAll(possibleCausativeRoots_voicing);
 
@@ -171,14 +163,12 @@ public class BruteForceVerbRootFinder implements RootFinder {
 
         final HashSet<DynamicRoot> generatedRoots = new HashSet<DynamicRoot>();
 
-        generatedRoots.add(noAttrRoot);
+        generatedRoots.add(defaultAttrRoot);
 
         if (voicingMightHaveHappened)
-            generatedRoots.add(this.getPossibleVoicingRoot(noAttrRoot));
+            generatedRoots.add(this.getPossibleVoicingRoot(defaultAttrRoot));
 
         generatedRoots.addAll(possibleProgressiveVowelDropRoots);
-        generatedRoots.addAll(possibleAorist_A_Roots);
-        generatedRoots.addAll(possibleAorist_I_Roots);
         generatedRoots.addAll(possibleCausativeRoots);
         generatedRoots.addAll(possiblePassiveRoots);
 
@@ -233,7 +223,7 @@ public class BruteForceVerbRootFinder implements RootFinder {
                 || (Arrays.asList(TurkishAlphabet.L_l, TurkishAlphabet.L_r, TurkishAlphabet.L_n).contains(previousLetter) && !lastLetter.isContinuant());
     }
 
-    private Set<DynamicRoot> getProgressiveDropRoots(DynamicRoot noAttrRoot, TurkishChar lastVowel) {
+    private Set<DynamicRoot> getProgressiveDropRoots(DynamicRoot defaultAttrRoot, TurkishChar lastVowel) {
         /*
         başla - +Iyor --> başlıyor
         elle  - +Iyor --> elliyor
@@ -271,7 +261,7 @@ public class BruteForceVerbRootFinder implements RootFinder {
         final HashSet<DynamicRoot> generatedRoots = new HashSet<DynamicRoot>();
 
         for (Character droppedVowel : droppedVowels) {
-            final DynamicRoot generatedRoot = new DynamicRoot(noAttrRoot);
+            final DynamicRoot generatedRoot = new DynamicRoot(defaultAttrRoot);
             generatedRoot.getLexeme().setLemmaRoot(generatedRoot.getLexeme().getLemmaRoot() + droppedVowel);
             generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.ProgressiveVowelDrop);
 
@@ -281,19 +271,7 @@ public class BruteForceVerbRootFinder implements RootFinder {
         return generatedRoots;
     }
 
-    private Set<DynamicRoot> getAorist_A_Roots(DynamicRoot noAttrRoot) {
-        final DynamicRoot generatedRoot = new DynamicRoot(noAttrRoot);
-        generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_A);
-        return Sets.newHashSet(generatedRoot);
-    }
-
-    private Set<DynamicRoot> getAorist_I_Roots(DynamicRoot noAttrRoot) {
-        final DynamicRoot generatedRoot = new DynamicRoot(noAttrRoot);
-        generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_I);
-        return Sets.newHashSet(generatedRoot);
-    }
-
-    private Set<DynamicRoot> getPossibleCausativeRoots(TurkicLetter lastLetter, TurkishSequence partialInput, TurkishSequence wholeSurface, DynamicRoot noAttrRoot) {
+    private Set<DynamicRoot> getPossibleCausativeRoots(TurkicLetter lastLetter, TurkishSequence partialInput, TurkishSequence wholeSurface, DynamicRoot defaultAttrRoot) {
         // no voicing can happen on causative_t
         final String wholeSurfaceStr = wholeSurface.getUnderlyingString();
         final String partialInputStr = partialInput.getUnderlyingString();
@@ -329,11 +307,16 @@ public class BruteForceVerbRootFinder implements RootFinder {
             // cannot have other causatives at the same time
             // cannot have any other passive at the same time
             // cannot have progressive vowel drop at the same time
-            // cannot have aorist_A or aorist_I at the same time
+            // needs to have aorist_A or aorist_I but not both
 
-            final DynamicRoot generatedRoot = new DynamicRoot(noAttrRoot);
+            final DynamicRoot generatedRoot = new DynamicRoot(defaultAttrRoot);
 
             generatedRoot.getLexeme().setAttributes(EnumSet.of(causativeAttr));
+
+            if (defaultAttrRoot.getLexeme().getAttributes().contains(LexemeAttribute.Aorist_A))
+                generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_A);
+            else
+                generatedRoot.getLexeme().getAttributes().add(LexemeAttribute.Aorist_I);
 
             generatedRoot.setPhoneticAttributes(this.phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, generatedRoot.getLexeme().getAttributes()));
 
@@ -344,9 +327,11 @@ public class BruteForceVerbRootFinder implements RootFinder {
         return causativeRoots;
     }
 
-    private Set<DynamicRoot> getPossiblePassiveRoots(TurkicLetter lastLetter, TurkishSequence partialInput, TurkishSequence wholeSurface, DynamicRoot noAttrRoot) {
+    private Set<DynamicRoot> getPossiblePassiveRoots(TurkicLetter lastLetter, TurkishSequence partialInput, TurkishSequence wholeSurface, DynamicRoot defaultAttrRoot) {
         final String wholeSurfaceStr = wholeSurface.getUnderlyingString();
         final String partialInputStr = partialInput.getUnderlyingString();
+
+        final LexemeAttribute aoristAttribute = defaultAttrRoot.getLexeme().getAttributes().contains(LexemeAttribute.Aorist_A) ? LexemeAttribute.Aorist_A : LexemeAttribute.Aorist_I;
 
         final boolean mightHavePassive_Il =
                 (!lastLetter.isVowel() && this.strStartsWithAnyAdditionOfStr(wholeSurfaceStr, partialInputStr, Arrays.asList("ıl", "il", "ul", "ül")))
@@ -378,11 +363,11 @@ public class BruteForceVerbRootFinder implements RootFinder {
             // cannot have other passives at the same time
             // cannot have any other causative at the same time
             // cannot have progressive vowel drop at the same time
-            // cannot have aorist_A or aorist_I at the same time
+            // needs to have aorist_A or aorist_I but not both
 
-            final DynamicRoot generatedRoot = new DynamicRoot(noAttrRoot);
+            final DynamicRoot generatedRoot = new DynamicRoot(defaultAttrRoot);
 
-            generatedRoot.getLexeme().setAttributes(EnumSet.of(passiveAttr));
+            generatedRoot.getLexeme().setAttributes(EnumSet.of(passiveAttr, aoristAttribute));
 
             generatedRoot.setPhoneticAttributes(this.phoneticsAnalyzer.calculatePhoneticAttributes(partialInput, generatedRoot.getLexeme().getAttributes()));
 
