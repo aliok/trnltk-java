@@ -50,6 +50,18 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
 
         // NOT ALLOWED: senin yapmisin --> yap+Verb+Narr+Adj+Zero+Noun+Zero+..P2sg
         addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Adj_to_Noun_Zero_Transition", "P2Sg_Noun");
+
+        // NOT ALLOWED: yaparcasina --> yap(yapmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero+Adj+XXX(cA[ca])+Noun+Zero+A3sg+P3sg(+sI[sı])+Dat(nA[na])
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Aorist_to_Adj", "Equ_Adj", "Adj_to_Noun_Zero_Transition");
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Aorist_to_Adj", "Quite", "Adj_to_Noun_Zero_Transition");
+        // NOT ALLOWED: yaparcasina --> yap(yapmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ca])+Noun+Zero+A3sg+P3sg(+sI[sı])+Dat(nA[na])
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Aorist_to_Adj", "Equ_Noun", "Adj_to_Noun_Zero_Transition");
+
+        // NOT ALLOWED: yapmamiscasina --> yap(yapmak)+Verb+Neg(mA[ma])+Narr(mIş[mış])+Adj+Zero+Adj+XXX(cA[ça])+Noun+Zero+A3sg+P3sg(+sI[sı])+Dat(nA[na])
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Equ_Adj", "Adj_to_Noun_Zero_Transition");
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Quite", "Adj_to_Noun_Zero_Transition");
+        // NOT ALLOWED: yapmamiscasina --> yap(yapmak)+Verb+Neg(mA[ma])+Narr(mIş[mış])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ça])+Noun+Zero+A3sg+P3sg(+sI[sı])+Dat(nA[na])
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Equ_Noun", "Adj_to_Noun_Zero_Transition");
     }
 
     /**
