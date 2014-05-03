@@ -32,19 +32,30 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
 
     private void createRules() {
         // in docs, $ means terminal
-        {
-            // NOT ALLOWED: kirmizi --> kirmizi+Adj+Noun+Zero+..Nom$
-            // NOT ALLOWED: kirmizili --> kirmizi+Adj+li+Adj+Noun+Zero+..Nom$
-            // ALLOWED: kirmizinin --> kirmizi+Adj+Noun+Zero+..Gen
-            // ALLOWED: kirmizilasmak --> kirmizi+Adj+Verb+Become+..+Noun+Inf+..Nom$
-            addRule("Adj_to_Noun_Zero_Transition", "A3Sg_Noun", "Pnon_Noun", "Nom_Noun", "Noun_Free_Transition_2");
-        }
+
+        // NOT ALLOWED: kirmizi --> kirmizi+Adj+Noun+Zero+..Nom$
+        // NOT ALLOWED: kirmizili --> kirmizi+Adj+li+Adj+Noun+Zero+..Nom$
+        // ALLOWED: kirmizinin --> kirmizi+Adj+Noun+Zero+..Gen
+        // ALLOWED: kirmizilasmak --> kirmizi+Adj+Verb+Become+..+Noun+Inf+..Nom$
+        addRule(DisallowedPathRuleType.CHECK_LAST_DERIVATION_GROUP, "Adj_to_Noun_Zero_Transition", "A3Sg_Noun", "Pnon_Noun", "Nom_Noun", "Noun_Free_Transition_2");
+
+        // NOT ALLOWED: benim yaparim --> yap+Verb+Aor+Adj+Zero+Noun+Zero+..P1sg
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Aorist_to_Adj", "Adj_to_Noun_Zero_Transition", "P1Sg_Noun");
+
+        // NOT ALLOWED: senin yaparin --> yap+Verb+Aor+Adj+Zero+Noun+Zero+..P2sg
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Aorist_to_Adj", "Adj_to_Noun_Zero_Transition", "P2Sg_Noun");
+
+        // NOT ALLOWED: benim yapmisim --> yap+Verb+Narr+Adj+Zero+Noun+Zero+..P1sg
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Adj_to_Noun_Zero_Transition", "P1Sg_Noun");
+
+        // NOT ALLOWED: senin yapmisin --> yap+Verb+Narr+Adj+Zero+Noun+Zero+..P2sg
+        addRule(DisallowedPathRuleType.CHECK_COMPLETE_PATH, "Narr_to_Adj", "Adj_to_Noun_Zero_Transition", "P2Sg_Noun");
     }
 
     /**
      * By default add with type {@link org.trnltk.morphology.morphotactics.reducedambiguity.DisallowedPathProviderRAImpl.DisallowedPathRuleType#CHECK_LAST_DERIVATION_GROUP}
      */
-    private void addRule(String... suffixIds) {
+    private void addRule(DisallowedPathRuleType disallowedPathRuleType, String... suffixIds) {
         final List<Suffix> suffixes = new ArrayList<>(suffixIds.length);
         for (int i = 0; i < suffixIds.length; i++) {
             final String suffixId = suffixIds[i];
@@ -56,7 +67,7 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
             }
         }
 
-        this.ruleMap.put(suffixes.get(suffixIds.length - 1), new DisallowedPathRule(suffixes, DisallowedPathRuleType.CHECK_LAST_DERIVATION_GROUP));
+        this.ruleMap.put(suffixes.get(suffixIds.length - 1), new DisallowedPathRule(suffixes, disallowedPathRuleType));
     }
 
     @Override
@@ -170,6 +181,11 @@ public class DisallowedPathProviderRAImpl implements DisallowedPathProvider {
         /**
          * Rule only checks the last derivation group including the derivation itself.
          */
-        CHECK_LAST_DERIVATION_GROUP
+        CHECK_LAST_DERIVATION_GROUP,
+
+        /**
+         * Rule checks all of suffix transitions
+         */
+        CHECK_COMPLETE_PATH
     }
 }

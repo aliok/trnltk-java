@@ -26,7 +26,7 @@ Bu da daha sonradan cikarabilecegimiz bir bilgi!
     - bilmez degilim
     - tartisilir konu
     - kullanilabilir hal
-    - kullanilabilirleri getir
+    - kullanilabilirleri getir      : SALLA
 
 - yapar --> cifte Aor durumunu engelle   **TAMAM**
     - bekler : bekle+Aor(+Ir)

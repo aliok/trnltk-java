@@ -95,6 +95,27 @@ public class SuffixGraphDrawingTest {
     }
 
     @Test
+    public void shouldDumpBasicRASuffixGraphInDotFormatForNounVerbAndAdjRelatedNodes() throws Exception {
+        final BasicRASuffixGraph graph = new BasicRASuffixGraph();
+        graph.initialize();
+
+
+        Predicate<SuffixGraphState> sourceNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN") || input.getName().startsWith("ADJ") || input.getName().startsWith("VERB");
+            }
+        };
+        Predicate<SuffixGraphState> targetNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("NOUN") || input.getName().startsWith("ADJ") || input.getName().startsWith("VERB");
+            }
+        };
+        this.dumpSuffixGraphInDotFormat(new File("core/target/ra_noun_verb_adj.dot"), graph, sourceNodePredicate, targetNodePredicate);
+    }
+
+    @Test
     public void shouldDumpSampleGraphInDotFormat() throws Exception {
         final BaseSuffixGraph graph = new SampleSuffixGraph();
         graph.initialize();
