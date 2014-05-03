@@ -28,10 +28,10 @@ Bu da daha sonradan cikarabilecegimiz bir bilgi!
     - kullanilabilir hal
     - kullanilabilirleri getir
 
-- yapar --> cifte Aor durumunu engelle
+- yapar --> cifte Aor durumunu engelle   **TAMAM**
     - bekler : bekle+Aor(+Ir)
     - bekler : bekle+Aor(+Ar)
-    - ** bekle+Aor(r) ** olsun
+    - ** bekle+Aor(+Ar) ** oldu
 
 - yaparim --> Sadece fiil halini kullan! Aor'dan sonra ek gelince aslinda baska bisey kastedilmis oluyor hep. Bkz : yapar
     - yaparim : Aor+A1sg

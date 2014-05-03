@@ -472,9 +472,9 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("yapacakmış", "yap(yapmak)+Verb+Pos+Fut(+yAcAk[acak])+Narr(mIş[mış])+A3sg");
 
 
-        assertParseCorrect("elerdim", "ele(elemek)+Verb+Pos+Aor(r[r])+Past(dI[di])+A1sg(+Im[m])");
-        assertParseCorrect("elerdin", "ele(elemek)+Verb+Pos+Aor(r[r])+Past(dI[di])+A2sg(n[n])");
-        assertParseCorrect("elerdi", "ele(elemek)+Verb+Pos+Aor(r[r])+Past(dI[di])+A3sg");
+        assertParseCorrect("elerdim", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A1sg(+Im[m])");
+        assertParseCorrect("elerdin", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A2sg(n[n])");
+        assertParseCorrect("elerdi", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A3sg");
 
         assertParseCorrect("eliyordum", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Past(dI[du])+A1sg(+Im[m])");
         assertParseCorrect("eliyordun", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Past(dI[du])+A2sg(n[n])");
@@ -493,9 +493,9 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("elemişti", "ele(elemek)+Verb+Pos+Narr(mIş[miş])+Past(dI[ti])+A3sg");
 
 
-        assertParseCorrect("elermişim", "ele(elemek)+Verb+Pos+Aor(r[r])+Narr(mIş[miş])+A1sg(+Im[im])");
-        assertParseCorrect("elermişsin", "ele(elemek)+Verb+Pos+Aor(r[r])+Narr(mIş[miş])+A2sg(sIn[sin])");
-        assertParseCorrect("elermiş", "ele(elemek)+Verb+Pos+Aor(r[r])+Narr(mIş[miş])+A3sg");
+        assertParseCorrect("elermişim", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A1sg(+Im[im])");
+        assertParseCorrect("elermişsin", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A2sg(sIn[sin])");
+        assertParseCorrect("elermiş", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A3sg");
 
         assertParseCorrect("eliyormuşum", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Narr(mIş[muş])+A1sg(+Im[um])");
         assertParseCorrect("eliyormuşsun", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Narr(mIş[muş])+A2sg(sIn[sun])");
@@ -1007,7 +1007,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("dendi", "de(demek)+Verb+Verb+Pass(+In[n])+Pos+Past(dI[di])+A3sg");
         assertParseCorrect("denildi", "de(demek)+Verb+Verb+Pass(+InIl[nil])+Pos+Past(dI[di])+A3sg");
         assertParseCorrect("yendi", "yen(yenmek)+Verb+Pos+Past(dI[di])+A3sg", "ye(yemek)+Verb+Verb+Pass(+In[n])+Pos+Past(dI[di])+A3sg");
-        assertParseCorrect("yenildi", "yen(yenmek) + Verb + Verb + Pass(+nIl[il]) + Pos + Past(dI[di]) + A3sg");
+        assertParseCorrect("yenildi", "yen(yenmek)+Verb+Verb+Pass(+nIl[il])+Pos+Past(dI[di])+A3sg");
 
         removeRoots("ye");
         assertParseCorrect("yerleştirilmiş", "yerleş(yerleşmek)+Verb+Verb+Caus(dIr[tir])+Verb+Pass(+nIl[il])+Pos+Narr(mIş[miş])+A3sg", "yerleş(yerleşmek)+Verb+Verb+Caus(dIr[tir])+Verb+Pass(+nIl[il])+Pos+Narr(mIş[miş])+Adj+Zero");
