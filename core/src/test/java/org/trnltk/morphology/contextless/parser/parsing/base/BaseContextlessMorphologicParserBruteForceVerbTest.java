@@ -136,15 +136,12 @@ public abstract class BaseContextlessMorphologicParserBruteForceVerbTest extends
         assertParseCorrect("çıkar",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+A3sg",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+A3sg",
-                "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+A3sg",
                 "çıka(çıkamak)+Verb+Pos+Aor(+Ar[r])+A3sg",
                 "çıkar(çıkarmak)+Verb+Pos+Imp+A2sg",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero",
-                "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero",
                 "çıka(çıkamak)+Verb+Pos+Aor(+Ar[r])+Adj+Zero",
                 "çık(çıkmak)+Verb+Verb+Caus(Ar[ar])+Pos+Imp+A2sg",
-                "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
                 "çık(çıkmak)+Verb+Pos+Aor(+Ar[ar])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
                 "çıka(çıkamak)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
@@ -154,26 +151,21 @@ public abstract class BaseContextlessMorphologicParserBruteForceVerbTest extends
                 "ötercesin(ötercesinmek)+Verb+Pos+Opt(A[e])+A3sg",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adv+AsIf(cAs!InA[cesine])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adv+AsIf(cAs!InA[cesine])",
-                "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adv+AsIf(cAs!InA[cesine])",
                 "öte(ötemek)+Verb+Pos+Aor(+Ar[r])+Adv+AsIf(cAs!InA[cesine])",
                 "öterces(ötercesmek)+Verb+Verb+Pass(+In[in])+Pos+Opt(A[e])+A3sg",
                 "ötercesi(ötercesimek)+Verb+Verb+Pass(+In[n])+Pos+Opt(A[e])+A3sg",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
-                "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öte(ötemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Quite(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Quite(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
-                "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Adj+Quite(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öte(ötemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Adj+Quite(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
-                "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öt(ötmek)+Verb+Pos+Aor(+Ar[er])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])",
                 "öte(ötemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom+Adj+Equ(cA[ce])+Noun+Zero+A3sg+P3sg(+sI[si])+Dat(nA[ne])");
 
 
         assertParseCorrect("zebersin",
-                "zeb(zebmek)+Verb+Pos+Aor(+Ar[er])+A2sg(sIn[sin])",
                 "zeb(zebmek)+Verb+Pos+Aor(+Ar[er])+A2sg(sIn[sin])",
                 "zeb(zebmek)+Verb+Pos+Aor(+Ar[er])+A2sg(sIn[sin])",
                 "zebe(zebemek)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sin])",
@@ -187,27 +179,21 @@ public abstract class BaseContextlessMorphologicParserBruteForceVerbTest extends
     @Test
     public void should_parse_verbs_with_aorist_I() {
         assertParseCorrect("yatır",
-                "ya(yamak)+Verb+Verb+Caus(!t[t])+Pos+Aor(+Ir[ır])+A3sg",
-                "ya(yamak)+Verb+Verb+Caus(!t[t])+Verb+Caus(Ir[ır])+Pos+Imp+A2sg",
-                "yat(yatmak)+Verb+Pos+Aor(+Ir[ır])+A3sg",
-                "yat(yatmak)+Verb+Verb+Caus(Ir[ır])+Pos+Imp+A2sg",
-                "yatı(yatımak)+Verb+Pos+Aor(+Ar[r])+A3sg",
                 "yatır(yatırmak)+Verb+Pos+Imp+A2sg",
-                "yat(yatmak)+Verb+Pos+Aor(+Ir[ır])+Adj+Zero",
+                "yatı(yatımak)+Verb+Pos+Aor(+Ar[r])+A3sg",
                 "yatı(yatımak)+Verb+Pos+Aor(+Ar[r])+Adj+Zero",
+                "yat(yatmak)+Verb+Verb+Caus(Ir[ır])+Pos+Imp+A2sg",
+                "ya(yamak)+Verb+Verb+Caus(!t[t])+Pos+Aor(+Ir[ır])+A3sg",
                 "ya(yamak)+Verb+Verb+Caus(!t[t])+Pos+Aor(+Ir[ır])+Adj+Zero",
-                "yat(yatmak)+Verb+Pos+Aor(+Ir[ır])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
+                "ya(yamak)+Verb+Verb+Caus(!t[t])+Verb+Caus(Ir[ır])+Pos+Imp+A2sg",
                 "yatı(yatımak)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
                 "ya(yamak)+Verb+Verb+Caus(!t[t])+Pos+Aor(+Ir[ır])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
 
         assertParseCorrect("gelir",
-                "gel(gelmek)+Verb+Pos+Aor(+Ir[ir])+A3sg",
-                "geli(gelimek)+Verb+Pos+Aor(+Ar[r])+A3sg",
                 "gelir(gelirmek)+Verb+Pos+Imp+A2sg",
-                "gel(gelmek)+Verb+Pos+Aor(+Ir[ir])+Adj+Zero",
+                "geli(gelimek)+Verb+Pos+Aor(+Ar[r])+A3sg",
                 "geli(gelimek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero",
                 "gel(gelmek)+Verb+Verb+Caus(Ir[ir])+Pos+Imp+A2sg",
-                "gel(gelmek)+Verb+Pos+Aor(+Ir[ir])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom",
                 "geli(gelimek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
 
         assertParseCorrect("zopuracak",
@@ -282,15 +268,13 @@ public abstract class BaseContextlessMorphologicParserBruteForceVerbTest extends
     @Test
     public void should_parse_verbs_with_causative_dIr() {
         assertParseCorrect("aldırsın",
-                "ald(altmak)+Verb+Pos+Aor(+Ir[ır])+A2sg(sIn[sın])",
-                "ald(aldmak)+Verb+Pos+Aor(+Ir[ır])+A2sg(sIn[sın])",
-                "aldı(aldımak)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sın])",
-                "aldır(aldırmak)+Verb+Pos+Imp+A3sg(sIn[sın])",
                 "aldırsın(aldırsınmak)+Verb+Pos+Imp+A2sg",
+                "aldır(aldırmak)+Verb+Pos+Imp+A3sg(sIn[sın])",
+                "aldı(aldımak)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sın])",
+                "aldırsı(aldırsımak)+Verb+Verb+Pass(+In[n])+Pos+Imp+A2sg",
                 "al(almak)+Verb+Verb+Caus(dIr[dır])+Pos+Imp+A3sg(sIn[sın])",
-                "ald(altmak)+Verb+Verb+Caus(Ir[ır])+Pos+Imp+A3sg(sIn[sın])",
                 "ald(aldmak)+Verb+Verb+Caus(Ir[ır])+Pos+Imp+A3sg(sIn[sın])",
-                "aldırsı(aldırsımak)+Verb+Verb+Pass(+In[n])+Pos+Imp+A2sg");
+                "ald(altmak)+Verb+Verb+Caus(Ir[ır])+Pos+Imp+A3sg(sIn[sın])");
 
         assertParseCorrect("öldürelim",
                 "öldür(öldürmek)+Verb+Pos+Opt(A[e])+A1pl(lIm[lim])",

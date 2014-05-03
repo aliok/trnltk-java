@@ -93,7 +93,7 @@ public class DictionaryLoaderTest {
         assertThat(lexemes, hasItem(new ImmutableLexeme("addolmak", "addol", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("ahlat", "ahlat", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.NoVoicing, LexemeAttribute.Plural))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("akşam", "akşam", PrimaryPos.Noun, SecondaryPos.Time, ImmutableSet.of(LexemeAttribute.NoVoicing))));
-        assertThat(lexemes, hasItem(new ImmutableLexeme("atamak", "ata", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_I, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
+        assertThat(lexemes, hasItem(new ImmutableLexeme("atamak", "ata", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_It, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("sürtmek", "sürt", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_Ir, LexemeAttribute.NoVoicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("yemek", "yemek", PrimaryPos.Noun, null, ImmutableSet.of(LexemeAttribute.Voicing))));
         assertThat(lexemes, hasItem(new ImmutableLexeme("yemek", "ye", PrimaryPos.Verb, null, ImmutableSet.of(LexemeAttribute.Aorist_A, LexemeAttribute.Causative_dIr, LexemeAttribute.NoVoicing, LexemeAttribute.Passive_In, LexemeAttribute.ProgressiveVowelDrop))));

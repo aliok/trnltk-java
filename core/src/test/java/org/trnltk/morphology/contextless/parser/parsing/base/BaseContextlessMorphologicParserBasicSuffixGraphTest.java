@@ -137,9 +137,9 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
 
         removeRootsExceptTheOneWithPrimaryPos("el", PrimaryPos.Verb);
 
-        assertParseCorrect("elerim", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom");
-        assertParseCorrect("elersin", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+A2sg(sIn[sin])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sin])");
-        assertParseCorrect("eler", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+A3sg", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A3sg", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Adj+Zero", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
+        assertParseCorrect("elerim", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+P1sg(+Im[im])+Nom");
+        assertParseCorrect("elersin", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A2sg(sIn[sin])");
+        assertParseCorrect("eler", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+A3sg", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Adj+Zero+Noun+Zero+A3sg+Pnon+Nom");
 
         assertParseCorrect("eliyorum", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+A1sg(+Im[um])");
         assertParseCorrect("eliyorsun", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+A2sg(sIn[sun])");
@@ -287,9 +287,9 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrectForVerb("yapacakmış", "yap(yapmak)+Verb+Pos+Fut(+yAcAk[acak])+Narr(mIş[mış])+A3sg");
 
 
-        assertParseCorrectForVerb("elerdim", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Past(dI[di])+A1sg(+Im[m])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A1sg(+Im[m])");
-        assertParseCorrectForVerb("elerdin", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Past(dI[di])+A2sg(n[n])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A2sg(n[n])");
-        assertParseCorrectForVerb("elerdi", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Past(dI[di])+A3sg", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A3sg");
+        assertParseCorrectForVerb("elerdim", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A1sg(+Im[m])");
+        assertParseCorrectForVerb("elerdin", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A2sg(n[n])");
+        assertParseCorrectForVerb("elerdi", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A3sg");
 
         assertParseCorrectForVerb("eliyordum", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Past(dI[du])+A1sg(+Im[m])");
         assertParseCorrectForVerb("eliyordun", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Past(dI[du])+A2sg(n[n])");
@@ -308,9 +308,9 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrectForVerb("elemişti", "ele(elemek)+Verb+Pos+Narr(mIş[miş])+Past(dI[ti])+A3sg");
 
 
-        assertParseCorrectForVerb("elermişim", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Narr(mIş[miş])+A1sg(+Im[im])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A1sg(+Im[im])");
-        assertParseCorrectForVerb("elermişsin", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Narr(mIş[miş])+A2sg(sIn[sin])", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A2sg(sIn[sin])");
-        assertParseCorrectForVerb("elermiş", "ele(elemek)+Verb+Pos+Aor(+Ir[r])+Narr(mIş[miş])+A3sg", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A3sg");
+        assertParseCorrectForVerb("elermişim", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A1sg(+Im[im])");
+        assertParseCorrectForVerb("elermişsin", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A2sg(sIn[sin])");
+        assertParseCorrectForVerb("elermiş", "ele(elemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A3sg");
 
         assertParseCorrectForVerb("eliyormuşum", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Narr(mIş[muş])+A1sg(+Im[um])");
         assertParseCorrectForVerb("eliyormuşsun", "el(elemek)+Verb+Pos+Prog(Iyor[iyor])+Narr(mIş[muş])+A2sg(sIn[sun])");
@@ -1673,8 +1673,8 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrect("bekleseydiler", "bekle(beklemek)+Verb+Pos+Desr(sA[se])+Past(ydI[ydi])+A3pl(lAr[ler])");
 
         //Aor+Past
-        assertParseCorrect("beklerlerdi", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Past(dI[di])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+A3pl(lAr[ler])+Past(dI[di])");
-        assertParseCorrect("beklerdiler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A3pl(lAr[ler])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+Past(dI[di])+A3pl(lAr[ler])");
+        assertParseCorrect("beklerlerdi", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Past(dI[di])");
+        assertParseCorrect("beklerdiler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Past(dI[di])+A3pl(lAr[ler])");
 
         //Prog+Past
         assertParseCorrect("bekliyorlardı", "bekl(beklemek)+Verb+Pos+Prog(Iyor[iyor])+A3pl(lAr[lar])+Past(dI[dı])");
@@ -1710,8 +1710,8 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         assertParseCorrect("bekleseymişler", "bekle(beklemek)+Verb+Pos+Desr(sA[se])+Narr(ymIş[ymiş])+A3pl(lAr[ler])");
 
         //Aor+Narr
-        assertParseCorrect("beklerlermiş", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Narr(mIş[miş])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+A3pl(lAr[ler])+Narr(mIş[miş])");
-        assertParseCorrect("beklermişler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A3pl(lAr[ler])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+Narr(mIş[miş])+A3pl(lAr[ler])");
+        assertParseCorrect("beklerlermiş", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Narr(mIş[miş])");
+        assertParseCorrect("beklermişler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Narr(mIş[miş])+A3pl(lAr[ler])");
 
         //Prog+Narr
         assertParseCorrect("bekliyorlarmış", "bekl(beklemek)+Verb+Pos+Prog(Iyor[iyor])+A3pl(lAr[lar])+Narr(mIş[mış])");
@@ -1747,8 +1747,8 @@ public abstract class BaseContextlessMorphologicParserBasicSuffixGraphTest exten
         //assertParseCorrect("bekleseymişler", "");
 
         //Aor+Cond
-        assertParseCorrect("beklerlerse", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Cond(+ysA[se])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+A3pl(lAr[ler])+Cond(+ysA[se])");
-        assertParseCorrect("beklerseler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Cond(+ysA[se])+A3pl(lAr[ler])", "bekle(beklemek)+Verb+Pos+Aor(+Ir[r])+Cond(+ysA[se])+A3pl(lAr[ler])");
+        assertParseCorrect("beklerlerse", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+A3pl(lAr[ler])+Cond(+ysA[se])");
+        assertParseCorrect("beklerseler", "bekle(beklemek)+Verb+Pos+Aor(+Ar[r])+Cond(+ysA[se])+A3pl(lAr[ler])");
 
         //Prog+Cond
         assertParseCorrect("bekliyorlarsa", "bekl(beklemek)+Verb+Pos+Prog(Iyor[iyor])+A3pl(lAr[lar])+Cond(+ysA[sa])");
