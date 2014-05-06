@@ -397,7 +397,7 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         final Suffix A2Pl_Pron = this.suffixGraph.getSuffix("A2Pl_Pron");
         final Suffix P2Pl_Pron = this.suffixGraph.getSuffix("P2Pl_Pron");
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
-        final Suffix P3Pl_Pron = this.suffixGraph.getSuffix("P3Pl_Pron");
+        final Suffix P3Sp_Pron = this.suffixGraph.getSuffix("P3Sp_Pron");
 
         ////////// A1Sg
         this.pathBuilder(root_kendi).s(A1Sg_Pron).s(P1Sg_Pron, "m").s("Nom_Pron").add();
@@ -486,15 +486,15 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_kendi).s(A2Pl_Pron, "ler").s(P2Pl_Pron, "iniz").s("Nom_Pron_Deriv").add();
 
         ////////// A3pl
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Nom_Pron").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Acc_Pron", "ni").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Dat_Pron", "ne").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Loc_Pron", "nde").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Abl_Pron", "nden").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Ins_Pron", "yle").add();
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Gen_Pron", "nin").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Nom_Pron").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Acc_Pron", "ni").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Dat_Pron", "ne").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Loc_Pron", "nde").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Abl_Pron", "nden").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Ins_Pron", "yle").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Gen_Pron", "nin").add();
 
-        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Pl_Pron).s("Nom_Pron_Deriv").add();
+        this.pathBuilder(root_kendi).s(A3Pl_Pron, "leri").s(P3Sp_Pron).s("Nom_Pron_Deriv").add();
     }
 
     void createPredefinedPathOf_hepsi() {
@@ -506,7 +506,7 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         final Suffix A2Pl_Pron = this.suffixGraph.getSuffix("A2Pl_Pron");
         final Suffix P2Pl_Pron = this.suffixGraph.getSuffix("P2Pl_Pron");
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
-        final Suffix P3Pl_Pron = this.suffixGraph.getSuffix("P3Pl_Pron");
+        final Suffix P3Sp_Pron = this.suffixGraph.getSuffix("P3Sp_Pron");
 
         ////////// No A1Sg
 
@@ -540,16 +540,16 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
 
         ////////// A3pl
 
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Nom_Pron").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Acc_Pron", "ni").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Dat_Pron", "ne").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Loc_Pron", "nde").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Abl_Pron", "nden").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Ins_Pron", "yle").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Gen_Pron", "nin").add();
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("AccordingTo", "nce").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Nom_Pron").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Acc_Pron", "ni").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Dat_Pron", "ne").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Loc_Pron", "nde").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Abl_Pron", "nden").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Ins_Pron", "yle").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Gen_Pron", "nin").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("AccordingTo", "nce").add();
 
-        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Pl_Pron).s("Nom_Pron_Deriv").add();
+        this.pathBuilder(root_hepsi).s(A3Pl_Pron).s(P3Sp_Pron).s("Nom_Pron_Deriv").add();
     }
 
     void createPredefinedPathOf_herkes() {
@@ -681,7 +681,7 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
 
         this.pathBuilder(root_ne).s(A3Sg_Pron).s("P2Pl_Pron", "yiniz").add();
 
-        this.pathBuilder(root_ne).s(A3Sg_Pron).s("P3Pl_Pron", "leri").add();
+        this.pathBuilder(root_ne).s(A3Sg_Pron).s("P3Sp_Pron", "leri").add();
 
         this.pathBuilder(root_ne).s(A3Sg_Pron).s("Pnon_Pron").s("Gen_Pron", "yin").add();
 
@@ -822,7 +822,7 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_birbiri).s("A1Pl_Pron").s("P1Pl_Pron", "miz").add();
         this.pathBuilder(root_birbiri).s("A2Pl_Pron").s("P2Pl_Pron", "niz").add();
 
-        this.pathBuilder(root_birbir).s("A3Pl_Pron").s("P3Pl_Pron", "leri").add();
+        this.pathBuilder(root_birbir).s("A3Pl_Pron").s("P3Sp_Pron", "leri").add();
     }
 
     void createPredefinedPathOf_cogu_bircogu_coklari_bircoklari() {
@@ -841,9 +841,9 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_bircogu).s(A3Sg_Pron).s("P1Pl_Pron", "muz").add();
         this.pathBuilder(root_bircogu).s(A3Sg_Pron).s("P2Pl_Pron", "nuz").add();
 
-        this.pathBuilder(root_coklari).s(A3Sg_Pron).s("P3Pl_Pron").add();
+        this.pathBuilder(root_coklari).s(A3Sg_Pron).s("P3Sp_Pron").add();
 
-        this.pathBuilder(root_bircoklari).s(A3Sg_Pron).s("P3Pl_Pron").add();
+        this.pathBuilder(root_bircoklari).s(A3Sg_Pron).s("P3Sp_Pron").add();
     }
 
     void createPredefinedPathOf_birkaci() {
@@ -872,7 +872,7 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_digeri).s(A3Sg_Pron).s("P1Pl_Pron", "miz").add();
         this.pathBuilder(root_digeri).s(A3Sg_Pron).s("P2Pl_Pron", "niz").add();
 
-        this.pathBuilder(root_digerleri).s(A3Sg_Pron).s("P3Pl_Pron").add();
+        this.pathBuilder(root_digerleri).s(A3Sg_Pron).s("P3Sp_Pron").add();
         this.pathBuilder(root_digerleri).s(A3Sg_Pron).s("P1Pl_Pron", "miz").add();
         this.pathBuilder(root_digerleri).s(A3Sg_Pron).s("P2Pl_Pron", "niz").add();
     }

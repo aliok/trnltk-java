@@ -116,6 +116,27 @@ public class SuffixGraphDrawingTest {
     }
 
     @Test
+    public void shouldDumpBasicRASuffixGraphInDotFormatForPronounRelatedNodes() throws Exception {
+        final BasicRASuffixGraph graph = new BasicRASuffixGraph();
+        graph.initialize();
+
+
+        Predicate<SuffixGraphState> sourceNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("PRON");
+            }
+        };
+        Predicate<SuffixGraphState> targetNodePredicate = new Predicate<SuffixGraphState>() {
+            @Override
+            public boolean apply(SuffixGraphState input) {
+                return input.getName().startsWith("PRON");
+            }
+        };
+        this.dumpSuffixGraphInDotFormat(new File("core/target/ra_pron.dot"), graph, sourceNodePredicate, targetNodePredicate);
+    }
+
+    @Test
     public void shouldDumpSampleGraphInDotFormat() throws Exception {
         final BaseSuffixGraph graph = new SampleSuffixGraph();
         graph.initialize();

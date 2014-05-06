@@ -61,7 +61,7 @@ public class MorphemeContainerFormatter {
         b.append(String.format("%s+%s", lexeme.getLemmaRoot(), morphemeContainer.getRootState().getPrimaryPos().getStringForm()));
 
         if (lexeme.getSecondaryPos() != null)
-            b.append("+").append(lexeme.getSecondaryPos());
+            b.append("+").append(lexeme.getSecondaryPos().getStringForm());
 
         if (morphemeContainer.hasTransitions()) {
             for (SuffixTransition suffixTransition : morphemeContainer.getSuffixTransitions()) {

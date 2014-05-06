@@ -192,7 +192,10 @@ Bkz: yaparcasina
     - benim cogum / cogumun      : N/A
     - senin cogun / cogunun      : N/A
 
-
+- nereleri/buralari/suralari/oralari --> Sadece Nominative ve Accusative hali mumkun. Ayrica, A3Pl+P3sp olayini burada da kullan. Sadece su asagidaki ikisi mumkun olsun:
+Bkz: sokaklari
+    - nere(nere)+Pron+Ques+A3pl(ler)+P3sp(i)+Nom
+    - nere(nere)+Pron+Ques+A3pl(ler)+Pnon+Acc(+yI[i])
 
 Yapilacaklar
 ===================

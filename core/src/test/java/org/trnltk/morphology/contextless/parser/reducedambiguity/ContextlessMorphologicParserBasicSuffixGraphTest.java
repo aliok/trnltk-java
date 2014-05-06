@@ -94,13 +94,19 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         return this.parser.parse(new TurkishSequence(surfaceToParse));
     }
 
-    private final ImmutableSet<String> NOT_ALLOWED_CASES = new ImmutableSet.Builder<String>()
+    private final ImmutableSet<String> DISALLOWED_CASES = new ImmutableSet.Builder<String>()
             // '>' char means parse result end
 
             .add("A3sg+P3pl")       // e.g. sokaklari
             .add("Adj+Zero+Noun+Zero+A3sg+Pnon+Nom>")        // kirmizi --> shouldn't be tagged as a noun in this stage!
             .add("Adj+With+Noun+Zero+A3sg+Pnon+Nom>")        // kirmizili --> shouldn't be tagged as a noun in this stage!
             .add("o(o)+Pron+Demons").add("o(o)+Pron+Pers")
+            .build();
+
+    private final ImmutableSet<String> DISALLOWED_CASES_EXCEPTIONS = new ImmutableSet.Builder<String>()
+            // '>' char means parse result end
+
+//            .add("nere+Pron+Ques+A3sg+P3pl")       // e.g. one parse result of nereleri
             .build();
 
     @Override
@@ -124,20 +130,31 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         for (String formattedParseResult : simpleFormattedParseResults) {
             formattedParseResult = '<' + formattedParseResult + '>';        // add special chars to the start and end to allow matching by them. e.g. to have sth like "a parse result cannot end with XYZ"
 
-            for (String notAllowedCase : NOT_ALLOWED_CASES) {
-                if (formattedParseResult.contains(notAllowedCase)) {
-                    StringBuilder failMessageBuilder = new StringBuilder("A not allowed case is found!")
-                            .append("\n Surface : ").append(surfaceToParse)
-                            .append("\n Not allowed case : ").append(notAllowedCase)
-                            .append("\n Parse results : ");
-
-                    for (String parseResult : withFormsFormattedParseResults) {
-                        failMessageBuilder.append("\n - ").append(parseResult);
-                    }
-
-                    Assert.fail(failMessageBuilder.toString());
+            boolean isDisallowedCaseException = false;
+            for (String disallowedCaseException : DISALLOWED_CASES_EXCEPTIONS) {
+                if (formattedParseResult.contains(disallowedCaseException)) {
+                    isDisallowedCaseException = true;
+                    break;
                 }
             }
+
+            if(!isDisallowedCaseException){
+                for (String disallowedAllowedCase : DISALLOWED_CASES) {
+                    if (formattedParseResult.contains(disallowedAllowedCase)) {
+                        StringBuilder failMessageBuilder = new StringBuilder("A not allowed case is found!")
+                                .append("\n Surface : ").append(surfaceToParse)
+                                .append("\n Disallowed case : ").append(disallowedAllowedCase)
+                                .append("\n Parse results : ");
+
+                        for (String parseResult : withFormsFormattedParseResults) {
+                            failMessageBuilder.append("\n - ").append(parseResult);
+                        }
+
+                        Assert.fail(failMessageBuilder.toString());
+                    }
+                }
+            }
+
         }
 
         return withFormsFormattedParseResults;
@@ -784,7 +801,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("neresi", "nere(nere)+Pron+Ques+A3sg+P3sg(+sI[si])+Nom");
         assertParseCorrect("neremiz", "nere(nere)+Pron+Ques+A3sg+P1pl(+ImIz[miz])+Nom");
         assertParseCorrect("nereniz", "nere(nere)+Pron+Ques+A3sg+P2pl(+InIz[niz])+Nom");
-        assertParseCorrect("nereleri", "nere(nere)+Pron+Ques+A3pl(lAr[ler])+P3sp(+sI[i])+Nom", "nereleri", "nere(nere)+Pron+Ques+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
+        assertParseCorrect("nereleri", "nere(nere)+Pron+Ques+A3pl(lAr[ler])+P3sp(!I[i])+Nom", "nere(nere)+Pron+Ques+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
 
         assertParseCorrect("nerenden", "nere(nere)+Pron+Ques+A3sg+P2sg(+In[n])+Abl(dAn[den])");
         assertParseCorrect("neresine", "nere(nere)+Pron+Ques+A3sg+P3sg(+sI[si])+Dat(nA[ne])");
@@ -802,7 +819,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kimsesi", "kimse(kimse)+Pron+A3sg+P3sg(+sI[si])+Nom");
         assertParseCorrect("kimsemiz", "kimse(kimse)+Pron+A3sg+P1pl(+ImIz[miz])+Nom");
         assertParseCorrect("kimseniz", "kimse(kimse)+Pron+A3sg+P2pl(+InIz[niz])+Nom");
-        assertParseCorrect("kimseleri", "kimse(kimse)+Pron+A3pl(lAr[ler])+P3sp(+sI[i])+Nom", "kimse(kimse)+Pron+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
+        assertParseCorrect("kimseleri", "kimse(kimse)+Pron+A3pl(lAr[ler])+P3sp(!I[i])+Nom", "kimse(kimse)+Pron+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
         assertParseCorrect("kimselerim", "kimse(kimse)+Pron+A3pl(lAr[ler])+P1sg(+Im[im])+Nom");
         assertParseCorrect("kimselerimizde", "kimse(kimse)+Pron+A3pl(lAr[ler])+P1pl(+ImIz[imiz])+Loc(dA[de])");
         assertParseCorrect("kimseler", "kimse(kimse)+Pron+A3pl(lAr[ler])+Pnon+Nom");
@@ -839,7 +856,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("burası", "bura(bura)+Pron+A3sg+P3sg(+sI[sı])+Nom");
         assertParseCorrect("buramız", "bura(bura)+Pron+A3sg+P1pl(+ImIz[mız])+Nom");
         assertParseCorrect("buranız", "bura(bura)+Pron+A3sg+P2pl(+InIz[nız])+Nom");
-        assertParseCorrect("buraları", "bura(bura)+Pron+A3pl(lAr[lar])+P3sp(+sI[ı])+Nom", "bura(bura)+Pron+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])");
+        assertParseCorrect("buraları", "bura(bura)+Pron+A3pl(lAr[lar])+P3sp(!I[ı])+Nom", "bura(bura)+Pron+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])");
 
         assertParseCorrect("burandan", "bura(bura)+Pron+A3sg+P2sg(+In[n])+Abl(dAn[dan])");
         assertParseCorrect("burasına", "bura(bura)+Pron+A3sg+P3sg(+sI[sı])+Dat(nA[na])");
@@ -1139,7 +1156,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendi", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Nom");
         assertParseCorrect("kendimiz", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Nom");
         assertParseCorrect("kendiniz", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Nom");
-        assertParseCorrect("kendileri", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Nom");
+        assertParseCorrect("kendileri", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Nom");
         assertParseCorrect("kendisi", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Nom");
         assertParseCorrect("kendilerimiz", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Nom");
         assertParseCorrect("kendileriniz", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Nom");
@@ -1148,7 +1165,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendini", "kendi(kendi)+Pron+Reflex+A2sg+P2sg(n[n])+Acc(i[i])", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Acc(ni[ni])");
         assertParseCorrect("kendimizi", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Acc(i[i])");
         assertParseCorrect("kendinizi", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Acc(i[i])");
-        assertParseCorrect("kendilerini", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Acc(ni[ni])");
+        assertParseCorrect("kendilerini", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Acc(ni[ni])");
         assertParseCorrect("kendisini", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Acc(ni[ni])");
         assertParseCorrect("kendilerimizi", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Acc(i[i])");
         assertParseCorrect("kendilerinizi", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Acc(i[i])");
@@ -1157,7 +1174,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendine", "kendi(kendi)+Pron+Reflex+A2sg+P2sg(n[n])+Dat(e[e])", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Dat(ne[ne])");
         assertParseCorrect("kendimize", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Dat(e[e])");
         assertParseCorrect("kendinize", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Dat(e[e])");
-        assertParseCorrect("kendilerine", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Dat(ne[ne])");
+        assertParseCorrect("kendilerine", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Dat(ne[ne])");
         assertParseCorrect("kendisine", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Dat(ne[ne])");
         assertParseCorrect("kendilerimize", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Dat(e[e])");
         assertParseCorrect("kendilerinize", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Dat(e[e])");
@@ -1166,7 +1183,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendinde", "kendi(kendi)+Pron+Reflex+A2sg+P2sg(n[n])+Loc(de[de])", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Loc(nde[nde])");
         assertParseCorrect("kendimizde", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Loc(de[de])");
         assertParseCorrect("kendinizde", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Loc(de[de])");
-        assertParseCorrect("kendilerinde", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Loc(nde[nde])");
+        assertParseCorrect("kendilerinde", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Loc(nde[nde])");
         assertParseCorrect("kendisinde", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Loc(nde[nde])");
         assertParseCorrect("kendilerimizde", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Loc(de[de])");
         assertParseCorrect("kendilerinizde", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Loc(de[de])");
@@ -1175,7 +1192,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendinden", "kendi(kendi)+Pron+Reflex+A2sg+P2sg(n[n])+Abl(den[den])", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Abl(nden[nden])", "kendinden(kendinden)+Adv");
         assertParseCorrect("kendimizden", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Abl(den[den])");
         assertParseCorrect("kendinizden", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Abl(den[den])");
-        assertParseCorrect("kendilerinden", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Abl(nden[nden])");
+        assertParseCorrect("kendilerinden", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Abl(nden[nden])");
         assertParseCorrect("kendisinden", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Abl(nden[nden])");
         assertParseCorrect("kendilerimizden", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Abl(den[den])");
         assertParseCorrect("kendilerinizden", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Abl(den[den])");
@@ -1184,7 +1201,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendinin", "kendi(kendi)+Pron+Reflex+A2sg+P2sg(n[n])+Gen(in[in])", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Gen(nin[nin])");
         assertParseCorrect("kendimizin", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Gen(in[in])");
         assertParseCorrect("kendinizin", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Gen(in[in])");
-        assertParseCorrect("kendilerinin", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Gen(nin[nin])");
+        assertParseCorrect("kendilerinin", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Gen(nin[nin])");
         assertParseCorrect("kendisinin", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Gen(nin[nin])");
         assertParseCorrect("kendilerimizin", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Gen(in[in])");
         assertParseCorrect("kendilerinizin", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Gen(in[in])");
@@ -1194,7 +1211,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("kendiyle", "kendi(kendi)+Pron+Reflex+A3sg+P3sg+Ins(yle[yle])");
         assertParseCorrect("kendimizle", "kendi(kendi)+Pron+Reflex+A1pl+P1pl(miz[miz])+Ins(le[le])");
         assertParseCorrect("kendinizle", "kendi(kendi)+Pron+Reflex+A2pl+P2pl(niz[niz])+Ins(le[le])");
-        assertParseCorrect("kendileriyle", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3pl+Ins(yle[yle])");
+        assertParseCorrect("kendileriyle", "kendi(kendi)+Pron+Reflex+A3pl(leri[leri])+P3sp+Ins(yle[yle])");
         assertParseCorrect("kendisiyle", "kendi(kendi)+Pron+Reflex+A3sg+P3sg(si[si])+Ins(yle[yle])");
         assertParseCorrect("kendilerimizle", "kendi(kendi)+Pron+Reflex+A1pl(ler[ler])+P1pl(imiz[imiz])+Ins(le[le])");
         assertParseCorrect("kendilerinizle", "kendi(kendi)+Pron+Reflex+A2pl(ler[ler])+P2pl(iniz[iniz])+Ins(le[le])");
@@ -1202,8 +1219,8 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
 
     @Test
     public void shouldParsePronounHepsi() {
-        assertParseCorrect("hepsi", "hepsi(hepsi)+Pron+A3pl+P3pl+Nom");
-        assertParseCorrect("hepsini", "hepsi(hepsi)+Pron+A3pl+P3pl+Acc(ni[ni])");
+        assertParseCorrect("hepsi", "hepsi(hepsi)+Pron+A3pl+P3sp+Nom");
+        assertParseCorrect("hepsini", "hepsi(hepsi)+Pron+A3pl+P3sp+Acc(ni[ni])");
         assertParseCorrect("hepimize", "hep(hepsi)+Pron+A1pl+P1pl(imiz[imiz])+Dat(e[e])");
         assertParseCorrect("hepinizle", "hep(hepsi)+Pron+A2pl+P2pl(iniz[iniz])+Ins(le[le])");
     }

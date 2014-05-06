@@ -312,7 +312,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
     private final Suffix P3Sg_Pron = registerSuffix("P3Sg_Pron", Pronoun_Possessions_Group, "P3sg");
     private final Suffix P1Pl_Pron = registerSuffix("P1Pl_Pron", Pronoun_Possessions_Group, "P1pl");
     private final Suffix P2Pl_Pron = registerSuffix("P2Pl_Pron", Pronoun_Possessions_Group, "P2pl");
-    private final Suffix P3Pl_Pron = registerSuffix("P3Pl_Pron", Pronoun_Possessions_Group, "P3pl");
+    private final Suffix P3Sp_Pron = registerSuffix("P3Sp_Pron", Pronoun_Possessions_Group, "P3sp");        // see P3Sp_Noun
 
     ///////////////  Pronoun cases
     private final SuffixGroup Pronoun_Case_Group = new SuffixGroup("Pronoun_Case_Group");
@@ -1068,7 +1068,7 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         //P2Sg_Pron forms for "ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
 
         PRONOUN_WITH_AGREEMENT.addOutSuffix(P3Sg_Pron, PRONOUN_WITH_POSSESSION);
-        P3Sg_Pron.addSuffixForm("+sI");
+        P3Sg_Pron.addSuffixForm("+sI", doesntComeAfter(A3Pl_Pron));
         //P3Sg_Pron forms for "ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
 
         PRONOUN_WITH_AGREEMENT.addOutSuffix(P1Pl_Pron, PRONOUN_WITH_POSSESSION);
@@ -1079,17 +1079,16 @@ public class BasicRASuffixGraph extends BaseSuffixGraph {
         P2Pl_Pron.addSuffixForm("+InIz");
         //P2Pl_Pron forms for "ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
 
-        PRONOUN_WITH_AGREEMENT.addOutSuffix(P3Pl_Pron, PRONOUN_WITH_POSSESSION);
-        P3Pl_Pron.addSuffixForm("lAr!I");
-        P3Pl_Pron.addSuffixForm("!I", comesAfter(A3Pl_Pron));
-        //P3Pl_Pron forms for ""ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
+        PRONOUN_WITH_AGREEMENT.addOutSuffix(P3Sp_Pron, PRONOUN_WITH_POSSESSION);
+        P3Sp_Pron.addSuffixForm("!I", comesAfter(A3Pl_Pron));
+        //P3sp_Pron forms for ""ben", "sen", "o", "biz", "siz", "onlar", "bu", "su", "kendi" are predefined
 
     }
 
     private void registerPronounCases() {
         final Specification<MorphemeContainer> comes_after_P3 = Specifications.or(
                 comesAfter(P3Sg_Pron),
-                comesAfter(P3Pl_Pron),
+                comesAfter(P3Sp_Pron),
                 comesAfterDerivation(RelPron_A3Sg_Noun),
                 comesAfterDerivation(RelPron_A3Sg_Pron)
         );
