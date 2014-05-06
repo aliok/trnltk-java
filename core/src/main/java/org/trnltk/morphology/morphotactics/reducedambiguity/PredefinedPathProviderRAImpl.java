@@ -65,19 +65,18 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
 
         this.createPredefinedPathOf_su();
 
+        this.createPredefinedPathOf_o_pron();
+        this.createPredefinedPathOf_onlar_pron();
+
         this.createPredefinedPathOf_ben();
         this.createPredefinedPathOf_sen();
-        this.createPredefinedPathOf_o_pron_pers();
         this.createPredefinedPathOf_biz();
         this.createPredefinedPathOf_siz();
-        this.createPredefinedPathOf_onlar_pron_pers();
 
         this.createPredefinedPathOf_bu_pron_demons();
         this.createPredefinedPathOf_su_pron_demons();
-        this.createPredefinedPathOf_o_pron_demons();
         this.createPredefinedPathOf_bunlar_pron_demons();
         this.createPredefinedPathOf_sunlar_pron_demons();
-        this.createPredefinedPathOf_onlar_pron_demons();
 
         this.createPredefinedPathOf_kendi();
         this.createPredefinedPathOf_hepsi();
@@ -219,8 +218,8 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_sen).s(A2Sg_Pron).s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
 
-    void createPredefinedPathOf_o_pron_pers() {
-        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondaryPos.Personal);
+    void createPredefinedPathOf_o_pron() {
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, null);
 
         final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -233,7 +232,6 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Ins_Pron", "nla").add();
         this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Ins_Pron", "nunla").add();
         this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Gen_Pron", "nun").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("AccordingTo", "nca").add();
 
         this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
@@ -298,8 +296,8 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_siz).s(A2Pl_Pron, "ler").s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
 
-    void createPredefinedPathOf_onlar_pron_pers() {
-        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondaryPos.Personal);
+    void createPredefinedPathOf_onlar_pron() {
+        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, null);
 
         final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
         final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
@@ -311,7 +309,6 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Abl_Pron", "dan").add();
         this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Ins_Pron", "la").add();
         this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Gen_Pron", "ın").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("AccordingTo", "ca").add();
 
         this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
@@ -352,24 +349,6 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_su).s(A3Sg_Pron).s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
 
-    void createPredefinedPathOf_o_pron_demons() {
-        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondaryPos.Demonstrative);
-
-        final Suffix A3Sg_Pron = this.suffixGraph.getSuffix("A3Sg_Pron");
-        final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
-
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Nom_Pron").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Acc_Pron", "nu").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Dat_Pron", "na").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Loc_Pron", "nda").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Abl_Pron", "ndan").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Ins_Pron", "nla").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Ins_Pron", "nunla").add();
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Gen_Pron", "nun").add();
-
-        this.pathBuilder(root_o).s(A3Sg_Pron).s(Pnon_Pron).s("Nom_Pron_Deriv").add();
-    }
-
     void createPredefinedPathOf_bunlar_pron_demons() {
         final Root root_bu = this.findRoot("bu", PrimaryPos.Pronoun, SecondaryPos.Demonstrative);
 
@@ -402,23 +381,6 @@ public class PredefinedPathProviderRAImpl implements PredefinedPathProvider {
         this.pathBuilder(root_su).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Gen_Pron", "ın").add();
 
         this.pathBuilder(root_su).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Nom_Pron_Deriv").add();
-    }
-
-    void createPredefinedPathOf_onlar_pron_demons() {
-        final Root root_o = this.findRoot("o", PrimaryPos.Pronoun, SecondaryPos.Demonstrative);
-
-        final Suffix A3Pl_Pron = this.suffixGraph.getSuffix("A3Pl_Pron");
-        final Suffix Pnon_Pron = this.suffixGraph.getSuffix("Pnon_Pron");
-
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Nom_Pron").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Acc_Pron", "ı").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Dat_Pron", "a").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Loc_Pron", "da").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Abl_Pron", "dan").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Ins_Pron", "la").add();
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Gen_Pron", "ın").add();
-
-        this.pathBuilder(root_o).s(A3Pl_Pron, "nlar").s(Pnon_Pron).s("Nom_Pron_Deriv").add();
     }
 
     void createPredefinedPathOf_kendi() {
