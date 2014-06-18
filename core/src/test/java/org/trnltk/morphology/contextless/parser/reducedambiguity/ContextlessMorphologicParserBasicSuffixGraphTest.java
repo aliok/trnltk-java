@@ -165,6 +165,16 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         throw new IllegalStateException("Since this is reduced ambiguity tests, reducing ambiguity in the matcher is not appropriate!");
     }
 
+    @Override
+    protected void assertParseExists(String surfaceToParse, String... expectedParseResults) {
+        throw new IllegalStateException("Since this is reduced ambiguity tests, reducing ambiguity in the matcher is not appropriate!");
+    }
+
+    @Override
+    protected void assertParseDoesntExist(String surfaceToParse, String... expectedParseResults) {
+        throw new IllegalStateException("Since this is reduced ambiguity tests, reducing ambiguity in the matcher is not appropriate!");
+    }
+
     @Test
     public void shouldParseNounCases() {
         assertParseCorrect("sokak", "sokak(sokak)+Noun+A3sg+Pnon+Nom");

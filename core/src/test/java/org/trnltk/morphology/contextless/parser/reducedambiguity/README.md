@@ -128,19 +128,46 @@ Bkz : yapmakta
 - onlar --> Bkz : o
 
 
-- kim / kimi / kimisi / kimileri -->        Buna karar veremedim. Buyuk ihtimalle kim, kimi, kimisi ve kimileri icin predefined path tanimlayacam
-    - kim geldi?     :                                                                   : kesin -> kim+Soru
-    - kim geldiyse   :                                                                   : kesin -> kim+Soru
-    - kimi insan     :                                                                   : kesin -> kimi = bazi
-    - kimim          :
-    - kimin          : kimin kimsen / kimin arabasi                                      : kimim'deki durum / Genitive durumu.
-    - kimimiz        :
-    - kiminiz        :
-    - kimilerimiz    :
-    - kimileriniz    :
-    - kimisi         : tek mumkun durum kimi+                                                                   : kesin -> kimi = bazi
-    - kimileri       : zamir
-    - kimleri        : kimleri aradin?
+- kim / kimi / kimisi / kimileri -->  GECTIM simdilik. Cok cok zor durumlar, Cok fazla istisna var. Bunlar icin hep predefined path tanimlamak veya baska bisey yapmak gerek! Cok fazla istisnai durum var ve istisnai durumlar birbirine benzemiyor (bkz kimim vs kimin) Temel olarak 3 durum var:
+    1. kim+Pron+Ques : kim geldi ?
+    2. kim+Pron      : benim kimim kimsem yok
+    3. kimi+Pron     : kimi oyle yapar, kimi boyle
+    - **2. durumu simdilik dusunmeyelim. Cunku 'kimim kimsem' kalibi disinda baska bir ornek yok.**
+
+    - kimim / kimimi / kimime vs.                                                    1  : kim+Pron+Ques+Cop sadece (kimim ben?). Cunku 2. durumu iptal ettik ve "bazim" mantikli olmuyor. Aslinda 'kimimi' vs de mantikli degil ama bunlari elemek cok is.
+    - kimlerim                                                                       -  : N/A cunku 2. duruma dusuyor bu (kimlerim kimselerim yok benim). "kimlerim ben?" olmuyor
+    - kimilerim                                                                      -  : N/A cunku 3 ornek de sacma: "kimilerim geldi?" / "kimilerim kimselerim yok" / "kimilerim oyle yapar"
+
+    - kimsin                                                                         1  : kim+Pron+Ques+Cop
+    - kimin / kimini / kimine vs.                                                    1  : kim+Gen sadece (kimin kitabi bu?). 2. durumu iptal ettigimiz icin 'senin kimin'='senin bazin' mantikli olmuyor. Bu durumda 'kimine' aslinda parseable olmamali ama bunu elemek cok is.
+    - kimlerin                                                                       1  : kim+Pron+Ques+A3pl+Gen sadece (kimlerin kitabi bu) cunku 2. durumu eledik
+    - kimilerin                                                                      -  : N/A cunku 3'u de sacma kimilerin geldi? / kimilerin kimselerin yok / kimilerin oyle yapar kimilerin boyle
+    - kimlersin                                                                      -  : N/A sacma
+
+    - kim                                                                            1  : kim+Pron+Ques cunku 2. durumu eledik
+    - kimi                                                                           3  : kimi+Pron sadece. 2. durumu eledigimiz icin. 1. durumu da salla
+    - kimisi                                                                         3  : kimi+Pron+P3sg sadece. bkz kimi
+    - kimler                                                                         1  :
+    - kimleri                                                                        1  : kimleri getirdin?
+    - kimileri                                                                       3  :
+
+    - kimiz                                                                          1  : kim+Pron+Ques
+    - kimimiz                                                                        3  : "kimimiz geldi?" durumunu salla. 1'e giriyor aslinda
+    - kimlerimiz                                                                     -  :
+    - kimilerimiz                                                                    3
+    - kimleriz                                                                       1
+
+    - kimsiniz                                                                       1  : kim+Pron+Ques
+    - kiminiz                                                                        3  : bkz. kimimiz
+    - kimleriniz                                                                     -  : bkz. kimlerin ve kimlerimiz
+    - kimileriniz                                                                    3  :
+    - kimlersiniz                                                                    1  :
+
+    - *Bazi diger iliskili durumlar*
+    - kimlerdenim                                                                    1
+    - kimlerinim                                                                     1
+    - kimlereyim                                                                     1
+    - kimlerdeyim                                                                    1
 
 
 - yapismak --> Recip durumunu engelle!
