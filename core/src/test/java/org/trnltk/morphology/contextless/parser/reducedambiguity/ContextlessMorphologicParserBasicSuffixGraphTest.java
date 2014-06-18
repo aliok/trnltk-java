@@ -840,15 +840,15 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
 
         assertParseCorrect("nerenden", "nere(nere)+Pron+Ques+A3sg+P2sg(+In[n])+Abl(dAn[den])");
 
-        assertParseCorrect("kimimiz", "kim(kim)+Pron+Ques+A3sg+P1pl(miz[imiz])+Nom");
-        assertParseCorrect("kimimizle", "kim(kim)+Pron+Ques+A3sg+P1pl(miz[imiz])+Ins(+ylA[le])");
-        assertParseCorrect("kimleri", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P3sp(+sI[i])+Nom", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
+        assertParseCorrect("kimimiz", "kimi(kimi)+Pron+A3sg+P1pl(miz[miz])+Nom","kim(kim)+Pron+Ques+A3sg+P1pl(+ImIz[imiz])+Nom");
+        assertParseCorrect("kimimizle", "kimi(kimi)+Pron+A3sg+P1pl(miz[miz])+Ins(+ylA[le])","kim(kim)+Pron+Ques+A3sg+P1pl(+ImIz[imiz])+Ins(+ylA[le])");
+        assertParseCorrect("kimleri", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P3sp(!I[i])+Nom", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+Pnon+Acc(+yI[i])");
         assertParseCorrect("kimlerimiz", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P1pl(+ImIz[imiz])+Nom");
         assertParseCorrect("kimlerimize", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P1pl(+ImIz[imiz])+Dat(+yA[e])");
         assertParseCorrect("kimlerimizin", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P1pl(+ImIz[imiz])+Gen(+nIn[in])");
         assertParseCorrect("kimlerimiz", "kim(kim)+Pron+Ques+A3pl(lAr[ler])+P1pl(+ImIz[imiz])+Nom");
-        assertParseCorrect("kimilerimize", "kimi(kimi)+Pron+A3pl(lAr[ler])+P1pl(+ImIz[miz])+Dat(+yA[e])");
-        assertParseCorrect("kimilerimizin", "kim(kimi)+Pron+A3pl(lAr[ler])+P1pl(+ImIz[miz])+Gen(+nIn[in])");
+        assertParseCorrect("kimilerimize", "kimileri(kimileri)+Pron+A3sg+P1pl(miz[miz])+Dat(+yA[e])");
+        assertParseCorrect("kimilerimizin", "kimileri(kimileri)+Pron+A3sg+P1pl(miz[miz])+Gen(+nIn[in])");
 
         assertParseCorrect("kimim", "kim(kim)+Pron+Ques+A3sg+P1sg(+Im[im])+Nom");
         assertParseCorrect("kimin", "kim(kim)+Pron+Ques+A3sg+P2sg(+In[in])+Nom", "kim(kim)+Pron+Ques+A3sg+Pnon+Gen(+nIn[in])");
@@ -938,8 +938,8 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
     public void shouldParsePointQualifiersForDerivedAdverbs() {
         assertParseCorrect("yaparkenki", "yap(yapmak)+Verb+Pos+Aor(+Ar[ar])+Adv+While(ken[ken])+Adj+PointQual(ki[ki])");
         assertParseCorrect("yapıncaki", "yap(yapmak)+Verb+Pos+Adv+When(+yIncA[ınca])+Adj+PointQual(ki[ki])");
-        assertParseCorrect("yapacakkenki", "XXXX");
-        assertParseCorrect("yapmışkenki", "XXXXX");
+        assertParseCorrect("yapacakkenki", "yap(yapmak)+Verb+Pos+Fut(+yAcAk[acak])+Adv+While(ken[ken])+Adj+PointQual(ki[ki])");
+        assertParseCorrect("yapmışkenki", "yap(yapmak)+Verb+Pos+Narr(mIş[mış])+Adv+While(ken[ken])+Adj+PointQual(ki[ki])");
 
         // there are more forms of derived adverbs, but they don"t make sense with "ki" suffix
     }
@@ -1034,7 +1034,7 @@ public class ContextlessMorphologicParserBasicSuffixGraphTest extends BaseContex
         assertParseCorrect("dendi", "de(demek)+Verb+Verb+Pass(+In[n])+Pos+Past(dI[di])+A3sg");
         assertParseCorrect("denildi", "de(demek)+Verb+Verb+Pass(+InIl[nil])+Pos+Past(dI[di])+A3sg");
         assertParseCorrect("yendi", "yen(yenmek)+Verb+Pos+Past(dI[di])+A3sg", "ye(yemek)+Verb+Verb+Pass(+In[n])+Pos+Past(dI[di])+A3sg");
-        assertParseCorrect("yenildi", "yen(yenmek)+Verb+Verb+Pass(+nIl[il])+Pos+Past(dI[di])+A3sg");
+        assertParseCorrect("yenildi", "ye(yemek)+Verb+Verb+Pass(+InIl[nil])+Pos+Past(dI[di])+A3sg","yen(yenmek)+Verb+Verb+Pass(+nIl[il])+Pos+Past(dI[di])+A3sg");
 
         removeRoots("ye");
         assertParseCorrect("yerleştirilmiş", "yerleş(yerleşmek)+Verb+Verb+Caus(dIr[tir])+Verb+Pass(+nIl[il])+Pos+Narr(mIş[miş])+A3sg", "yerleş(yerleşmek)+Verb+Verb+Caus(dIr[tir])+Verb+Pass(+nIl[il])+Pos+Narr(mIş[miş])+Adj+Zero");
