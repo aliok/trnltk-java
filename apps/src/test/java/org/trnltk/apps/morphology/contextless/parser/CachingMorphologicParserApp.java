@@ -22,17 +22,17 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.MapMaker;
 import com.google.common.io.Files;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.trnltk.apps.analysis.FrequentWordAnalysis;
 import org.trnltk.apps.commands.BulkParseCommand;
 import org.trnltk.apps.commands.SingleParseCommand;
-import org.trnltk.apps.commons.App;
-import org.trnltk.apps.commons.AppRunner;
-import org.trnltk.apps.commons.LoggingSettings;
-import org.trnltk.apps.commons.SampleFiles;
+import org.trnltk.apps.commons.*;
 import org.trnltk.model.lexicon.Root;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.CachingMorphologicParser;
@@ -52,12 +52,10 @@ import org.trnltk.morphology.morphotactics.*;
 import org.trnltk.morphology.phonetics.PhoneticsAnalyzer;
 import org.trnltk.morphology.phonetics.PhoneticsEngine;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Requires a lot of memory!
@@ -387,6 +385,135 @@ public class CachingMorphologicParserApp {
         System.out.println("Total time :" + stopWatch.toString());
         System.out.println("Nr of tokens : " + words.size());
         System.out.println("Avg time : " + (stopWatch.getTime() * 1.0d) / (words.size() * 1.0d) + " ms");
+    }
+
+    @App("Parse all sample corpus. Does an offline analysis to add most frequent words to cache in advance.")
+    public void parseWordsOfOneMillionSentences_withOfflineAnalysis_printParseResults() throws Exception {
+            /*
+            Total time :0:05:27.806
+            Nr of tokens : 18362187
+            Avg time : 0.01785223078274935 ms
+            */
+        LoggingSettings.turnOnLogger(LoggingSettings.Piece.FrequentWordAnalysis);
+
+        final Set<File> files = new HashSet<File>(SampleFiles.oneMillionSentencesTokenizedFiles());
+
+        final List<String> words = new ArrayList<String>();
+        final HashSet<String> uniqueWords = new HashSet<String>();
+
+        for (File tokenizedFile : files) {
+            final List<String> lines = Files.readLines(tokenizedFile, Charsets.UTF_8);
+            for (String line : lines) {
+                final ArrayList<String> strings = Lists.newArrayList(Splitter.on(" ").trimResults().omitEmptyStrings().split(line));
+                words.addAll(strings);
+                uniqueWords.addAll(strings);
+            }
+        }
+
+        System.out.println("Number of words : " + words.size());
+        System.out.println("Number of unique words : " + uniqueWords.size());
+        System.out.println("======================");
+
+        final MorphologicParserCache staticCache = new MorphologicParserCache() {
+
+            private ImmutableMap<String, List<MorphemeContainer>> cacheMap;
+            private boolean built;
+
+            @Override
+            public List<MorphemeContainer> get(String input) {
+                return this.cacheMap.get(input);
+            }
+
+            @Override
+            public void put(String input, List<MorphemeContainer> morphemeContainers) {
+                // do nothing
+            }
+
+            @Override
+            public void putAll(Map<String, List<MorphemeContainer>> map) {
+                // do nothing
+            }
+
+            @Override
+            public void build(MorphologicParser parser) {
+                final ImmutableMap.Builder<String, List<MorphemeContainer>> builder = new ImmutableMap.Builder<String, List<MorphemeContainer>>();
+                final FrequentWordAnalysis.FrequentWordAnalysisResult result = new FrequentWordAnalysis().run(words, 0.75);
+
+                final List<String> wordsToUseInCache = result.getWordsWithEnoughOccurrences();
+                for (String word : wordsToUseInCache) {
+                    builder.put(word, contextlessMorphologicParser.parseStr(word));
+                }
+                this.cacheMap = builder.build();
+                this.built = true;
+            }
+
+            @Override
+            public boolean isNotBuilt() {
+                return !this.built;
+            }
+        };
+
+
+        final ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+        final MorphologicParser[] parsers = new MorphologicParser[NUMBER_OF_THREADS];
+        for (int i = 0; i < parsers.length; i++) {
+            parsers[i] = new CachingMorphologicParser(
+                    staticCache,
+                    contextlessMorphologicParser, true);
+        }
+
+
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        final ConcurrentMap<String, List<String>> resultMap = new MapMaker()
+                .concurrencyLevel(NUMBER_OF_THREADS)
+                .initialCapacity(uniqueWords.size())
+                .makeMap();
+
+        for (int i = 0; i < words.size(); i = i + BULK_SIZE) {
+            final MorphologicParser parser = parsers[(i / BULK_SIZE) % NUMBER_OF_THREADS];
+            int start = i;
+            int end = i + BULK_SIZE < words.size() ? i + BULK_SIZE : words.size();
+            final List<String> subWordList = words.subList(start, end);
+            final int wordIndex = i;
+            pool.execute(new BulkParseCommand(parser, subWordList, wordIndex, false, resultMap));
+        }
+
+        pool.shutdown();
+        while (!pool.isTerminated()) {
+            System.out.println("Waiting pool to be terminated!");
+            pool.awaitTermination(1000, TimeUnit.MILLISECONDS);
+        }
+
+        stopWatch.stop();
+
+        System.out.println("Total time :" + stopWatch.toString());
+        System.out.println("Nr of tokens : " + words.size());
+        System.out.println("Avg time : " + (stopWatch.getTime() * 1.0d) / (words.size() * 1.0d) + " ms");
+
+        final String parseResultsFolder = FilenameUtils.concat(AppProperties.oneMillionSentencesFolder(), "parseResults");
+        final String parseResultsFile = FilenameUtils.concat(parseResultsFolder, "result.txt");
+
+        System.out.println("Writing parse results to file: " + parseResultsFile);
+
+        BufferedWriter bufferedWriter = null;
+        try {
+            new File(parseResultsFolder).mkdirs();
+            bufferedWriter = new BufferedWriter(new FileWriterWithEncoding(new File(parseResultsFile), "UTF-8", false));
+            for (String key : resultMap.keySet()) {
+                bufferedWriter.write(key + " " + resultMap.get(key) + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedWriter != null) {
+                bufferedWriter.flush();
+                bufferedWriter.close();
+            }
+        }
+
     }
 
 }
