@@ -15,8 +15,6 @@ Currently a morphologic parser and a tokenizer is provided. Biggest challenge is
 Project first implemented in Python, [TRNLTK Python](https://github.com/aliok/trnltk), then Java.
 Python project is obsolete.
 
-[![Build Status](https://drone.io/github.com/aliok/trnltk-java/status.png)](https://drone.io/github.com/aliok/trnltk-java/latest)
-
 **See [documentation, tutorial and cookbook](docs/README.md)**
 
 News:
@@ -42,30 +40,3 @@ How it is tested?
 There are thousands of parsing unit tests. Plus, I use the treebank from METU-Sabanci, but is closed-source.
 Unfortunately, its license doesn't allow anyone to publish any portion of the treebank,
 thus I only test the parser against it in my local environment.
-
-
-Plan
-=================
-  1. DONE: Get rid of unused stuff as much as possible. Such as
-    * suffix based parsing (deprecated by form based parsing)
-  1. DONE:  Fix the build!
-  1. SKIPPED Write a graphical tool to build suffix graphs.
-    * Support editing a suffix graph
-    * Show form-based graph immediately
-    * Always save backups upon edit!
-    * Show related portion of form-based graph whenever a suffix is selected in suffix-based graph
-  1. Prepare for reducing ambiguity in suffix graph. Fill reducedAmbiguity.ContextlessMorphologicParserBasicSuffixGraphTest and remove @Ignore annotation
-  1. Reduce ambiguity in suffix graph. E.g. discard parse results like
-    * `"sokakları", "sokak(sokak)+Noun+A3pl(lAr[lar])+Pnon+Acc(+yI[ı])", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3sg(+sI[ı])+Nom", "sokak(sokak)+Noun+A3pl(lAr[lar])+P3pl(!I[ı])+Nom", "sokak(sokak)+Noun+A3sg+P3pl(lAr!I[ları])+Nom"`
-    * ...
-  1. Write a disambiguator with hunch-based parameters and metrics
-  1. Use machine learning techniques to determine metrics and parameters
-  1. Apply ideas:
-    * Ambiguity classification (to apply similar disambiguation techniques in case of a similar disambiguity)
-    * Critical surface tagging (solve "easy-win"s)
-    * Implement a parse tree for POS tagging
-    * Integrate disambiguation and POS tagging
-    * Proper noun identification
-    *
-
-
