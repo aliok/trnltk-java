@@ -23,6 +23,7 @@ import com.google.common.collect.*;
 import com.google.common.io.Files;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.trnltk.morphology.contextless.parser.ContextlessMorphologicParser;
 import org.trnltk.morphology.contextless.parser.PhoneticAttributeSets;
@@ -46,6 +47,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+@Ignore
 public class BruteForceExperiments {
     private ContextlessMorphologicParser parser;
 
