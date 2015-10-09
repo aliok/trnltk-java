@@ -27,7 +27,6 @@
     </parent>
 
     <artifactId>apps</artifactId>
-
     <name>TRNLTK Apps</name>
     <description>TRNLTK Apps</description>
 

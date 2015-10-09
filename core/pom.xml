@@ -27,7 +27,6 @@
     </parent>
 
     <artifactId>core</artifactId>
-
     <name>TRNLTK Core</name>
     <description>TRNLTK Core</description>
 

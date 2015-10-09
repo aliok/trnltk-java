@@ -28,7 +28,6 @@
 
     <artifactId>web</artifactId>
     <packaging>war</packaging>
-
     <name>TRNLTK Web</name>
     <description>TRNLTK Web</description>
 

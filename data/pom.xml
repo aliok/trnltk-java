@@ -27,7 +27,6 @@
     </parent>
 
     <artifactId>data</artifactId>
-
     <name>TRNLTK Data</name>
     <description>TRNLTK Data</description>
 
