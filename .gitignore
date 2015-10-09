@@ -16,3 +16,9 @@ atlassian-ide-plugin.xml
 
 # OS files:
 *.DS_Store
+
+*/bin
+**/.project
+**/.classpath
+**/.settings/
+**/target/

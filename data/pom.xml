@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.trnltk</groupId>
         <artifactId>trnltk</artifactId>
-        <version>${trnltk-version}</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>data</artifactId>

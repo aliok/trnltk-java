@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.trnltk</groupId>
         <artifactId>trnltk</artifactId>
-        <version>${trnltk-version}</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>apps</artifactId>
@@ -36,6 +36,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
                 <executions>
                     <execution>
                         <goals>
@@ -51,12 +52,12 @@
         <dependency>
             <groupId>org.trnltk</groupId>
             <artifactId>core</artifactId>
-            <version>${trnltk-version}</version>
+            <version>1.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.trnltk</groupId>
             <artifactId>core</artifactId>
-            <version>${trnltk-version}</version>
+            <version>1.0.3-SNAPSHOT</version>
             <type>test-jar</type>
         </dependency>
     </dependencies>

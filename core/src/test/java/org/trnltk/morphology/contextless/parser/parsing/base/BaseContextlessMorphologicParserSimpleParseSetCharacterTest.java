@@ -16,24 +16,29 @@
 
 package org.trnltk.morphology.contextless.parser.parsing.base;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.*;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.LineProcessor;
-import com.google.common.io.Resources;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.tuple.Pair;
-import org.trnltk.util.MorphemeContainerFormatter;
-import org.trnltk.model.morpheme.MorphemeContainer;
-
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
+import org.trnltk.model.morpheme.MorphemeContainer;
+import org.trnltk.util.MorphemeContainerFormatter;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Multisets;
+import com.google.common.collect.TreeMultiset;
+import com.google.common.io.CharSource;
+import com.google.common.io.LineProcessor;
+import com.google.common.io.Resources;
 
 public abstract class BaseContextlessMorphologicParserSimpleParseSetCharacterTest extends BaseContextlessMorphologicParserTest {
 
@@ -134,12 +139,12 @@ public abstract class BaseContextlessMorphologicParserSimpleParseSetCharacterTes
             .build();
 
     protected void shouldParseParseSetN(String index, boolean printSurfaces) throws IOException {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset" + index + ".txt"),
+        final CharSource source = Resources.asCharSource(Resources.getResource("simpleparsesets/simpleparseset" + index + ".txt"),
                 Charset.forName("utf-8"));
 
 
         //read all in advance
-        final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new SimpleParseSetValidationLineProcessor());
+        final List<Pair<String, String>> lines = source.readLines(new SimpleParseSetValidationLineProcessor());
 
         final int numberOfSurfaces = lines.size();
         System.out.println("Number of words to parse " + numberOfSurfaces);

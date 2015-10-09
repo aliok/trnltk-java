@@ -61,19 +61,19 @@ public class MorphemeContainerFormatterTest {
     public void shouldFormatDetailed() throws JSONException {
         {
             final MorphemeContainer result = getFirstParseResult("kitaba");
-            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Dat\"]}],\"LemmaRoot\":\"kitap\",\"RootPos\":\"Noun\",\"Root\":\"kitab\"}"));
+            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Root\":\"kitab\",\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Dat\"]}],\"LemmaRoot\":\"kitap\",\"RootPos\":\"Noun\"}"));
         }
         {
             final MorphemeContainer result = getFirstParseResult("yaptırtmayı");
-            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Verb\"},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\"]},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\",\"Pos\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Inf\",\"A3sg\",\"Pnon\",\"Acc\"]}],\"LemmaRoot\":\"yap\",\"RootPos\":\"Verb\",\"Root\":\"yap\"}"));
+            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Root\":\"yap\",\"Parts\":[{\"POS\":\"Verb\"},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\"]},{\"POS\":\"Verb\",\"Suffixes\":[\"Caus\",\"Pos\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Inf\",\"A3sg\",\"Pnon\",\"Acc\"]}],\"LemmaRoot\":\"yap\",\"RootPos\":\"Verb\"}"));
         }
         {
             final MorphemeContainer result = getFirstParseResult("üzümcülükteki");
-            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Nom\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"Agt\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Ness\",\"A3sg\",\"Pnon\",\"Loc\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"PointQual\"]}],\"LemmaRoot\":\"üzüm\",\"RootPos\":\"Noun\",\"Root\":\"üzüm\"}"));
+            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Root\":\"üzüm\",\"Parts\":[{\"POS\":\"Noun\",\"Suffixes\":[\"A3sg\",\"Pnon\",\"Nom\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"Agt\"]},{\"POS\":\"Noun\",\"Suffixes\":[\"Ness\",\"A3sg\",\"Pnon\",\"Loc\"]},{\"POS\":\"Adj\",\"Suffixes\":[\"PointQual\"]}],\"LemmaRoot\":\"üzüm\",\"RootPos\":\"Noun\"}"));
         }
         {
             final MorphemeContainer result = getFirstParseResult("bu");
-            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"LemmaRoot\":\"bu\",\"RootPos\":\"Det\",\"Root\":\"bu\"}"));
+            assertThat(MorphemeContainerFormatter.formatMorphemeContainerDetailed(result), equalTo("{\"Root\":\"bu\",\"LemmaRoot\":\"bu\",\"RootPos\":\"Det\"}"));
         }
 
     }

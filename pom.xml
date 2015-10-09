@@ -22,7 +22,7 @@
 
     <groupId>org.trnltk</groupId>
     <artifactId>trnltk</artifactId>
-    <version>${trnltk-version}</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TRNLTK Parent</name>
     <description>TRNLTK Parent</description>
@@ -52,9 +52,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
                 <configuration>
                     <source>1.7</source>
-                    <target>1.7</target>
+                    <target>1.8</target>
                     <encoding>${encoding}</encoding>
                 </configuration>
             </plugin>
@@ -64,6 +65,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -135,7 +137,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.1</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -145,18 +147,18 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0-rc1</version>
+            <version>18.0</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20090211</version>
+            <version>20150729</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit-dep</artifactId>
+            <artifactId>junit</artifactId>
             <!-- junit without hamcrest -->
-            <version>4.8.1</version>
+            <version>4.12</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -174,7 +176,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>1.9.0</version>
+            <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
