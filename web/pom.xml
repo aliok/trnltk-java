@@ -105,5 +105,4 @@
         <myfaces-version>2.2.8</myfaces-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
 </project>
