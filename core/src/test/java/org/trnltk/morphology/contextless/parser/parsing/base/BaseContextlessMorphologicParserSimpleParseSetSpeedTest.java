@@ -16,30 +16,29 @@
 
 package org.trnltk.morphology.contextless.parser.parsing.base;
 
-import com.google.common.base.Stopwatch;
-import com.google.common.collect.ImmutableList;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.LineProcessor;
-import com.google.common.io.Resources;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.base.Stopwatch;
+import com.google.common.collect.ImmutableList;
+import com.google.common.io.CharSource;
+import com.google.common.io.LineProcessor;
+import com.google.common.io.Resources;
+
 public abstract class BaseContextlessMorphologicParserSimpleParseSetSpeedTest extends BaseContextlessMorphologicParserTest {
 
     protected void shouldParseParseSetN(String index, boolean profilingMode) throws IOException {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset" + index + ".txt"),
+        final CharSource charSource = Resources.asCharSource(Resources.getResource("simpleparsesets/simpleparseset" + index + ".txt"),
                 Charset.forName("utf-8"));
 
         //read all in advance
-        final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new LineProcessor<List<Pair<String, String>>>() {
+        final List<Pair<String, String>> lines = charSource.readLines(new LineProcessor<List<Pair<String, String>>>() {
             final ImmutableList.Builder<Pair<String, String>> builder = ImmutableList.builder();
 
             @Override
@@ -59,7 +58,7 @@ public abstract class BaseContextlessMorphologicParserSimpleParseSetSpeedTest ex
         });
 
         System.out.println("Number of words to parse " + lines.size());
-        final Stopwatch stopwatch = new Stopwatch();
+        final Stopwatch stopwatch = Stopwatch.createUnstarted();
         if (profilingMode) {
             System.out.println("Start profiling now and then press enter!");
             new Scanner(System.in).nextLine();

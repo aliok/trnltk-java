@@ -16,21 +16,20 @@
 
 package org.trnltk.morphology.lexicon;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.HashSet;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.trnltk.model.lexicon.Lexeme;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
+import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
-import org.apache.commons.lang3.StringUtils;
-import org.trnltk.model.lexicon.Lexeme;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Creates {@link Lexeme}s from dictionary file(s).
@@ -47,21 +46,20 @@ public class DictionaryLoader {
     private static final String COMMENT_SYMBOL = "#";
 
     public static HashSet<Lexeme> loadDefaultMasterDictionary() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-dictionary.dict"), Charset.forName("utf-8"));
-        return new DictionaryLoader().load(supplier);
+        final CharSource charSource = Resources.asCharSource(Resources.getResource("master-dictionary.dict"), Charset.forName("utf-8"));
+        return new DictionaryLoader().load(charSource);
     }
 
     public static HashSet<Lexeme> loadDefaultNumeralMasterDictionary() {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("master-numeral-dictionary.dict"), Charset.forName("utf-8"));
-        return new DictionaryLoader().load(supplier);
+        final CharSource charSource = Resources.asCharSource(Resources.getResource("master-numeral-dictionary.dict"), Charset.forName("utf-8"));
+        return new DictionaryLoader().load(charSource);
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public HashSet<Lexeme> load(InputSupplier<InputStreamReader> inputSupplier) {
+    public HashSet<Lexeme> load(CharSource charSource) {
         try {
             // could have created a line processor, but all file will be
             // read anyway while creating an in-memory lexeme map
-            final List<String> lines = CharStreams.readLines(inputSupplier);
+            final List<String> lines = charSource.readLines();
             return this.createLexemesFromLines(lines);
         } catch (IOException e) {
             throw new RuntimeException(e);
