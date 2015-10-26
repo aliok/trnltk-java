@@ -16,12 +16,16 @@
 
 package org.trnltk.morphology.phonetics;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.Resources;
+import static org.junit.Assert.fail;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assume;
 import org.junit.Before;
@@ -33,12 +37,12 @@ import org.trnltk.morphology.contextless.parser.parsing.base.BaseContextlessMorp
 import org.trnltk.morphology.lexicon.RootMapFactory;
 import org.trnltk.testutil.TestEnvironment;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.*;
-
-import static org.junit.Assert.fail;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.io.CharSource;
+import com.google.common.io.LineProcessor;
+import com.google.common.io.Resources;
 
 public class PhoneticsAnalyzerDistinctionTest {
 
@@ -97,12 +101,13 @@ public class PhoneticsAnalyzerDistinctionTest {
     }
 
     private Set<EnumSet<PhoneticAttribute>> getDistinctPhoneticAttributeSetsFromSimpleParseset(String number) throws IOException {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(Resources.getResource("simpleparsesets/simpleparseset" + number + ".txt"),
-                Charset.forName("utf-8"));
+		final CharSource charSource = Resources.asCharSource(
+				Resources.getResource("simpleparsesets/simpleparseset" + number + ".txt"), Charset.forName("utf-8"));
 
         final Set<EnumSet<PhoneticAttribute>> distinctPhonAttrs = new HashSet<EnumSet<PhoneticAttribute>>();
 
-        final List<Pair<String, String>> lines = CharStreams.readLines(supplier, new BaseContextlessMorphologicParserSimpleParseSetCharacterTest.SimpleParseSetValidationLineProcessor());
+        LineProcessor<List<Pair<String, String>>> lineProcessor = new BaseContextlessMorphologicParserSimpleParseSetCharacterTest.SimpleParseSetValidationLineProcessor();
+		final List<Pair<String, String>> lines = charSource.readLines(lineProcessor);
 
         for (Pair<String, String> line : lines) {
             final String surfaceToParse = line.getLeft();

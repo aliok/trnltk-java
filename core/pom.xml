@@ -23,11 +23,10 @@
     <parent>
         <groupId>org.trnltk</groupId>
         <artifactId>trnltk</artifactId>
-        <version>${trnltk-version}</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>core</artifactId>
-
     <name>TRNLTK Core</name>
     <description>TRNLTK Core</description>
 
@@ -36,6 +35,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
                 <executions>
                     <execution>
                         <goals>

@@ -1,15 +1,13 @@
 package org.trnltk.morphology.contextless.parser.cache;
 
 import com.google.common.collect.Lists;
-import com.google.common.io.CharStreams;
-import com.google.common.io.InputSupplier;
+import com.google.common.io.CharSource;
 import com.google.common.io.Resources;
 import org.apache.commons.lang3.Validate;
 import org.trnltk.model.morpheme.MorphemeContainer;
 import org.trnltk.morphology.contextless.parser.MorphologicParser;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Collection;
@@ -51,10 +49,10 @@ public class SimpleOfflineCache implements MorphologicParserCache {
     }
 
     private static SimpleOfflineCache fromFile(URL resource) {
-        final InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(resource, Charset.forName("utf-8"));
+        CharSource charSource = Resources.asCharSource(resource, Charset.forName("utf-8"));
         final List<String> lines;
         try {
-            lines = CharStreams.readLines(supplier);
+            lines = charSource.readLines();
         } catch (IOException e) {
             throw new IllegalStateException("Cannot find bundled most frequent word list!", e);
         }
@@ -66,7 +64,6 @@ public class SimpleOfflineCache implements MorphologicParserCache {
     /**
      * Builds a cache with values of given words and their parse results.
      */
-    @SuppressWarnings("WeakerAccess")
     public SimpleOfflineCache(Collection<String> words) {
         Validate.notEmpty(words, "Cache keys cannot be null or empty.");
         this.cacheKeys = words;

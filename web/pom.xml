@@ -23,12 +23,11 @@
     <parent>
         <artifactId>trnltk</artifactId>
         <groupId>org.trnltk</groupId>
-        <version>${trnltk-version}</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>web</artifactId>
     <packaging>war</packaging>
-
     <name>TRNLTK Web</name>
     <description>TRNLTK Web</description>
 
@@ -64,12 +63,12 @@
         <dependency>
             <groupId>org.trnltk</groupId>
             <artifactId>core</artifactId>
-            <version>${trnltk-version}</version>
+            <version>1.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.trnltk</groupId>
             <artifactId>apps</artifactId>
-            <version>${trnltk-version}</version>
+            <version>1.0.3-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>compile</scope>
             <!-- I know looks weird -->
@@ -102,8 +101,7 @@
     </dependencies>
 
     <properties>
-        <myfaces-version>2.1.14</myfaces-version>
+        <myfaces-version>2.2.8</myfaces-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
 </project>
